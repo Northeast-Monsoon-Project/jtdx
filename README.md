@@ -42,7 +42,7 @@ SOURCE_COMMIT.txt  原始 V3.7.1 源码包记录的提交标识
 
 ## Windows 使用
 
-本地随附的安装包为 `JTDX-F-V3.7.1-Windows-x64-Setup.exe`，面向 Windows 10/11 64 位。本次源码更新未将安装包上传为 GitHub Release；源码 ZIP 不能直接运行。
+从 [V3.7.1 Release](https://github.com/Northeast-Monsoon-Project/jtdx/releases/tag/v3.7.1) 下载 `JTDX-F-V3.7.1-Windows-x64-Setup.exe`，面向 Windows 10/11 64 位。源码 ZIP 不能直接运行。
 
 安装后先配置呼号、网格、声卡、CAT/PTT、频率和系统时间。OmniRig 用户另需安装并注册 OmniRig 服务。详细步骤见 [使用说明](jtdx-master/docs/使用说明_zh.md)。
 

@@ -37,6 +37,17 @@
 #include <fftw3.h>
 
 #include "fano.h"
+static void *fm_checked_malloc(size_t size) {
+    void *p=malloc(size);
+    if(!p){fputs("WSPR: out of memory\n",stderr);exit(EXIT_FAILURE);}
+    return p;
+}
+static void *fm_checked_calloc(size_t count, size_t size) {
+    void *p=calloc(count,size);
+    if(!p){fputs("WSPR: out of memory\n",stderr);exit(EXIT_FAILURE);}
+    return p;
+}
+
 #include "jelinek.h"
 #include "nhash.h"
 #include "wsprd_utils.h"
@@ -73,7 +84,7 @@ unsigned long readc2file(char *ptr_to_infile, double *idat, double *qdat,
     char c2file[15];
     FILE* fp;
     
-    buffer=malloc(sizeof(float)*2*65536);
+    buffer=fm_checked_malloc(sizeof(float)*2*65536);
     if (!buffer) return 1;
     memset(buffer,0,sizeof(float)*2*65536);
     
@@ -133,7 +144,7 @@ unsigned long readwavfile(char *ptr_to_infile, int ntrmin, double *idat, double 
     
     FILE *fp;
     short int *buf2;
-    buf2 = calloc(npoints,sizeof(short int));
+    buf2 = fm_checked_calloc(npoints,sizeof(short int));
     if (!buf2) return 1;
     
     fp = fopen(ptr_to_infile,"rb");
@@ -403,12 +414,12 @@ void subtract_signal2(double *id, double *qd, long np,
     
     double *refi, *refq, *ci, *cq, *cfi, *cfq;
 
-    refi=malloc(sizeof(double)*nc2);
-    refq=malloc(sizeof(double)*nc2);
-    ci=malloc(sizeof(double)*nc2);
-    cq=malloc(sizeof(double)*nc2);
-    cfi=malloc(sizeof(double)*nc2);
-    cfq=malloc(sizeof(double)*nc2);
+    refi=fm_checked_malloc(sizeof(double)*nc2);
+    refq=fm_checked_malloc(sizeof(double)*nc2);
+    ci=fm_checked_malloc(sizeof(double)*nc2);
+    cq=fm_checked_malloc(sizeof(double)*nc2);
+    cfi=fm_checked_malloc(sizeof(double)*nc2);
+    cfq=fm_checked_malloc(sizeof(double)*nc2);
     
     memset(refi,0,sizeof(double)*nc2);
     memset(refq,0,sizeof(double)*nc2);
@@ -518,7 +529,7 @@ unsigned long writec2file(char *c2filename, int trmin, double freq
 {
     int i;
     double *buffer;
-    buffer=malloc(sizeof(double)*2*45000);
+    buffer=fm_checked_malloc(sizeof(double)*2*45000);
     memset(buffer,0,sizeof(double)*2*45000);
     
     FILE *fp;
@@ -529,9 +540,15 @@ unsigned long writec2file(char *c2filename, int trmin, double freq
         free(buffer);
         return 0;
     }
-    unsigned long nwrite = fwrite(c2filename,sizeof(char),14,fp);
-    nwrite = fwrite(&trmin, sizeof(int), 1, fp);
-    nwrite = fwrite(&freq, sizeof(double), 1, fp);
+    char header_name[14]={0};
+    const char *base=c2filename;
+    for(const char *p=c2filename;*p;++p)if(*p=='/' || *p=='\\')base=p+1;
+    memcpy(header_name,base,strlen(base)<sizeof header_name?strlen(base):sizeof header_name);
+    if(fwrite(header_name,1,sizeof header_name,fp)!=sizeof header_name ||
+       fwrite(&trmin,sizeof trmin,1,fp)!=1 || fwrite(&freq,sizeof freq,1,fp)!=1) {
+        fclose(fp);free(buffer);return 0;
+    }
+    unsigned long nwrite;
     
     for(i=0; i<45000; i++) {
         buffer[2*i]=idat[i];
@@ -539,10 +556,11 @@ unsigned long writec2file(char *c2filename, int trmin, double freq
     }
     
     nwrite = fwrite(buffer, sizeof(double), 2*45000, fp);
+    free(buffer);
+    if(fclose(fp)!=0)return 0;
     if( nwrite == 2*45000 ) {
         return nwrite;
     } else {
-        free(buffer);
         return 0;
     }
 }
@@ -611,16 +629,16 @@ int main(int argc, char *argv[])
     
 //    char hashtab[32768][13];
     char *hashtab;
-    hashtab=malloc(sizeof(char)*32768*13);
+    hashtab=fm_checked_malloc(sizeof(char)*32768*13);
     memset(hashtab,0,sizeof(char)*32768*13);
     int nh;
-    symbols=malloc(sizeof(char)*nbits*2);
-    decdata=malloc(sizeof(char)*11);
-    channel_symbols=malloc(sizeof(char)*nbits*2);
+    symbols=fm_checked_malloc(sizeof(char)*nbits*2);
+    decdata=fm_checked_malloc(sizeof(char)*11);
+    channel_symbols=fm_checked_malloc(sizeof(char)*nbits*2);
 //    unsigned char channel_symbols[162];
 
-    callsign=malloc(sizeof(char)*13);
-    call_loc_pow=malloc(sizeof(char)*23);
+    callsign=fm_checked_malloc(sizeof(char)*13);
+    call_loc_pow=fm_checked_malloc(sizeof(char)*23);
     double allfreqs[100];
     char allcalls[100][13];
     memset(allfreqs,0,sizeof(double)*100);
@@ -642,11 +660,13 @@ int main(int argc, char *argv[])
     t00=clock();
     fftw_complex *fftin, *fftout;
 #include "./metric_tables.c"
+
+
     
     int mettab[2][256];
     
-    idat=malloc(sizeof(double)*maxpts);
-    qdat=malloc(sizeof(double)*maxpts);
+    idat=fm_checked_malloc(sizeof(double)*maxpts);
+    qdat=fm_checked_malloc(sizeof(double)*maxpts);
     
     while ( (c = getopt(argc, argv, "a:cC:de:f:HJmqstwvz:")) !=-1 ) {
         switch (c) {
@@ -702,7 +722,7 @@ int main(int argc, char *argv[])
     }
     
     if( stackdecoder ) {
-        stack=malloc(stacksize*sizeof(struct snode));
+        stack=fm_checked_malloc(stacksize*sizeof(struct snode));
     }
     
     if( optind+1 > argc) {

@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <limits.h>
 #include "fano.h"
 
 struct node {
@@ -105,9 +106,15 @@ int fano(
   unsigned int lsym;
   unsigned int i;
 
+  /* This decoder is used only for WSPR (81 bits, including a 31-bit tail).
+     Failure must never be reported as a decoded message. Bound arithmetic
+     before allocating or forming the tail pointer. */
+  if (!metric || !cycles || !maxnp || !data || !symbols || !mettab ||
+      nbits < 32 || nbits > 81 || delta <= 0 || maxcycles == 0 ||
+      maxcycles > (UINT_MAX - 2u) / nbits) return -1;
+  *metric = 0; *cycles = 0; *maxnp = 0;
   if((nodes = (struct node *)malloc((nbits+1)*sizeof(struct node))) == NULL) {
-    printf("malloc failed\n");
-    return 0;
+    return -1;
   }
   lastnode = &nodes[nbits-1];
   tail = &nodes[nbits-31];
@@ -154,7 +161,7 @@ int fano(
   for(i=1;i <= maxcycles;i++) {
     if((int)(np-nodes) > (int)*maxnp) *maxnp=(int)(np-nodes);
 #ifdef	debug
-    printf("k=%ld, g=%ld, t=%d, m[%d]=%d, maxnp=%d, encstate=%lx\n",
+    printf("k=%td, g=%ld, t=%d, m[%d]=%d, maxnp=%u, encstate=%lx\n",
 	   np-nodes,np->gamma,t,np->i,np->tm[np->i],*maxnp,np->encstate);
 #endif
 // Look forward */

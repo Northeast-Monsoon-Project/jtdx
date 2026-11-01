@@ -255,7 +255,8 @@ hdec(indices)=hdec
 decoded=cw(1:K) 
 call chkcrc14a(decoded,nbadcrc)
 message77=decoded(1:77)
-if(nbadcrc.eq.1) nhardmin=-nhardmin
+! Negating zero cannot signal failure for an LDPC word with a bad CRC.
+if(nbadcrc.ne.0) nhardmin=-max(1,abs(nhardmin))
 
 return
 end subroutine osd4_174_91

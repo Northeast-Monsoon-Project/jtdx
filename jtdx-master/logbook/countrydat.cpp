@@ -522,8 +522,12 @@ void CountryDat::load()
                 {
                     QStringList p = _extractPrefix(line2,more);
                     prefixs += p;
-                    if (more)
+                    if (more) {
+                        // A truncated user override must not spin forever at
+                        // EOF. Discard this incomplete country's prefixes.
+                        if(in.atEnd()) {prefixs.clear();break;}
                         line2 = in.readLine();
+                    }
                 }
 
                 QString p,_cqz,_ituz,_continent;
@@ -557,15 +561,12 @@ void CountryDat::load()
        while ( !in.atEnd() )
        {
           QString line1 = in.readLine();
-          if ( !in.atEnd() )
-          {
             QStringList items = line1.split(',');
             if (items.size() > 1)
             {
                 last = QDate::fromString(items[1],"yyyy-MM-dd");
                 if (last > first) _data2.insert(items[0],items[1]);
             }
-          }
        }
 //    printf("%d active lotw users.\n",_data2.size());
     inputFile2.close();

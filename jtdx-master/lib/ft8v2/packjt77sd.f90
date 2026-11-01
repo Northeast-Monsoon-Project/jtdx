@@ -3,6 +3,8 @@
 
 module packjt77sd
 
+  use packjt77, only: type12_rr73_is_tail,type12_mixed_suffixes
+
 ! These variables are accessible from outside via "use packjt77":
 !  integer n28a,n28b
 
@@ -22,6 +24,7 @@ subroutine pack77sd(msg0,i3,n3,c77)
   call split77(msg,nwords,nw,w)
   i3=-1
   n3=-1
+  if(type12_mixed_suffixes(w(1),w(2))) go to 800
   if(msg(1:3).eq.'CQ ' .or. msg(1:3).eq.'DE ' .or. msg(1:4).eq.'QRZ ') go to 100
 
 ! Check Type 1 (Standard 77-bit message) or Type 2, with optional "/P"
@@ -29,7 +32,7 @@ subroutine pack77sd(msg0,i3,n3,c77)
   if(i3.ge.0) go to 900
 
 ! It defaults to free text
-  i3=0
+800 i3=0
   n3=0
   msg(14:)='                        '
   call packtext77(msg(1:13),c77(1:71))
@@ -442,7 +445,7 @@ subroutine pack77_1(nwords,w,i3,n3,c77)
   if(i2psuffix.ge.4.or.index(w(2)//' ','/R ').ge.4) ipb=1
   
   grid4=w(nwords)(1:4)
-  if(is_grid4(grid4)) then
+  if(is_grid4(grid4).and..not.type12_rr73_is_tail(nwords,w(1),w(nwords))) then
      ir=0
      if(w(3).eq.'R ') ir=1
      j1=(ichar(grid4(1:1))-ichar('A'))*18*10*10

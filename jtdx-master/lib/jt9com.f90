@@ -80,6 +80,8 @@
      logical(c_bool) :: lforcesync
      logical(c_bool) :: learlystart
      integer(c_int) :: nsftol
+     integer(c_int) :: nmodernft8
+     integer(c_int) :: nmodernft4
  end type params_block
 
   type, bind(C) :: dec_data

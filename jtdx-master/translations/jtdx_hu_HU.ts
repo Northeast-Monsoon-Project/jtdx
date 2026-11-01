@@ -46,6 +46,43 @@
         <source>OK</source>
         <translation>OK</translation>
     </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>A JTDX-F névjegye</translation>
+    </message>
+    <message>
+        <source>JTDX-F is developed by the Fluxmancer team.&lt;br&gt;Based on JTDX and WSJT-X; upstream credits and GPLv3 are preserved.&lt;br&gt;&lt;br&gt;</source>
+        <translation>A JTDX-F fejlesztője a Fluxmancer csapat.&lt;br&gt;A JTDX és a WSJT-X alapjaira épül; az eredeti szerzők feltüntetése és a GPLv3 licenc megmarad.&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>JTDX-F is licensed under GNU GPLv3, without warranty.</source>
+        <translation>A JTDX-F GNU GPLv3 licenc alatt érhető el, garancia nélkül.</translation>
+    </message>
+    <message>
+        <source>FT2 / SuperFox: additional integrations; source revisions are documented with the source code.</source>
+        <translation>FT2 / SuperFox: további integrációk; a forrásrevíziók a forráskód mellett vannak dokumentálva.</translation>
+    </message>
+    <message>
+        <source>FT8 / FT4: JTDX decoders, WSJT-X 3.0.2 protocol/waveforms, selected 3.3.0-beta5 performance/concurrency fixes, and Fluxmancer modern decoding.</source>
+        <translation>FT8 / FT4: JTDX dekóderek, WSJT-X 3.0.2 protokoll és hullámformák, a 3.3.0-beta5 kiválasztott teljesítmény- és párhuzamosítási javításai, valamint a Fluxmancer modern dekódolása.</translation>
+    </message>
+    <message>
+        <source>Hamlib (radio control): %1</source>
+        <translation>Hamlib (rádióvezérlés): %1</translation>
+    </message>
+    <message>
+        <source>JTDX-F preserves JTDX's heritage and incorporates selected WSJT-X updates. Components retain their respective authors and licenses.</source>
+        <translation>A JTDX-F megőrzi a JTDX örökségét, és kiválasztott WSJT-X frissítéseket tartalmaz. Az összetevők megtartják szerzőiket és licenceiket.</translation>
+    </message>
+    <message>
+        <source>Q65 / MSK144 / Echo and astronomical calculations: WSJT-X 3.0.2.</source>
+        <translation>Q65 / MSK144 / Echo és csillagászati számítások: WSJT-X 3.0.2.</translation>
+    </message>
+    <message>
+        <source>WSPR: WSJT-X 3.0.2 decoder with 3.3.0-beta5 message validation and JTDX-F safety fixes.</source>
+        <translation>WSPR: WSJT-X 3.0.2 dekóder a 3.3.0-beta5 üzenetellenőrzésével és a JTDX-F biztonsági javításaival.</translation>
+    </message>
+    <message><source>JTTY: WSJT-X 3.3.0-beta5 decoder with Fluxmancer integration.</source><translation>JTTY: WSJT-X 3.3.0-beta5 dekóder, a Fluxmancer integrációjával.</translation></message>
 </context>
 <context>
     <name>CallsignDialog</name>
@@ -57,6 +94,10 @@
 </context>
 <context>
     <name>Configuration::impl</name>
+    <message>
+        <source>Own transmitted message</source>
+        <translation>Saját adásüzenet</translation>
+    </message>
     <message>
         <location filename="../Configuration.cpp" line="1372"/>
         <source>&amp;OK</source>
@@ -321,6 +362,64 @@ Formátum:
         <location filename="../Configuration.cpp" line="5453"/>
         <source>Are you sure you want to discard your current working frequencies and replace them with the loaded ones?</source>
         <translation>Biztos benne, hogy el akarja hagyni a jelenlegi munkafrekvenciákat, és helyettesíteni azokat a betöltöttekkel?</translation>
+    </message>
+    <message>
+        <source>Callsign management…</source>
+        <translation>Hívójelek kezelése…</translation>
+    </message>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Adjon meg érvényes NTP-kiszolgálónevet vagy IP-címet.</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Önálló üzemmód</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization</source>
+        <translation>NTP-időszinkronizálás</translation>
+    </message>
+    <message>
+        <source>Current version: %1
+Previous version: %2</source>
+        <translation>Jelenlegi verzió: %1
+Előző verzió: %2</translation>
+    </message>
+    <message>
+        <source>Halt Tx when SWR &gt; 2.5</source>
+        <translation>TX leállítása, ha SWR &gt; 2,5</translation>
+    </message>
+    <message>
+        <source>Hamlib updates</source>
+        <translation>Hamlib-frissítések</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Nincs</translation>
+    </message>
+    <message>
+        <source>Restart application</source>
+        <translation>Alkalmazás újraindítása</translation>
+    </message>
+    <message>
+        <source>Restore previous Hamlib</source>
+        <translation>Előző Hamlib visszaállítása</translation>
+    </message>
+    <message>
+        <source>Stop transmission when a supported CAT radio reports SWR above 2.5. Unknown or unsupported readings are shown as unavailable. Protection also polls SWR when power display is off.</source>
+        <translation>Az adás leáll, ha a támogatott CAT-rádió 2,5 feletti SWR-t jelez. Az ismeretlen vagy nem támogatott értékek nem elérhetőként jelennek meg. A védelem kikapcsolt teljesítménykijelzés mellett is lekérdezi az SWR-t.</translation>
+    </message>
+    <message>
+        <source>Update Hamlib</source>
+        <translation>Hamlib frissítése</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready to restore. Restart the application to apply it.</source>
+        <translation>A(z) %1 verzió visszaállításra kész. Alkalmazásához indítsa újra az alkalmazást.</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready. Restart the application to apply it.</source>
+        <translation>A(z) %1 verzió készen áll. Alkalmazásához indítsa újra az alkalmazást.</translation>
     </message>
 </context>
 <context>
@@ -2492,6 +2591,18 @@ Hiba: %2 - %3</translation>
         <source>Ham Radio Deluxe didn&apos;t respond to command &quot;%1&quot; as expected</source>
         <translation>A Ham Radio Deluxe a várt módon nem válaszol a (z) &quot;%1&quot; parancsra</translation>
     </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid frequency list</source>
+        <translation>A Ham Radio Deluxe érvénytelen frekvencialistát küldött</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid or incomplete reply</source>
+        <translation>A Ham Radio Deluxe érvénytelen vagy hiányos választ küldött</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid radio list</source>
+        <translation>A Ham Radio Deluxe érvénytelen rádiólistát küldött</translation>
+    </message>
 </context>
 <context>
     <name>HamlibTransceiver</name>
@@ -2960,6 +3071,46 @@ Hiba: %2 - %3</translation>
         <location filename="../logqso.cpp" line="222"/>
         <source>Cannot open &quot;%1&quot; for append: %2</source>
         <translation>A hozzáadáshoz nem lehet megnyitni a &quot;%1&quot;: %2</translation>
+    </message>
+    <message>
+        <source>Earth–Moon–Earth</source>
+        <translation>Föld–Hold–Föld</translation>
+    </message>
+    <message>
+        <source>Meteor scatter</source>
+        <translation>Meteor scatter</translation>
+    </message>
+    <message>
+        <source>Propagation</source>
+        <translation>Terjedés</translation>
+    </message>
+    <message>
+        <source>Receive frequency</source>
+        <translation>Vételi frekvencia</translation>
+    </message>
+    <message>
+        <source>Remember propagation and satellite</source>
+        <translation>Terjedési mód és műhold megjegyzése</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Műhold</translation>
+    </message>
+    <message>
+        <source>Satellite mode</source>
+        <translation>Műholdas üzemmód</translation>
+    </message>
+    <message>
+        <source>Satellite name</source>
+        <translation>Műhold neve</translation>
+    </message>
+    <message>
+        <source>Tropospheric</source>
+        <translation>Troposzférikus</translation>
+    </message>
+    <message>
+        <source>Unspecified</source>
+        <translation>Nincs megadva</translation>
     </message>
 </context>
 <context>
@@ -5253,6 +5404,310 @@ UDP szerver %2:%3</translation>
         <source>WD %1m</source>
         <translation>WD %1m</translation>
     </message>
+    <message>
+        <source>A log import is already running.</source>
+        <translation>Már folyamatban van egy napló importálása.</translation>
+    </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>A JTDX-F névjegye</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC-vadász</translation>
+    </message>
+    <message>
+        <source>Decoder error: %1. TX stopped; restarting decoder.</source>
+        <translation>Dekóderhiba: %1. Az adás leállt; a dekóder újraindul.</translation>
+    </message>
+    <message>
+        <source>Decoder exited (code %1, crash %2)</source>
+        <translation>A dekóder kilépett (kód: %1, összeomlás: %2)</translation>
+    </message>
+    <message>
+        <source>Decoder restart failed repeatedly. Check decoder-errors.log and restart JTDX-F.</source>
+        <translation>A dekóder újraindítása többször sikertelen volt. Ellenőrizze a decoder-errors.log fájlt, majd indítsa újra a JTDX-F-et.</translation>
+    </message>
+    <message>
+        <source>Decoder restarted. Enable Monitor to resume reception; TX remains stopped.</source>
+        <translation>A dekóder újraindult. A vétel folytatásához kapcsolja be a Monitor módot; az adás leállítva marad.</translation>
+    </message>
+    <message>
+        <source>Enable TX manually, then Send each message (max. 80 characters).</source>
+        <translation>Engedélyezze kézzel az adást, majd küldje el egyenként az üzeneteket (legfeljebb 80 karakter).</translation>
+    </message>
+    <message>
+        <source>FT2</source>
+        <translation>FT2</translation>
+    </message>
+    <message>
+        <source>JTTY</source>
+        <translation>JTTY</translation>
+    </message>
+    <message>
+        <source>JTTY requires a local audio input and output device.</source>
+        <translation>A JTTY-hez helyi hangbemeneti és hangkimeneti eszköz szükséges.</translation>
+    </message>
+    <message>
+        <source>JTTY transmission timed out; TX stopped.</source>
+        <translation>A JTTY-adás időtúllépés miatt leállt.</translation>
+    </message>
+    <message>
+        <source>Listening…</source>
+        <translation>Figyelés…</translation>
+    </message>
+    <message>
+        <source>Log import: %1 new, %2 duplicates, %3 originals archived, %4 records from other stations skipped.</source>
+        <translation>Naplóimport: %1 új, %2 ismétlődő bejegyzés, %3 eredeti fájl archiválva, %4 más állomáshoz tartozó bejegyzés kihagyva.</translation>
+    </message>
+    <message>
+        <source>Log loading failed: %1</source>
+        <translation>A napló betöltése sikertelen: %1</translation>
+    </message>
+    <message>
+        <source>MCP %1</source>
+        <translation>MCP %1</translation>
+    </message>
+    <message>
+        <source>MCP error</source>
+        <translation>MCP-hiba</translation>
+    </message>
+    <message>
+        <source>MCP off</source>
+        <translation>MCP ki</translation>
+    </message>
+    <message>
+        <source>MCP settings: File &gt; Settings &gt; MCP</source>
+        <translation>MCP-beállítások: Fájl &gt; Beállítások &gt; MCP</translation>
+    </message>
+    <message>
+        <source>MCP: %1</source>
+        <translation>MCP: %1</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Önálló üzemmód</translation>
+    </message>
+    <message>
+        <source>Managed mode is listening. Enable TX manually to allow calls and scheduled CQ.</source>
+        <translation>Az önálló üzemmód figyel. A hívásokhoz és az ütemezett CQ-khoz kézzel engedélyezze az adást.</translation>
+    </message>
+    <message>
+        <source>Managed mode is off.</source>
+        <translation>Az önálló üzemmód ki van kapcsolva.</translation>
+    </message>
+    <message>
+        <source>Modern algorithm decoding</source>
+        <translation>Korszerű algoritmusú dekódolás</translation>
+    </message>
+    <message>
+        <source>My callsign</source>
+        <translation>Saját hívójel</translation>
+    </message>
+    <message>
+        <source>No decoder completion within the timeout</source>
+        <translation>A dekóder nem végzett a megadott időn belül</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>Kikapcsolva</translation>
+    </message>
+    <message>
+        <source>Previous audio file is still being saved; this interval was skipped.</source>
+        <translation>Az előző hangfájl mentése még folyamatban van; ez az időszak kimaradt.</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast</source>
+        <translation>QSO-kedvelő</translation>
+    </message>
+    <message>
+        <source>Receiving</source>
+        <translation>Vétel</translation>
+    </message>
+    <message>
+        <source>Search around Rx frequency (Hz):</source>
+        <translation>Keresés a vételi frekvencia körül (Hz):</translation>
+    </message>
+    <message>
+        <source>Select a callsign before importing logs.</source>
+        <translation>A naplók importálása előtt válasszon hívójelet.</translation>
+    </message>
+    <message>
+        <source>Select a valid callsign and grid in station settings before enabling TX.</source>
+        <translation>Az adás engedélyezése előtt adjon meg érvényes hívójelet és lokátort az állomásbeállításokban.</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Küldés</translation>
+    </message>
+    <message>
+        <source>SuperFox decoding (SuperHound)</source>
+        <translation>SuperFox-dekódolás (SuperHound)</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance</source>
+        <translation>SuperFox-frekvenciatűrés</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance...</source>
+        <translation>SuperFox-frekvenciatűrés...</translation>
+    </message>
+    <message>
+        <source>SuperHound</source>
+        <translation>SuperHound</translation>
+    </message>
+    <message>
+        <source>TX watchdog expired. Finishing the current QSO before stopping.</source>
+        <translation>Az adásfelügyeleti időzítő lejárt. Leállás előtt befejeződik a folyamatban lévő QSO.</translation>
+    </message>
+    <message>
+        <source>This mode requires local audio devices; TCI audio is unavailable.</source>
+        <translation>Ehhez az üzemmódhoz helyi hangeszközök szükségesek; a TCI-hang nem érhető el.</translation>
+    </message>
+    <message>
+        <source>Transmitting</source>
+        <translation>Adás</translation>
+    </message>
+    <message>
+        <source>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</source>
+        <translation>Utólagos valószínűségi becslésekkel segített dekódolás és további jelöltellenőrzés. Kikapcsolva a hagyományos dekóder működik. A következő dekódolástól érvényes.</translation>
+    </message>
+    <message>
+        <source>WD %1:%2</source>
+        <translation>WD %1:%2</translation>
+    </message>
+    <message>
+        <source>WD finishing QSO</source>
+        <translation>WD: QSO</translation>
+    </message>
+    <message>
+        <source>WD unlimited</source>
+        <translation>WD ∞</translation>
+    </message>
+    <message>
+        <source>The current operator's log is not ready. Check the log files and try again.</source>
+        <translation>A jelenlegi operátor naplója még nem áll készen. Ellenőrizze a naplófájlokat, és próbálja újra.</translation>
+    </message>
+    <message>
+        <source>Blacklist management</source>
+        <translation>Tiltólista kezelése</translation>
+    </message>
+    <message>
+        <source>CALL</source>
+        <translation>HÍVÁS</translation>
+    </message>
+    <message>
+        <source>REPORT</source>
+        <translation>RIPORT</translation>
+    </message>
+    <message>
+        <source>This station is blocked, or the permanent blacklist is unavailable.</source>
+        <translation>Ez az állomás tiltva van, vagy az állandó tiltólista nem érhető el.</translation>
+    </message>
+    <message>
+        <source>Confirm switch</source>
+        <translation>Váltás</translation>
+    </message>
+    <message>
+        <source>Average</source>
+        <translation>Átlagolás</translation>
+    </message>
+    <message>
+        <source>Clear average</source>
+        <translation>Átlagolás törlése</translation>
+    </message>
+    <message>
+        <source>Click to erase the right window; double-click to erase both.</source>
+        <translation>Kattintásra a jobb ablak, dupla kattintásra mindkettő törlődik.</translation>
+    </message>
+    <message>
+        <source>EME presets</source>
+        <translation>EME-előbeállítások</translation>
+    </message>
+    <message>
+        <source>Echo: %1 dB; Δf %2 Hz; quality %3; averages %4</source>
+        <translation>Visszhang: %1 dB; Δf %2 Hz; minőség %3; átlagolások %4</translation>
+    </message>
+    <message>
+        <source>Enable TX manually to measure lunar echoes.</source>
+        <translation>A holdvisszhang méréséhez kézzel engedélyezze a TX-et.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX.</source>
+        <translation>TX engedélyezése vagy leállítása.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX. Right-click for Wait &amp; Reply, Wait &amp; Call or Wait &amp; Pounce. Waiting requires a manually enabled TX session.</source>
+        <translation>TX engedélyezése vagy leállítása. Jobb kattintás: várakozás és válasz, hívás vagy lecsapás. A várakozáshoz kézzel engedélyezett TX-munkamenet szükséges.</translation>
+    </message>
+    <message>
+        <source>Full duplex</source>
+        <translation>Teljes duplex</translation>
+    </message>
+    <message>
+        <source>Left-click to erase the left window; right-click to erase the right window; double-click to erase both.</source>
+        <translation>Bal kattintásra a bal, jobb kattintásra a jobb, dupla kattintásra mindkét ablak törlődik.</translation>
+    </message>
+    <message>
+        <source>Period</source>
+        <translation>Periódus</translation>
+    </message>
+    <message>
+        <source>SWR %1 exceeds 2.5. TX stopped; enable TX manually after checking the antenna.</source>
+        <translation>Az SWR %1 meghaladja a 2,5 értéket. A TX leállt; az antenna ellenőrzése után kézzel engedélyezze a TX-et.</translation>
+    </message>
+    <message>
+        <source>Set a valid station grid locator to calculate astronomical data.</source>
+        <translation>A csillagászati számításokhoz adjon meg érvényes állomáslokátort.</translation>
+    </message>
+    <message>
+        <source>Stopped</source>
+        <translation>Leállítva</translation>
+    </message>
+    <message>
+        <source>The transmit slot was missed; enable TX again.</source>
+        <translation>Az adási időrés kimaradt; engedélyezze újra a TX-et.</translation>
+    </message>
+    <message>
+        <source>Transmission timed out; TX stopped.</source>
+        <translation>Az adás túllépte az időkorlátot; a TX leállt.</translation>
+    </message>
+    <message>
+        <source>VHF / EME</source>
+        <translation>VHF / EME</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Call</source>
+        <translation>Várakozás és hívás</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Pounce</source>
+        <translation>Várakozás és lecsapás</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Reply</source>
+        <translation>Várakozás és válasz</translation>
+    </message>
+    <message>
+        <source>Waiting is selected. Click Enable TX to authorize transmission; Stop cancels waiting.</source>
+        <translation>Várakozás kiválasztva. Az adás engedélyezéséhez kattintson a TX engedélyezése gombra; a Leállítás megszakítja a várakozást.</translation>
+    </message>
+    <message>
+        <source>Waiting matched %1; continuing the manually enabled TX session.</source>
+        <translation>A várakozási feltétel teljesült: %1; a kézzel engedélyezett TX-munkamenet folytatódik.</translation>
+    </message>
+    <message>
+        <source>Waiting timed out; TX stopped.</source>
+        <translation>A várakozás túllépte az időkorlátot; a TX leállt.</translation>
+    </message>
+    <message>
+        <source>%1 is replying to another station; waiting for its CQ or final message.</source>
+        <translation>%1 másik állomásnak válaszol; várakozás a CQ vagy záróüzenetére.</translation>
+    </message>
+    <message>
+        <source>%1 is available; continuing the manually enabled TX session.</source>
+        <translation>%1 elérhető; a kézzel engedélyezett adási munkamenet folytatódik.</translation>
+    </message>
 </context>
 <context>
     <name>Modes</name>
@@ -5565,6 +6020,58 @@ Ellenőrizze, hogy a helyes könyvtárnevet adta-e meg.</translation>
         <location filename="../WFPalette.cpp" line="258"/>
         <source>Error writing waterfall palette file &quot;%1&quot;: %2.</source>
         <translation>Hiba történt a &quot;%1&quot; vízesés palettafájl írásakor: %2.</translation>
+    </message>
+    <message>
+        <source>Cannot create log directory</source>
+        <translation>Nem sikerült létrehozni a naplókönyvtárat</translation>
+    </message>
+    <message>
+        <source>Log files changed while loading. Please retry.</source>
+        <translation>A naplófájlok betöltés közben megváltoztak. Próbálja újra.</translation>
+    </message>
+    <message>
+        <source>Log is busy. Please retry.</source>
+        <translation>A napló foglalt. Próbálja újra.</translation>
+    </message>
+    <message>
+        <source>Unable to import the log files.</source>
+        <translation>Nem sikerült importálni a naplófájlokat.</translation>
+    </message>
+    <message>
+        <source>Unable to read the log files.</source>
+        <translation>Nem sikerült olvasni a naplófájlokat.</translation>
+    </message>
+    <message>
+        <source>Ambiguous QSO identity; log unchanged</source>
+        <translation>A QSO azonosítója nem egyértelmű; a napló változatlan</translation>
+    </message>
+    <message>
+        <source>Recorded QSO not found; log unchanged</source>
+        <translation>A rögzített QSO nem található; a napló változatlan</translation>
+    </message>
+    <message>
+        <source>Cannot read pending log update</source>
+        <translation>A függőben lévő naplófrissítés nem olvasható</translation>
+    </message>
+    <message>
+        <source>Invalid pending log update; originals retained</source>
+        <translation>A függőben lévő naplófrissítés érvénytelen; az eredeti fájlok megmaradtak</translation>
+    </message>
+    <message>
+        <source>Cannot remove completed log update journal</source>
+        <translation>A befejezett naplófrissítés helyreállítási fájlja nem törölhető</translation>
+    </message>
+    <message>
+        <source>QSO identity changed or timestamps are invalid; log unchanged</source>
+        <translation>A QSO azonosítója megváltozott, vagy az időbélyegek érvénytelenek; a napló változatlan</translation>
+    </message>
+    <message>
+        <source>Cannot revise a symbolic log link</source>
+        <translation>Szimbolikus hivatkozáson keresztül nem frissíthető a napló</translation>
+    </message>
+    <message>
+        <source>QSO update exceeds the journal size limit</source>
+        <translation>A QSO frissítése meghaladja a helyreállítási fájl méretkorlátját</translation>
     </message>
 </context>
 <context>
@@ -6045,6 +6552,14 @@ Hiba(%2): %3</translation>
         <location filename="../TCITransceiver.cpp" line="1480"/>
         <source>TCI failed set txfreq</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid TCI audio packet</source>
+        <translation>Érvénytelen TCI-hangcsomag</translation>
+    </message>
+    <message>
+        <source>TCI PCM playback requires an active, explicitly started transmission.</source>
+        <translation>A TCI PCM-lejátszáshoz aktív, kifejezetten elindított adás szükséges.</translation>
     </message>
 </context>
 <context>
@@ -7150,13 +7665,13 @@ a Stereo-t.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2233"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option is being used for non-overlapping spectra scenario. Tx will be halted if spectra have common frequencies with no respect to this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ez az opció egy nem átfedő spektrumú kapcsolat esetén használható, a Tx letiltására. Ha a spektrumok azonos frekvenciájúak, akkor e beállítástól függetlenül.a Tx letiltódik.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>With AutoSeq enabled, checking this option pauses calls to the selected station while it replies to someone else, keeping Enable TX on. Resume on its CQ, 73, RR73, RRR or a reply to you. When unchecked, do not pause for this reason. Call limits, the TX watchdog and Stop still apply.</source>
+        <translation>Bekapcsolt AutoSeq mellett ez a beállítás szünetelteti a kiválasztott állomás hívását, amíg az másnak válaszol, de az Adás engedélyezése bekapcsolva marad. A hívás az állomás CQ, 73, RR73, RRR üzenete vagy Önnek szóló válasza után folytatódik. Ha nincs bejelölve, emiatt nincs szünet. A hívásszámkorlátok, az adásfelügyeleti időzítő és a Leállítás továbbra is érvényesek.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2236"/>
-        <source>Halt TX if operator I called answered to other operator</source>
-        <translation>Álljon le az adás, ha a hívott állomás másnak válaszol.</translation>
+        <source>Wait if the called station replies to someone else</source>
+        <translation>Várakozás, ha a hívott állomás másnak válaszol</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2243"/>
@@ -7977,8 +8492,8 @@ A jobb gombbal kattintva, a beillesztési és törlési lehetőségek elérhető
     </message>
     <message>
         <location filename="../Configuration.ui" line="3846"/>
-        <source>Transmitted message</source>
-        <translation>Adott üzenet</translation>
+        <source>Own transmitted message</source>
+        <translation>Saját adásüzenet</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3862"/>
@@ -8842,6 +9357,294 @@ soundcard changes</source>
 a rádió interfész resetelését (visszaállítását), és bármilyen
 hangkártya módosítási tevékenységet</translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Az adás engedélyezése óta eltelt percek, a QSO-k között is; 0 = korlátlan, legfeljebb 999. A tevékenység nem nullázza az időzítőt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Access token</source>
+        <translation>Hozzáférési token</translation>
+    </message>
+    <message>
+        <source>Allow control (mode, frequency, QSO and options)</source>
+        <translation>Vezérlés engedélyezése (üzemmód, frekvencia, QSO és beállítások)</translation>
+    </message>
+    <message>
+        <source>Allow starting TX and Tune (also requires control)</source>
+        <translation>Adás és hangolás indításának engedélyezése (vezérlési engedély is szükséges)</translation>
+    </message>
+    <message>
+        <source>Connect an AI client to JTDX-F using MCP. Changes take effect after OK. Only this computer (127.0.0.1) can connect.</source>
+        <translation>Csatlakoztasson MI-klienst a JTDX-F-hez MCP-n keresztül. A változások az OK után lépnek életbe. Csak erről a számítógépről (127.0.0.1) lehet kapcsolódni.</translation>
+    </message>
+    <message>
+        <source>Copy token</source>
+        <translation>Token másolása</translation>
+    </message>
+    <message>
+        <source>Enable MCP server</source>
+        <translation>MCP-kiszolgáló engedélyezése</translation>
+    </message>
+    <message>
+        <source>Endpoint</source>
+        <translation>Kapcsolódási cím</translation>
+    </message>
+    <message>
+        <source>Generate new token</source>
+        <translation>Új token létrehozása</translation>
+    </message>
+    <message>
+        <source>MCP</source>
+        <translation>MCP</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>Port</translation>
+    </message>
+    <message>
+        <source>Use Streamable HTTP with Authorization: Bearer TOKEN, or the bundled jtdx_mcp_bridge.py for stdio clients. Status, decodes and log are readable with a token. Stop TX is always available. See docs/MCP_zh.md.</source>
+        <translation>Használjon Streamable HTTP-t Authorization: Bearer TOKEN fejléccel, vagy a mellékelt jtdx_mcp_bridge.py programot stdio-kliensekhez. A tokennel az állapot, a dekódolt üzenetek és a napló olvasható. Az adás leállítása mindig elérhető. Lásd: docs/MCP_zh.md.</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Align the text for DXCC, distance and azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A DXCC, távolság és azimut szövegének igazítása.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allow kHz frequency offset entry without 'k' suffix.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A frekvenciaeltolás megadása kHz-ben „k” utótag nélkül.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have decodes for a new period start at the top of the Band Activity window and not scroll off the top when the window is full.&lt;/p&gt;&lt;p&gt;This is to aid selecting decodes to double-click while decoding is still in progress. Use the Band Activity vertical scroll bar to reveal decodes past the bottom of the window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jelölje be, hogy az új periódus dekódolásai a Sáv-aktivitás ablak tetején kezdődjenek, és ne gördüljön le felülről, amikor az ablak megtelt.&lt;/p&gt;&lt;p&gt;Ez megkönnyíti a dekódolás kiválasztását a dupla kattintáshoz, miközben a dekódolás még folyamatban van. A Sáv-aktivítás függőleges görgetősávjának segítségével az ablak alján túlfutó dekódolásokat is megjelenítheti.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase Band Activity and Rx frequency windows after band change.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A sávi aktivitás és az RX-frekvencia ablakának törlése sávváltás után.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends a valid Maidenhead locator, calculate and show the great-circle azimuth in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ha az állomás érvényes Maidenhead-lokátort küld, a nagykör menti azimut kiszámítása és megjelenítése a sávi aktivitás ablakában.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends locator, calculate and show the distance in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ha az állomás lokátort küld, a távolság kiszámítása és megjelenítése a sávi aktivitás ablakában.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between DXCC and distance/azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A DXCC és a távolság/azimut közötti térköz növelése vagy csökkentése.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between message text and DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Az üzenetszöveg és a DXCC közötti térköz növelése vagy csökkentése.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open the Astronomical Data window automatically when switching to Q65 or JT65 mode and Decode after EME delay is enabled, and close it when no longer needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A csillagászati adatok ablakának automatikus megnyitása Q65 vagy JT65 módra váltáskor, ha az EME-késleltetett dekódolás engedélyezett; bezárása, amikor már nincs rá szükség.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Turn the progress bar red while transmitting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Adás közben legyen piros a folyamatjelző sáv.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tx until 73 is received when in MSK144 or Q65 mode. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;MSK144 és Q65 módban adás a 73 vételéig.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>A deliberate double-click may enable TX only after the transmission safety checks pass. Startup, background messages and remote selection cannot grant transmission permission.</source>
+        <translation>A szándékos dupla kattintás csak sikeres biztonsági ellenőrzések után engedélyezheti az adást. Az indítás, a háttérüzenetek és a távoli kiválasztás nem adhatnak adási engedélyt.</translation>
+    </message>
+    <message>
+        <source>Additional features</source>
+        <translation>További funkciók</translation>
+    </message>
+    <message>
+        <source>After a completed QSO, move the receive audio frequency to the transmit audio frequency. This does not enable the Tx=Rx lock.</source>
+        <translation>Befejezett QSO után az RX hangfrekvenciájának beállítása a TX frekvenciájára. Ez nem kapcsolja be a Tx=Rx zárolást.</translation>
+    </message>
+    <message>
+        <source>Align DXCC/distance/azimuth</source>
+        <translation>DXCC/távolság/azimut igazítása</translation>
+    </message>
+    <message>
+        <source>Allow Tx frequency changes while transmitting</source>
+        <translation>Tx frekvencia változtatások engedélyezése adás közben</translation>
+    </message>
+    <message>
+        <source>Allow the additional Earth–Moon–Earth propagation delay when collecting and decoding signals. This does not alter the UTC clock.</source>
+        <translation>A Föld–Hold–Föld terjedés többletkésleltetésének figyelembevétele a jelek gyűjtése és dekódolása során. Az UTC-órát nem módosítja.</translation>
+    </message>
+    <message>
+        <source>Alternate Erase button behavior</source>
+        <translation>A Törlés gomb alternatív működése</translation>
+    </message>
+    <message>
+        <source>Alternate F1-F6 bindings</source>
+        <translation>Alternatív F1-F6 hozzárendelések</translation>
+    </message>
+    <message>
+        <source>Auto-open/close Astronomical data window</source>
+        <translation>A csillagászati adatok automatikus megnyitása/bezárása</translation>
+    </message>
+    <message>
+        <source>Calling CQ forces Call 1st</source>
+        <translation>CQ-ra válasz az 1.Hívás-választóból</translation>
+    </message>
+    <message>
+        <source>Clear DX Call after QSO</source>
+        <translation>A DX hívójel törlése QSO után</translation>
+    </message>
+    <message>
+        <source>Clear DX Grid after QSO</source>
+        <translation>A DX lokátor törlése QSO után</translation>
+    </message>
+    <message>
+        <source>Decode after EME delay</source>
+        <translation>Dekódolás az EME késedelem után</translation>
+    </message>
+    <message>
+        <source>Di&amp;sable Tx after sending 73</source>
+        <translation>Tx letiltása a 73 elküldése után</translation>
+    </message>
+    <message>
+        <source>Doubl&amp;e-click on call sets Tx enable</source>
+        <translation>Dupla klikk a hívójelre, Tx engedélyezése</translation>
+    </message>
+    <message>
+        <source>Enable VHF and submode features</source>
+        <translation>VHF és almód funkciók engedélyezése</translation>
+    </message>
+    <message>
+        <source>Enable Wait &amp; Call, Wait &amp; Reply and Wait &amp; Pounce controls. They require a manually authorized TX session and cannot restart transmission after Stop. Managed mode keeps its own selection rules.</source>
+        <translation>A „Várakozás és hívás”, „Várakozás és válasz” és „Várakozás és lecsapás” engedélyezése. Kézzel engedélyezett TX-munkamenetet igényelnek, és Leállítás után nem indíthatják újra az adást. A felügyelt mód megtartja saját kiválasztási szabályait.</translation>
+    </message>
+    <message>
+        <source>Enable Wait features</source>
+        <translation>Várakozási funkciók engedélyezése</translation>
+    </message>
+    <message>
+        <source>Erase decodes after band change</source>
+        <translation>Dekódolások törlése sávváltás után</translation>
+    </message>
+    <message>
+        <source>Finish one QSO and stop. This is the same setting as Single QSO in the main window. Leave it unchecked for continuous QSOs within the TX watchdog session.</source>
+        <translation>Egy QSO befejezése, majd leállás. Megegyezik a főablak Egyetlen QSO beállításával. Hagyja kikapcsolva a TX-időzítő munkamenetén belüli folyamatos QSO-khoz.</translation>
+    </message>
+    <message>
+        <source>Font...</source>
+        <translation>Alkalmazás betű...</translation>
+    </message>
+    <message>
+        <source>Highlight DX Call in message</source>
+        <translation>DX hívójel kiemelése az üzenetben</translation>
+    </message>
+    <message>
+        <source>Highlight DX Grid in message</source>
+        <translation>DX lokátor kiemelése az üzenetben</translation>
+    </message>
+    <message>
+        <source>Less button coloring (restart required)</source>
+        <translation>Kevesebb gombszínezés (újraindítás szükséges)</translation>
+    </message>
+    <message>
+        <source>MSK144/Q65: Tx until 73 is received</source>
+        <translation>MSK144/Q65: adás a 73 vételéig</translation>
+    </message>
+    <message>
+        <source>Map Grid locator to U.S. State</source>
+        <translation>Lokátor hozzárendelése USA-államhoz</translation>
+    </message>
+    <message>
+        <source>Monitor returns to last used frequency</source>
+        <translation>A Vétel visszatér a legutóbbi frekvenciára</translation>
+    </message>
+    <message>
+        <source>Read and display PWR and SWR</source>
+        <translation>Teljesítmény és SWR olvasása és megjelenítése</translation>
+    </message>
+    <message>
+        <source>Read and display transmit power and SWR through CAT. Unsupported readings are shown as unavailable.</source>
+        <translation>Adási teljesítmény és SWR olvasása és megjelenítése CAT-on keresztül. A nem támogatott értékek nem elérhetőként jelennek meg.</translation>
+    </message>
+    <message>
+        <source>Set Rx frequency to Tx frequency after QSO</source>
+        <translation>RX-frekvencia beállítása TX-re QSO után</translation>
+    </message>
+    <message>
+        <source>Show &amp;DXCC, grid, and worked-before status    </source>
+        <translation>DXCC, QRA és a volt QSO állapot megjelenítése</translation>
+    </message>
+    <message>
+        <source>Show DXCC for all messages</source>
+        <translation>DXCC megjelenítése minden üzenetnél</translation>
+    </message>
+    <message>
+        <source>Show U.S. States in messages with grid</source>
+        <translation>USA-államok megjelenítése lokátoros üzenetekben</translation>
+    </message>
+    <message>
+        <source>Show azimuth in messages with grid</source>
+        <translation>Azimut megjelenítése lokátoros üzenetekben</translation>
+    </message>
+    <message>
+        <source>Show blank line with time stamp</source>
+        <translation>Üres sor megjelenítése időbélyeggel</translation>
+    </message>
+    <message>
+        <source>Show distance in messages with grid</source>
+        <translation>Távolság megjelenítése lokátoros üzenetekben</translation>
+    </message>
+    <message>
+        <source>Show if decoded stations are new DXCC entities or worked before.</source>
+        <translation>Megmutatja, hogy a dekódolt állomások új DXCC entitások-e, vagy már volt-e QSO velük korábban.</translation>
+    </message>
+    <message>
+        <source>Show principal prefix instead of country name        </source>
+        <translation>Prefix megjelenítése az ország neve helyett</translation>
+    </message>
+    <message>
+        <source>Show the separator line between periods with time stamp of the decode period.</source>
+        <translation>A periódusok közötti elválasztó sor megjelenítése a dekódolási periódus időbélyegével.</translation>
+    </message>
+    <message>
+        <source>Single decode</source>
+        <translation>Egyszeres dekódolás</translation>
+    </message>
+    <message>
+        <source>Start new period decodes at top</source>
+        <translation>Új periódus dekódolásának kezdése fentről</translation>
+    </message>
+    <message>
+        <source>Stop Tune after the selected number of seconds. A zero interval disables this timer.</source>
+        <translation>A hangolás leállítása a kiválasztott másodpercek után. Nulla esetén az időzítő kikapcsol.</translation>
+    </message>
+    <message>
+        <source>Tune watchdog   </source>
+        <translation>Hangolási időzítő   </translation>
+    </message>
+    <message>
+        <source>Turn progress bar red while transmitting</source>
+        <translation>Piros folyamatjelző sáv adás közben</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. Transmission safety checks still apply.</source>
+        <translation>Az F1–F5 a CQ, riport, R-riport, nyugtázás és 73 kiválasztására szolgál; az F6 a válaszszabályt módosítja. Az adás biztonsági ellenőrzései továbbra is érvényesek.</translation>
+    </message>
+    <message>
+        <source>kHz entry without k (restart required)</source>
+        <translation>kHz megadása k nélkül (újraindítás szükséges)</translation>
+    </message>
+    <message>
+        <source>When checked, double-clicking a decoded callsign starts a TX session after the transmission safety checks pass. The session then follows the normal AutoSeq, Single QSO and watchdog settings. Off by default.</source>
+        <translation>Ha be van jelölve, a dekódolt hívójelre történő dupla kattintás az adásbiztonsági ellenőrzések sikeres lefutása után TX-menetet indít. A menet ezután az AutoSeq, az egyetlen QSO és az adásfelügyeleti időzítő szokásos beállításait követi. Alapértelmezés szerint kikapcsolva.</translation>
+    </message>
+    <message>
+        <source>Double-click a callsign to enable TX</source>
+        <translation>Hívójelre dupla kattintva TX engedélyezése</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. These keys cannot start a TX session. Click Enable TX first.</source>
+        <translation>Az F1–F5 billentyűk a CQ, riport, R-riport, nyugtázás és 73 üzenetet választják ki; az F6 a válaszadási szabályt módosítja. Ezek a billentyűk nem indíthatnak adási munkamenetet. Először kattintson az Adás engedélyezése gombra.</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -8892,6 +9695,870 @@ hangkártya módosítási tevékenységet</translation>
         <location filename="../wf_palette_design_dialog.ui" line="23"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Double click a color to edit it.&lt;/p&gt;&lt;p&gt;Right click to insert or delete colors.&lt;/p&gt;&lt;p&gt;Colors at the top represent weak signals&lt;/p&gt;&lt;p&gt;and colors at the bottom represent strong&lt;/p&gt;&lt;p&gt;signals. You can have up to 256 colors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kattintson duplán egy színre annak szerkesztéséhez.&lt;/p&gt;&lt;p&gt;Kattintson a jobb gombbal a színek beszúrására vagy törlésére.&lt;/p&gt;&lt;p&gt;A felül lévő színek gyenge jeleket jelölnek&lt;/p&gt;&lt;p&gt;és az alsó színek erős jeleket képviselnek.&lt;/p&gt;&lt;p&gt; 256 szín közül választhat.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>JttyController</name>
+    <message>
+        <source>Cannot write to the JTTY decoder.</source>
+        <translation>Nem sikerült adatot küldeni a JTTY-dekódernek.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY decoder response.</source>
+        <translation>Érvénytelen válasz a JTTY-dekódertől.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY transmit audio.</source>
+        <translation>Érvénytelen JTTY-adáshangadatok.</translation>
+    </message>
+    <message>
+        <source>JTTY audio backlog exceeded 10 seconds; reception restarted.</source>
+        <translation>A JTTY hangpuffer több mint 10 másodpercet késett; a vétel újraindult.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder stopped unexpectedly.</source>
+        <translation>A JTTY-dekóder váratlanul leállt.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder timed out. Select JTTY again to restart it.</source>
+        <translation>A JTTY-dekóder időtúllépés miatt leállt. Az újraindításhoz válassza ki ismét a JTTY-t.</translation>
+    </message>
+    <message>
+        <source>Unexpected JTTY decoder response.</source>
+        <translation>Váratlan válasz a JTTY-dekódertől.</translation>
+    </message>
+</context>
+<context>
+    <name>LogForwarder</name>
+    <message>
+        <source>External logger did not acknowledge the QSO. Local logs are saved.</source>
+        <translation>A külső naplózó nem igazolta vissza a QSO-t. A helyi naplók mentve vannak.</translation>
+    </message>
+    <message>
+        <source>External logger disconnected before acknowledgement. Local logs are saved.</source>
+        <translation>A külső naplózó a visszaigazolás előtt bontotta a kapcsolatot. A helyi naplók mentve vannak.</translation>
+    </message>
+    <message>
+        <source>External logger rejected the QSO. Local logs are saved.</source>
+        <translation>A külső naplózó elutasította a QSO-t. A helyi naplók mentve vannak.</translation>
+    </message>
+    <message>
+        <source>Invalid external logger response. Local logs are saved.</source>
+        <translation>Érvénytelen válasz a külső naplózótól. A helyi naplók mentve vannak.</translation>
+    </message>
+    <message>
+        <source>Unexpected external logger response. Local logs are saved.</source>
+        <translation>Váratlan válasz a külső naplózótól. A helyi naplók mentve vannak.</translation>
+    </message>
+</context>
+<context>
+    <name>ManagedSettingsWidget</name>
+    <message>
+        <source>0 — unlimited</source>
+        <translation>0 — korlátlan</translation>
+    </message>
+    <message>
+        <source>Answer previously worked callsigns</source>
+        <translation>Válasz a korábban már elért hívójeleknek</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC-vadász</translation>
+    </message>
+    <message>
+        <source>New CQ zone</source>
+        <translation>Új CQ-zóna</translation>
+    </message>
+    <message>
+        <source>New DXCC</source>
+        <translation>Új DXCC-körzet</translation>
+    </message>
+    <message>
+        <source>New ITU zone</source>
+        <translation>Új ITU-zóna</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode DXCC</source>
+        <translation>Új DXCC sávon &amp;&amp; üzemmódban</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode callsign</source>
+        <translation>Új hívójel sávon &amp;&amp; üzemmódban</translation>
+    </message>
+    <message>
+        <source>New callsign</source>
+        <translation>Új hívójel</translation>
+    </message>
+    <message>
+        <source>New grid</source>
+        <translation>Új lokátor</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast (also prioritizes new DXCC entities and zones)</source>
+        <translation>QSO-kedvelő (az új DXCC-körzeteket és zónákat is előnyben részesíti)</translation>
+    </message>
+    <message>
+        <source>Send three CQ rounds every 15 minutes</source>
+        <translation>Három CQ-ciklus küldése 15 percenként</translation>
+    </message>
+    <message>
+        <source>Unanswered call limit:</source>
+        <translation>Megválaszolatlan hívások korlátja:</translation>
+    </message>
+    <message>
+        <source>Allow TX slot changes</source>
+        <translation>TX-időrés váltásának engedélyezése</translation>
+    </message>
+    <message>
+        <source>Allow automatic TX slot changes between completed QSOs. After a slot change, wait 5 minutes before another automatic change. Manual changes are always allowed and restart this timer. Off: stay in the selected TX slot.</source>
+        <translation>Automatikus TX-időrés-váltás engedélyezése befejezett QSO-k között. Váltás után 5 percet kell várni az újabb automatikus váltásig. A kézi váltás mindig megengedett, és újraindítja ezt az időzítőt. Kikapcsolva: a kiválasztott TX-időrés marad érvényben.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpClient</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Adjon meg érvényes NTP-kiszolgálónevet vagy IP-címet.</translation>
+    </message>
+    <message>
+        <source>Invalid NTP packet length.</source>
+        <translation>Érvénytelen NTP-csomaghossz.</translation>
+    </message>
+    <message>
+        <source>NTP request timed out.</source>
+        <translation>Az NTP-kérés időtúllépést okozott.</translation>
+    </message>
+    <message>
+        <source>The NTP date is outside the supported range.</source>
+        <translation>Az NTP-dátum kívül esik a támogatott tartományon.</translation>
+    </message>
+    <message>
+        <source>The NTP response does not match this request.</source>
+        <translation>Az NTP-válasz nem ehhez a kéréshez tartozik.</translation>
+    </message>
+    <message>
+        <source>The NTP response has excessive delay or uncertainty.</source>
+        <translation>Az NTP-válasz késése vagy bizonytalansága túl nagy.</translation>
+    </message>
+    <message>
+        <source>The NTP server is not synchronized or refused the request.</source>
+        <translation>Az NTP-kiszolgáló nincs szinkronizálva, vagy elutasította a kérést.</translation>
+    </message>
+    <message>
+        <source>The clock changed during the NTP request, or the response was too slow.</source>
+        <translation>Az óra megváltozott az NTP-kérés alatt, vagy a válasz túl későn érkezett.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpController</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Adjon meg érvényes NTP-kiszolgálónevet vagy IP-címet.</translation>
+    </message>
+    <message>
+        <source>Install polkit/pkexec to authorize system time synchronization.</source>
+        <translation>A rendszeridő szinkronizálásának engedélyezéséhez telepítse a polkit/pkexec programot.</translation>
+    </message>
+    <message>
+        <source>Permission granted. Synchronization follows the selected interval.</source>
+        <translation>Engedély megadva. A szinkronizálás a kiválasztott időközönként történik.</translation>
+    </message>
+    <message>
+        <source>Permission request timed out. System time is unchanged.</source>
+        <translation>Az engedélykérés időtúllépés miatt megszakadt. A rendszeridő nem változott.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted (Windows error %1). Using system time.</source>
+        <translation>Az engedély nincs megadva (Windows-hiba: %1). A rendszeridő használata folytatódik.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted. Using system time.</source>
+        <translation>Az engedély nincs megadva. A rendszeridő használata folytatódik.</translation>
+    </message>
+    <message>
+        <source>Requesting permission to set the system time…</source>
+        <translation>Engedély kérése a rendszeridő beállításához…</translation>
+    </message>
+    <message>
+        <source>Synchronization deferred while transmitting.</source>
+        <translation>A szinkronizálás az adás idejére elhalasztva.</translation>
+    </message>
+    <message>
+        <source>Synchronization failed: %1. Retrying in 1 minute.</source>
+        <translation>A szinkronizálás sikertelen: %1. Újrapróbálkozás 1 perc múlva.</translation>
+    </message>
+    <message>
+        <source>The time synchronization helper is missing.</source>
+        <translation>Hiányzik az időszinkronizáló segédprogram.</translation>
+    </message>
+    <message>
+        <source>Time synchronization stopped. Using system time.</source>
+        <translation>Az időszinkronizálás leállt. A rendszeridő használata folytatódik.</translation>
+    </message>
+    <message>
+        <source>Time synchronized; correction %1 ms. Next check in %2 minutes.</source>
+        <translation>Az idő szinkronizálva; korrekció: %1 ms. Következő ellenőrzés %2 perc múlva.</translation>
+    </message>
+    <message>
+        <source>Use system time. NTP synchronization is disabled.</source>
+        <translation>A rendszeridő használata. Az NTP-szinkronizálás ki van kapcsolva.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpSettingsWidget</name>
+    <message>
+        <source>%1 hours</source>
+        <translation>%1 óra</translation>
+    </message>
+    <message>
+        <source>%1 minutes</source>
+        <translation>%1 perc</translation>
+    </message>
+    <message>
+        <source>Africa / Kenya / icolo</source>
+        <translation>Afrika / Kenya / icolo</translation>
+    </message>
+    <message>
+        <source>Africa / Mauritius / Mauritius Telecom</source>
+        <translation>Afrika / Mauritius / Mauritius Telecom</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / INX-ZA</source>
+        <translation>Afrika / Dél-Afrika / INX-ZA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / NMISA</source>
+        <translation>Afrika / Dél-Afrika / NMISA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / SANReN</source>
+        <translation>Afrika / Dél-Afrika / SANReN</translation>
+    </message>
+    <message>
+        <source>Asia / Apple</source>
+        <translation>Ázsia / Apple</translation>
+    </message>
+    <message>
+        <source>Asia / China / Alibaba</source>
+        <translation>Ázsia / Kína / Alibaba</translation>
+    </message>
+    <message>
+        <source>Asia / China / Baidu</source>
+        <translation>Ázsia / Kína / Baidu</translation>
+    </message>
+    <message>
+        <source>Asia / China / CAS NTSC</source>
+        <translation>Ázsia / Kína / CAS NTSC</translation>
+    </message>
+    <message>
+        <source>Asia / China / NTP Pool</source>
+        <translation>Ázsia / Kína / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tencent</source>
+        <translation>Ázsia / Kína / Tencent</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tsinghua TUNA</source>
+        <translation>Ázsia / Kína / Tsinghua TUNA</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Internet Multifeed</source>
+        <translation>Ázsia / Japán / Internet Multifeed</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / NICT</source>
+        <translation>Ázsia / Japán / NICT</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Sakura Internet</source>
+        <translation>Ázsia / Japán / Sakura Internet</translation>
+    </message>
+    <message>
+        <source>Asia / South Korea / KRISS</source>
+        <translation>Ázsia / Dél-Korea / KRISS</translation>
+    </message>
+    <message>
+        <source>Europe / France / RDEM Systems</source>
+        <translation>Európa / Franciaország / RDEM Systems</translation>
+    </message>
+    <message>
+        <source>Europe / Germany / PTB</source>
+        <translation>Európa / Németország / PTB</translation>
+    </message>
+    <message>
+        <source>Europe / Poland / GUM</source>
+        <translation>Európa / Lengyelország / GUM</translation>
+    </message>
+    <message>
+        <source>Europe / Sweden / Netnod</source>
+        <translation>Európa / Svédország / Netnod</translation>
+    </message>
+    <message>
+        <source>Europe / UK / NPL</source>
+        <translation>Európa / Egyesült Királyság / NPL</translation>
+    </message>
+    <message>
+        <source>Global / Apple</source>
+        <translation>Globális / Apple</translation>
+    </message>
+    <message>
+        <source>Global / Cloudflare</source>
+        <translation>Globális / Cloudflare</translation>
+    </message>
+    <message>
+        <source>Global / Google</source>
+        <translation>Globális / Google</translation>
+    </message>
+    <message>
+        <source>Global / Microsoft Windows</source>
+        <translation>Globális / Microsoft Windows</translation>
+    </message>
+    <message>
+        <source>NTP hostname or IP address</source>
+        <translation>NTP-kiszolgálónév vagy IP-cím</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization (requests administrator privileges when enabled)</source>
+        <translation>NTP-időszinkronizálás (bekapcsoláskor rendszergazdai jogosultságot kér)</translation>
+    </message>
+    <message>
+        <source>North America / Canada / NRC</source>
+        <translation>Észak-Amerika / Kanada / NRC</translation>
+    </message>
+    <message>
+        <source>North America / USA / NIST</source>
+        <translation>Észak-Amerika / USA / NIST</translation>
+    </message>
+    <message>
+        <source>Oceania / Australia / NTP Pool</source>
+        <translation>Óceánia / Ausztrália / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Oceania / New Zealand / MSL (NZ networks only)</source>
+        <translation>Óceánia / Új-Zéland / MSL (csak új-zélandi hálózatokon)</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Egyéb</translation>
+    </message>
+    <message>
+        <source>South America / Argentina / INTI</source>
+        <translation>Dél-Amerika / Argentína / INTI</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / NIC.br</source>
+        <translation>Dél-Amerika / Brazília / NIC.br</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / National Observatory</source>
+        <translation>Dél-Amerika / Brazília / Nemzeti Obszervatórium</translation>
+    </message>
+    <message>
+        <source>South America / Chile / SHOA</source>
+        <translation>Dél-Amerika / Chile / SHOA</translation>
+    </message>
+    <message>
+        <source>South America / Colombia / INM</source>
+        <translation>Dél-Amerika / Kolumbia / INM</translation>
+    </message>
+    <message>
+        <source>Synchronization interval:</source>
+        <translation>Szinkronizálási időköz:</translation>
+    </message>
+    <message>
+        <source>Uses system UTC time; the synchronization interval is configurable.</source>
+        <translation>A rendszer UTC-idejét használja; a szinkronizálás időköze beállítható.</translation>
+    </message>
+</context>
+<context>
+    <name>ProcessingDialog</name>
+    <message>
+        <source>Processing</source>
+        <translation>Feldolgozás</translation>
+    </message>
+    <message>
+        <source>Stop TX</source>
+        <translation>Adás leállítása</translation>
+    </message>
+    <message>
+        <source>System processing, please wait…</source>
+        <translation>Feldolgozás folyamatban, kis türelmet…</translation>
+    </message>
+</context>
+<context>
+    <name>StationManager</name>
+    <message>
+        <source>Add</source>
+        <translation>Hozzáadás</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Hívójel hozzáadása</translation>
+    </message>
+    <message>
+        <source>All regions</source>
+        <translation>Minden régió</translation>
+    </message>
+    <message>
+        <source>Callsign management</source>
+        <translation>Hívójelek kezelése</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Mégse</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Szerkesztés</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Hívójel szerkesztése</translation>
+    </message>
+    <message>
+        <source>Enter a valid 4, 6 or 8 character grid locator.</source>
+        <translation>Adjon meg érvényes, 4, 6 vagy 8 karakteres lokátort.</translation>
+    </message>
+    <message>
+        <source>Enter a valid callsign (3–12 letters/digits, optional /suffix).</source>
+        <translation>Adjon meg érvényes hívójelet (3–12 betű/szám, opcionális /utótag).</translation>
+    </message>
+    <message>
+        <source>Full call in Tx1</source>
+        <translation>Teljes hívójel a Tx1-ben</translation>
+    </message>
+    <message>
+        <source>Full call in Tx3</source>
+        <translation>Teljes hívójel a Tx3-ban</translation>
+    </message>
+    <message>
+        <source>Full call in Tx5 only</source>
+        <translation>Teljes hívójel csak a Tx5-ben</translation>
+    </message>
+    <message>
+        <source>IARU region:</source>
+        <translation>IARU-régió:</translation>
+    </message>
+    <message>
+        <source>Invalid profile</source>
+        <translation>Érvénytelen profil</translation>
+    </message>
+    <message>
+        <source>My callsign:</source>
+        <translation>Saját hívójel:</translation>
+    </message>
+    <message>
+        <source>My grid:</source>
+        <translation>Saját lokátor:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Region 1</source>
+        <translation>1. régió</translation>
+    </message>
+    <message>
+        <source>Region 2</source>
+        <translation>2. régió</translation>
+    </message>
+    <message>
+        <source>Region 3</source>
+        <translation>3. régió</translation>
+    </message>
+    <message>
+        <source>Remove profile</source>
+        <translation>Profil eltávolítása</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Mentés</translation>
+    </message>
+    <message>
+        <source>This callsign already exists. Different /suffixes are allowed.</source>
+        <translation>Ez a hívójel már létezik. Eltérő /utótagok megengedettek.</translation>
+    </message>
+    <message>
+        <source>Type 2 callsign messages:</source>
+        <translation>2. típusú hívójeles üzenetek:</translation>
+    </message>
+</context>
+<context>
+    <name>Blacklist</name>
+    <message>
+        <source>A base callsign blocks its portable prefixes and suffixes (K1ABC also blocks EA8/K1ABC and K1ABC/P). A callsign containing / blocks only that exact callsign.</source>
+        <translation>Az alaphívójel a hordozható elő- és utótagos változatokat is tiltja (a K1ABC az EA8/K1ABC és K1ABC/P jelet is). A / jelet tartalmazó hívójel csak a pontosan egyező hívójelet tiltja.</translation>
+    </message>
+    <message>
+        <source>Blacklist changed in another program. Reload it before saving.</source>
+        <translation>A tiltólistát egy másik program módosította. Mentés előtt töltse be újra.</translation>
+    </message>
+    <message>
+        <source>Blacklist file is too large.</source>
+        <translation>A tiltólista fájlja túl nagy.</translation>
+    </message>
+    <message>
+        <source>Blacklist has too many entries.</source>
+        <translation>Túl sok bejegyzés van a tiltólistán.</translation>
+    </message>
+    <message>
+        <source>Blacklist is busy. Please retry.</source>
+        <translation>A tiltólista foglalt. Próbálja újra.</translation>
+    </message>
+    <message>
+        <source>Blacklist is not ready. Repair the existing file before saving.</source>
+        <translation>A tiltólista még nem áll készen. Mentés előtt javítsa ki a meglévő fájlt.</translation>
+    </message>
+    <message>
+        <source>Blacklist notes must not exceed 512 characters.</source>
+        <translation>A tiltólista megjegyzései legfeljebb 512 karakteresek lehetnek.</translation>
+    </message>
+    <message>
+        <source>Cannot create blacklist directory.</source>
+        <translation>Nem sikerült létrehozni a tiltólista könyvtárát.</translation>
+    </message>
+    <message>
+        <source>Cannot open blacklist: %1</source>
+        <translation>Nem sikerült megnyitni a tiltólistát: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save blacklist: %1</source>
+        <translation>Nem sikerült menteni a tiltólistát: %1</translation>
+    </message>
+    <message>
+        <source>Duplicate callsign: %1</source>
+        <translation>Ismétlődő hívójel: %1</translation>
+    </message>
+    <message>
+        <source>Invalid blacklist file; the original has been preserved.</source>
+        <translation>Érvénytelen tiltólistafájl; az eredeti megmaradt.</translation>
+    </message>
+    <message>
+        <source>Invalid callsign: %1</source>
+        <translation>Érvénytelen hívójel: %1</translation>
+    </message>
+    <message>
+        <source>Select an operator before editing the blacklist.</source>
+        <translation>A tiltólista szerkesztése előtt válasszon operátort.</translation>
+    </message>
+    <message>
+        <source>Unsupported blacklist file version.</source>
+        <translation>Nem támogatott tiltólistafájl-verzió.</translation>
+    </message>
+</context>
+<context>
+    <name>BlacklistDialog</name>
+    <message>
+        <source>Add</source>
+        <translation>Hozzáadás</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Hívójel hozzáadása</translation>
+    </message>
+    <message>
+        <source>Callsign:</source>
+        <translation>Hívójel:</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Mégse</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Szerkesztés</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Hívójel szerkesztése</translation>
+    </message>
+    <message>
+        <source>Invalid entry</source>
+        <translation>Érvénytelen bejegyzés</translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation>Megjegyzés:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Permanent blacklist</source>
+        <translation>Állandó tiltólista</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Eltávolítás</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Mentés</translation>
+    </message>
+</context>
+<context>
+    <name>AstroDialog</name>
+    <message>
+        <source>Astronomical Data</source>
+        <translation>Csillagászati adatok</translation>
+    </message>
+    <message>
+        <source>Call DX</source>
+        <translation>DX Hívójel</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Bezár</translation>
+    </message>
+    <message>
+        <source>Constant frequency on the Moon</source>
+        <translation>Állandó frekvencia a Holdon</translation>
+    </message>
+    <message>
+        <source>DX Moon Az / El: %1° / %2°</source>
+        <translation>Hold azimut / magasság a DX-nél: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>Doppler tracking</source>
+        <translation>Doppler követés</translation>
+    </message>
+    <message>
+        <source>Echo RIT</source>
+        <translation>Visszhang RIT</translation>
+    </message>
+    <message>
+        <source>Echo delay: %1 s; spread: %2 / %3 Hz</source>
+        <translation>Visszhangkésés: %1 s; szóródás: %2 / %3 Hz</translation>
+    </message>
+    <message>
+        <source>Echo frequency dither (±10 Hz)</source>
+        <translation>Visszhangfrekvencia ingadoztatása (±10 Hz)</translation>
+    </message>
+    <message>
+        <source>Full Doppler to DX grid</source>
+        <translation>Teljes Doppler-korrekció a DX lokátorához</translation>
+    </message>
+    <message>
+        <source>Method</source>
+        <translation>Módszer</translation>
+    </message>
+    <message>
+        <source>Moon Az / El: %1° / %2°</source>
+        <translation>Hold azimut / magasság: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>No Doppler correction</source>
+        <translation>Doppler-korrekció nélkül</translation>
+    </message>
+    <message>
+        <source>On DX echo</source>
+        <translation>A DX visszhangján</translation>
+    </message>
+    <message>
+        <source>Own / DX Doppler: %1 / %2 Hz</source>
+        <translation>Saját / DX Doppler: %1 / %2 Hz</translation>
+    </message>
+    <message>
+        <source>Own echo</source>
+        <translation>Saját visszhang</translation>
+    </message>
+    <message>
+        <source>Set frequency</source>
+        <translation>Frekvencia beállítása</translation>
+    </message>
+    <message>
+        <source>Sky: %1 K; degradation: %2 dB; polarization: %3°</source>
+        <translation>Égbolt: %1 K; romlás: %2 dB; polarizáció: %3°</translation>
+    </message>
+    <message>
+        <source>Sun Az / El: %1° / %2°</source>
+        <translation>Nap azimut / magasság: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>TX frequency offset (MHz)</source>
+        <translation>TX-frekvenciaeltolás (MHz)</translation>
+    </message>
+    <message>
+        <source>Waiting for astronomical data…</source>
+        <translation>Várakozás csillagászati adatokra…</translation>
+    </message>
+</context>
+<context>
+    <name>HamlibUpdater</name>
+    <message>
+        <source>Another Hamlib update is in progress.</source>
+        <translation>Már folyamatban van egy másik Hamlib-frissítés.</translation>
+    </message>
+    <message>
+        <source>Cannot read the Hamlib files.</source>
+        <translation>A Hamlib fájljai nem olvashatók.</translation>
+    </message>
+    <message>
+        <source>Cannot save the Hamlib restart request: %1</source>
+        <translation>A Hamlib újraindítási kérelme nem menthető: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save the downloaded Hamlib file.</source>
+        <translation>A letöltött Hamlib-fájl nem menthető.</translation>
+    </message>
+    <message>
+        <source>Cannot stage Hamlib: %1</source>
+        <translation>A Hamlib nem készíthető elő: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib compatibility checker: %1</source>
+        <translation>A Hamlib kompatibilitás-ellenőrzése nem indítható: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib update helper.</source>
+        <translation>A Hamlib frissítési segédprogramja nem indítható.</translation>
+    </message>
+    <message>
+        <source>Checking Hamlib compatibility without connecting to a radio…</source>
+        <translation>Hamlib-kompatibilitás ellenőrzése rádiókapcsolat nélkül…</translation>
+    </message>
+    <message>
+        <source>Compatibility check passed. Restart JTDX-F to apply %1.</source>
+        <translation>A kompatibilitás-ellenőrzés sikeres. A(z) %1 alkalmazásához indítsa újra a JTDX-F-et.</translation>
+    </message>
+    <message>
+        <source>Downloading the official Hamlib 4.7 branch update…</source>
+        <translation>A Hamlib 4.7 ág hivatalos frissítésének letöltése…</translation>
+    </message>
+    <message>
+        <source>Hamlib compatibility check failed: %1</source>
+        <translation>A Hamlib kompatibilitás-ellenőrzése sikertelen: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib download failed: %1</source>
+        <translation>A Hamlib letöltése sikertelen: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib files changed after validation. Check the update again.</source>
+        <translation>A Hamlib fájljai megváltoztak az ellenőrzés óta. Ellenőrizze újra a frissítést.</translation>
+    </message>
+    <message>
+        <source>Hamlib update completed successfully.</source>
+        <translation>A Hamlib frissítése sikerült.</translation>
+    </message>
+    <message>
+        <source>Hamlib update timed out. The current version is unchanged.</source>
+        <translation>A Hamlib-frissítés túllépte az időkorlátot. A jelenlegi verzió változatlan.</translation>
+    </message>
+    <message>
+        <source>Hamlib update was not applied: %1</source>
+        <translation>A Hamlib-frissítés nem lett alkalmazva: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib updates require a 64-bit Windows installation.</source>
+        <translation>A Hamlib frissítéséhez 64 bites Windows szükséges.</translation>
+    </message>
+    <message>
+        <source>Invalid Hamlib update: %1</source>
+        <translation>Érvénytelen Hamlib-frissítés: %1</translation>
+    </message>
+    <message>
+        <source>No previous Hamlib version is available.</source>
+        <translation>Nincs elérhető korábbi Hamlib-verzió.</translation>
+    </message>
+    <message>
+        <source>On this platform, Hamlib is updated with JTDX-F.</source>
+        <translation>Ezen a platformon a Hamlib a JTDX-F-fel együtt frissül.</translation>
+    </message>
+    <message>
+        <source>Restarting JTDX-F to apply the Hamlib update…</source>
+        <translation>A JTDX-F újraindítása a Hamlib-frissítés alkalmazásához…</translation>
+    </message>
+    <message>
+        <source>The Hamlib download is too large or could not be saved.</source>
+        <translation>A letöltött Hamlib-fájl túl nagy, vagy nem menthető.</translation>
+    </message>
+    <message>
+        <source>The Hamlib update helper is missing. Reinstall JTDX-F.</source>
+        <translation>Hiányzik a Hamlib frissítési segédprogramja. Telepítse újra a JTDX-F-et.</translation>
+    </message>
+    <message>
+        <source>The installation folder is not writable. Run JTDX-F with permission to update this folder.</source>
+        <translation>A telepítési mappa nem írható. Indítsa a JTDX-F-et a mappa frissítéséhez szükséges jogosultsággal.</translation>
+    </message>
+</context>
+<context>
+    <name>OmniRigTransceiver</name>
+    <message>
+        <source>OmniRig: cannot initialize COM</source>
+        <translation>OmniRig: a COM nem inicializálható</translation>
+    </message>
+    <message>
+        <source>OmniRig: no valid receive frequency was reported</source>
+        <translation>OmniRig: nem érkezett érvényes vételi frekvencia</translation>
+    </message>
+</context>
+<context>
+    <name>Transceiver</name>
+    <message>
+        <source>This transceiver does not support PCM audio.</source>
+        <translation>Ez az adóvevő nem támogatja a PCM-hangot.</translation>
+    </message>
+</context>
+<context>
+    <name>UpstreamController</name>
+    <message>
+        <source>Cannot communicate with the WSJT-X backend.</source>
+        <translation>Nem lehet kommunikálni a WSJT-X háttérmodullal.</translation>
+    </message>
+    <message>
+        <source>Cannot prepare audio for the WSJT-X backend.</source>
+        <translation>Nem készíthető elő hang a WSJT-X háttérmodulhoz.</translation>
+    </message>
+    <message>
+        <source>Cannot read the prepared transmit audio.</source>
+        <translation>Az előkészített adási hang nem olvasható.</translation>
+    </message>
+    <message>
+        <source>Invalid response from the WSJT-X backend.</source>
+        <translation>Érvénytelen válasz a WSJT-X háttérmodultól.</translation>
+    </message>
+    <message>
+        <source>Invalid transmit audio from the WSJT-X backend.</source>
+        <translation>Érvénytelen adási hang a WSJT-X háttérmodultól.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend rejected the request.</source>
+        <translation>A WSJT-X háttérmodul elutasította a kérést.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend stopped unexpectedly.</source>
+        <translation>A WSJT-X háttérmodul váratlanul leállt.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend timed out. Reception can be restarted by selecting the mode again.</source>
+        <translation>A WSJT-X háttérmodul túllépte az időkorlátot. A vétel az üzemmód újbóli kiválasztásával indítható újra.</translation>
+    </message>
+    <message>
+        <source>Unexpected response from the WSJT-X backend.</source>
+        <translation>Váratlan válasz a WSJT-X háttérmodultól.</translation>
+    </message>
+</context>
+<context>
+    <name>OperatorLog</name>
+    <message>
+        <source>Log files changed during processing; originals retained. Please retry.</source>
+        <translation>A naplófájlok megváltoztak a feldolgozás során; az eredetiek megmaradtak. Próbálja újra.</translation>
+    </message>
+    <message>
+        <source>Cannot create the old backup directory; originals retained.</source>
+        <translation>Az old biztonsági mentési mappa nem hozható létre; az eredetiek megmaradtak.</translation>
+    </message>
+    <message>
+        <source>Backup contents differ; originals retained.</source>
+        <translation>A biztonsági mentés tartalma eltér; az eredetiek megmaradtak.</translation>
+    </message>
+    <message>
+        <source>Invalid QSO for the current station; originals retained.</source>
+        <translation>Érvénytelen QSO az aktuális állomáshoz; az eredetiek megmaradtak.</translation>
     </message>
 </context>
 </TS>

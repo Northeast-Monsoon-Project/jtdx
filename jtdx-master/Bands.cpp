@@ -63,6 +63,11 @@ Bands::Bands (QObject * parent)
 
 QString Bands::find (Frequency f) const
 {
+  return findBand(f);
+}
+
+QString Bands::findBand (Frequency f)
+{
   QString result;
   auto const& end_iter = ADIF_bands + table_rows ();
   auto const& row_iter = std::find_if (ADIF_bands, end_iter, [f] (ADIFBand const& band) {

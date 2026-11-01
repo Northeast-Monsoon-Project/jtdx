@@ -5,28 +5,44 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
                 ncount,msgsrcvd,lrepliedother,lhashmsg,lqsothread,lft8lowth,lhighsens,lsubtracted,      &
                 tmpcqsig,tmpmycsig,tmpqsosig,lnohiscall,lnomycall,lnohisgrid)
 !  use timer_module, only: timer
+  use ft8_fft32, only: fft32_first_eight
+  use ft8_symbol_spectrum, only: ft8_symbol_spectra
+  use ft8_shared_state, only: ft8_snapshot_history, ft8_qso_decoded, ft8_mark_qso_decoded, &
+                             ft8_record_qso, ft8_decode_seen, ft8_prefer_legacy_rr73, ft8_apply_rr73_variant
   use packjt77, only : unpack77
-  use ft8_mod1, only : allmessages,ndecodes,apsym,mcq,m73,mrr73,mrrr,icos7,naptypes,nhaptypes,one,graymap,                     &
-                       oddcopy,evencopy,lastrxmsg,lasthcall,nlasttx,calldteven,calldtodd,lqsomsgdcd,mycalllen1,                &
-                       msgroot,msgrootlen,allfreq,idtone25,lapmyc,idtonemyc,mycall,hiscall,lhound,apsymsp,                     &
+  use modern174, only : modern_ft8, modern174_decode, modern174_valid
+  use ft8_mod1, only : apsym,mcq,m73,mrr73,mrrr,icos7,naptypes,nhaptypes,one,graymap,                     &
+                       oddcopy,evencopy,nlasttx,mycalllen1,                &
+                       msgroot,msgrootlen,idtone25,lapmyc,idtonemyc,mycall,hiscall,lhound,apsymsp,                     &
                        ndxnsaptypes,apsymdxns1,apsymdxnsrrr,lenabledxcsearch,lwidedxcsearch,apcqsym,apsymdxnsrr73,apsymdxns73, &
                        mybcall,hisbcall,lskiptx1,nft8cycles,nft8swlcycles,ctwkw,ctwkn,nincallthr,msgincall,xdtincall,          &
                        maskincallthr,ctwk256,numcqsig,numdeccq,evencq,oddcq,nummycsig,numdecmyc,evenmyc,oddmyc,idtone56,       &
                        idtonecqdxcns,evenqso,oddqso,nmycnsaptypes,apsymmyns1,apsymmyns2,apsymmynsrr73,apsymmyns73,apsymdxstd,  &
-                       apsymdxnsr73,apsymdxns732,ltxing,apsymmynsrrr,idtonedxcns73,idtonefox73,idtonespec
+                       apsymdxnsr73,apsymdxns732,ltxing,apsymmynsrrr,idtonedxcns73,idtonefox73,idtonespec,legacy_rr73_tones
+
+  use ft8_mod1, only: lastrxmsg_struct,callsigndteven_struct,callsigndtodd_struct
 
   include 'ft8_params.f90'
+  type(lastrxmsg_struct) lastrxmsg(1)
+  type(callsigndteven_struct) calldteven(150)
+  type(callsigndtodd_struct) calldtodd(150)
   character c77*77,msg37*37,msg37_2*37,msgd*37,msgbase37*37,call_a*12,call_b*12,callsign*12,grid*12
   character*37 msgsrcvd(130)
-  complex cd0(-800:4000),cd1(-800:4000),cd2(-800:4000),cd3(-800:4000),ctwk(32),csymb(32),cs(0:7,79),csymbr(32),csr(0:7,79), &
+  complex cd0(-800:4000),cd1(-800:4000),cd2(-800:4000),cd3(-800:4000),ctwk(32),csymb(32),cs(0:7,79),forward(0:7),reversed(0:7),csr(0:7,79), &
           csig(32),csig0(151680),z1,csymb256(256),cstmp2(0:7,79),csold(0:7,79),cscs(0:7,79)
   real a(5),s8(0:7,79),s82(0:7,79),s2(0:511),sp(0:7),s81(0:7),snrsync(21),syncw(7),sumkw(7),scoreratiow(7),freqsub(200), &
        s256(0:8),s2563(0:26),syncavpart(3)
   real bmeta(174),bmetb(174),bmetc(174),bmetd(174)
   real llra(174),llrb(174),llrc(174),llrd(174),llrz(174)
   integer*1 message77(77),apmask(174),cw(174),nsmax(8)
+  integer*1 modern_message(77),modern_cw(174)
+  real modern_distance
   integer itone(79),ip(1),ka(1),nqsoend(3)
+  integer rr73_data_tones(58)
+  integer nmoderntries,modern_errors
   integer, intent(in) :: nQSOProgress,nfqso,nftx,napwid,nthr,ipass,nft8rxfsens
+  logical ft8_ap_mask_valid
+  logical legacy_rr73
   logical newdat1,lsubtract,lFreeText,nagainfil,lspecial,unpk77_success
   logical(1), intent(in) :: swl,stophint,lft8subpass,lhidehash,lmycallstd,lhiscallstd,lqsothread,lft8lowth, &
                             lhighsens,lcqcand,levenint,loddint,lnohiscall,lnomycall,lnohisgrid
@@ -69,7 +85,10 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
   end type tmpqsosig_struct
   type(tmpqsosig_struct) tmpqsosig(1)
 
+  call ft8_snapshot_history(lastrxmsg,calldteven,calldtodd)
+
   max_iterations=30; nharderrors=-1; nbadcrc=1; delfbest=0.; ibest=0; dfqso=500.; rrxdt=0.5
+  nmoderntries=0
   fs2=200.; dt2=0.005 ! fs2=12000.0/NDOWN; dt2=1.0/fs2
   lcall1hash=.false.; lcall2hash=.false.; lskipnotap=.false.
   ldeepsync=.false.; if(lft8lowth .or. lft8subpass .or. swl) ldeepsync=.true.
@@ -78,7 +97,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
   xdt0=xdt; f10=f1
 ! apply last freq f1 and last DT criteria here  
   nqso=1
-  if(lqsothread .and. .not. lft8sdec .and. .not.lqsomsgdcd .and. .not.stophint .and. nlasttx.ge.1 &
+  if(lqsothread .and. .not. lft8sdec .and. .not.ft8_qso_decoded() .and. .not.stophint .and. nlasttx.ge.1 &
     .and. nlasttx.le.4 .and. abs(f10-nfqso).lt.2.51) then
     if(lastrxmsg(1)%lstate .and. abs(lastrxmsg(1)%xdt-xdt).lt.0.18) then; nqso=2
       elseif(.not.lastrxmsg(1)%lstate) then; nqso=2
@@ -86,7 +105,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
   endif
 
   lvirtual2=.false.; lvirtual3=.false.; maxlasttx=4
-  if(lqsothread .and. .not. lft8sdec .and. .not.lqsomsgdcd) then
+  if(lqsothread .and. .not. lft8sdec .and. .not.ft8_qso_decoded()) then
     if(len_trim(hiscall).gt.2) then
       if(xdt.gt.4.9 .or. xdt.lt.-4.9) then
         if(lastrxmsg(1)%lstate .and. trim(lastrxmsg(1)%lastmsg).eq.trim(msgroot)//' RRR') maxlasttx=5
@@ -222,8 +241,8 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
       i1=ibest+(k-1)*32
       csymb=cd0(i1:i1+31)
       if((k.ge.1 .and. k.le.7) .or. (k.ge.37 .and. k.le.43) .or. (k.ge.73 .and. k.le.79)) then
-        call four2a(csymb,32,1,-1,1)
-        s81(0:7)=abs(csymb(1:8))
+        call fft32_first_eight(csymb,forward)
+        s81(0:7)=abs(forward)
         if(k.ge.1 .and. k.le.7) then
           synclev=s81(icos7(k-1)); snoiselev=(sum(s81)-synclev)/7.0
           if(snoiselev.gt.1.E-16) snrsync(k)=synclev/snoiselev
@@ -267,21 +286,24 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
       csymb=cd0(i1:i1+31)
       if(syncav.lt.2.5) then
         csymb(1)=csymb(1)*1.9; csymb(32)=csymb(32)*1.9
-        scr=SQRT(abs(csymb(1)))/SQRT(abs(csymb(32)))
-        if(scr.gt.1.0) then; csymb(32)=csymb(32)*scr; else; if(scr.gt.1.E-16) csymb(1)=csymb(1)/scr; endif
+        ! Silent/truncated symbols must not produce 0/0 or 0*Inf.
+        if(abs(csymb(1)).gt.1.E-16 .and. abs(csymb(32)).gt.1.E-16) then
+          scr=SQRT(abs(csymb(1)))/SQRT(abs(csymb(32)))
+          if(scr.gt.1.0) then; csymb(32)=csymb(32)*scr
+          else; csymb(1)=csymb(1)/scr
+          endif
+        endif
       endif
-      do i=1,32; csymbr(i)=cmplx(real(csymb(33-i)),-aimag(csymb(33-i))); enddo
+      call ft8_symbol_spectra(csymb,forward,reversed)
+      ! Always initialize both directions: cscs is normalized below even on
+      ! forward passes. The reverse DFT is derived without a second FFT.
+      cscs(:,k)=forward/1e3
+      csr(:,k)=reversed/1e3
       if(lreverse) then
-        call four2a(csymb,32,1,-1,1)
-        cscs(0:7,k)=csymb(1:8)/1e3
-        csymb=csymbr
+        cs(:,k)=csr(:,k); s8(:,k)=abs(reversed)
+      else
+        cs(:,k)=cscs(:,k); s8(:,k)=abs(forward)
       endif
-      call four2a(csymb,32,1,-1,1)
-      cs(0:7,k)=csymb(1:8)/1e3
-      if(lreverse) then; csr=cs
-      else; call four2a(csymbr,32,1,-1,1); csr(0:7,k)=csymbr(1:8)/1e3
-      endif
-      s8(0:7,k)=abs(csymb(1:8))
     enddo
 
     sp=0.
@@ -551,7 +573,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
 ! -24            1.94
 
 8   if(iqso.gt.1 .and. iqso.lt.4) then
-      if(.not.lqsomsgdcd .and. .not.(.not.lmycallstd .and. .not.lhiscallstd)) then
+      if(.not.ft8_qso_decoded() .and. .not.(.not.lmycallstd .and. .not.lhiscallstd)) then
         if(.not.lft8sdec .and. dfqso.lt.2.0) then
           if(lvirtual2 .or. lvirtual3) srr=0.0
           call ft8s(s82,srr,itone,msg37,lft8s,nft8rxfsens,stophint)
@@ -582,8 +604,14 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
     ip=maxloc(s8(:,27)); if(ip(1).eq.1 .or. ip(1).eq.2) rscq=rscq+0.5
     ip=maxloc(s8(:,33)); if(ip(1).eq.3 .or. ip(1).eq.4) rscq=rscq+0.5
 
+    rr73_data_tones=idtone56(55,:)
+    legacy_rr73=ft8_prefer_legacy_rr73(s8)
+    if(legacy_rr73) then
+      rr73_data_tones(1:29)=legacy_rr73_tones(8:36)
+      rr73_data_tones(30:58)=legacy_rr73_tones(44:72)
+    endif
     lqsosig=.false.; lqsosigtype3=.false.; lqso73=.false.; lqsorr73=.false.; lqsorrr=.false. ! 73/rr73/rrr for std/nonstd callsigns
-    if(.not.lqsomsgdcd .and. (dfqso.lt.napwid .or. abs(nftx-f1).lt.napwid) .and. lapmyc .and. len_trim(hiscall).gt.2) then
+    if(.not.ft8_qso_decoded() .and. (dfqso.lt.napwid .or. abs(nftx-f1).lt.napwid) .and. lapmyc .and. len_trim(hiscall).gt.2) then
       nqsot=0
       do i=1,19
         ip=maxloc(s8(:,i+7))
@@ -600,7 +628,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
         do i=24,58
           if(i.lt.30) then; ip=maxloc(s8(:,i+7)); else; ip=maxloc(s8(:,i+14)); endif
           if(ip(1).eq.idtone56(56,i)+1) nqsoend(1)=nqsoend(1)+1
-          if(ip(1).eq.idtone56(55,i)+1) nqsoend(2)=nqsoend(2)+1
+          if(ip(1).eq.rr73_data_tones(i)+1) nqsoend(2)=nqsoend(2)+1
           if(ip(1).eq.idtone56(54,i)+1) nqsoend(3)=nqsoend(3)+1
         enddo
         ip=maxloc(nqsoend)
@@ -696,7 +724,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
     endif
 
     lsubptxfreq=.false.
-    if(lapmyc .and. abs(f1-nftx).lt.2.0 .and. .not.lhound .and. .not.lft8sdec .and. .not.lqsomsgdcd .and. &
+    if(lapmyc .and. abs(f1-nftx).lt.2.0 .and. .not.lhound .and. .not.lft8sdec .and. .not.ft8_qso_decoded() .and. &
       ((.not.lskiptx1 .and. nlasttx.eq.1) .or. (lskiptx1 .and. nlasttx.eq.2))) lsubptxfreq=.true.
 
     nweak=1
@@ -739,7 +767,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
       endif
     endif
     lqsocandave=.false.
-    if(lapmyc .and. ndxt.gt.2 .and. nmic.gt.2 .and. .not.lqsomsgdcd .and. lmycallstd .and. lhiscallstd .and. &
+    if(lapmyc .and. ndxt.gt.2 .and. nmic.gt.2 .and. .not.ft8_qso_decoded() .and. lmycallstd .and. lhiscallstd .and. &
        dfqso.lt.napwid/2.0) then
       lqsocandave=.true.
       nsubpasses=9
@@ -963,7 +991,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
         if(isubp1.gt.2 .and. isubp2.lt.5) cycle ! skip regular decoding for extra subpasses
         if(lqsocandave) then
           if(isubp1.gt.2 .and. isubp1.lt.9) cycle ! skip other extra subpasses if QSO signal, highest priority
-          if(lqsomsgdcd) cycle
+          if(ft8_qso_decoded()) cycle
         else if(lmycsignal .and. lmycallstd) then
           if(isubp1.gt.2 .and. isubp1.lt.6) cycle ! skip CQ signal extra subpasses if MyCall signal
         endif
@@ -981,7 +1009,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
           if(.not.lhound) then
             if(lmycallstd .and. (lhiscallstd .or. lnohiscall)) then
               iaptype=naptypes(nQSOProgress,isubp2-4); if(iaptype.eq.0) cycle
-              if(lqsomsgdcd .and. iaptype.gt.2 .and. iaptype.lt.31) cycle ! QSO message already decoded
+              if(ft8_qso_decoded() .and. iaptype.gt.2 .and. iaptype.lt.31) cycle ! QSO message already decoded
               if(iaptype.eq.2) then
                 if(.not.lapmyc .or. lapcqonly) cycle ! skip AP for 'mycall ???? ????' in 2..3 minutes after last TX
                 if(nQSOProgress.ne.0 .and. nmic.lt.2) cycle ! reduce CPU load at QSO
@@ -1101,7 +1129,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
               iaptype=ndxnsaptypes(nQSOProgress,isubp2-4); if(iaptype.eq.0) cycle
               if(iaptype.eq.2 .and. lapcqonly) cycle ! skip weak CQ signals
               if(.not.stophint .and. iaptype.gt.30) cycle ! no DXCall searching at QSO, reduce Lag
-              if((lqsomsgdcd .or. .not.lapmyc) .and. iaptype.gt.1 .and. iaptype.lt.15) cycle ! skip AP for mycall in 2..3 minutes after last TX
+              if((ft8_qso_decoded() .or. .not.lapmyc) .and. iaptype.gt.1 .and. iaptype.lt.15) cycle ! skip AP for mycall in 2..3 minutes after last TX
               if(iaptype.eq.12 .and. .not.lqsorrr) cycle ! not RRR signal
               if(iaptype.eq.13 .and. .not.lqso73) cycle ! not 73 signal
               if(iaptype.eq.14 .and. .not.lqsorr73) cycle ! not RR73 signal
@@ -1259,7 +1287,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
               if(isubp1.eq.2 .and. nweak.eq.1) cycle
               if(isubp1.gt.5) cycle ! so far CQ averaging only
               if(iaptype.eq.40 .and. lapcqonly) cycle ! skip weak CQ signals
-              if(iaptype.gt.40 .and. iaptype.lt.45 .and. lqsomsgdcd) cycle ! already decoded
+              if(iaptype.gt.40 .and. iaptype.lt.45 .and. ft8_qso_decoded()) cycle ! already decoded
               if(iaptype.eq.42 .and. .not.lqsorrr) cycle ! not RRR signal
               if(iaptype.eq.43 .and. .not.lqso73) cycle ! not 73 signal
               if(iaptype.eq.44 .and. .not.lqsorr73) cycle ! not RR73 signal
@@ -1339,7 +1367,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
             iaptype=nhaptypes(nQSOProgress,isubp2-4); if(iaptype.eq.0) cycle
             if(lnomycall .and. iaptype.gt.1 .and. iaptype.lt.31) cycle ! skip AP if mycall is missed in config
             if(lhiscallstd .and. iaptype.eq.31 .and. .not.lcqsignal) cycle ! not CQ signal, skip CQ DXCall DXgrid mask
-            if(lqsomsgdcd .and. iaptype.gt.0 .and. iaptype.lt.25) cycle ! QSO message already decoded
+            if(ft8_qso_decoded() .and. iaptype.gt.0 .and. iaptype.lt.25) cycle ! QSO message already decoded
             if(.not.stophint .and. (iaptype.eq.31 .or. iaptype.eq.36)) cycle ! CQ and RR73 decoding not needed if TX is on
             if(nQSOProgress.eq.1) then
               if(lfoxspecrpt) then
@@ -1440,6 +1468,11 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
           endif
         endif
 
+        call ft8_apply_ap_type(iaptype,lmycallstd,lhiscallstd,apmag,apmask,llrz)
+        call ft8_apply_rr73_variant(iaptype,legacy_rr73,apmag,apmask,llrz)
+        if(iaptype.gt.0) then
+          if(.not.ft8_ap_mask_valid(apmag,apmask,llrz)) cycle
+        endif
         cw=0
 !        call timer('bpd174_91 ',0)
         call bpdecode174_91(llrz,apmask,max_iterations,message77,cw,nharderrors,  &
@@ -1450,7 +1483,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
           ndeep=3
           if(lqsosig .or. lmycsignal) then
             if((dfqso.lt.napwid .or. (abs(nftx-f1).lt.napwid .and. lapmyc)) .and. .not.nagainfil) ndeep=4
-            if(lapmyc .and. lqsomsgdcd .or. iaptype.eq.0) ndeep=3 ! deep is not needed, reduce number of CPU cycles
+            if(lapmyc .and. ft8_qso_decoded() .or. iaptype.eq.0) ndeep=3 ! deep is not needed, reduce number of CPU cycles
             if(.not.stophint .and. len_trim(hiscall).gt.2) ndeep=3 ! unload CPU, let ft8s pick up QSO message
           endif
           if(ldxcsig .and. stophint .and. dfqso.lt.napwid) ndeep=4 ! DXCall search inside RX napwid
@@ -1462,6 +1495,19 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
 !          call timer('osd174_91 ',0)
           call osd174_91(llrz,apmask,ndeep,message77,cw,nharderrors,dmin,nthr)
 !          call timer('osd174_91 ',1)
+        endif
+        if(modern_ft8) then
+          if(nharderrors.ge.0) then
+            if(.not.modern174_valid(llrz,apmask,cw)) nharderrors=-1
+          endif
+          if(nharderrors.lt.0 .and. iaptype.eq.0 .and. nmoderntries.lt.3) then
+            nmoderntries=nmoderntries+1
+            call modern174_decode(llrz,apmask,.false.,nthr,modern_message,modern_cw,modern_errors,modern_distance, &
+              reshape((/llra,llrb,llrc/),(/174,3/)))
+            if(modern_errors.ge.0)then
+              message77=modern_message;cw=modern_cw;nharderrors=modern_errors;dmin=modern_distance
+            endif
+          endif
         endif
         nbadcrc=1; msg37=''
         if(count(cw.eq.0).eq.174) cycle           !Reject the all-zero codeword
@@ -1510,7 +1556,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
 
           if(lqsothread .and. (.not.lhound .and. iaptype.ge.3 .or. lhound .and. (iaptype.eq.21 .or. iaptype.eq.23)) &
              .and. .not.lsdone) then
-            if(.not.lqsomsgdcd .and. .not.(.not.lmycallstd .and. .not.lhiscallstd)) then
+            if(.not.ft8_qso_decoded() .and. .not.(.not.lmycallstd .and. .not.lhiscallstd)) then
               if(.not.lft8sdec .and. .not.stophint .and. dfqso.lt.2.0) then
                 call ft8s(s8,srr,itone,msg37,lft8s,nft8rxfsens,stophint)
                 if(lft8s) then
@@ -1585,7 +1631,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
         if(.not.unpk77_success) then
           if(lqsothread .and. (.not.lhound .and. iaptype.ge.3 .or. lhound .and. &
              (iaptype.eq.21 .or. iaptype.eq.23)) .and. .not.lsdone) then
-            if(.not.lqsomsgdcd .and. .not.(.not.lmycallstd .and. .not.lhiscallstd)) then
+            if(.not.ft8_qso_decoded() .and. .not.(.not.lmycallstd .and. .not.lhiscallstd)) then
               if(.not.lft8sdec .and. .not.stophint .and. dfqso.lt.2.0) then
                 call ft8s(s8,srr,itone,msg37,lft8s,nft8rxfsens,stophint)
                 if(lft8s) then
@@ -1630,7 +1676,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
     if(i3bit.eq.1 .and. .not.lft8s .and. .not.lft8sd) then
       call msgparser(msg37,msg37_2); lspecial=.true.
 !protection against a false FT8S decode in Hound mode 
-      if(lhound .and. dfqso.lt.2.0) lqsomsgdcd=.true.; !$OMP FLUSH (lqsomsgdcd)
+      if(lhound .and. dfqso.lt.2.0) call ft8_mark_qso_decoded()
     endif
     qual=1.0-(nharderrors+dmin)/60.0
     xsnr=0.001; xnoi=1.E-8
@@ -1725,7 +1771,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
           endif
           if(lcall2hash) then ! valid call_b can be found in hash table, check call_a then
             call_a=''
-            if((i3.eq.1 .and. msg37(ispc1-2:ispc1-1).eq.'/R') .or. (i3.eq.2 .and. msg37(ispc1-2:ispc1-1).eq.'/R')) then
+            if((i3.eq.1 .and. msg37(ispc1-2:ispc1-1).eq.'/R') .or. (i3.eq.2 .and. msg37(ispc1-2:ispc1-1).eq.'/P')) then
               call_a=msg37(1:ispc1-3)
             else
               call_a=msg37(1:ispc1-1)
@@ -1892,26 +1938,20 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
       endif
     endif
 
-4   ldupemsg=.false.
-    if(ndecodes.gt.0) then
-      do i=1,ndecodes; if(allmessages(i).eq.msg37 .and. abs(allfreq(i)-f1).lt.45.0) ldupemsg=.true.; enddo
-    endif
+4   ldupemsg=ft8_decode_seen(msg37,f1)
 
-    if(.not.ldupemsg .and. dfqso.lt.2.0 .and. ((i3.eq.1 .and. .not.lft8s) .or. lft8s)) then
+    if(.not.ldupemsg .and. dfqso.lt.2.0 .and. (((i3.eq.1.or.i3.eq.2) .and. .not.lft8s) .or. lft8s)) then
       if(msg37(1:msgrootlen+1).eq.trim(msgroot)//' ') then
-        lasthcall=hiscall; lastrxmsg(1)%lastmsg=msg37; lastrxmsg(1)%xdt=xdt-0.5; lastrxmsg(1)%lstate=.true.
-        lqsomsgdcd=.true.
-!$OMP FLUSH (lqsomsgdcd)
+        call ft8_record_qso(msg37,xdt-0.5,.true.)
       else if(.not.lft8s .and. mycalllen1.gt.2) then
         if(msg37(1:mycalllen1).ne.trim(mycall)//' ' .and. index(msg37,' '//trim(hiscall)//' ').gt.0) then
           lrepliedother=.true.
         endif
       endif
     endif
-    if(len_trim(hiscall).gt.3 .and. .not.lqsomsgdcd) then
+    if(len_trim(hiscall).gt.3 .and. .not.ft8_qso_decoded()) then
       if(msg37(1:msgrootlen+1).eq.trim(msgroot)//' ') then
-      lqsomsgdcd=.true.
-!$OMP FLUSH (lqsomsgdcd)
+      call ft8_mark_qso_decoded()
       endif
     endif
     if(.not.stophint .and. .not.ldupemsg .and. dfqso.lt.2.0 .and. nlasttx.gt.0 .and. &
@@ -1945,7 +1985,7 @@ subroutine ft8b(newdat1,nQSOProgress,nfqso,nftx,napwid,lsubtract,npos,freqsub,tm
     endif
     if(ldupeft8sd) then; msg37=''; nbadcrc=1; return; endif
 
-    if(.not.ldupemsg .and. i3.eq.1 .and. .not.lft8sd .and. .not.lft8s .and. msg37(1:3).ne.'CQ ') then
+    if(.not.ldupemsg .and. (i3.eq.1.or.i3.eq.2) .and. .not.lft8sd .and. .not.lft8s .and. msg37(1:3).ne.'CQ ' .and. ncount.lt.size(msgsrcvd)) then
       ispc1=index(msg37,' '); ispc2=index(msg37((ispc1+1):),' ')+ispc1
       ncount=ncount+1
       msgsrcvd(ncount)=msg37(1:ispc2-1)

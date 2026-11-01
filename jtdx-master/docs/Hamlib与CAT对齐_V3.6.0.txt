@@ -1,0 +1,53 @@
+JTDX-F V3.6.0：Hamlib、CAT与TCI音频对齐记录
+
+对齐来源为WSJT-X正式v3.0.2，commit ccdfaf3c1c109010d15399674ce278167cfde848（2026-06-19发行），不是3.3开发分支。
+官方证据：
+https://github.com/WSJTX/wsjtx/blob/ccdfaf3c1c109010d15399674ce278167cfde848/.github/workflows/release.yml
+https://github.com/WSJTX/wsjtx/blob/ccdfaf3c1c109010d15399674ce278167cfde848/Configuration.cpp
+https://github.com/WSJTX/wsjtx/blob/ccdfaf3c1c109010d15399674ce278167cfde848/Release_Notes.txt
+https://github.com/WSJTX/wsjtx/blob/ccdfaf3c1c109010d15399674ce278167cfde848/doc/user_guide/en/vhf-features.adoc
+https://hamlib.sourceforge.net/snapshots-4.7/
+
+Hamlib版本与二进制兼容
+官方3.0.2发行工作流固定Hamlib 4.7.1；程序内“Update Hamlib”则下载4.7维护分支每日快照。JTDX-F已使用更新的4.7.2，不为对齐而退回4.7.1。在线更新固定官方snapshots-4.7/dll64/libhamlib-4.dll，明确排除5.x主干；Hamlib5已声明改变内部结构ABI。
+本次实测当前DLL版本为Hamlib 4.7.2、SHA=40f63488f、64-bit；2026-10-30取得官方快照为4.7.3~rc、SHA=78f5b78f2、64-bit。快照可能是候选版，界面展示其完整版本，不伪称稳定版。
+objdump确认当前Windows DLL使用UCRT，官方下载DLL使用MSVCRT；位数和DLL文件名相同不能证明兼容。本项目调用的是C接口、标量和调用者缓冲区；RIG对象由同一个Hamlib负责分配/释放，不跨CRT传递FILE或释放另一运行库分配的对象。仍存在对rig->state的访问，因此更新前另开独立进程，核查PE x86_64 DLL头、全部实际调用导出、版本分支、rig_data_pointer给出的state/PTTport地址与编译期结构地址，以及Dummy电台VFO、频率、分离操作来回测试。两份上述DLL均通过。探测只打开内存Dummy，不接真实电台、不发射。
+
+更新与回滚机制
+下载有TLS校验、大小上限和超时，先写暂存文件，绝不覆盖正在运行的DLL。兼容检查在独立进程进行，检查崩溃/超时不会影响当前库。暂存文件及当前文件的SHA256在检查后记住，重启应用前和安装前复核，防止文件被其他更新操作改变。
+用户重启时，独立安装helper等待主程序正常退出，再在另一个子进程重做兼容检查；安装helper自身不加载Hamlib。这样不会依赖Hamlib或其后台模块是否能够立即卸载。实际Windows测试还发现QTemporaryFile保留文件句柄会阻止替换，因此事务临时文件使用独立临时目录，避免在打开的临时文件上原子改名。
+文件写入使用QSaveFile，成功更新保留libhamlib-4_backup.dll及版本/校验值。回滚也先检查并暂存备份，再交换当前版与备份；失败不会留下半个DLL。下载失败、不兼容、父进程未退出或目录不可写都会保留当前安装，显示原因。更新/回滚后通过正常启动流程进入禁止发射状态，更新器绝不授予PTT权限。
+非Windows平台显示随JTDX-F软件升级Hamlib；本发行的Linux库不是可直接替换的Windows DLL，不提供无效的在线替换按钮。
+
+CAT适配保留JTDX特色的具体变化
+1. SWR轮询独立于功率计能力，修复只支持SWR却未读取的问题；统一使用ratio×100、0表示未知，拒绝NaN/无穷/越界值。功率后备换算的频率和模式先初始化，失败不会使用未初始化局部变量。
+2. TCI小数和整数用数值转换，不再拆字符串后直接取不存在的小数段；检查命令参数数量，未知/损坏测量为未知。SWR与功率记录独立时效，5秒未更新不沿用旧值，进入新发射清除上一周期测量。
+3. Hamlib配置读取使用有长度参数的rig_get_conf2；未知错误码不再越界访问旧翻译表；保留已有错误译文。MAIN/SUB机型选取正确接收VFO；仅PTT用途的Dummy不污染正常Dummy的保存频率；分辨率探测临时关闭缓存并以作用域清理恢复，异常也会恢复缓存。
+4. HRD使用3.0.2明确的小端UTF-16封包与有界分片解析，验证末尾NUL，保留上层首个NUL分隔语义；保留JTDX-F已有单次总超时、列表长度校验，Yaesu稳定延迟跟随3.0.2调整为350ms。
+5. OmniRig依据3.0.2取消不适用于1.20的试探改频。JTDX-F进一步避免启动后延时改回旧频率覆盖操作员新选择；无有效接收频率时明确失败。COM初始化按CAT线程配对释放，失败路径不会遗留初始化计数。
+6. TCI保留本项目音频包边界/长度/互斥/停止发射保护，不覆盖为上游旧代码。新的Q65/Echo等使用独立48kHz单声道s16LE PCM队列，经已确认的PTT发送为TCI浮点双声道；PCM本身不能开启发射。停止、断连清空队列，播放完成发完成信号。接收下采样后发12kHz带UTC结束时间的PCM；长周期使用连续音频流，不受旧共享缓冲区60秒容量限制。全双工是否继续接收由主界面设置控制。
+
+验证与范围
+原生独立HamlibUpdateTests覆盖PE位数/格式拒绝、更新与回滚、失败保留文件、SWR整数/小数/NaN边界、HRD分片与NUL、PCM仅在PTT已确认时推进及只完成一次，8项通过。
+当前与官方DLL的Wine/Windows helper兼容探测通过；退出后实际文件替换/回滚/不兼容拒绝及重新启动使用隔离目录与无无线电功能的模拟程序验证，详细结果见工作区logs/hamlib-update-v3.6.0-transactions.json。
+这些验证不替代具体电台、固件、串口驱动和真实Windows设备的实机验收。SWR保护只能依据电台或TCI真正提供的有效读数；软件无法从普通接收音频推导天线驻波。
+
+EME/卫星功能边界
+3.0.2明确有全双工音频、卫星日志字段、月球天文数据与五种月球多普勒方案、EME接收延迟、发射中允许改频、Q65子模式快捷、Echo测量与6字符回波、整数MHz发送频差。它没有卫星TLE/SGP4轨道预测器；月球多普勒不能替代人造卫星轨道跟踪。实际GUI/模式支持以本版本功能与对照验证说明为准，不能仅因为参考源码中存在就宣称全部移植完成。
+
+Hamlib 5 源级迁移评估（2026-10-30，未更换生产依赖）
+官方 master 的 ReleaseNotes_5.0.md 仍标 DRAFT，目标 2026-12-01；不是已发布稳定版。
+https://github.com/Hamlib/Hamlib/blob/master/ReleaseNotes_5.0.md
+https://github.com/Hamlib/Hamlib/blob/master/include/hamlib/rig_state.h
+https://github.com/Hamlib/Hamlib/blob/master/include/hamlib/port.h
+
+本项目当前需要迁移的直接存储访问集中于 HamlibTransceiver.cpp：
+- tx_vfo 保存/临时修改/恢复；vfo_list 分支选择：改用 <hamlib/rig_state.h> 的 HAMLIB_STATE(rig)。
+- pttport.type.ptt：改用 <hamlib/port.h> 的 HAMLIB_PTTPORT(rig)。
+- 旧 rig_get_conf 已在本次升级改成有缓冲区长度的 rig_get_conf2，因此该移除项已处理。
+- rig_get_caps_* / rig_get_function_ptr 已避免直接依赖 rig_caps 大结构，保留这一做法。
+- 5 的 tx_vfo 注释指出直接访问并不同步。临时修改内部 TX VFO 的旧 workaround 必须针对具体后端复核，不能只替换字段名就宣称线程安全。
+
+4.7.2 已提供 rig_data_pointer 和上述宏，因此可以先在 4.7 源码上引入访问封装；但 4.7/5 的 rig_state 自身字段布局不同，编译4.7头文件的程序不能因此加载5的二进制库。应为5重新编译应用、探测器、整套依赖，并重新验证 Dummy、串口/USB/网络、分频、PTT、SWR及异常断开。当前更新器严格限制4.7版本，ABI探测也按4.7编译，不支持替换为5 DLL。
+
+另一条隔离路线是外部运行 Hamlib 5 rigctld，由当前4.7 NET rigctl 后端通过网络协议访问。这样两个进程各自链接自己的库，不共享 RIG 结构，避免 DLL ABI 混用。此路线在源级可行，但尚未使用5服务器验证协议和具体电台能力，不能视为已完成支持；也不会自动获得5的新API或音频流功能。生产包不包含未发布5，不自动启动外部服务器。

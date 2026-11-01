@@ -15,6 +15,8 @@ integer function savec2(c2name,ntrseconds,f0m1500)
   complex c2(0:65535)
   common/c0com/c0(0:NDMAX-1)
 
+  savec2=-1
+  if(ntrseconds.ne.120) return ! c0 only holds a two-minute capture
   ntrminutes=ntrseconds/60
   npts=114*1500
   nfft1=262144
@@ -44,11 +46,12 @@ integer function savec2(c2name,ntrseconds,f0m1500)
   call four2a(c2,nfft2,1,-1,1)      !Shorter complex FFT, back to time domain
 
 ! Write complex time-domain data to disk.
-  i1=index(c2name,'.c2')
+  i1=index(c2name,'.c2',back=.true.)
+  if(i1.lt.12) return
   outfile=c2name(i1-11:i1+2)
   open(18,file=c2name,status='unknown',access='stream', iostat=ioerr)
   if (ioerr.eq.0) then
-     write(18) outfile,ntrminutes,f0m1500,c2(0:45000-1)
+     write(18,iostat=ioerr) outfile,ntrminutes,f0m1500,c2(0:45000-1)
      close(18)
   endif
   savec2 = ioerr

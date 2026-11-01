@@ -10,6 +10,8 @@
 #include <QString>
 #include <QStringList>
 #include <QHash>
+#include <QElapsedTimer>
+#include <functional>
 #include "Radio.hpp"
 #include <QRegularExpression>
 #include <QtMath>
@@ -17,6 +19,8 @@
 class QsoHistory
 {
  public:
+    // The optional clock returns monotonic milliseconds and is used by tests.
+    explicit QsoHistory(std::function<qint64()> monotonicNow = {});
 //                  0     1    2    3      4      5        6        7         8         9   10   11     12     13   14   15   16
 	enum Status {NONE, RFIN, RCQ, SCQ, RCALL, SCALL, RREPORT, SREPORT, RRREPORT, SRREPORT, RRR, SRR, RRR73, SRR73, R73, S73, FIN};
 	void init();
@@ -29,9 +33,15 @@ class QsoHistory
 	Status autoseq(QString &callsign, QString &grid, QString &rep, int &rx, int &tx, unsigned &time, int &count, int &prio, QString &mode);
 	Status log_data(QString const& callsign, unsigned &time, QString &rrep, QString &srep);
 	int remove(QString const& callsign);		
+	QStringList calls() const {QStringList out;for(auto const& q:_data)out.append(q.call);return out;}
+	void discardDecodedCall(QString const& call) {_data.remove(Radio::base_callsign(call));}
 	int blacklist(QString const& callsign);
 	void calllist(QString const& callsign,int level, unsigned time);
 	int reset_count(QString const& callsign,Status status = NONE);
+	int sent_count(QString const& callsign) const;
+    // Restrict automatic outgoing selection only, never replies or manual calls.
+    void deferOutgoingCall(QString const& callsign);
+    bool outgoingCallDeferred(QString const& callsign) const;
 	JTDXDateTime * jtdxtime;
  private:
 	QRegularExpression _gridRe = QRegularExpression("^[A-R]{2}[0-9]{2}[A-X]{2}[0-9]{2}[A-X]{2}$");
@@ -59,6 +69,10 @@ class QsoHistory
 	QHash<QString, QSO> _data;
 	QHash<QString, int> _blackdata;
 	QHash<QString, CALLED> _calldata;
+    QElapsedTimer _outgoingClock;
+    std::function<qint64()> _monotonicNow;
+    QHash<QString, qint64> _outgoingDeferredUntil;
+    qint64 outgoingNow() const;
 	bool _working = false;
 	bool as_active = false;
 	bool _strictdirCQ = false;

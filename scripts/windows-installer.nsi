@@ -3,7 +3,7 @@
 !include "x64.nsh"
 !include "WordFunc.nsh"
 !ifndef FM_VERSION
-!define FM_VERSION "3.3.0"
+!define FM_VERSION "3.6.0"
 !endif
 Name "JTDX-F V${FM_VERSION}"
 OutFile "${FM_OUTPUT}"
@@ -25,7 +25,7 @@ VIAddVersionKey "LegalCopyright" "Fluxmancer 2026; upstream JTDX and WSJT-X copy
 !insertmacro MUI_PAGE_LICENSE "${FM_STAGE}\COPYING"
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
-!define MUI_FINISHPAGE_RUN "$INSTDIR\bin\jtdx-f.exe"
+!define MUI_FINISHPAGE_RUN "$INSTDIR\bin\jtdx.exe"
 !define MUI_FINISHPAGE_RUN_NOTCHECKED
 !insertmacro MUI_PAGE_FINISH
 !insertmacro MUI_UNPAGE_CONFIRM
@@ -58,15 +58,15 @@ Section "JTDX-F" Main
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\JTDX-F" "DisplayVersion" "${FM_VERSION}"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\JTDX-F" "Publisher" "Fluxmancer"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\JTDX-F" "UninstallString" '$\"$INSTDIR\Uninstall.exe$\"' 
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\JTDX-F" "DisplayIcon" "$INSTDIR\bin\jtdx-f.exe"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\JTDX-F" "DisplayIcon" "$INSTDIR\bin\jtdx.exe"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\JTDX-F" "InstallLocation" "$INSTDIR"
   WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\JTDX-F" "NoModify" 1
   WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\JTDX-F" "NoRepair" 1
   CreateDirectory "$SMPROGRAMS\JTDX-F"
-  CreateShortcut "$SMPROGRAMS\JTDX-F\JTDX-F.lnk" "$INSTDIR\bin\jtdx-f.exe"
+  CreateShortcut "$SMPROGRAMS\JTDX-F\JTDX-F.lnk" "$INSTDIR\bin\jtdx.exe"
   CreateShortcut "$SMPROGRAMS\JTDX-F\Documentation.lnk" "$INSTDIR\share\jtdx\docs"
   CreateShortcut "$SMPROGRAMS\JTDX-F\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
-  CreateShortcut "$DESKTOP\JTDX-F.lnk" "$INSTDIR\bin\jtdx-f.exe"
+  CreateShortcut "$DESKTOP\JTDX-F.lnk" "$INSTDIR\bin\jtdx.exe"
 SectionEnd
 Section "Uninstall"
   SetRegView 64

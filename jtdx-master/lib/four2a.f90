@@ -25,6 +25,7 @@ subroutine four2a(a,nfft,ndim,isign,iform)
   complex aa(NSMALL)                     !Local copy of "small" a()
   integer nn(NPMAX),ns(NPMAX),nf(NPMAX)  !Params of stored plans 
   integer*8 nl(NPMAX),nloc               !More params of plans
+  integer*8 active_plan
   integer*8 plan(NPMAX)                  !Pointers to stored plans
   logical found_plan
   data nplan/0/                          !Number of stored plans
@@ -37,6 +38,7 @@ subroutine four2a(a,nfft,ndim,isign,iform)
   nloc=loc(a)
   found_plan = .false.
 
+  !$omp critical(four2a_setup)
   do i=1,nplan
      if(nfft.eq.nn(i) .and. isign.eq.ns(i) .and.                     &
           iform.eq.nf(i) .and. nloc.eq.nl(i)) then
@@ -45,10 +47,8 @@ subroutine four2a(a,nfft,ndim,isign,iform)
      end if
   enddo
 
-  if(i.ge.NPMAX) stop 'Too many FFTW plans requested.'
-
   if (.not. found_plan) then
-  !$omp critical(four2a_setup)
+     if(nplan.ge.NPMAX) stop 'Too many FFTW plans requested.'
      nplan=nplan+1
      i=nplan
 
@@ -72,6 +72,9 @@ subroutine four2a(a,nfft,ndim,isign,iform)
      endif
 
      !$omp critical(fftw) ! serialize non thread-safe FFTW3 calls
+     ! Dedicated JT9/JT10 downsamplers can leave the global planner at many
+     ! threads. Generic transforms run inside FT8 workers and must stay serial.
+     call sfftw_plan_with_nthreads(1)
      if(isign.eq.-1 .and. iform.eq.1) then
         call sfftw_plan_dft_1d(plan(i),nfft,a,a,FFTW_FORWARD,nflags)
      else if(isign.eq.1 .and. iform.eq.1) then
@@ -90,15 +93,16 @@ subroutine four2a(a,nfft,ndim,isign,iform)
         if(iform.le.0) jz=nfft/2+1
         a(1:jz)=aa(1:jz)
      endif
-  !$omp end critical(four2a_setup)
   end if
+  active_plan=plan(i)
+  !$omp end critical(four2a_setup)
 
-  call sfftw_execute(plan(i))
+  call sfftw_execute(active_plan)
   return
 
 999 continue
 
-  !$omp critical(four2a)
+  !$omp critical(four2a_setup)
   do i=1,nplan
 ! The test is only to silence a compiler warning:
      if(ndim.ne.-999) then
@@ -109,7 +113,7 @@ subroutine four2a(a,nfft,ndim,isign,iform)
   enddo
 
   nplan=0
-  !$omp end critical(four2a)
+  !$omp end critical(four2a_setup)
 
   return
 end subroutine four2a

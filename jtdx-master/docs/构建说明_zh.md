@@ -1,8 +1,8 @@
-# 构建 JTDX-F V3.3.0
+# 构建 JTDX-F V3.6.0
 
 ## 源码基线和工具链
 
-用户提供的 `jtdx-master.zip` 保留不变；其中 `Versions.cmake` 为 JTDX 2.2.159。本分支使用 C、C++11 和 Fortran，CMake 构建。
+用户提供的 `jtdx-master.zip` 保留不变；其中 `Versions.cmake` 为 JTDX 2.2.159。本分支使用 C、C++11（JTTY 助手使用 C++17）和 Fortran，CMake 构建。
 
 本次验证环境：Linux x86_64，GCC/G++/GFortran 16.2.1；Windows 交叉编译为 x86_64 MinGW-w64 GCC/GFortran 16.2.0、UCRT，配合 MSYS2 UCRT64 的 Qt 5.15.19、FFTW 3、Boost 和 Hamlib 4.7.2。完整包版本及 SHA-256 见发行源码附带的依赖清单。
 
@@ -36,7 +36,7 @@ scripts/build-windows.sh
 
 脚本使用 `scripts/windows-toolchain.cmake`，输出在 `build-windows-ucrt/`，安装树在 `install-windows/`。`scripts/package_windows.py` 递归检查 PE 导入表、复制所需 DLL 和 Qt 插件，任何未解析的非系统 DLL 会使打包失败。`runtime-manifest.json` 记录所含 PE 文件的 SHA-256 和导入表。
 
-生成安装程序：`scripts/make-windows-installer.sh`，采用 NSIS，默认输出 `release/JTDX-F-V3.3.0-Windows-x64-Setup.exe`。Wine 只在 Linux 构建安装器和兼容性测试时使用，Windows 用户不需要 Wine。所有 Wine 操作放在工作区的独立前缀和 Xvfb 显示中。
+生成安装程序：`scripts/make-windows-installer.sh`，采用 NSIS，默认输出 `release/JTDX-F-V3.6.0-Windows-x64-Setup.exe`。Wine 只在 Linux 构建安装器和兼容性测试时使用，Windows 用户不需要 Wine。所有 Wine 操作放在工作区的独立前缀和 Xvfb 显示中。
 
 ## 在其他环境准备依赖
 
@@ -85,3 +85,39 @@ Windows 回归在 Wine 11.20 中执行；真实 Windows 电台、声卡、驱动
 只读网络诊断：`jtdx-f-clock --query ntp1.aliyun.com`。这条命令仅打印 UTC、时间偏差及往返延迟，不申请权限、不校时。
 
 安装脚本保存为 UTF-8 BOM，并在 `makensis` 命令中指定 `-INPUTCHARSET UTF8`，确保降级确认等中文字符串不会按系统 ANSI 代码页误读。`Unicode True` 仅控制输出程序，不能替代输入脚本编码声明。参考 [NSIS 命令行说明](https://nsis.sourceforge.io/Docs/Chapter3.html)。
+
+## V3.4.0 新模式及审计检查
+
+`jtdx-f-jtty` 与主程序一起安装，使用 Qt Core 和既有 Fortran 库，单独子进程串行处理键盘模式编解码。四组 `fm_jtty_*` Fortran 测试验证上游协议、纠错和连续接收；`fm_jtty_helper` 验证实际 PCM 编解码往返。`fm_wspr_codec` 检查畸形消息与 10000 个固定种子输入。
+
+V3.4.0 的 CTest 为 13 组，V3.5.0 新增日志缓存、黑名单、现代解码、线程一致性和波形验证。审计构建可额外传 `-DCMAKE_Fortran_FLAGS="-fcheck=bounds -fbacktrace"`。多个主程序回归会使用同一共享内存测试键，应串行运行；测试不接电台、不改变宿主时钟。
+
+
+## V3.5.0 新增验证
+
+`fm_operator_log_cache` 检查日志缓存命中、内容变更、双日志同步及数据库失效；`fm_blacklist_tests` 检查按操作员持久化、精确匹配、原子保存、文件监测、损坏保护和编辑冲突。主界面回归覆盖“选中但不确认不切换”、发射与日志切换门控、黑名单显示和控制入口。
+
+`fm_modern_decoder` 检查 CRC、重编码、有限输入和软比特恢复，`fm_modern_decoder_threads` 检查多个工作线程及 OSD 同时首次初始化；`fm_modern_waveform` 使用完整生成波形、同步和生产译码链进行传统/现代对照。正常 CTest 仅运行小规模波形回归，完整实验可执行：
+
+```bash
+python3 jtdx-master/tests/test_modern_waveform.py \
+  build/fm_modern_waveform build/test-data --benchmark --messages mixed \
+  --seed 20261031 --trials 30 --scenarios awgn impulse crowded \
+  --snr8 -21 -22 -23 --snr4 -17 -18 -19 \
+  --output logs/modern-waveform-reproduction.json
+```
+
+请先看脚本 `--help` 核对可用参数；各组种子、线程、SNR 和场景会写入结果。定时比较应停止并行编译和其他高负载任务。所有音频均在测试进程内生成，不使用声卡或电台，也不读取用户日志。候选算法研究代码保留在 `tests/ModernDecoderCandidates.f90` 和 `tests/ModernCandidateBench.f90`，未选中的算法不进入生产译码路径。来源、参数取舍和失败实验见 `lib/MODERN_DECODER_PROVENANCE.txt`。
+
+从旧版构建目录迁移时，建议使用新的构建目录。V3.5.0 将串行与 OpenMP 的 Fortran 模块分别放入 `fortran_modules_serial/` 和 `fortran_modules_omp/`；旧构建根目录中遗留的 `.mod` 应先移走，避免编译器优先读取过期接口。
+
+
+## V3.6.0：独立上游后端与审计
+
+固定上游为 WSJT-X 正式 `v3.0.2`，commit `ccdfaf3c1c109010d15399674ce278167cfde848`。源码、GPL、作者及每文件 SHA-256 位于 `upstream/wsjtx-3.0.2/`；`SOURCE.json.excluded_files` 明确排除了禁止本分支再分发的 SuperFox 表。本地 SuperFox 继续使用已有独立测量表。
+
+`jtdx-f-upstream` 在独立进程使用上游 Q65/MSK144/Echo/天文实现，避免其 Fortran 全局变量和较大缓冲 ABI 与 JTDX 冲突。主程序负责 CAT、音频和发射许可，后端不接触设备。构建同时安装该助手、正式 JPLEPH 和 grid.dat。接口/迁移记录见 `helpers/upstream/PROTOCOL.txt` 和 `MIGRATION.txt`，运行包也提供这两份文档。
+
+`UpstreamWaveform` 执行真实 PCM 往返、平均、EME 时延、天文及畸形输入检查；`UpstreamController/UpstreamOperating` 检查协议、超时、迟到回包、取消、UTC 倒跳和频率反馈；协议/波形兼容测试与正式上游固定向量比较。`ReedSolomonSafety` 检查旧 JT65 纠错接口、并发、擦除边界和重复分配路径。Windows 同样编译这些测试；helper 的 Python 测试支持 `--wine`。
+
+`jtdx-hamlib-update` 为事务更新助手，Windows 安装后才运行更新/回退，不写用户日志。主程序继续以兼容 4.7.2 头文件编译；不能用 Hamlib 5 DLL 直接替代。

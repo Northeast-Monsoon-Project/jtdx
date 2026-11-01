@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 #include <QUdpSocket>
 #include <QHostInfo>
@@ -10,6 +11,7 @@
 #include <QQueue>
 #include <QByteArray>
 #include <QHostAddress>
+#include <QNetworkProxy>
 
 #include "NetworkMessage.hpp"
 
@@ -25,7 +27,8 @@ class MessageClient::impl
 public:
   impl (QString const& id, QString const& version,
         port_type server_port, MessageClient * self)
-    : self_ {self}
+    : QUdpSocket {self}
+    , self_ {self}
     , id_ {id}
     , version_ {version}
     , server_port_ {server_port}
@@ -33,22 +36,28 @@ public:
     , force_ {false}
     , heartbeat_timer_ {new QTimer {this}}
   {
+    // Radio companion applications use direct UDP. An application/system
+    // HTTP proxy cannot transport UDP and can otherwise make bind fail.
+    setProxy (QNetworkProxy::NoProxy);
     connect (heartbeat_timer_, &QTimer::timeout, this, &impl::heartbeat);
     connect (this, &QIODevice::readyRead, this, &impl::pending_datagrams);
 
     heartbeat_timer_->start (NetworkMessage::pulse * 1000);
 
-    // bind to an ephemeral port
-    bind ();
+    // Bind once the destination family is known.
   }
 
   ~impl ()
   {
+    cancel_lookup ();
     closedown ();
   }
 
   enum StreamStatus {Fail, Short, OK};
 
+  void cancel_lookup ();
+  void start_server ();
+  void clear_pending () { pending_messages_.clear (); pending_bytes_ = 0; }
   void parse_message (QByteArray const& msg);
   void pending_datagrams ();
   void heartbeat ();
@@ -82,45 +91,72 @@ public:
 
   // hold messages sent before host lookup completes asynchronously
   QQueue<QByteArray> pending_messages_;
+  int dns_lookup_id_ = -1;
+  int pending_bytes_ = 0;
+  static constexpr int maximum_pending_messages_ = 128;
+  static constexpr int maximum_pending_bytes_ = 256 * 1024;
   QByteArray last_message_;
 };
 
 #include "MessageClient.moc"
 
+void MessageClient::impl::cancel_lookup ()
+{
+  if (dns_lookup_id_ != -1) QHostInfo::abortHostLookup (dns_lookup_id_);
+  dns_lookup_id_ = -1;
+}
+
 void MessageClient::impl::host_info_results (QHostInfo host_info)
 {
+  // abortHostLookup cannot withdraw a callback already queued to this thread.
+  if (dns_lookup_id_ == -1 || host_info.lookupId () != dns_lookup_id_) return;
+  dns_lookup_id_ = -1;
   if (QHostInfo::NoError != host_info.error ())
     {
+      clear_pending ();
       Q_EMIT self_->error ("UDP server lookup failed:\n" + host_info.errorString ());
-      pending_messages_.clear (); // discard
+      return;
     }
-  else if (host_info.addresses ().size ())
+  if (!host_info.addresses ().isEmpty ()) server_ = host_info.addresses ().first ();
+  start_server ();
+}
+
+void MessageClient::impl::start_server ()
+{
+  if (server_.isNull ()) { clear_pending (); return; }
+  if (std::find (blocked_addresses_.begin (), blocked_addresses_.end (), server_) != blocked_addresses_.end ())
     {
-      auto server = host_info.addresses ()[0];
-      if (blocked_addresses_.end () == std::find (blocked_addresses_.begin (), blocked_addresses_.end (), server))
+      server_.clear ();
+      clear_pending ();
+      Q_EMIT self_->error ("UDP server blocked, please try another");
+      return;
+    }
+  auto const interface = server_.protocol () == QAbstractSocket::IPv6Protocol
+    ? QHostAddress (QHostAddress::AnyIPv6) : QHostAddress (QHostAddress::AnyIPv4);
+  if (state () != QAbstractSocket::BoundState || localAddress () != interface)
+    {
+      close ();
+      if (!bind (interface, quint16 (0)))
         {
-          server_ = server;
-
-          // send initial heartbeat which allows schema negotiation
-          heartbeat ();
-
-          // clear any backlog
-          while (pending_messages_.size ())
-            {
-              send_message (pending_messages_.dequeue ());
-            }
+          server_.clear ();
+          clear_pending ();
+          Q_EMIT self_->error ("UDP socket binding failed:\n" + errorString ());
+          return;
         }
-      else
-        {
-          Q_EMIT self_->error ("UDP server blocked, please try another");
-          pending_messages_.clear (); // discard
-        }
+    }
+  heartbeat ();
+  while (!pending_messages_.isEmpty ())
+    {
+      auto message = pending_messages_.dequeue ();
+      pending_bytes_ -= message.size ();
+      send_message (message);
     }
 }
 
 void MessageClient::impl::pending_datagrams ()
 {
-  while (hasPendingDatagrams ())
+  int budget = 64;
+  while (budget-- && hasPendingDatagrams ())
     {
       QByteArray datagram;
       datagram.resize (pendingDatagramSize ());
@@ -131,6 +167,7 @@ void MessageClient::impl::pending_datagrams ()
           parse_message (datagram);
         }
     }
+  if (hasPendingDatagrams ()) QTimer::singleShot (0, this, &impl::pending_datagrams);
 }
 
 void MessageClient::impl::parse_message (QByteArray const& msg)
@@ -158,16 +195,21 @@ void MessageClient::impl::parse_message (QByteArray const& msg)
               {
                 // unpack message
                 QTime time;
-                qint32 snr;
-                float delta_time;
-                quint32 delta_frequency;
+                qint32 snr {0};
+                float delta_time {0};
+                quint32 delta_frequency {0};
                 QByteArray mode;
                 QByteArray message;
                 bool low_confidence {false};
                 quint8 modifiers {0};
-                in >> time >> snr >> delta_time >> delta_frequency >> mode >> message
-                   >> low_confidence >> modifiers;
-                if (check_status (in) != Fail)
+                in >> time >> snr >> delta_time >> delta_frequency >> mode >> message;
+                if (OK != check_status (in) || !time.isValid () || !std::isfinite (delta_time)
+                    || mode.isEmpty () || message.isEmpty ()) break;
+                // These trailing fields were added after the original Reply.
+                // Missing optional bytes are valid; incomplete required fields are not.
+                if (!in.atEnd ()) in >> low_confidence;
+                if (!in.atEnd ()) in >> modifiers;
+                if (OK == check_status (in))
                   {
                     Q_EMIT self_->reply (time, snr, delta_time, delta_frequency
                                          , QString::fromUtf8 (mode), QString::fromUtf8 (message)
@@ -199,8 +241,10 @@ void MessageClient::impl::parse_message (QByteArray const& msg)
               {
                 QByteArray message;
                 bool send {true};
-                in >> message >> send;
-                if (check_status (in) != Fail)
+                in >> message;
+                if (OK != check_status (in)) break;
+                if (!in.atEnd ()) in >> send;
+                if (OK == check_status (in))
                   {
                     Q_EMIT self_->free_text (QString::fromUtf8 (message), send);
                   }
@@ -209,9 +253,9 @@ void MessageClient::impl::parse_message (QByteArray const& msg)
 
             case NetworkMessage::SetTxDeltaFreq:
               {
-                quint32 tx_delta_frequency;
+                quint32 tx_delta_frequency {0};
                 in >> tx_delta_frequency;
-                if (check_status (in) != Fail)
+                if (OK == check_status (in))
                   {
                     Q_EMIT self_->set_tx_deltafreq (tx_delta_frequency);
                   }
@@ -223,8 +267,8 @@ void MessageClient::impl::parse_message (QByteArray const& msg)
                 QByteArray direction;
                 bool tx_period {false};
                 bool send {true};
-                in >> direction >> send;
-                if (check_status (in) != Fail)
+                in >> direction >> tx_period >> send;
+                if (OK == check_status (in))
                   {
                     Q_EMIT self_->trigger_CQ (QString::fromUtf8 (direction),tx_period,send);
                   }
@@ -283,14 +327,23 @@ void MessageClient::impl::send_message (QByteArray const& message)
         {
           if (force_ || message != last_message_) // avoid duplicates, force status dupe for same callsign UDP reply
             {
-              force_=false;
-              writeDatagram (message, server_, server_port_);
-              last_message_ = message;
+              if (writeDatagram (message, server_, server_port_) == message.size ())
+                {
+                  force_ = false;
+                  last_message_ = message;
+                }
             }
         }
-      else
+      else if (dns_lookup_id_ != -1 && message.size () <= maximum_pending_bytes_)
         {
+          // DNS may be slow or fail. Keep a small, recent backlog only while
+          // a lookup is actually active, never grow a queue after failure.
+          while (!pending_messages_.isEmpty ()
+                 && (pending_messages_.size () >= maximum_pending_messages_
+                     || pending_bytes_ + message.size () > maximum_pending_bytes_))
+            pending_bytes_ -= pending_messages_.dequeue ().size ();
           pending_messages_.enqueue (message);
+          pending_bytes_ += message.size ();
         }
     }
 }
@@ -359,6 +412,10 @@ MessageClient::MessageClient (QString const& id, QString const& version,
   set_server (server);
 }
 
+// Instantiate pimpl destruction here, where impl and its destructor are
+// complete, including the normal UDP Close notification and socket cleanup.
+MessageClient::~MessageClient () = default;
+
 QHostAddress MessageClient::server_address () const
 {
   return m_->server_;
@@ -371,18 +428,28 @@ auto MessageClient::server_port () const -> port_type
 
 void MessageClient::set_server (QString const& server)
 {
-  m_->server_.clear ();
-  m_->server_string_ = server;
-  if (!server.isEmpty ())
-    {
-      // queue a host address lookup
-      QHostInfo::lookupHost (server, &*m_, SLOT (host_info_results (QHostInfo)));
-    }
+  m_->cancel_lookup ();
+  m_->clear_pending ();
+  m_->last_message_.clear ();
+  m_->force_ = false;
+  m_->schema_ = 2;
+  m_->server_string_ = server.trimmed ();
+  m_->server_.setAddress (m_->server_string_);
+  if (m_->server_.isNull () && !m_->server_string_.isEmpty ())
+    m_->dns_lookup_id_ = QHostInfo::lookupHost (m_->server_string_, &*m_, SLOT (host_info_results (QHostInfo)));
+  else
+    m_->start_server ();
 }
 
 void MessageClient::set_server_port (port_type server_port)
 {
+  if (m_->server_port_ == server_port) return;
   m_->server_port_ = server_port;
+  m_->clear_pending ();
+  m_->last_message_.clear ();
+  m_->force_ = false;
+  m_->schema_ = 2;
+  m_->heartbeat ();
 }
 
 void MessageClient::send_raw_datagram (QByteArray const& message, QHostAddress const& dest_address
@@ -401,7 +468,7 @@ void MessageClient::add_blocked_destination (QHostAddress const& a)
     {
       m_->server_.clear ();
       Q_EMIT error ("UDP server blocked, please try another");
-      m_->pending_messages_.clear (); // discard
+      m_->clear_pending (); // discard
     }
 }
 

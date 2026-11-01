@@ -31,12 +31,15 @@ public:
   void initLogQSO(QString const& hisCall, QString const& hisGrid, QString mode,
                   QString const& rptSent, QString const& rptRcvd, QString const& distance,
                   QString const& name, QDateTime const& dateTimeOn,
-                  QDateTime const& dateTimeOff, Radio::Frequency dialFreq, bool autologging);
+                  QDateTime const& dateTimeOff, Radio::Frequency dialFreq, bool autologging,
+                  Radio::Frequency receiveFrequency=0);
+  void updateSignoffSnapshot(QDateTime const& end,QString const& sent,QString const& received);
 
 public slots:
   void accept();
 
 signals:
+  void forwardingError(QString message);
   void acceptQSO (QDateTime const& QSO_date_off, QString const& call, QString const& grid
                   , Radio::Frequency dial_freq, QString const& mode
                   , QString const& rpt_sent, QString const& rpt_received
@@ -48,6 +51,10 @@ protected:
   void hideEvent (QHideEvent *);
 
 private:
+  QComboBox *m_propagation=nullptr;
+  QLineEdit *m_satellite=nullptr,*m_satMode=nullptr;
+  QDoubleSpinBox *m_receiveFrequency=nullptr;
+  QCheckBox *m_keepPropagation=nullptr;
   void loadSettings ();
   void storeSettings () const;
 

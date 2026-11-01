@@ -2,7 +2,13 @@
 
 subroutine ft8s(s8,srr,itone,msg37,lft8s,nft8rxfsens,stophint)
 
-  use ft8_mod1, only : itone56,idtone56,msg,nlasttx,lastrxmsg,mycall,hiscall
+  use ft8_mod1, only : shared_itone56=>itone56,shared_idtone56=>idtone56,shared_msg=>msg, &
+                      nlasttx,lastrxmsg_struct,mycall,hiscall,legacy_rr73_tones
+  use ft8_shared_state, only: ft8_snapshot_history, ft8_message_has_call, ft8_prefer_legacy_rr73
+  type(lastrxmsg_struct) lastrxmsg(1)
+  integer itone56(56,79),idtone56(56,58)
+  integer*1 msgbits(77)
+  character(37) msg(56)
   real, intent(in) :: s8(0:7,79),srr
   real s8_1(0:7,79),s8d(0:7,58),xsync(21),xmsync(21),xdata(58),xmdata(58),xnoise(79),xmnoise(79)
   character, intent(out) :: msg37*37
@@ -27,8 +33,18 @@ subroutine ft8s(s8,srr,itone,msg37,lft8s,nft8rxfsens,stophint)
 !  5      AA1AA BB1BB 73
 !  6      CQ BB1BB PL35
 
+  ! Grid hints vary with the received message; keep their tones local instead
+  ! of rewriting the shared table while other frequency workers consult it.
+  call ft8_snapshot_history(lastrxmsg)
+  itone56=shared_itone56; idtone56=shared_idtone56; msg=shared_msg
+
   lft8s=.false.
   if(stophint) return; if(len_trim(hiscall).lt.3) return; if(nlasttx.eq.6 .or. nlasttx.eq.0) return ! CQ or TX halted
+  if(ft8_prefer_legacy_rr73(s8)) then
+    itone56(55,:)=legacy_rr73_tones
+    idtone56(55,1:29)=legacy_rr73_tones(8:36)
+    idtone56(55,30:58)=legacy_rr73_tones(44:72)
+  endif
   lgrid=.false.; nft8rxfslow=nft8rxfsens; lmycall=.false.; lastrcvdmsg=''
   lmatched=.false.; s8_1=s8; lhiscall=.false.; lrrr=.false.; lr73=.false.; lcallingrprt=.false.; lastrrprt=.false.
   lastreport=.false.; itonedem=11; ntresh1=26; ntresh2=38; if(srr.gt.7.0) then; ntresh1=29; ntresh2=41; endif
@@ -36,8 +52,8 @@ subroutine ft8s(s8,srr,itone,msg37,lft8s,nft8rxfsens,stophint)
   if(lastrxmsg(1)%lstate) then; lastrcvdmsg=lastrxmsg(1)%lastmsg; else; lastrcvdmsg=''; endif
 
   if(lastrcvdmsg.ne.'                                     ') then
-    if(index(lastrcvdmsg,trim(hiscall)).gt.0) lhiscall=.true.
-    if(index(lastrcvdmsg,trim(mycall)).eq.1) lmycall=.true.
+    lhiscall=ft8_message_has_call(lastrcvdmsg,hiscall)
+    lmycall=ft8_message_has_call(lastrcvdmsg,mycall,1,1)
     if(lmycall .and. lhiscall) then
       if(index(lastrcvdmsg,' RRR').gt.0) lrrr=.true.
       if(index(lastrcvdmsg,' RR73').gt.0 .or. index(lastrcvdmsg,' 73').gt.0) lr73=.true.

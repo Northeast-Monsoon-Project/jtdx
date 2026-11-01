@@ -37,10 +37,12 @@ public:
                           , Bands const * bands // bands model
                           , FrequencyList_v2 const * frequencies // working frequencies model
                           , Frequency const * nominal_frequency
+                          , bool kHz_without_k = false
                           , QWidget * parent = nullptr);
 
   State validate (QString& input, int& pos) const override;
   void fixup (QString& input) const override;
+  void setKHzWithoutK(bool enabled) {kHz_without_k_=enabled;}
 
   Q_SIGNAL void valid (Frequency) const;
 
@@ -49,6 +51,7 @@ private:
   FrequencyList_v2 const * frequencies_;
   Frequency const * nominal_frequency_;
   QComboBox * combo_box_;
+  bool kHz_without_k_;
 };
 
 #endif

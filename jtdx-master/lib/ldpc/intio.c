@@ -40,6 +40,7 @@ int intio_read
   int top;
   int i;
 
+  if(!f)return 0;
   for (i = 0; i<4; i++)
   { if (fread(&b[i],1,1,f) != 1) return 0;
   }
@@ -66,6 +67,7 @@ void intio_write
   unsigned char b;
   int i;
 
+  if(!f)return;
   for (i = 0; i<3; i++)
   { b = v&0xff;
     fwrite(&b,1,1,f);
@@ -85,12 +87,14 @@ main(void)
 { 
   FILE *f;
   f = fopen("test","wb");
+  if(!f)return 1;
   intio_write(f,334);
   intio_write(f,-40000);
   intio_write(f,0x8fffffff);
   intio_write(f,-0x8fffffff);
   fclose(f);
   f = fopen("test","rb");
+  if(!f)return 1;
   if (intio_read(f)!=334
    || intio_read(f)!=-40000
    || intio_read(f)!=0x8fffffff

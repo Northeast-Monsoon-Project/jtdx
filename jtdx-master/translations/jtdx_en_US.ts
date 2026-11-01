@@ -46,6 +46,43 @@
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>About JTDX-F</translation>
+    </message>
+    <message>
+        <source>JTDX-F is developed by the Fluxmancer team.&lt;br&gt;Based on JTDX and WSJT-X; upstream credits and GPLv3 are preserved.&lt;br&gt;&lt;br&gt;</source>
+        <translation>JTDX-F is developed by the Fluxmancer team.&lt;br&gt;Based on JTDX and WSJT-X; upstream credits and GPLv3 are preserved.&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>JTDX-F is licensed under GNU GPLv3, without warranty.</source>
+        <translation>JTDX-F is licensed under GNU GPLv3, without warranty.</translation>
+    </message>
+    <message>
+        <source>FT2 / SuperFox: additional integrations; source revisions are documented with the source code.</source>
+        <translation>FT2 / SuperFox: additional integrations; source revisions are documented with the source code.</translation>
+    </message>
+    <message>
+        <source>FT8 / FT4: JTDX decoders, WSJT-X 3.0.2 protocol/waveforms, selected 3.3.0-beta5 performance/concurrency fixes, and Fluxmancer modern decoding.</source>
+        <translation>FT8 / FT4: JTDX decoders, WSJT-X 3.0.2 protocol/waveforms, selected 3.3.0-beta5 performance/concurrency fixes, and Fluxmancer modern decoding.</translation>
+    </message>
+    <message>
+        <source>Hamlib (radio control): %1</source>
+        <translation>Hamlib (radio control): %1</translation>
+    </message>
+    <message>
+        <source>JTDX-F preserves JTDX's heritage and incorporates selected WSJT-X updates. Components retain their respective authors and licenses.</source>
+        <translation>JTDX-F preserves JTDX's heritage and incorporates selected WSJT-X updates. Components retain their respective authors and licenses.</translation>
+    </message>
+    <message>
+        <source>Q65 / MSK144 / Echo and astronomical calculations: WSJT-X 3.0.2.</source>
+        <translation>Q65 / MSK144 / Echo and astronomical calculations: WSJT-X 3.0.2.</translation>
+    </message>
+    <message>
+        <source>WSPR: WSJT-X 3.0.2 decoder with 3.3.0-beta5 message validation and JTDX-F safety fixes.</source>
+        <translation>WSPR: WSJT-X 3.0.2 decoder with 3.3.0-beta5 message validation and JTDX-F safety fixes.</translation>
+    </message>
+    <message><source>JTTY: WSJT-X 3.3.0-beta5 decoder with Fluxmancer integration.</source><translation>JTTY: WSJT-X 3.3.0-beta5 decoder with Fluxmancer integration.</translation></message>
 </context>
 <context>
     <name>CallsignDialog</name>
@@ -57,6 +94,10 @@
 </context>
 <context>
     <name>Configuration::impl</name>
+    <message>
+        <source>Own transmitted message</source>
+        <translation>Own transmitted message</translation>
+    </message>
     <message>
         <location filename="../Configuration.cpp" line="1372"/>
         <source>&amp;OK</source>
@@ -311,6 +352,64 @@ Format:
         <location filename="../Configuration.cpp" line="5453"/>
         <source>Are you sure you want to discard your current working frequencies and replace them with the loaded ones?</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Callsign management…</source>
+        <translation>Callsign management…</translation>
+    </message>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Enter a valid NTP hostname or IP address.</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Managed mode</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization</source>
+        <translation>NTP time synchronization</translation>
+    </message>
+    <message>
+        <source>Current version: %1
+Previous version: %2</source>
+        <translation>Current version: %1
+Previous version: %2</translation>
+    </message>
+    <message>
+        <source>Halt Tx when SWR &gt; 2.5</source>
+        <translation>Halt Tx when SWR &gt; 2.5</translation>
+    </message>
+    <message>
+        <source>Hamlib updates</source>
+        <translation>Hamlib updates</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>None</translation>
+    </message>
+    <message>
+        <source>Restart application</source>
+        <translation>Restart application</translation>
+    </message>
+    <message>
+        <source>Restore previous Hamlib</source>
+        <translation>Restore previous Hamlib</translation>
+    </message>
+    <message>
+        <source>Stop transmission when a supported CAT radio reports SWR above 2.5. Unknown or unsupported readings are shown as unavailable. Protection also polls SWR when power display is off.</source>
+        <translation>Stop transmission when a supported CAT radio reports SWR above 2.5. Unknown or unsupported readings are shown as unavailable. Protection also polls SWR when power display is off.</translation>
+    </message>
+    <message>
+        <source>Update Hamlib</source>
+        <translation>Update Hamlib</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready to restore. Restart the application to apply it.</source>
+        <translation>Version %1 is ready to restore. Restart the application to apply it.</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready. Restart the application to apply it.</source>
+        <translation>Version %1 is ready. Restart the application to apply it.</translation>
     </message>
 </context>
 <context>
@@ -2473,6 +2572,18 @@ Error: %2 - %3</source>
         <source>Ham Radio Deluxe didn&apos;t respond to command &quot;%1&quot; as expected</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid frequency list</source>
+        <translation>Ham Radio Deluxe sent an invalid frequency list</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid or incomplete reply</source>
+        <translation>Ham Radio Deluxe sent an invalid or incomplete reply</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid radio list</source>
+        <translation>Ham Radio Deluxe sent an invalid radio list</translation>
+    </message>
 </context>
 <context>
     <name>HamlibTransceiver</name>
@@ -2941,6 +3052,46 @@ Error: %2 - %3</source>
         <location filename="../logqso.cpp" line="222"/>
         <source>Cannot open &quot;%1&quot; for append: %2</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Earth–Moon–Earth</source>
+        <translation>Earth–Moon–Earth</translation>
+    </message>
+    <message>
+        <source>Meteor scatter</source>
+        <translation>Meteor scatter</translation>
+    </message>
+    <message>
+        <source>Propagation</source>
+        <translation>Propagation</translation>
+    </message>
+    <message>
+        <source>Receive frequency</source>
+        <translation>Receive frequency</translation>
+    </message>
+    <message>
+        <source>Remember propagation and satellite</source>
+        <translation>Remember propagation and satellite</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satellite</translation>
+    </message>
+    <message>
+        <source>Satellite mode</source>
+        <translation>Satellite mode</translation>
+    </message>
+    <message>
+        <source>Satellite name</source>
+        <translation>Satellite name</translation>
+    </message>
+    <message>
+        <source>Tropospheric</source>
+        <translation>Tropospheric</translation>
+    </message>
+    <message>
+        <source>Unspecified</source>
+        <translation>Unspecified</translation>
     </message>
 </context>
 <context>
@@ -5208,6 +5359,310 @@ UDP server %2:%3</source>
         <source>Keyboard Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>A log import is already running.</source>
+        <translation>A log import is already running.</translation>
+    </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>About JTDX-F</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC hunter</translation>
+    </message>
+    <message>
+        <source>Decoder error: %1. TX stopped; restarting decoder.</source>
+        <translation>Decoder error: %1. TX stopped; restarting decoder.</translation>
+    </message>
+    <message>
+        <source>Decoder exited (code %1, crash %2)</source>
+        <translation>Decoder exited (code %1, crash %2)</translation>
+    </message>
+    <message>
+        <source>Decoder restart failed repeatedly. Check decoder-errors.log and restart JTDX-F.</source>
+        <translation>Decoder restart failed repeatedly. Check decoder-errors.log and restart JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Decoder restarted. Enable Monitor to resume reception; TX remains stopped.</source>
+        <translation>Decoder restarted. Enable Monitor to resume reception; TX remains stopped.</translation>
+    </message>
+    <message>
+        <source>Enable TX manually, then Send each message (max. 80 characters).</source>
+        <translation>Enable TX manually, then Send each message (max. 80 characters).</translation>
+    </message>
+    <message>
+        <source>FT2</source>
+        <translation>FT2</translation>
+    </message>
+    <message>
+        <source>JTTY</source>
+        <translation>JTTY</translation>
+    </message>
+    <message>
+        <source>JTTY requires a local audio input and output device.</source>
+        <translation>JTTY requires a local audio input and output device.</translation>
+    </message>
+    <message>
+        <source>JTTY transmission timed out; TX stopped.</source>
+        <translation>JTTY transmission timed out; TX stopped.</translation>
+    </message>
+    <message>
+        <source>Listening…</source>
+        <translation>Listening…</translation>
+    </message>
+    <message>
+        <source>Log import: %1 new, %2 duplicates, %3 originals archived, %4 records from other stations skipped.</source>
+        <translation>Log import: %1 new, %2 duplicates, %3 originals archived, %4 records from other stations skipped.</translation>
+    </message>
+    <message>
+        <source>Log loading failed: %1</source>
+        <translation>Log loading failed: %1</translation>
+    </message>
+    <message>
+        <source>MCP %1</source>
+        <translation>MCP %1</translation>
+    </message>
+    <message>
+        <source>MCP error</source>
+        <translation>MCP error</translation>
+    </message>
+    <message>
+        <source>MCP off</source>
+        <translation>MCP off</translation>
+    </message>
+    <message>
+        <source>MCP settings: File &gt; Settings &gt; MCP</source>
+        <translation>MCP settings: File &gt; Settings &gt; MCP</translation>
+    </message>
+    <message>
+        <source>MCP: %1</source>
+        <translation>MCP: %1</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Managed mode</translation>
+    </message>
+    <message>
+        <source>Managed mode is listening. Enable TX manually to allow calls and scheduled CQ.</source>
+        <translation>Managed mode is listening. Enable TX manually to allow calls and scheduled CQ.</translation>
+    </message>
+    <message>
+        <source>Managed mode is off.</source>
+        <translation>Managed mode is off.</translation>
+    </message>
+    <message>
+        <source>Modern algorithm decoding</source>
+        <translation>Modern algorithm decoding</translation>
+    </message>
+    <message>
+        <source>My callsign</source>
+        <translation>My callsign</translation>
+    </message>
+    <message>
+        <source>No decoder completion within the timeout</source>
+        <translation>No decoder completion within the timeout</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>Off</translation>
+    </message>
+    <message>
+        <source>Previous audio file is still being saved; this interval was skipped.</source>
+        <translation>Previous audio file is still being saved; this interval was skipped.</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast</source>
+        <translation>QSO enthusiast</translation>
+    </message>
+    <message>
+        <source>Receiving</source>
+        <translation>Receiving</translation>
+    </message>
+    <message>
+        <source>Search around Rx frequency (Hz):</source>
+        <translation>Search around Rx frequency (Hz):</translation>
+    </message>
+    <message>
+        <source>Select a callsign before importing logs.</source>
+        <translation>Select a callsign before importing logs.</translation>
+    </message>
+    <message>
+        <source>Select a valid callsign and grid in station settings before enabling TX.</source>
+        <translation>Select a valid callsign and grid in station settings before enabling TX.</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Send</translation>
+    </message>
+    <message>
+        <source>SuperFox decoding (SuperHound)</source>
+        <translation>SuperFox decoding (SuperHound)</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance</source>
+        <translation>SuperFox frequency tolerance</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance...</source>
+        <translation>SuperFox frequency tolerance...</translation>
+    </message>
+    <message>
+        <source>SuperHound</source>
+        <translation>SuperHound</translation>
+    </message>
+    <message>
+        <source>TX watchdog expired. Finishing the current QSO before stopping.</source>
+        <translation>TX watchdog expired. Finishing the current QSO before stopping.</translation>
+    </message>
+    <message>
+        <source>This mode requires local audio devices; TCI audio is unavailable.</source>
+        <translation>This mode requires local audio devices; TCI audio is unavailable.</translation>
+    </message>
+    <message>
+        <source>Transmitting</source>
+        <translation>Transmitting</translation>
+    </message>
+    <message>
+        <source>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</source>
+        <translation>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</translation>
+    </message>
+    <message>
+        <source>WD %1:%2</source>
+        <translation>WD %1:%2</translation>
+    </message>
+    <message>
+        <source>WD finishing QSO</source>
+        <translation>WD: QSO</translation>
+    </message>
+    <message>
+        <source>WD unlimited</source>
+        <translation>WD ∞</translation>
+    </message>
+    <message>
+        <source>The current operator's log is not ready. Check the log files and try again.</source>
+        <translation>The current operator's log is not ready. Check the log files and try again.</translation>
+    </message>
+    <message>
+        <source>Blacklist management</source>
+        <translation>Blacklist management</translation>
+    </message>
+    <message>
+        <source>CALL</source>
+        <translation>CALL</translation>
+    </message>
+    <message>
+        <source>Confirm switch</source>
+        <translation>Confirm switch</translation>
+    </message>
+    <message>
+        <source>REPORT</source>
+        <translation>REPORT</translation>
+    </message>
+    <message>
+        <source>This station is blocked, or the permanent blacklist is unavailable.</source>
+        <translation>This station is blocked, or the permanent blacklist is unavailable.</translation>
+    </message>
+    <message>
+        <source>Average</source>
+        <translation>Average</translation>
+    </message>
+    <message>
+        <source>Clear average</source>
+        <translation>Clear average</translation>
+    </message>
+    <message>
+        <source>Click to erase the right window; double-click to erase both.</source>
+        <translation>Click to erase the right window; double-click to erase both.</translation>
+    </message>
+    <message>
+        <source>EME presets</source>
+        <translation>EME presets</translation>
+    </message>
+    <message>
+        <source>Echo: %1 dB; Δf %2 Hz; quality %3; averages %4</source>
+        <translation>Echo: %1 dB; Δf %2 Hz; quality %3; averages %4</translation>
+    </message>
+    <message>
+        <source>Enable TX manually to measure lunar echoes.</source>
+        <translation>Enable TX manually to measure lunar echoes.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX.</source>
+        <translation>Enable or stop TX.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX. Right-click for Wait &amp; Reply, Wait &amp; Call or Wait &amp; Pounce. Waiting requires a manually enabled TX session.</source>
+        <translation>Enable or stop TX. Right-click for Wait &amp; Reply, Wait &amp; Call or Wait &amp; Pounce. Waiting requires a manually enabled TX session.</translation>
+    </message>
+    <message>
+        <source>Full duplex</source>
+        <translation>Full duplex</translation>
+    </message>
+    <message>
+        <source>Left-click to erase the left window; right-click to erase the right window; double-click to erase both.</source>
+        <translation>Left-click to erase the left window; right-click to erase the right window; double-click to erase both.</translation>
+    </message>
+    <message>
+        <source>Period</source>
+        <translation>Period</translation>
+    </message>
+    <message>
+        <source>SWR %1 exceeds 2.5. TX stopped; enable TX manually after checking the antenna.</source>
+        <translation>SWR %1 exceeds 2.5. TX stopped; enable TX manually after checking the antenna.</translation>
+    </message>
+    <message>
+        <source>Set a valid station grid locator to calculate astronomical data.</source>
+        <translation>Set a valid station grid locator to calculate astronomical data.</translation>
+    </message>
+    <message>
+        <source>Stopped</source>
+        <translation>Stopped</translation>
+    </message>
+    <message>
+        <source>The transmit slot was missed; enable TX again.</source>
+        <translation>The transmit slot was missed; enable TX again.</translation>
+    </message>
+    <message>
+        <source>Transmission timed out; TX stopped.</source>
+        <translation>Transmission timed out; TX stopped.</translation>
+    </message>
+    <message>
+        <source>VHF / EME</source>
+        <translation>VHF / EME</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Call</source>
+        <translation>Wait &amp; Call</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Pounce</source>
+        <translation>Wait &amp; Pounce</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Reply</source>
+        <translation>Wait &amp; Reply</translation>
+    </message>
+    <message>
+        <source>Waiting is selected. Click Enable TX to authorize transmission; Stop cancels waiting.</source>
+        <translation>Waiting is selected. Click Enable TX to authorize transmission; Stop cancels waiting.</translation>
+    </message>
+    <message>
+        <source>Waiting matched %1; continuing the manually enabled TX session.</source>
+        <translation>Waiting matched %1; continuing the manually enabled TX session.</translation>
+    </message>
+    <message>
+        <source>Waiting timed out; TX stopped.</source>
+        <translation>Waiting timed out; TX stopped.</translation>
+    </message>
+    <message>
+        <source>%1 is replying to another station; waiting for its CQ or final message.</source>
+        <translation>%1 is replying to another station; waiting for its CQ or final message.</translation>
+    </message>
+    <message>
+        <source>%1 is available; continuing the manually enabled TX session.</source>
+        <translation>%1 is available; continuing the manually enabled TX session.</translation>
+    </message>
 </context>
 <context>
     <name>Modes</name>
@@ -5517,6 +5972,58 @@ Please verify the correct directory name was given.</source>
         <location filename="../WFPalette.cpp" line="258"/>
         <source>Error writing waterfall palette file &quot;%1&quot;: %2.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot create log directory</source>
+        <translation>Cannot create log directory</translation>
+    </message>
+    <message>
+        <source>Log files changed while loading. Please retry.</source>
+        <translation>Log files changed while loading. Please retry.</translation>
+    </message>
+    <message>
+        <source>Log is busy. Please retry.</source>
+        <translation>Log is busy. Please retry.</translation>
+    </message>
+    <message>
+        <source>Unable to import the log files.</source>
+        <translation>Unable to import the log files.</translation>
+    </message>
+    <message>
+        <source>Unable to read the log files.</source>
+        <translation>Unable to read the log files.</translation>
+    </message>
+    <message>
+        <source>Ambiguous QSO identity; log unchanged</source>
+        <translation>Ambiguous QSO identity; log unchanged</translation>
+    </message>
+    <message>
+        <source>Recorded QSO not found; log unchanged</source>
+        <translation>Recorded QSO not found; log unchanged</translation>
+    </message>
+    <message>
+        <source>Cannot read pending log update</source>
+        <translation>Cannot read pending log update</translation>
+    </message>
+    <message>
+        <source>Invalid pending log update; originals retained</source>
+        <translation>Invalid pending log update; originals retained</translation>
+    </message>
+    <message>
+        <source>Cannot remove completed log update journal</source>
+        <translation>Cannot remove completed log update journal</translation>
+    </message>
+    <message>
+        <source>QSO identity changed or timestamps are invalid; log unchanged</source>
+        <translation>QSO identity changed or timestamps are invalid; log unchanged</translation>
+    </message>
+    <message>
+        <source>Cannot revise a symbolic log link</source>
+        <translation>Cannot revise a symbolic log link</translation>
+    </message>
+    <message>
+        <source>QSO update exceeds the journal size limit</source>
+        <translation>QSO update exceeds the journal size limit</translation>
     </message>
 </context>
 <context>
@@ -5987,6 +6494,14 @@ Error(%2): %3</source>
         <location filename="../TCITransceiver.cpp" line="1480"/>
         <source>TCI failed set txfreq</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid TCI audio packet</source>
+        <translation>Invalid TCI audio packet</translation>
+    </message>
+    <message>
+        <source>TCI PCM playback requires an active, explicitly started transmission.</source>
+        <translation>TCI PCM playback requires an active, explicitly started transmission.</translation>
     </message>
 </context>
 <context>
@@ -7071,13 +7586,13 @@ both here.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2233"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option is being used for non-overlapping spectra scenario. Tx will be halted if spectra have common frequencies with no respect to this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>With AutoSeq enabled, checking this option pauses calls to the selected station while it replies to someone else, keeping Enable TX on. Resume on its CQ, 73, RR73, RRR or a reply to you. When unchecked, do not pause for this reason. Call limits, the TX watchdog and Stop still apply.</source>
+        <translation>With AutoSeq enabled, checking this option pauses calls to the selected station while it replies to someone else, keeping Enable TX on. Resume on its CQ, 73, RR73, RRR or a reply to you. When unchecked, do not pause for this reason. Call limits, the TX watchdog and Stop still apply.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2236"/>
-        <source>Halt TX if operator I called answered to other operator</source>
-        <translation type="unfinished"></translation>
+        <source>Wait if the called station replies to someone else</source>
+        <translation>Wait if the called station replies to someone else</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2243"/>
@@ -7889,8 +8404,8 @@ Right click for insert and delete options.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3846"/>
-        <source>Transmitted message</source>
-        <translation type="unfinished"></translation>
+        <source>Own transmitted message</source>
+        <translation>Own transmitted message</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3862"/>
@@ -8733,6 +9248,294 @@ resetting the radio interface and applying any
 soundcard changes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Access token</source>
+        <translation>Access token</translation>
+    </message>
+    <message>
+        <source>Allow control (mode, frequency, QSO and options)</source>
+        <translation>Allow control (mode, frequency, QSO and options)</translation>
+    </message>
+    <message>
+        <source>Allow starting TX and Tune (also requires control)</source>
+        <translation>Allow starting TX and Tune (also requires control)</translation>
+    </message>
+    <message>
+        <source>Connect an AI client to JTDX-F using MCP. Changes take effect after OK. Only this computer (127.0.0.1) can connect.</source>
+        <translation>Connect an AI client to JTDX-F using MCP. Changes take effect after OK. Only this computer (127.0.0.1) can connect.</translation>
+    </message>
+    <message>
+        <source>Copy token</source>
+        <translation>Copy token</translation>
+    </message>
+    <message>
+        <source>Enable MCP server</source>
+        <translation>Enable MCP server</translation>
+    </message>
+    <message>
+        <source>Endpoint</source>
+        <translation>Endpoint</translation>
+    </message>
+    <message>
+        <source>Generate new token</source>
+        <translation>Generate new token</translation>
+    </message>
+    <message>
+        <source>MCP</source>
+        <translation>MCP</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>Port</translation>
+    </message>
+    <message>
+        <source>Use Streamable HTTP with Authorization: Bearer TOKEN, or the bundled jtdx_mcp_bridge.py for stdio clients. Status, decodes and log are readable with a token. Stop TX is always available. See docs/MCP_zh.md.</source>
+        <translation>Use Streamable HTTP with Authorization: Bearer TOKEN, or the bundled jtdx_mcp_bridge.py for stdio clients. Status, decodes and log are readable with a token. Stop TX is always available. See docs/MCP_zh.md.</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Align the text for DXCC, distance and azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Align the text for DXCC, distance and azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allow kHz frequency offset entry without 'k' suffix.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allow kHz frequency offset entry without 'k' suffix.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have decodes for a new period start at the top of the Band Activity window and not scroll off the top when the window is full.&lt;/p&gt;&lt;p&gt;This is to aid selecting decodes to double-click while decoding is still in progress. Use the Band Activity vertical scroll bar to reveal decodes past the bottom of the window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have decodes for a new period start at the top of the Band Activity window and not scroll off the top when the window is full.&lt;/p&gt;&lt;p&gt;This is to aid selecting decodes to double-click while decoding is still in progress. Use the Band Activity vertical scroll bar to reveal decodes past the bottom of the window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase Band Activity and Rx frequency windows after band change.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase Band Activity and Rx frequency windows after band change.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends a valid Maidenhead locator, calculate and show the great-circle azimuth in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends a valid Maidenhead locator, calculate and show the great-circle azimuth in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends locator, calculate and show the distance in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends locator, calculate and show the distance in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between DXCC and distance/azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between DXCC and distance/azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between message text and DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between message text and DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open the Astronomical Data window automatically when switching to Q65 or JT65 mode and Decode after EME delay is enabled, and close it when no longer needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open the Astronomical Data window automatically when switching to Q65 or JT65 mode and Decode after EME delay is enabled, and close it when no longer needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Turn the progress bar red while transmitting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Turn the progress bar red while transmitting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tx until 73 is received when in MSK144 or Q65 mode. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tx until 73 is received when in MSK144 or Q65 mode. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>A deliberate double-click may enable TX only after the transmission safety checks pass. Startup, background messages and remote selection cannot grant transmission permission.</source>
+        <translation>A deliberate double-click may enable TX only after the transmission safety checks pass. Startup, background messages and remote selection cannot grant transmission permission.</translation>
+    </message>
+    <message>
+        <source>Additional features</source>
+        <translation>Additional features</translation>
+    </message>
+    <message>
+        <source>After a completed QSO, move the receive audio frequency to the transmit audio frequency. This does not enable the Tx=Rx lock.</source>
+        <translation>After a completed QSO, move the receive audio frequency to the transmit audio frequency. This does not enable the Tx=Rx lock.</translation>
+    </message>
+    <message>
+        <source>Align DXCC/distance/azimuth</source>
+        <translation>Align DXCC/distance/azimuth</translation>
+    </message>
+    <message>
+        <source>Allow Tx frequency changes while transmitting</source>
+        <translation>Allow Tx frequency changes while transmitting</translation>
+    </message>
+    <message>
+        <source>Allow the additional Earth–Moon–Earth propagation delay when collecting and decoding signals. This does not alter the UTC clock.</source>
+        <translation>Allow the additional Earth–Moon–Earth propagation delay when collecting and decoding signals. This does not alter the UTC clock.</translation>
+    </message>
+    <message>
+        <source>Alternate Erase button behavior</source>
+        <translation>Alternate Erase button behavior</translation>
+    </message>
+    <message>
+        <source>Alternate F1-F6 bindings</source>
+        <translation>Alternate F1-F6 bindings</translation>
+    </message>
+    <message>
+        <source>Auto-open/close Astronomical data window</source>
+        <translation>Auto-open/close Astronomical data window</translation>
+    </message>
+    <message>
+        <source>Calling CQ forces Call 1st</source>
+        <translation>Calling CQ forces Call 1st</translation>
+    </message>
+    <message>
+        <source>Clear DX Call after QSO</source>
+        <translation>Clear DX Call after QSO</translation>
+    </message>
+    <message>
+        <source>Clear DX Grid after QSO</source>
+        <translation>Clear DX Grid after QSO</translation>
+    </message>
+    <message>
+        <source>Decode after EME delay</source>
+        <translation>Decode after EME delay</translation>
+    </message>
+    <message>
+        <source>Di&amp;sable Tx after sending 73</source>
+        <translation>Di&amp;sable Tx after sending 73</translation>
+    </message>
+    <message>
+        <source>Doubl&amp;e-click on call sets Tx enable</source>
+        <translation>Doubl&amp;e-click on call sets Tx enable</translation>
+    </message>
+    <message>
+        <source>Enable VHF and submode features</source>
+        <translation>Enable VHF and submode features</translation>
+    </message>
+    <message>
+        <source>Enable Wait &amp; Call, Wait &amp; Reply and Wait &amp; Pounce controls. They require a manually authorized TX session and cannot restart transmission after Stop. Managed mode keeps its own selection rules.</source>
+        <translation>Enable Wait &amp; Call, Wait &amp; Reply and Wait &amp; Pounce controls. They require a manually authorized TX session and cannot restart transmission after Stop. Managed mode keeps its own selection rules.</translation>
+    </message>
+    <message>
+        <source>Enable Wait features</source>
+        <translation>Enable Wait features</translation>
+    </message>
+    <message>
+        <source>Erase decodes after band change</source>
+        <translation>Erase decodes after band change</translation>
+    </message>
+    <message>
+        <source>Finish one QSO and stop. This is the same setting as Single QSO in the main window. Leave it unchecked for continuous QSOs within the TX watchdog session.</source>
+        <translation>Finish one QSO and stop. This is the same setting as Single QSO in the main window. Leave it unchecked for continuous QSOs within the TX watchdog session.</translation>
+    </message>
+    <message>
+        <source>Font...</source>
+        <translation>Font...</translation>
+    </message>
+    <message>
+        <source>Highlight DX Call in message</source>
+        <translation>Highlight DX Call in message</translation>
+    </message>
+    <message>
+        <source>Highlight DX Grid in message</source>
+        <translation>Highlight DX Grid in message</translation>
+    </message>
+    <message>
+        <source>Less button coloring (restart required)</source>
+        <translation>Less button coloring (restart required)</translation>
+    </message>
+    <message>
+        <source>MSK144/Q65: Tx until 73 is received</source>
+        <translation>MSK144/Q65: Tx until 73 is received</translation>
+    </message>
+    <message>
+        <source>Map Grid locator to U.S. State</source>
+        <translation>Map Grid locator to U.S. State</translation>
+    </message>
+    <message>
+        <source>Monitor returns to last used frequency</source>
+        <translation>Monitor returns to last used frequency</translation>
+    </message>
+    <message>
+        <source>Read and display PWR and SWR</source>
+        <translation>Read and display PWR and SWR</translation>
+    </message>
+    <message>
+        <source>Read and display transmit power and SWR through CAT. Unsupported readings are shown as unavailable.</source>
+        <translation>Read and display transmit power and SWR through CAT. Unsupported readings are shown as unavailable.</translation>
+    </message>
+    <message>
+        <source>Set Rx frequency to Tx frequency after QSO</source>
+        <translation>Set Rx frequency to Tx frequency after QSO</translation>
+    </message>
+    <message>
+        <source>Show &amp;DXCC, grid, and worked-before status    </source>
+        <translation>Show &amp;DXCC, grid, and worked-before status    </translation>
+    </message>
+    <message>
+        <source>Show DXCC for all messages</source>
+        <translation>Show DXCC for all messages</translation>
+    </message>
+    <message>
+        <source>Show U.S. States in messages with grid</source>
+        <translation>Show U.S. States in messages with grid</translation>
+    </message>
+    <message>
+        <source>Show azimuth in messages with grid</source>
+        <translation>Show azimuth in messages with grid</translation>
+    </message>
+    <message>
+        <source>Show blank line with time stamp</source>
+        <translation>Show blank line with time stamp</translation>
+    </message>
+    <message>
+        <source>Show distance in messages with grid</source>
+        <translation>Show distance in messages with grid</translation>
+    </message>
+    <message>
+        <source>Show if decoded stations are new DXCC entities or worked before.</source>
+        <translation>Show if decoded stations are new DXCC entities or worked before.</translation>
+    </message>
+    <message>
+        <source>Show principal prefix instead of country name        </source>
+        <translation>Show principal prefix instead of country name        </translation>
+    </message>
+    <message>
+        <source>Show the separator line between periods with time stamp of the decode period.</source>
+        <translation>Show the separator line between periods with time stamp of the decode period.</translation>
+    </message>
+    <message>
+        <source>Single decode</source>
+        <translation>Single decode</translation>
+    </message>
+    <message>
+        <source>Start new period decodes at top</source>
+        <translation>Start new period decodes at top</translation>
+    </message>
+    <message>
+        <source>Stop Tune after the selected number of seconds. A zero interval disables this timer.</source>
+        <translation>Stop Tune after the selected number of seconds. A zero interval disables this timer.</translation>
+    </message>
+    <message>
+        <source>Tune watchdog   </source>
+        <translation>Tune watchdog   </translation>
+    </message>
+    <message>
+        <source>Turn progress bar red while transmitting</source>
+        <translation>Turn progress bar red while transmitting</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. Transmission safety checks still apply.</source>
+        <translation>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. Transmission safety checks still apply.</translation>
+    </message>
+    <message>
+        <source>kHz entry without k (restart required)</source>
+        <translation>kHz entry without k (restart required)</translation>
+    </message>
+    <message>
+        <source>When checked, double-clicking a decoded callsign starts a TX session after the transmission safety checks pass. The session then follows the normal AutoSeq, Single QSO and watchdog settings. Off by default.</source>
+        <translation>When checked, double-clicking a decoded callsign starts a TX session after the transmission safety checks pass. The session then follows the normal AutoSeq, Single QSO and watchdog settings. Off by default.</translation>
+    </message>
+    <message>
+        <source>Double-click a callsign to enable TX</source>
+        <translation>Double-click a callsign to enable TX</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. These keys cannot start a TX session. Click Enable TX first.</source>
+        <translation>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. These keys cannot start a TX session. Click Enable TX first.</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -8783,6 +9586,870 @@ soundcard changes</source>
         <location filename="../wf_palette_design_dialog.ui" line="23"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Double click a color to edit it.&lt;/p&gt;&lt;p&gt;Right click to insert or delete colors.&lt;/p&gt;&lt;p&gt;Colors at the top represent weak signals&lt;/p&gt;&lt;p&gt;and colors at the bottom represent strong&lt;/p&gt;&lt;p&gt;signals. You can have up to 256 colors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>JttyController</name>
+    <message>
+        <source>Cannot write to the JTTY decoder.</source>
+        <translation>Cannot write to the JTTY decoder.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY decoder response.</source>
+        <translation>Invalid JTTY decoder response.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY transmit audio.</source>
+        <translation>Invalid JTTY transmit audio.</translation>
+    </message>
+    <message>
+        <source>JTTY audio backlog exceeded 10 seconds; reception restarted.</source>
+        <translation>JTTY audio backlog exceeded 10 seconds; reception restarted.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder stopped unexpectedly.</source>
+        <translation>JTTY decoder stopped unexpectedly.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder timed out. Select JTTY again to restart it.</source>
+        <translation>JTTY decoder timed out. Select JTTY again to restart it.</translation>
+    </message>
+    <message>
+        <source>Unexpected JTTY decoder response.</source>
+        <translation>Unexpected JTTY decoder response.</translation>
+    </message>
+</context>
+<context>
+    <name>LogForwarder</name>
+    <message>
+        <source>External logger did not acknowledge the QSO. Local logs are saved.</source>
+        <translation>External logger did not acknowledge the QSO. Local logs are saved.</translation>
+    </message>
+    <message>
+        <source>External logger disconnected before acknowledgement. Local logs are saved.</source>
+        <translation>External logger disconnected before acknowledgement. Local logs are saved.</translation>
+    </message>
+    <message>
+        <source>External logger rejected the QSO. Local logs are saved.</source>
+        <translation>External logger rejected the QSO. Local logs are saved.</translation>
+    </message>
+    <message>
+        <source>Invalid external logger response. Local logs are saved.</source>
+        <translation>Invalid external logger response. Local logs are saved.</translation>
+    </message>
+    <message>
+        <source>Unexpected external logger response. Local logs are saved.</source>
+        <translation>Unexpected external logger response. Local logs are saved.</translation>
+    </message>
+</context>
+<context>
+    <name>ManagedSettingsWidget</name>
+    <message>
+        <source>0 — unlimited</source>
+        <translation>0 — unlimited</translation>
+    </message>
+    <message>
+        <source>Answer previously worked callsigns</source>
+        <translation>Answer previously worked callsigns</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC hunter</translation>
+    </message>
+    <message>
+        <source>New CQ zone</source>
+        <translation>New CQ zone</translation>
+    </message>
+    <message>
+        <source>New DXCC</source>
+        <translation>New DXCC</translation>
+    </message>
+    <message>
+        <source>New ITU zone</source>
+        <translation>New ITU zone</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode DXCC</source>
+        <translation>New band &amp;&amp; mode DXCC</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode callsign</source>
+        <translation>New band &amp;&amp; mode callsign</translation>
+    </message>
+    <message>
+        <source>New callsign</source>
+        <translation>New callsign</translation>
+    </message>
+    <message>
+        <source>New grid</source>
+        <translation>New grid</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast (also prioritizes new DXCC entities and zones)</source>
+        <translation>QSO enthusiast (also prioritizes new DXCC entities and zones)</translation>
+    </message>
+    <message>
+        <source>Send three CQ rounds every 15 minutes</source>
+        <translation>Send three CQ rounds every 15 minutes</translation>
+    </message>
+    <message>
+        <source>Unanswered call limit:</source>
+        <translation>Unanswered call limit:</translation>
+    </message>
+    <message>
+        <source>Allow TX slot changes</source>
+        <translation>Allow TX slot changes</translation>
+    </message>
+    <message>
+        <source>Allow automatic TX slot changes between completed QSOs. After a slot change, wait 5 minutes before another automatic change. Manual changes are always allowed and restart this timer. Off: stay in the selected TX slot.</source>
+        <translation>Allow automatic TX slot changes between completed QSOs. After a slot change, wait 5 minutes before another automatic change. Manual changes are always allowed and restart this timer. Off: stay in the selected TX slot.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpClient</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Enter a valid NTP hostname or IP address.</translation>
+    </message>
+    <message>
+        <source>Invalid NTP packet length.</source>
+        <translation>Invalid NTP packet length.</translation>
+    </message>
+    <message>
+        <source>NTP request timed out.</source>
+        <translation>NTP request timed out.</translation>
+    </message>
+    <message>
+        <source>The NTP date is outside the supported range.</source>
+        <translation>The NTP date is outside the supported range.</translation>
+    </message>
+    <message>
+        <source>The NTP response does not match this request.</source>
+        <translation>The NTP response does not match this request.</translation>
+    </message>
+    <message>
+        <source>The NTP response has excessive delay or uncertainty.</source>
+        <translation>The NTP response has excessive delay or uncertainty.</translation>
+    </message>
+    <message>
+        <source>The NTP server is not synchronized or refused the request.</source>
+        <translation>The NTP server is not synchronized or refused the request.</translation>
+    </message>
+    <message>
+        <source>The clock changed during the NTP request, or the response was too slow.</source>
+        <translation>The clock changed during the NTP request, or the response was too slow.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpController</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Enter a valid NTP hostname or IP address.</translation>
+    </message>
+    <message>
+        <source>Install polkit/pkexec to authorize system time synchronization.</source>
+        <translation>Install polkit/pkexec to authorize system time synchronization.</translation>
+    </message>
+    <message>
+        <source>Permission granted. Synchronization follows the selected interval.</source>
+        <translation>Permission granted. Synchronization follows the selected interval.</translation>
+    </message>
+    <message>
+        <source>Permission request timed out. System time is unchanged.</source>
+        <translation>Permission request timed out. System time is unchanged.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted (Windows error %1). Using system time.</source>
+        <translation>Permission was not granted (Windows error %1). Using system time.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted. Using system time.</source>
+        <translation>Permission was not granted. Using system time.</translation>
+    </message>
+    <message>
+        <source>Requesting permission to set the system time…</source>
+        <translation>Requesting permission to set the system time…</translation>
+    </message>
+    <message>
+        <source>Synchronization deferred while transmitting.</source>
+        <translation>Synchronization deferred while transmitting.</translation>
+    </message>
+    <message>
+        <source>Synchronization failed: %1. Retrying in 1 minute.</source>
+        <translation>Synchronization failed: %1. Retrying in 1 minute.</translation>
+    </message>
+    <message>
+        <source>The time synchronization helper is missing.</source>
+        <translation>The time synchronization helper is missing.</translation>
+    </message>
+    <message>
+        <source>Time synchronization stopped. Using system time.</source>
+        <translation>Time synchronization stopped. Using system time.</translation>
+    </message>
+    <message>
+        <source>Time synchronized; correction %1 ms. Next check in %2 minutes.</source>
+        <translation>Time synchronized; correction %1 ms. Next check in %2 minutes.</translation>
+    </message>
+    <message>
+        <source>Use system time. NTP synchronization is disabled.</source>
+        <translation>Use system time. NTP synchronization is disabled.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpSettingsWidget</name>
+    <message>
+        <source>%1 hours</source>
+        <translation>%1 hours</translation>
+    </message>
+    <message>
+        <source>%1 minutes</source>
+        <translation>%1 minutes</translation>
+    </message>
+    <message>
+        <source>Africa / Kenya / icolo</source>
+        <translation>Africa / Kenya / icolo</translation>
+    </message>
+    <message>
+        <source>Africa / Mauritius / Mauritius Telecom</source>
+        <translation>Africa / Mauritius / Mauritius Telecom</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / INX-ZA</source>
+        <translation>Africa / South Africa / INX-ZA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / NMISA</source>
+        <translation>Africa / South Africa / NMISA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / SANReN</source>
+        <translation>Africa / South Africa / SANReN</translation>
+    </message>
+    <message>
+        <source>Asia / Apple</source>
+        <translation>Asia / Apple</translation>
+    </message>
+    <message>
+        <source>Asia / China / Alibaba</source>
+        <translation>Asia / China / Alibaba</translation>
+    </message>
+    <message>
+        <source>Asia / China / Baidu</source>
+        <translation>Asia / China / Baidu</translation>
+    </message>
+    <message>
+        <source>Asia / China / CAS NTSC</source>
+        <translation>Asia / China / CAS NTSC</translation>
+    </message>
+    <message>
+        <source>Asia / China / NTP Pool</source>
+        <translation>Asia / China / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tencent</source>
+        <translation>Asia / China / Tencent</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tsinghua TUNA</source>
+        <translation>Asia / China / Tsinghua TUNA</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Internet Multifeed</source>
+        <translation>Asia / Japan / Internet Multifeed</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / NICT</source>
+        <translation>Asia / Japan / NICT</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Sakura Internet</source>
+        <translation>Asia / Japan / Sakura Internet</translation>
+    </message>
+    <message>
+        <source>Asia / South Korea / KRISS</source>
+        <translation>Asia / South Korea / KRISS</translation>
+    </message>
+    <message>
+        <source>Europe / France / RDEM Systems</source>
+        <translation>Europe / France / RDEM Systems</translation>
+    </message>
+    <message>
+        <source>Europe / Germany / PTB</source>
+        <translation>Europe / Germany / PTB</translation>
+    </message>
+    <message>
+        <source>Europe / Poland / GUM</source>
+        <translation>Europe / Poland / GUM</translation>
+    </message>
+    <message>
+        <source>Europe / Sweden / Netnod</source>
+        <translation>Europe / Sweden / Netnod</translation>
+    </message>
+    <message>
+        <source>Europe / UK / NPL</source>
+        <translation>Europe / UK / NPL</translation>
+    </message>
+    <message>
+        <source>Global / Apple</source>
+        <translation>Global / Apple</translation>
+    </message>
+    <message>
+        <source>Global / Cloudflare</source>
+        <translation>Global / Cloudflare</translation>
+    </message>
+    <message>
+        <source>Global / Google</source>
+        <translation>Global / Google</translation>
+    </message>
+    <message>
+        <source>Global / Microsoft Windows</source>
+        <translation>Global / Microsoft Windows</translation>
+    </message>
+    <message>
+        <source>NTP hostname or IP address</source>
+        <translation>NTP hostname or IP address</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization (requests administrator privileges when enabled)</source>
+        <translation>NTP time synchronization (requests administrator privileges when enabled)</translation>
+    </message>
+    <message>
+        <source>North America / Canada / NRC</source>
+        <translation>North America / Canada / NRC</translation>
+    </message>
+    <message>
+        <source>North America / USA / NIST</source>
+        <translation>North America / USA / NIST</translation>
+    </message>
+    <message>
+        <source>Oceania / Australia / NTP Pool</source>
+        <translation>Oceania / Australia / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Oceania / New Zealand / MSL (NZ networks only)</source>
+        <translation>Oceania / New Zealand / MSL (NZ networks only)</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Other</translation>
+    </message>
+    <message>
+        <source>South America / Argentina / INTI</source>
+        <translation>South America / Argentina / INTI</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / NIC.br</source>
+        <translation>South America / Brazil / NIC.br</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / National Observatory</source>
+        <translation>South America / Brazil / National Observatory</translation>
+    </message>
+    <message>
+        <source>South America / Chile / SHOA</source>
+        <translation>South America / Chile / SHOA</translation>
+    </message>
+    <message>
+        <source>South America / Colombia / INM</source>
+        <translation>South America / Colombia / INM</translation>
+    </message>
+    <message>
+        <source>Synchronization interval:</source>
+        <translation>Synchronization interval:</translation>
+    </message>
+    <message>
+        <source>Uses system UTC time; the synchronization interval is configurable.</source>
+        <translation>Uses system UTC time; the synchronization interval is configurable.</translation>
+    </message>
+</context>
+<context>
+    <name>ProcessingDialog</name>
+    <message>
+        <source>Processing</source>
+        <translation>Processing</translation>
+    </message>
+    <message>
+        <source>Stop TX</source>
+        <translation>Stop TX</translation>
+    </message>
+    <message>
+        <source>System processing, please wait…</source>
+        <translation>System processing, please wait…</translation>
+    </message>
+</context>
+<context>
+    <name>StationManager</name>
+    <message>
+        <source>Add</source>
+        <translation>Add</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Add callsign</translation>
+    </message>
+    <message>
+        <source>All regions</source>
+        <translation>All regions</translation>
+    </message>
+    <message>
+        <source>Callsign management</source>
+        <translation>Callsign management</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Edit</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Edit callsign</translation>
+    </message>
+    <message>
+        <source>Enter a valid 4, 6 or 8 character grid locator.</source>
+        <translation>Enter a valid 4, 6 or 8 character grid locator.</translation>
+    </message>
+    <message>
+        <source>Enter a valid callsign (3–12 letters/digits, optional /suffix).</source>
+        <translation>Enter a valid callsign (3–12 letters/digits, optional /suffix).</translation>
+    </message>
+    <message>
+        <source>Full call in Tx1</source>
+        <translation>Full call in Tx1</translation>
+    </message>
+    <message>
+        <source>Full call in Tx3</source>
+        <translation>Full call in Tx3</translation>
+    </message>
+    <message>
+        <source>Full call in Tx5 only</source>
+        <translation>Full call in Tx5 only</translation>
+    </message>
+    <message>
+        <source>IARU region:</source>
+        <translation>IARU region:</translation>
+    </message>
+    <message>
+        <source>Invalid profile</source>
+        <translation>Invalid profile</translation>
+    </message>
+    <message>
+        <source>My callsign:</source>
+        <translation>My callsign:</translation>
+    </message>
+    <message>
+        <source>My grid:</source>
+        <translation>My grid:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Region 1</source>
+        <translation>Region 1</translation>
+    </message>
+    <message>
+        <source>Region 2</source>
+        <translation>Region 2</translation>
+    </message>
+    <message>
+        <source>Region 3</source>
+        <translation>Region 3</translation>
+    </message>
+    <message>
+        <source>Remove profile</source>
+        <translation>Remove profile</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Save</translation>
+    </message>
+    <message>
+        <source>This callsign already exists. Different /suffixes are allowed.</source>
+        <translation>This callsign already exists. Different /suffixes are allowed.</translation>
+    </message>
+    <message>
+        <source>Type 2 callsign messages:</source>
+        <translation>Type 2 callsign messages:</translation>
+    </message>
+</context>
+<context>
+    <name>Blacklist</name>
+    <message>
+        <source>A base callsign blocks its portable prefixes and suffixes (K1ABC also blocks EA8/K1ABC and K1ABC/P). A callsign containing / blocks only that exact callsign.</source>
+        <translation>A base callsign blocks its portable prefixes and suffixes (K1ABC also blocks EA8/K1ABC and K1ABC/P). A callsign containing / blocks only that exact callsign.</translation>
+    </message>
+    <message>
+        <source>Blacklist changed in another program. Reload it before saving.</source>
+        <translation>Blacklist changed in another program. Reload it before saving.</translation>
+    </message>
+    <message>
+        <source>Blacklist file is too large.</source>
+        <translation>Blacklist file is too large.</translation>
+    </message>
+    <message>
+        <source>Blacklist has too many entries.</source>
+        <translation>Blacklist has too many entries.</translation>
+    </message>
+    <message>
+        <source>Blacklist is busy. Please retry.</source>
+        <translation>Blacklist is busy. Please retry.</translation>
+    </message>
+    <message>
+        <source>Blacklist is not ready. Repair the existing file before saving.</source>
+        <translation>Blacklist is not ready. Repair the existing file before saving.</translation>
+    </message>
+    <message>
+        <source>Blacklist notes must not exceed 512 characters.</source>
+        <translation>Blacklist notes must not exceed 512 characters.</translation>
+    </message>
+    <message>
+        <source>Cannot create blacklist directory.</source>
+        <translation>Cannot create blacklist directory.</translation>
+    </message>
+    <message>
+        <source>Cannot open blacklist: %1</source>
+        <translation>Cannot open blacklist: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save blacklist: %1</source>
+        <translation>Cannot save blacklist: %1</translation>
+    </message>
+    <message>
+        <source>Duplicate callsign: %1</source>
+        <translation>Duplicate callsign: %1</translation>
+    </message>
+    <message>
+        <source>Invalid blacklist file; the original has been preserved.</source>
+        <translation>Invalid blacklist file; the original has been preserved.</translation>
+    </message>
+    <message>
+        <source>Invalid callsign: %1</source>
+        <translation>Invalid callsign: %1</translation>
+    </message>
+    <message>
+        <source>Select an operator before editing the blacklist.</source>
+        <translation>Select an operator before editing the blacklist.</translation>
+    </message>
+    <message>
+        <source>Unsupported blacklist file version.</source>
+        <translation>Unsupported blacklist file version.</translation>
+    </message>
+</context>
+<context>
+    <name>BlacklistDialog</name>
+    <message>
+        <source>Add</source>
+        <translation>Add</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Add callsign</translation>
+    </message>
+    <message>
+        <source>Callsign:</source>
+        <translation>Callsign:</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Edit</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Edit callsign</translation>
+    </message>
+    <message>
+        <source>Invalid entry</source>
+        <translation>Invalid entry</translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation>Note:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Permanent blacklist</source>
+        <translation>Permanent blacklist</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Remove</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Save</translation>
+    </message>
+</context>
+<context>
+    <name>AstroDialog</name>
+    <message>
+        <source>Astronomical Data</source>
+        <translation>Astronomical Data</translation>
+    </message>
+    <message>
+        <source>Call DX</source>
+        <translation>Call DX</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Close</translation>
+    </message>
+    <message>
+        <source>Constant frequency on the Moon</source>
+        <translation>Constant frequency on the Moon</translation>
+    </message>
+    <message>
+        <source>DX Moon Az / El: %1° / %2°</source>
+        <translation>DX Moon Az / El: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>Doppler tracking</source>
+        <translation>Doppler tracking</translation>
+    </message>
+    <message>
+        <source>Echo RIT</source>
+        <translation>Echo RIT</translation>
+    </message>
+    <message>
+        <source>Echo delay: %1 s; spread: %2 / %3 Hz</source>
+        <translation>Echo delay: %1 s; spread: %2 / %3 Hz</translation>
+    </message>
+    <message>
+        <source>Echo frequency dither (±10 Hz)</source>
+        <translation>Echo frequency dither (±10 Hz)</translation>
+    </message>
+    <message>
+        <source>Full Doppler to DX grid</source>
+        <translation>Full Doppler to DX grid</translation>
+    </message>
+    <message>
+        <source>Method</source>
+        <translation>Method</translation>
+    </message>
+    <message>
+        <source>Moon Az / El: %1° / %2°</source>
+        <translation>Moon Az / El: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>No Doppler correction</source>
+        <translation>No Doppler correction</translation>
+    </message>
+    <message>
+        <source>On DX echo</source>
+        <translation>On DX echo</translation>
+    </message>
+    <message>
+        <source>Own / DX Doppler: %1 / %2 Hz</source>
+        <translation>Own / DX Doppler: %1 / %2 Hz</translation>
+    </message>
+    <message>
+        <source>Own echo</source>
+        <translation>Own echo</translation>
+    </message>
+    <message>
+        <source>Set frequency</source>
+        <translation>Set frequency</translation>
+    </message>
+    <message>
+        <source>Sky: %1 K; degradation: %2 dB; polarization: %3°</source>
+        <translation>Sky: %1 K; degradation: %2 dB; polarization: %3°</translation>
+    </message>
+    <message>
+        <source>Sun Az / El: %1° / %2°</source>
+        <translation>Sun Az / El: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>TX frequency offset (MHz)</source>
+        <translation>TX frequency offset (MHz)</translation>
+    </message>
+    <message>
+        <source>Waiting for astronomical data…</source>
+        <translation>Waiting for astronomical data…</translation>
+    </message>
+</context>
+<context>
+    <name>HamlibUpdater</name>
+    <message>
+        <source>Another Hamlib update is in progress.</source>
+        <translation>Another Hamlib update is in progress.</translation>
+    </message>
+    <message>
+        <source>Cannot read the Hamlib files.</source>
+        <translation>Cannot read the Hamlib files.</translation>
+    </message>
+    <message>
+        <source>Cannot save the Hamlib restart request: %1</source>
+        <translation>Cannot save the Hamlib restart request: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save the downloaded Hamlib file.</source>
+        <translation>Cannot save the downloaded Hamlib file.</translation>
+    </message>
+    <message>
+        <source>Cannot stage Hamlib: %1</source>
+        <translation>Cannot stage Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib compatibility checker: %1</source>
+        <translation>Cannot start the Hamlib compatibility checker: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib update helper.</source>
+        <translation>Cannot start the Hamlib update helper.</translation>
+    </message>
+    <message>
+        <source>Checking Hamlib compatibility without connecting to a radio…</source>
+        <translation>Checking Hamlib compatibility without connecting to a radio…</translation>
+    </message>
+    <message>
+        <source>Compatibility check passed. Restart JTDX-F to apply %1.</source>
+        <translation>Compatibility check passed. Restart JTDX-F to apply %1.</translation>
+    </message>
+    <message>
+        <source>Downloading the official Hamlib 4.7 branch update…</source>
+        <translation>Downloading the official Hamlib 4.7 branch update…</translation>
+    </message>
+    <message>
+        <source>Hamlib compatibility check failed: %1</source>
+        <translation>Hamlib compatibility check failed: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib download failed: %1</source>
+        <translation>Hamlib download failed: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib files changed after validation. Check the update again.</source>
+        <translation>Hamlib files changed after validation. Check the update again.</translation>
+    </message>
+    <message>
+        <source>Hamlib update completed successfully.</source>
+        <translation>Hamlib update completed successfully.</translation>
+    </message>
+    <message>
+        <source>Hamlib update timed out. The current version is unchanged.</source>
+        <translation>Hamlib update timed out. The current version is unchanged.</translation>
+    </message>
+    <message>
+        <source>Hamlib update was not applied: %1</source>
+        <translation>Hamlib update was not applied: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib updates require a 64-bit Windows installation.</source>
+        <translation>Hamlib updates require a 64-bit Windows installation.</translation>
+    </message>
+    <message>
+        <source>Invalid Hamlib update: %1</source>
+        <translation>Invalid Hamlib update: %1</translation>
+    </message>
+    <message>
+        <source>No previous Hamlib version is available.</source>
+        <translation>No previous Hamlib version is available.</translation>
+    </message>
+    <message>
+        <source>On this platform, Hamlib is updated with JTDX-F.</source>
+        <translation>On this platform, Hamlib is updated with JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Restarting JTDX-F to apply the Hamlib update…</source>
+        <translation>Restarting JTDX-F to apply the Hamlib update…</translation>
+    </message>
+    <message>
+        <source>The Hamlib download is too large or could not be saved.</source>
+        <translation>The Hamlib download is too large or could not be saved.</translation>
+    </message>
+    <message>
+        <source>The Hamlib update helper is missing. Reinstall JTDX-F.</source>
+        <translation>The Hamlib update helper is missing. Reinstall JTDX-F.</translation>
+    </message>
+    <message>
+        <source>The installation folder is not writable. Run JTDX-F with permission to update this folder.</source>
+        <translation>The installation folder is not writable. Run JTDX-F with permission to update this folder.</translation>
+    </message>
+</context>
+<context>
+    <name>OmniRigTransceiver</name>
+    <message>
+        <source>OmniRig: cannot initialize COM</source>
+        <translation>OmniRig: cannot initialize COM</translation>
+    </message>
+    <message>
+        <source>OmniRig: no valid receive frequency was reported</source>
+        <translation>OmniRig: no valid receive frequency was reported</translation>
+    </message>
+</context>
+<context>
+    <name>Transceiver</name>
+    <message>
+        <source>This transceiver does not support PCM audio.</source>
+        <translation>This transceiver does not support PCM audio.</translation>
+    </message>
+</context>
+<context>
+    <name>UpstreamController</name>
+    <message>
+        <source>Cannot communicate with the WSJT-X backend.</source>
+        <translation>Cannot communicate with the WSJT-X backend.</translation>
+    </message>
+    <message>
+        <source>Cannot prepare audio for the WSJT-X backend.</source>
+        <translation>Cannot prepare audio for the WSJT-X backend.</translation>
+    </message>
+    <message>
+        <source>Cannot read the prepared transmit audio.</source>
+        <translation>Cannot read the prepared transmit audio.</translation>
+    </message>
+    <message>
+        <source>Invalid response from the WSJT-X backend.</source>
+        <translation>Invalid response from the WSJT-X backend.</translation>
+    </message>
+    <message>
+        <source>Invalid transmit audio from the WSJT-X backend.</source>
+        <translation>Invalid transmit audio from the WSJT-X backend.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend rejected the request.</source>
+        <translation>The WSJT-X backend rejected the request.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend stopped unexpectedly.</source>
+        <translation>The WSJT-X backend stopped unexpectedly.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend timed out. Reception can be restarted by selecting the mode again.</source>
+        <translation>The WSJT-X backend timed out. Reception can be restarted by selecting the mode again.</translation>
+    </message>
+    <message>
+        <source>Unexpected response from the WSJT-X backend.</source>
+        <translation>Unexpected response from the WSJT-X backend.</translation>
+    </message>
+</context>
+<context>
+    <name>OperatorLog</name>
+    <message>
+        <source>Log files changed during processing; originals retained. Please retry.</source>
+        <translation>Log files changed during processing; originals retained. Please retry.</translation>
+    </message>
+    <message>
+        <source>Cannot create the old backup directory; originals retained.</source>
+        <translation>Cannot create the old backup directory; originals retained.</translation>
+    </message>
+    <message>
+        <source>Backup contents differ; originals retained.</source>
+        <translation>Backup contents differ; originals retained.</translation>
+    </message>
+    <message>
+        <source>Invalid QSO for the current station; originals retained.</source>
+        <translation>Invalid QSO for the current station; originals retained.</translation>
     </message>
 </context>
 </TS>

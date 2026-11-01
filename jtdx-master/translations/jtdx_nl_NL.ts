@@ -46,6 +46,43 @@
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>Over JTDX-F</translation>
+    </message>
+    <message>
+        <source>JTDX-F is developed by the Fluxmancer team.&lt;br&gt;Based on JTDX and WSJT-X; upstream credits and GPLv3 are preserved.&lt;br&gt;&lt;br&gt;</source>
+        <translation>JTDX-F wordt ontwikkeld door het Fluxmancer-team.&lt;br&gt;Gebaseerd op JTDX en WSJT-X; de oorspronkelijke naamsvermeldingen en GPLv3 blijven behouden.&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>JTDX-F is licensed under GNU GPLv3, without warranty.</source>
+        <translation>JTDX-F valt onder de GNU GPLv3, zonder garantie.</translation>
+    </message>
+    <message>
+        <source>FT2 / SuperFox: additional integrations; source revisions are documented with the source code.</source>
+        <translation>FT2 / SuperFox: aanvullende integraties; bronrevisies staan bij de broncode.</translation>
+    </message>
+    <message>
+        <source>FT8 / FT4: JTDX decoders, WSJT-X 3.0.2 protocol/waveforms, selected 3.3.0-beta5 performance/concurrency fixes, and Fluxmancer modern decoding.</source>
+        <translation>FT8 / FT4: JTDX-decoders, protocol en golfvormen van WSJT-X 3.0.2, geselecteerde prestatie- en parallelle-verwerkingscorrecties uit 3.3.0-beta5 en moderne decodering van Fluxmancer.</translation>
+    </message>
+    <message>
+        <source>Hamlib (radio control): %1</source>
+        <translation>Hamlib (radiobesturing): %1</translation>
+    </message>
+    <message>
+        <source>JTDX-F preserves JTDX's heritage and incorporates selected WSJT-X updates. Components retain their respective authors and licenses.</source>
+        <translation>JTDX-F bouwt voort op JTDX en neemt geselecteerde WSJT-X-updates over. De auteurs en licenties van de onderdelen blijven behouden.</translation>
+    </message>
+    <message>
+        <source>Q65 / MSK144 / Echo and astronomical calculations: WSJT-X 3.0.2.</source>
+        <translation>Q65 / MSK144 / Echo en astronomische berekeningen: WSJT-X 3.0.2.</translation>
+    </message>
+    <message>
+        <source>WSPR: WSJT-X 3.0.2 decoder with 3.3.0-beta5 message validation and JTDX-F safety fixes.</source>
+        <translation>WSPR: WSJT-X 3.0.2-decoder met berichtvalidatie uit 3.3.0-beta5 en veiligheidsverbeteringen van JTDX-F.</translation>
+    </message>
+    <message><source>JTTY: WSJT-X 3.3.0-beta5 decoder with Fluxmancer integration.</source><translation>JTTY: WSJT-X 3.3.0-beta5-decoder, geïntegreerd door Fluxmancer.</translation></message>
 </context>
 <context>
     <name>CallsignDialog</name>
@@ -57,6 +94,10 @@
 </context>
 <context>
     <name>Configuration::impl</name>
+    <message>
+        <source>Own transmitted message</source>
+        <translation>Eigen verzonden bericht</translation>
+    </message>
     <message>
         <location filename="../Configuration.cpp" line="1372"/>
         <source>&amp;OK</source>
@@ -311,6 +352,64 @@ Format:
         <location filename="../Configuration.cpp" line="6028"/>
         <source>Rig failure</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Callsign management…</source>
+        <translation>Roepnamen beheren…</translation>
+    </message>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Voer een geldige NTP-hostnaam of een IP-adres in.</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Onbeheerde modus</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization</source>
+        <translation>NTP-tijdsynchronisatie</translation>
+    </message>
+    <message>
+        <source>Current version: %1
+Previous version: %2</source>
+        <translation>Huidige versie: %1
+Vorige versie: %2</translation>
+    </message>
+    <message>
+        <source>Halt Tx when SWR &gt; 2.5</source>
+        <translation>Stop TX bij SWR &gt; 2.5</translation>
+    </message>
+    <message>
+        <source>Hamlib updates</source>
+        <translation>Hamlib-updates</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Geen</translation>
+    </message>
+    <message>
+        <source>Restart application</source>
+        <translation>Toepassing herstarten</translation>
+    </message>
+    <message>
+        <source>Restore previous Hamlib</source>
+        <translation>Vorige Hamlib herstellen</translation>
+    </message>
+    <message>
+        <source>Stop transmission when a supported CAT radio reports SWR above 2.5. Unknown or unsupported readings are shown as unavailable. Protection also polls SWR when power display is off.</source>
+        <translation>Stop TX als een ondersteunde CAT-radio SWR boven 2.5 meldt. Onbekende of niet-ondersteunde waarden zijn niet beschikbaar. De beveiliging vraagt SWR ook op als de vermogensweergave uitstaat.</translation>
+    </message>
+    <message>
+        <source>Update Hamlib</source>
+        <translation>Hamlib bijwerken</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready to restore. Restart the application to apply it.</source>
+        <translation>Versie %1 kan worden hersteld. Herstart de toepassing om dit toe te passen.</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready. Restart the application to apply it.</source>
+        <translation>Versie %1 is gereed. Herstart de toepassing om deze toe te passen.</translation>
     </message>
 </context>
 <context>
@@ -2473,6 +2572,18 @@ Error: %2 - %3</source>
         <source>Ham Radio Deluxe didn&apos;t respond to command &quot;%1&quot; as expected</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid frequency list</source>
+        <translation>Ham Radio Deluxe stuurde een ongeldige frequentielijst</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid or incomplete reply</source>
+        <translation>Ham Radio Deluxe stuurde een ongeldig of onvolledig antwoord</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid radio list</source>
+        <translation>Ham Radio Deluxe stuurde een ongeldige radiolijst</translation>
+    </message>
 </context>
 <context>
     <name>HamlibTransceiver</name>
@@ -2941,6 +3052,46 @@ Error: %2 - %3</source>
         <location filename="../logqso.cpp" line="222"/>
         <source>Cannot open &quot;%1&quot; for append: %2</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Earth–Moon–Earth</source>
+        <translation>Aarde–maan–aarde</translation>
+    </message>
+    <message>
+        <source>Meteor scatter</source>
+        <translation>Meteoorscatter</translation>
+    </message>
+    <message>
+        <source>Propagation</source>
+        <translation>Propagatie</translation>
+    </message>
+    <message>
+        <source>Receive frequency</source>
+        <translation>Ontvangstfrequentie</translation>
+    </message>
+    <message>
+        <source>Remember propagation and satellite</source>
+        <translation>Propagatie en satelliet onthouden</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satelliet</translation>
+    </message>
+    <message>
+        <source>Satellite mode</source>
+        <translation>Satellietmodus</translation>
+    </message>
+    <message>
+        <source>Satellite name</source>
+        <translation>Satellietnaam</translation>
+    </message>
+    <message>
+        <source>Tropospheric</source>
+        <translation>Troposferisch</translation>
+    </message>
+    <message>
+        <source>Unspecified</source>
+        <translation>Niet opgegeven</translation>
     </message>
 </context>
 <context>
@@ -5208,6 +5359,310 @@ UDP server %2:%3</source>
         <source>Keyboard Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>A log import is already running.</source>
+        <translation>Er wordt al een log geïmporteerd.</translation>
+    </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>Over JTDX-F</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC-jager</translation>
+    </message>
+    <message>
+        <source>Decoder error: %1. TX stopped; restarting decoder.</source>
+        <translation>Decoderfout: %1. TX gestopt; de decoder wordt herstart.</translation>
+    </message>
+    <message>
+        <source>Decoder exited (code %1, crash %2)</source>
+        <translation>Decoder beëindigd (code %1, crash %2)</translation>
+    </message>
+    <message>
+        <source>Decoder restart failed repeatedly. Check decoder-errors.log and restart JTDX-F.</source>
+        <translation>Herhaaldelijk herstarten van de decoder is mislukt. Controleer decoder-errors.log en herstart JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Decoder restarted. Enable Monitor to resume reception; TX remains stopped.</source>
+        <translation>De decoder is herstart. Schakel Monitor in om de ontvangst te hervatten; TX blijft gestopt.</translation>
+    </message>
+    <message>
+        <source>Enable TX manually, then Send each message (max. 80 characters).</source>
+        <translation>Schakel TX handmatig in en verzend daarna elk bericht (maximaal 80 tekens).</translation>
+    </message>
+    <message>
+        <source>FT2</source>
+        <translation>FT2</translation>
+    </message>
+    <message>
+        <source>JTTY</source>
+        <translation>JTTY</translation>
+    </message>
+    <message>
+        <source>JTTY requires a local audio input and output device.</source>
+        <translation>JTTY vereist een lokaal audio-invoer- en uitvoerapparaat.</translation>
+    </message>
+    <message>
+        <source>JTTY transmission timed out; TX stopped.</source>
+        <translation>De JTTY-uitzending duurde te lang; TX is gestopt.</translation>
+    </message>
+    <message>
+        <source>Listening…</source>
+        <translation>Luisteren…</translation>
+    </message>
+    <message>
+        <source>Log import: %1 new, %2 duplicates, %3 originals archived, %4 records from other stations skipped.</source>
+        <translation>Logimport: %1 nieuw, %2 duplicaten, %3 originelen gearchiveerd, %4 records van andere stations overgeslagen.</translation>
+    </message>
+    <message>
+        <source>Log loading failed: %1</source>
+        <translation>Laden van log mislukt: %1</translation>
+    </message>
+    <message>
+        <source>MCP %1</source>
+        <translation>MCP %1</translation>
+    </message>
+    <message>
+        <source>MCP error</source>
+        <translation>MCP-fout</translation>
+    </message>
+    <message>
+        <source>MCP off</source>
+        <translation>MCP uit</translation>
+    </message>
+    <message>
+        <source>MCP settings: File &gt; Settings &gt; MCP</source>
+        <translation>MCP-instellingen: Bestand &gt; Instellingen &gt; MCP</translation>
+    </message>
+    <message>
+        <source>MCP: %1</source>
+        <translation>MCP: %1</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Onbeheerde modus</translation>
+    </message>
+    <message>
+        <source>Managed mode is listening. Enable TX manually to allow calls and scheduled CQ.</source>
+        <translation>De onbeheerde modus luistert. Schakel TX handmatig in om oproepen en geplande CQ-oproepen toe te staan.</translation>
+    </message>
+    <message>
+        <source>Managed mode is off.</source>
+        <translation>De onbeheerde modus is uitgeschakeld.</translation>
+    </message>
+    <message>
+        <source>Modern algorithm decoding</source>
+        <translation>Decoderen met modern algoritme</translation>
+    </message>
+    <message>
+        <source>My callsign</source>
+        <translation>Mijn roepnaam</translation>
+    </message>
+    <message>
+        <source>No decoder completion within the timeout</source>
+        <translation>De decoder was niet klaar binnen de tijdslimiet</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>Uit</translation>
+    </message>
+    <message>
+        <source>Previous audio file is still being saved; this interval was skipped.</source>
+        <translation>Het vorige audiobestand wordt nog opgeslagen; dit interval is overgeslagen.</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast</source>
+        <translation>QSO-liefhebber</translation>
+    </message>
+    <message>
+        <source>Receiving</source>
+        <translation>Ontvangen</translation>
+    </message>
+    <message>
+        <source>Search around Rx frequency (Hz):</source>
+        <translation>Zoeken rond de Rx-frequentie (Hz):</translation>
+    </message>
+    <message>
+        <source>Select a callsign before importing logs.</source>
+        <translation>Selecteer een roepnaam voordat u logs importeert.</translation>
+    </message>
+    <message>
+        <source>Select a valid callsign and grid in station settings before enabling TX.</source>
+        <translation>Selecteer een geldige roepnaam en locator in de stationsinstellingen voordat u TX inschakelt.</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Verzenden</translation>
+    </message>
+    <message>
+        <source>SuperFox decoding (SuperHound)</source>
+        <translation>SuperFox-decodering (SuperHound)</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance</source>
+        <translation>SuperFox-frequentietolerantie</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance...</source>
+        <translation>SuperFox-frequentietolerantie...</translation>
+    </message>
+    <message>
+        <source>SuperHound</source>
+        <translation>SuperHound</translation>
+    </message>
+    <message>
+        <source>TX watchdog expired. Finishing the current QSO before stopping.</source>
+        <translation>De TX-bewakingstimer is verstreken. De huidige QSO wordt afgerond voordat TX stopt.</translation>
+    </message>
+    <message>
+        <source>This mode requires local audio devices; TCI audio is unavailable.</source>
+        <translation>Deze modus vereist lokale audioapparaten; TCI-audio is niet beschikbaar.</translation>
+    </message>
+    <message>
+        <source>Transmitting</source>
+        <translation>Zenden</translation>
+    </message>
+    <message>
+        <source>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</source>
+        <translation>Gebruik decodering op basis van posteriorinformatie en extra kandidaatvalidatie. Uitgeschakeld wordt de traditionele decoder gebruikt. Geldt vanaf de volgende decodering.</translation>
+    </message>
+    <message>
+        <source>WD %1:%2</source>
+        <translation>WD %1:%2</translation>
+    </message>
+    <message>
+        <source>WD finishing QSO</source>
+        <translation>WD: QSO</translation>
+    </message>
+    <message>
+        <source>WD unlimited</source>
+        <translation>WD ∞</translation>
+    </message>
+    <message>
+        <source>The current operator's log is not ready. Check the log files and try again.</source>
+        <translation>Het log van de huidige operator is niet gereed. Controleer de logbestanden en probeer het opnieuw.</translation>
+    </message>
+    <message>
+        <source>Blacklist management</source>
+        <translation>Blokkeerlijst beheren</translation>
+    </message>
+    <message>
+        <source>CALL</source>
+        <translation>ROEPNAAM</translation>
+    </message>
+    <message>
+        <source>REPORT</source>
+        <translation>RAPPORT</translation>
+    </message>
+    <message>
+        <source>This station is blocked, or the permanent blacklist is unavailable.</source>
+        <translation>Dit station is geblokkeerd, of de permanente blokkeerlijst is niet beschikbaar.</translation>
+    </message>
+    <message>
+        <source>Confirm switch</source>
+        <translation>Bevestigen</translation>
+    </message>
+    <message>
+        <source>Average</source>
+        <translation>Middelen</translation>
+    </message>
+    <message>
+        <source>Clear average</source>
+        <translation>Gemiddelde wissen</translation>
+    </message>
+    <message>
+        <source>Click to erase the right window; double-click to erase both.</source>
+        <translation>Klik om rechts te wissen; dubbelklik voor beide vensters.</translation>
+    </message>
+    <message>
+        <source>EME presets</source>
+        <translation>EME-voorkeuzen</translation>
+    </message>
+    <message>
+        <source>Echo: %1 dB; Δf %2 Hz; quality %3; averages %4</source>
+        <translation>Echo: %1 dB; Δf %2 Hz; kwaliteit %3; gemiddelden %4</translation>
+    </message>
+    <message>
+        <source>Enable TX manually to measure lunar echoes.</source>
+        <translation>Schakel TX handmatig in om maanecho's te meten.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX.</source>
+        <translation>TX inschakelen of stoppen.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX. Right-click for Wait &amp; Reply, Wait &amp; Call or Wait &amp; Pounce. Waiting requires a manually enabled TX session.</source>
+        <translation>TX inschakelen of stoppen. Rechtsklik voor wachten en antwoorden, aanroepen of CQ beantwoorden. Wachten vereist een handmatig ingeschakelde TX-sessie.</translation>
+    </message>
+    <message>
+        <source>Full duplex</source>
+        <translation>Volledig duplex</translation>
+    </message>
+    <message>
+        <source>Left-click to erase the left window; right-click to erase the right window; double-click to erase both.</source>
+        <translation>Linksklik wist links, rechtsklik wist rechts, dubbelklik wist beide vensters.</translation>
+    </message>
+    <message>
+        <source>Period</source>
+        <translation>Periode</translation>
+    </message>
+    <message>
+        <source>SWR %1 exceeds 2.5. TX stopped; enable TX manually after checking the antenna.</source>
+        <translation>SWR %1 is hoger dan 2.5. TX gestopt; schakel TX na controle van de antenne handmatig in.</translation>
+    </message>
+    <message>
+        <source>Set a valid station grid locator to calculate astronomical data.</source>
+        <translation>Stel een geldige stationslocator in om astronomische gegevens te berekenen.</translation>
+    </message>
+    <message>
+        <source>Stopped</source>
+        <translation>Gestopt</translation>
+    </message>
+    <message>
+        <source>The transmit slot was missed; enable TX again.</source>
+        <translation>Het zendtijdvak is gemist; schakel TX opnieuw in.</translation>
+    </message>
+    <message>
+        <source>Transmission timed out; TX stopped.</source>
+        <translation>Zendtijd verlopen; TX gestopt.</translation>
+    </message>
+    <message>
+        <source>VHF / EME</source>
+        <translation>VHF / EME</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Call</source>
+        <translation>Wachten en aanroepen</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Pounce</source>
+        <translation>Wachten en CQ beantwoorden</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Reply</source>
+        <translation>Wachten en antwoorden</translation>
+    </message>
+    <message>
+        <source>Waiting is selected. Click Enable TX to authorize transmission; Stop cancels waiting.</source>
+        <translation>Wachten geselecteerd. Klik op TX inschakelen om zenden toe te staan; Stop annuleert het wachten.</translation>
+    </message>
+    <message>
+        <source>Waiting matched %1; continuing the manually enabled TX session.</source>
+        <translation>Wachtvoorwaarde voor %1 gevonden; de handmatig ingeschakelde TX-sessie gaat verder.</translation>
+    </message>
+    <message>
+        <source>Waiting timed out; TX stopped.</source>
+        <translation>Wachttijd verlopen; TX gestopt.</translation>
+    </message>
+    <message>
+        <source>%1 is replying to another station; waiting for its CQ or final message.</source>
+        <translation>%1 antwoordt een ander station; wacht op zijn CQ of eindbericht.</translation>
+    </message>
+    <message>
+        <source>%1 is available; continuing the manually enabled TX session.</source>
+        <translation>%1 is beschikbaar; de handmatig ingeschakelde TX-sessie wordt voortgezet.</translation>
+    </message>
 </context>
 <context>
     <name>Modes</name>
@@ -5517,6 +5972,58 @@ Please verify the correct directory name was given.</source>
         <location filename="../WFPalette.cpp" line="258"/>
         <source>Error writing waterfall palette file &quot;%1&quot;: %2.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot create log directory</source>
+        <translation>Kan de logmap niet maken</translation>
+    </message>
+    <message>
+        <source>Log files changed while loading. Please retry.</source>
+        <translation>De logbestanden zijn tijdens het laden gewijzigd. Probeer het opnieuw.</translation>
+    </message>
+    <message>
+        <source>Log is busy. Please retry.</source>
+        <translation>Het log is in gebruik. Probeer het opnieuw.</translation>
+    </message>
+    <message>
+        <source>Unable to import the log files.</source>
+        <translation>Kan de logbestanden niet importeren.</translation>
+    </message>
+    <message>
+        <source>Unable to read the log files.</source>
+        <translation>Kan de logbestanden niet lezen.</translation>
+    </message>
+    <message>
+        <source>Ambiguous QSO identity; log unchanged</source>
+        <translation>De QSO-identiteit is niet uniek; het logboek is ongewijzigd</translation>
+    </message>
+    <message>
+        <source>Recorded QSO not found; log unchanged</source>
+        <translation>Het geregistreerde QSO is niet gevonden; het logboek is ongewijzigd</translation>
+    </message>
+    <message>
+        <source>Cannot read pending log update</source>
+        <translation>De wachtende logboekupdate kan niet worden gelezen</translation>
+    </message>
+    <message>
+        <source>Invalid pending log update; originals retained</source>
+        <translation>De wachtende logboekupdate is ongeldig; de originelen zijn behouden</translation>
+    </message>
+    <message>
+        <source>Cannot remove completed log update journal</source>
+        <translation>Het herstelbestand van de voltooide logboekupdate kan niet worden verwijderd</translation>
+    </message>
+    <message>
+        <source>QSO identity changed or timestamps are invalid; log unchanged</source>
+        <translation>De QSO-identiteit is gewijzigd of de tijdstempels zijn ongeldig; het logboek is ongewijzigd</translation>
+    </message>
+    <message>
+        <source>Cannot revise a symbolic log link</source>
+        <translation>Een logboek via een symbolische koppeling kan niet worden bijgewerkt</translation>
+    </message>
+    <message>
+        <source>QSO update exceeds the journal size limit</source>
+        <translation>De QSO-update overschrijdt de maximale grootte van het herstelbestand</translation>
     </message>
 </context>
 <context>
@@ -5987,6 +6494,14 @@ Error(%2): %3</source>
         <location filename="../TCITransceiver.cpp" line="1480"/>
         <source>TCI failed set txfreq</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid TCI audio packet</source>
+        <translation>Ongeldig TCI-audiopakket</translation>
+    </message>
+    <message>
+        <source>TCI PCM playback requires an active, explicitly started transmission.</source>
+        <translation>TCI PCM-weergave vereist een actieve, expliciet gestarte uitzending.</translation>
     </message>
 </context>
 <context>
@@ -7071,13 +7586,13 @@ both here.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2233"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option is being used for non-overlapping spectra scenario. Tx will be halted if spectra have common frequencies with no respect to this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>With AutoSeq enabled, checking this option pauses calls to the selected station while it replies to someone else, keeping Enable TX on. Resume on its CQ, 73, RR73, RRR or a reply to you. When unchecked, do not pause for this reason. Call limits, the TX watchdog and Stop still apply.</source>
+        <translation>Als AutoSeq is ingeschakeld, pauzeert deze optie het aanroepen van het geselecteerde station terwijl het een ander antwoordt; TX inschakelen blijft actief. Hervat bij zijn CQ, 73, RR73, RRR of een antwoord aan u. Indien uitgevinkt, wordt om deze reden niet gepauzeerd. Oproeplimieten, de TX-bewakingstimer en Stop blijven gelden.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2236"/>
-        <source>Halt TX if operator I called answered to other operator</source>
-        <translation type="unfinished"></translation>
+        <source>Wait if the called station replies to someone else</source>
+        <translation>Wacht als het aangeroepen station een ander antwoordt</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2243"/>
@@ -7884,8 +8399,8 @@ Right click for insert and delete options.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3846"/>
-        <source>Transmitted message</source>
-        <translation type="unfinished"></translation>
+        <source>Own transmitted message</source>
+        <translation>Eigen verzonden bericht</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3862"/>
@@ -8733,6 +9248,294 @@ resetting the radio interface and applying any
 soundcard changes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minuten vanaf het inschakelen van TX, over meerdere QSO's; 0 = onbeperkt, maximaal 999. Activiteit stelt de timer niet opnieuw in.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Access token</source>
+        <translation>Toegangstoken</translation>
+    </message>
+    <message>
+        <source>Allow control (mode, frequency, QSO and options)</source>
+        <translation>Besturing toestaan (modus, frequentie, QSO en opties)</translation>
+    </message>
+    <message>
+        <source>Allow starting TX and Tune (also requires control)</source>
+        <translation>Starten van TX en Tune toestaan (vereist ook besturing)</translation>
+    </message>
+    <message>
+        <source>Connect an AI client to JTDX-F using MCP. Changes take effect after OK. Only this computer (127.0.0.1) can connect.</source>
+        <translation>Verbind een AI-client met JTDX-F via MCP. Wijzigingen worden actief na OK. Alleen deze computer (127.0.0.1) kan verbinding maken.</translation>
+    </message>
+    <message>
+        <source>Copy token</source>
+        <translation>Token kopiëren</translation>
+    </message>
+    <message>
+        <source>Enable MCP server</source>
+        <translation>MCP-server inschakelen</translation>
+    </message>
+    <message>
+        <source>Endpoint</source>
+        <translation>Eindpunt</translation>
+    </message>
+    <message>
+        <source>Generate new token</source>
+        <translation>Nieuw token genereren</translation>
+    </message>
+    <message>
+        <source>MCP</source>
+        <translation>MCP</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>Poort</translation>
+    </message>
+    <message>
+        <source>Use Streamable HTTP with Authorization: Bearer TOKEN, or the bundled jtdx_mcp_bridge.py for stdio clients. Status, decodes and log are readable with a token. Stop TX is always available. See docs/MCP_zh.md.</source>
+        <translation>Gebruik Streamable HTTP met Authorization: Bearer TOKEN, of de meegeleverde jtdx_mcp_bridge.py voor stdio-clients. Met een token zijn status, decoderingen en log leesbaar. Stop TX is altijd beschikbaar. Zie docs/MCP_zh.md.</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Align the text for DXCC, distance and azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Lijn tekst voor DXCC, afstand en azimut uit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allow kHz frequency offset entry without 'k' suffix.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sta invoer van kHz-frequentieverschillen zonder achtervoegsel k toe.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have decodes for a new period start at the top of the Band Activity window and not scroll off the top when the window is full.&lt;/p&gt;&lt;p&gt;This is to aid selecting decodes to double-click while decoding is still in progress. Use the Band Activity vertical scroll bar to reveal decodes past the bottom of the window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Begin decodes van een nieuwe periode bovenaan Bandactiviteit en schuif ze niet weg wanneer het venster vol is.&lt;/p&gt;&lt;p&gt;Zo kunt u tijdens het decoderen gemakkelijker een station dubbelklikken. Gebruik de verticale schuifbalk om berichten onderaan te zien.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase Band Activity and Rx frequency windows after band change.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wis Bandactiviteit en Ontvangstfrequentie na een bandwissel.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends a valid Maidenhead locator, calculate and show the great-circle azimuth in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bereken bij een geldige Maidenhead-locator de grootcirkelazimut en toon deze bij Bandactiviteit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends locator, calculate and show the distance in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bereken bij een ontvangen locator de afstand en toon die bij Bandactiviteit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between DXCC and distance/azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vergroot of verklein de ruimte tussen DXCC en afstand/azimut.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between message text and DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vergroot of verklein de ruimte tussen berichttekst en DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open the Astronomical Data window automatically when switching to Q65 or JT65 mode and Decode after EME delay is enabled, and close it when no longer needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open Astronomische gegevens automatisch bij Q65 of JT65 als decoderen na EME-vertraging aanstaat; sluit het wanneer het niet meer nodig is.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Turn the progress bar red while transmitting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maak de voortgangsbalk rood tijdens zenden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tx until 73 is received when in MSK144 or Q65 mode. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blijf in MSK144 of Q65 zenden tot 73 is ontvangen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>A deliberate double-click may enable TX only after the transmission safety checks pass. Startup, background messages and remote selection cannot grant transmission permission.</source>
+        <translation>Een bewuste dubbelklik kan TX pas na de veiligheidscontroles inschakelen. Opstarten, achtergrondberichten en selectie op afstand geven geen zendtoestemming.</translation>
+    </message>
+    <message>
+        <source>Additional features</source>
+        <translation>Extra functies</translation>
+    </message>
+    <message>
+        <source>After a completed QSO, move the receive audio frequency to the transmit audio frequency. This does not enable the Tx=Rx lock.</source>
+        <translation>Zet na een voltooid QSO de ontvangstaudiofrequentie gelijk aan de zendaudiofrequentie. Dit schakelt de Tx=Rx-vergrendeling niet in.</translation>
+    </message>
+    <message>
+        <source>Align DXCC/distance/azimuth</source>
+        <translation>DXCC/afstand/azimut uitlijnen</translation>
+    </message>
+    <message>
+        <source>Allow Tx frequency changes while transmitting</source>
+        <translation>TX-frequentiewijzigingen tijdens zenden toestaan</translation>
+    </message>
+    <message>
+        <source>Allow the additional Earth–Moon–Earth propagation delay when collecting and decoding signals. This does not alter the UTC clock.</source>
+        <translation>Houd bij opname en decodering rekening met de extra aarde–maan–aarde-vertraging. De UTC-klok verandert niet.</translation>
+    </message>
+    <message>
+        <source>Alternate Erase button behavior</source>
+        <translation>Alternatieve werking van de wisknop</translation>
+    </message>
+    <message>
+        <source>Alternate F1-F6 bindings</source>
+        <translation>Alternatieve F1-F6-toetsen</translation>
+    </message>
+    <message>
+        <source>Auto-open/close Astronomical data window</source>
+        <translation>Astronomische gegevens automatisch openen/sluiten</translation>
+    </message>
+    <message>
+        <source>Calling CQ forces Call 1st</source>
+        <translation>CQ dwingt eerste beller af</translation>
+    </message>
+    <message>
+        <source>Clear DX Call after QSO</source>
+        <translation>DX-roepnaam wissen na QSO</translation>
+    </message>
+    <message>
+        <source>Clear DX Grid after QSO</source>
+        <translation>DX-locator wissen na QSO</translation>
+    </message>
+    <message>
+        <source>Decode after EME delay</source>
+        <translation>Decoderen na EME-vertraging</translation>
+    </message>
+    <message>
+        <source>Di&amp;sable Tx after sending 73</source>
+        <translation>TX stoppen na verzenden van 73</translation>
+    </message>
+    <message>
+        <source>Doubl&amp;e-click on call sets Tx enable</source>
+        <translation>Dubbelklik op roepnaam schakelt TX in</translation>
+    </message>
+    <message>
+        <source>Enable VHF and submode features</source>
+        <translation>VHF- en submodusfuncties inschakelen</translation>
+    </message>
+    <message>
+        <source>Enable Wait &amp; Call, Wait &amp; Reply and Wait &amp; Pounce controls. They require a manually authorized TX session and cannot restart transmission after Stop. Managed mode keeps its own selection rules.</source>
+        <translation>Schakel wachten en aanroepen, antwoorden of CQ beantwoorden in. Dit vereist een handmatig toegestane TX-sessie en herstart niet na Stop. Beheerde modus behoudt eigen selectieregels.</translation>
+    </message>
+    <message>
+        <source>Enable Wait features</source>
+        <translation>Wachtfuncties inschakelen</translation>
+    </message>
+    <message>
+        <source>Erase decodes after band change</source>
+        <translation>Decodes wissen na bandwissel</translation>
+    </message>
+    <message>
+        <source>Finish one QSO and stop. This is the same setting as Single QSO in the main window. Leave it unchecked for continuous QSOs within the TX watchdog session.</source>
+        <translation>Voltooi één QSO en stop. Dit is dezelfde instelling als Enkel QSO in het hoofdvenster. Uitgeschakeld blijven QSOs doorgaan binnen de TX-bewakingstijd.</translation>
+    </message>
+    <message>
+        <source>Font...</source>
+        <translation>Lettertype…</translation>
+    </message>
+    <message>
+        <source>Highlight DX Call in message</source>
+        <translation>DX-roepnaam in berichten markeren</translation>
+    </message>
+    <message>
+        <source>Highlight DX Grid in message</source>
+        <translation>DX-locator in berichten markeren</translation>
+    </message>
+    <message>
+        <source>Less button coloring (restart required)</source>
+        <translation>Minder knopkleuren (herstart vereist)</translation>
+    </message>
+    <message>
+        <source>MSK144/Q65: Tx until 73 is received</source>
+        <translation>MSK144/Q65: zenden tot ontvangst van 73</translation>
+    </message>
+    <message>
+        <source>Map Grid locator to U.S. State</source>
+        <translation>Locator aan Amerikaanse staat koppelen</translation>
+    </message>
+    <message>
+        <source>Monitor returns to last used frequency</source>
+        <translation>Monitor keert terug naar laatst gebruikte frequentie</translation>
+    </message>
+    <message>
+        <source>Read and display PWR and SWR</source>
+        <translation>Vermogen en SWR lezen en tonen</translation>
+    </message>
+    <message>
+        <source>Read and display transmit power and SWR through CAT. Unsupported readings are shown as unavailable.</source>
+        <translation>Lees en toon zendvermogen en SWR via CAT. Niet-ondersteunde waarden worden als niet beschikbaar getoond.</translation>
+    </message>
+    <message>
+        <source>Set Rx frequency to Tx frequency after QSO</source>
+        <translation>RX-frequentie na QSO op TX instellen</translation>
+    </message>
+    <message>
+        <source>Show &amp;DXCC, grid, and worked-before status    </source>
+        <translation>DXCC, locator en eerder gewerkt tonen</translation>
+    </message>
+    <message>
+        <source>Show DXCC for all messages</source>
+        <translation>DXCC bij alle berichten tonen</translation>
+    </message>
+    <message>
+        <source>Show U.S. States in messages with grid</source>
+        <translation>Amerikaanse staat tonen bij berichten met locator</translation>
+    </message>
+    <message>
+        <source>Show azimuth in messages with grid</source>
+        <translation>Azimut tonen bij berichten met locator</translation>
+    </message>
+    <message>
+        <source>Show blank line with time stamp</source>
+        <translation>Tijdstempel op scheidingsregel tonen</translation>
+    </message>
+    <message>
+        <source>Show distance in messages with grid</source>
+        <translation>Afstand tonen bij berichten met locator</translation>
+    </message>
+    <message>
+        <source>Show if decoded stations are new DXCC entities or worked before.</source>
+        <translation>Toon of gedecodeerde stations nieuwe DXCC-entiteiten zijn of eerder zijn gewerkt.</translation>
+    </message>
+    <message>
+        <source>Show principal prefix instead of country name        </source>
+        <translation>Hoofdprefix tonen in plaats van landnaam</translation>
+    </message>
+    <message>
+        <source>Show the separator line between periods with time stamp of the decode period.</source>
+        <translation>Toon op de scheidingsregel de tijdstempel van de decodeerperiode.</translation>
+    </message>
+    <message>
+        <source>Single decode</source>
+        <translation>Enkele decode</translation>
+    </message>
+    <message>
+        <source>Start new period decodes at top</source>
+        <translation>Nieuwe periode bovenaan beginnen</translation>
+    </message>
+    <message>
+        <source>Stop Tune after the selected number of seconds. A zero interval disables this timer.</source>
+        <translation>Stop Tune na het gekozen aantal seconden. Nul schakelt deze timer uit.</translation>
+    </message>
+    <message>
+        <source>Tune watchdog   </source>
+        <translation>Tune-bewaking</translation>
+    </message>
+    <message>
+        <source>Turn progress bar red while transmitting</source>
+        <translation>Voortgangsbalk rood tijdens zenden</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. Transmission safety checks still apply.</source>
+        <translation>F1–F5 kiezen CQ, rapport, R-rapport, bevestiging en 73; F6 wijzigt het antwoordbeleid. De zendveiligheidscontroles blijven gelden.</translation>
+    </message>
+    <message>
+        <source>kHz entry without k (restart required)</source>
+        <translation>kHz invoeren zonder k (herstart vereist)</translation>
+    </message>
+    <message>
+        <source>When checked, double-clicking a decoded callsign starts a TX session after the transmission safety checks pass. The session then follows the normal AutoSeq, Single QSO and watchdog settings. Off by default.</source>
+        <translation>Als dit is aangevinkt, start dubbelklikken op een gedecodeerde roepnaam een TX-sessie nadat de veiligheidscontroles voor zenden zijn geslaagd. De sessie volgt daarna de normale instellingen voor AutoSeq, één QSO en de bewakingstimer. Standaard uitgeschakeld.</translation>
+    </message>
+    <message>
+        <source>Double-click a callsign to enable TX</source>
+        <translation>TX inschakelen met dubbelklik op een roepnaam</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. These keys cannot start a TX session. Click Enable TX first.</source>
+        <translation>Gebruik F1–F5 om CQ, rapport, R-rapport, bevestiging en 73 te kiezen; F6 wijzigt het antwoordbeleid. Deze toetsen kunnen geen TX-sessie starten. Klik eerst op TX inschakelen.</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -8783,6 +9586,870 @@ soundcard changes</source>
         <location filename="../wf_palette_design_dialog.ui" line="23"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Double click a color to edit it.&lt;/p&gt;&lt;p&gt;Right click to insert or delete colors.&lt;/p&gt;&lt;p&gt;Colors at the top represent weak signals&lt;/p&gt;&lt;p&gt;and colors at the bottom represent strong&lt;/p&gt;&lt;p&gt;signals. You can have up to 256 colors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>JttyController</name>
+    <message>
+        <source>Cannot write to the JTTY decoder.</source>
+        <translation>Kan niet naar de JTTY-decoder schrijven.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY decoder response.</source>
+        <translation>Ongeldig antwoord van de JTTY-decoder.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY transmit audio.</source>
+        <translation>Ongeldige JTTY-zendaudio.</translation>
+    </message>
+    <message>
+        <source>JTTY audio backlog exceeded 10 seconds; reception restarted.</source>
+        <translation>De JTTY-audiowachtrij overschreed 10 seconden; de ontvangst is herstart.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder stopped unexpectedly.</source>
+        <translation>De JTTY-decoder is onverwacht gestopt.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder timed out. Select JTTY again to restart it.</source>
+        <translation>De JTTY-decoder reageerde niet op tijd. Selecteer JTTY opnieuw om hem te herstarten.</translation>
+    </message>
+    <message>
+        <source>Unexpected JTTY decoder response.</source>
+        <translation>Onverwacht antwoord van de JTTY-decoder.</translation>
+    </message>
+</context>
+<context>
+    <name>LogForwarder</name>
+    <message>
+        <source>External logger did not acknowledge the QSO. Local logs are saved.</source>
+        <translation>Het externe logprogramma heeft de QSO niet bevestigd. De lokale logs zijn opgeslagen.</translation>
+    </message>
+    <message>
+        <source>External logger disconnected before acknowledgement. Local logs are saved.</source>
+        <translation>Het externe logprogramma verbrak de verbinding vóór de bevestiging. De lokale logs zijn opgeslagen.</translation>
+    </message>
+    <message>
+        <source>External logger rejected the QSO. Local logs are saved.</source>
+        <translation>Het externe logprogramma heeft de QSO geweigerd. De lokale logs zijn opgeslagen.</translation>
+    </message>
+    <message>
+        <source>Invalid external logger response. Local logs are saved.</source>
+        <translation>Ongeldig antwoord van het externe logprogramma. De lokale logs zijn opgeslagen.</translation>
+    </message>
+    <message>
+        <source>Unexpected external logger response. Local logs are saved.</source>
+        <translation>Onverwacht antwoord van het externe logprogramma. De lokale logs zijn opgeslagen.</translation>
+    </message>
+</context>
+<context>
+    <name>ManagedSettingsWidget</name>
+    <message>
+        <source>0 — unlimited</source>
+        <translation>0 — onbeperkt</translation>
+    </message>
+    <message>
+        <source>Answer previously worked callsigns</source>
+        <translation>Beantwoord eerder gewerkte roepnamen</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC-jager</translation>
+    </message>
+    <message>
+        <source>New CQ zone</source>
+        <translation>Nieuwe CQ-zone</translation>
+    </message>
+    <message>
+        <source>New DXCC</source>
+        <translation>Nieuwe DXCC</translation>
+    </message>
+    <message>
+        <source>New ITU zone</source>
+        <translation>Nieuwe ITU-zone</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode DXCC</source>
+        <translation>Nieuwe DXCC op band &amp;&amp; modus</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode callsign</source>
+        <translation>Nieuwe roepnaam op band &amp;&amp; modus</translation>
+    </message>
+    <message>
+        <source>New callsign</source>
+        <translation>Nieuwe roepnaam</translation>
+    </message>
+    <message>
+        <source>New grid</source>
+        <translation>Nieuwe locator</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast (also prioritizes new DXCC entities and zones)</source>
+        <translation>QSO-liefhebber (geeft ook voorrang aan nieuwe DXCC-entiteiten en zones)</translation>
+    </message>
+    <message>
+        <source>Send three CQ rounds every 15 minutes</source>
+        <translation>Zend elke 15 minuten drie CQ-rondes</translation>
+    </message>
+    <message>
+        <source>Unanswered call limit:</source>
+        <translation>Limiet voor onbeantwoorde oproepen:</translation>
+    </message>
+    <message>
+        <source>Allow TX slot changes</source>
+        <translation>Wisselen van TX-tijdslot toestaan</translation>
+    </message>
+    <message>
+        <source>Allow automatic TX slot changes between completed QSOs. After a slot change, wait 5 minutes before another automatic change. Manual changes are always allowed and restart this timer. Off: stay in the selected TX slot.</source>
+        <translation>Automatisch wisselen van TX-tijdslot toestaan tussen afgeronde QSO’s. Wacht na een wissel 5 minuten voordat opnieuw automatisch wordt gewisseld. Handmatig wisselen is altijd toegestaan en start deze timer opnieuw. Uit: behoud het geselecteerde TX-tijdslot.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpClient</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Voer een geldige NTP-hostnaam of een IP-adres in.</translation>
+    </message>
+    <message>
+        <source>Invalid NTP packet length.</source>
+        <translation>Ongeldige NTP-pakketlengte.</translation>
+    </message>
+    <message>
+        <source>NTP request timed out.</source>
+        <translation>De NTP-aanvraag reageerde niet op tijd.</translation>
+    </message>
+    <message>
+        <source>The NTP date is outside the supported range.</source>
+        <translation>De NTP-datum valt buiten het ondersteunde bereik.</translation>
+    </message>
+    <message>
+        <source>The NTP response does not match this request.</source>
+        <translation>Het NTP-antwoord komt niet overeen met deze aanvraag.</translation>
+    </message>
+    <message>
+        <source>The NTP response has excessive delay or uncertainty.</source>
+        <translation>Het NTP-antwoord heeft te veel vertraging of onzekerheid.</translation>
+    </message>
+    <message>
+        <source>The NTP server is not synchronized or refused the request.</source>
+        <translation>De NTP-server is niet gesynchroniseerd of heeft de aanvraag geweigerd.</translation>
+    </message>
+    <message>
+        <source>The clock changed during the NTP request, or the response was too slow.</source>
+        <translation>De klok is gewijzigd tijdens de NTP-aanvraag, of het antwoord was te traag.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpController</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Voer een geldige NTP-hostnaam of een IP-adres in.</translation>
+    </message>
+    <message>
+        <source>Install polkit/pkexec to authorize system time synchronization.</source>
+        <translation>Installeer polkit/pkexec om synchronisatie van de systeemklok te autoriseren.</translation>
+    </message>
+    <message>
+        <source>Permission granted. Synchronization follows the selected interval.</source>
+        <translation>Toestemming verleend. Synchronisatie volgt het gekozen interval.</translation>
+    </message>
+    <message>
+        <source>Permission request timed out. System time is unchanged.</source>
+        <translation>De toestemmingsaanvraag duurde te lang. De systeemklok is niet gewijzigd.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted (Windows error %1). Using system time.</source>
+        <translation>Geen toestemming verleend (Windows-fout %1). De systeemklok wordt gebruikt.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted. Using system time.</source>
+        <translation>Geen toestemming verleend. De systeemklok wordt gebruikt.</translation>
+    </message>
+    <message>
+        <source>Requesting permission to set the system time…</source>
+        <translation>Toestemming aanvragen om de systeemklok in te stellen…</translation>
+    </message>
+    <message>
+        <source>Synchronization deferred while transmitting.</source>
+        <translation>Synchronisatie uitgesteld tijdens het zenden.</translation>
+    </message>
+    <message>
+        <source>Synchronization failed: %1. Retrying in 1 minute.</source>
+        <translation>Synchronisatie mislukt: %1. Nieuwe poging over 1 minuut.</translation>
+    </message>
+    <message>
+        <source>The time synchronization helper is missing.</source>
+        <translation>Het hulpprogramma voor tijdsynchronisatie ontbreekt.</translation>
+    </message>
+    <message>
+        <source>Time synchronization stopped. Using system time.</source>
+        <translation>Tijdsynchronisatie gestopt. De systeemklok wordt gebruikt.</translation>
+    </message>
+    <message>
+        <source>Time synchronized; correction %1 ms. Next check in %2 minutes.</source>
+        <translation>Tijd gesynchroniseerd; correctie %1 ms. Volgende controle over %2 minuten.</translation>
+    </message>
+    <message>
+        <source>Use system time. NTP synchronization is disabled.</source>
+        <translation>Gebruik de systeemklok. NTP-synchronisatie is uitgeschakeld.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpSettingsWidget</name>
+    <message>
+        <source>%1 hours</source>
+        <translation>%1 uur</translation>
+    </message>
+    <message>
+        <source>%1 minutes</source>
+        <translation>%1 minuten</translation>
+    </message>
+    <message>
+        <source>Africa / Kenya / icolo</source>
+        <translation>Afrika / Kenia / icolo</translation>
+    </message>
+    <message>
+        <source>Africa / Mauritius / Mauritius Telecom</source>
+        <translation>Afrika / Mauritius / Mauritius Telecom</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / INX-ZA</source>
+        <translation>Afrika / Zuid-Afrika / INX-ZA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / NMISA</source>
+        <translation>Afrika / Zuid-Afrika / NMISA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / SANReN</source>
+        <translation>Afrika / Zuid-Afrika / SANReN</translation>
+    </message>
+    <message>
+        <source>Asia / Apple</source>
+        <translation>Azië / Apple</translation>
+    </message>
+    <message>
+        <source>Asia / China / Alibaba</source>
+        <translation>Azië / China / Alibaba</translation>
+    </message>
+    <message>
+        <source>Asia / China / Baidu</source>
+        <translation>Azië / China / Baidu</translation>
+    </message>
+    <message>
+        <source>Asia / China / CAS NTSC</source>
+        <translation>Azië / China / CAS NTSC</translation>
+    </message>
+    <message>
+        <source>Asia / China / NTP Pool</source>
+        <translation>Azië / China / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tencent</source>
+        <translation>Azië / China / Tencent</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tsinghua TUNA</source>
+        <translation>Azië / China / Tsinghua TUNA</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Internet Multifeed</source>
+        <translation>Azië / Japan / Internet Multifeed</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / NICT</source>
+        <translation>Azië / Japan / NICT</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Sakura Internet</source>
+        <translation>Azië / Japan / Sakura Internet</translation>
+    </message>
+    <message>
+        <source>Asia / South Korea / KRISS</source>
+        <translation>Azië / Zuid-Korea / KRISS</translation>
+    </message>
+    <message>
+        <source>Europe / France / RDEM Systems</source>
+        <translation>Europa / Frankrijk / RDEM Systems</translation>
+    </message>
+    <message>
+        <source>Europe / Germany / PTB</source>
+        <translation>Europa / Duitsland / PTB</translation>
+    </message>
+    <message>
+        <source>Europe / Poland / GUM</source>
+        <translation>Europa / Polen / GUM</translation>
+    </message>
+    <message>
+        <source>Europe / Sweden / Netnod</source>
+        <translation>Europa / Zweden / Netnod</translation>
+    </message>
+    <message>
+        <source>Europe / UK / NPL</source>
+        <translation>Europa / Verenigd Koninkrijk / NPL</translation>
+    </message>
+    <message>
+        <source>Global / Apple</source>
+        <translation>Wereldwijd / Apple</translation>
+    </message>
+    <message>
+        <source>Global / Cloudflare</source>
+        <translation>Wereldwijd / Cloudflare</translation>
+    </message>
+    <message>
+        <source>Global / Google</source>
+        <translation>Wereldwijd / Google</translation>
+    </message>
+    <message>
+        <source>Global / Microsoft Windows</source>
+        <translation>Wereldwijd / Microsoft Windows</translation>
+    </message>
+    <message>
+        <source>NTP hostname or IP address</source>
+        <translation>NTP-hostnaam of IP-adres</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization (requests administrator privileges when enabled)</source>
+        <translation>NTP-tijdsynchronisatie (vraagt beheerdersrechten bij inschakelen)</translation>
+    </message>
+    <message>
+        <source>North America / Canada / NRC</source>
+        <translation>Noord-Amerika / Canada / NRC</translation>
+    </message>
+    <message>
+        <source>North America / USA / NIST</source>
+        <translation>Noord-Amerika / VS / NIST</translation>
+    </message>
+    <message>
+        <source>Oceania / Australia / NTP Pool</source>
+        <translation>Oceanië / Australië / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Oceania / New Zealand / MSL (NZ networks only)</source>
+        <translation>Oceanië / Nieuw-Zeeland / MSL (alleen Nieuw-Zeelandse netwerken)</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Anders</translation>
+    </message>
+    <message>
+        <source>South America / Argentina / INTI</source>
+        <translation>Zuid-Amerika / Argentinië / INTI</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / NIC.br</source>
+        <translation>Zuid-Amerika / Brazilië / NIC.br</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / National Observatory</source>
+        <translation>Zuid-Amerika / Brazilië / Nationaal observatorium</translation>
+    </message>
+    <message>
+        <source>South America / Chile / SHOA</source>
+        <translation>Zuid-Amerika / Chili / SHOA</translation>
+    </message>
+    <message>
+        <source>South America / Colombia / INM</source>
+        <translation>Zuid-Amerika / Colombia / INM</translation>
+    </message>
+    <message>
+        <source>Synchronization interval:</source>
+        <translation>Synchronisatie-interval:</translation>
+    </message>
+    <message>
+        <source>Uses system UTC time; the synchronization interval is configurable.</source>
+        <translation>Gebruikt de UTC-tijd van het systeem; het synchronisatie-interval is instelbaar.</translation>
+    </message>
+</context>
+<context>
+    <name>ProcessingDialog</name>
+    <message>
+        <source>Processing</source>
+        <translation>Verwerken</translation>
+    </message>
+    <message>
+        <source>Stop TX</source>
+        <translation>Stop TX</translation>
+    </message>
+    <message>
+        <source>System processing, please wait…</source>
+        <translation>Het systeem is bezig, even geduld…</translation>
+    </message>
+</context>
+<context>
+    <name>StationManager</name>
+    <message>
+        <source>Add</source>
+        <translation>Toevoegen</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Roepnaam toevoegen</translation>
+    </message>
+    <message>
+        <source>All regions</source>
+        <translation>Alle regio's</translation>
+    </message>
+    <message>
+        <source>Callsign management</source>
+        <translation>Roepnamenbeheer</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annuleren</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Bewerken</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Roepnaam bewerken</translation>
+    </message>
+    <message>
+        <source>Enter a valid 4, 6 or 8 character grid locator.</source>
+        <translation>Voer een geldige locator van 4, 6 of 8 tekens in.</translation>
+    </message>
+    <message>
+        <source>Enter a valid callsign (3–12 letters/digits, optional /suffix).</source>
+        <translation>Voer een geldige roepnaam in (3–12 letters/cijfers, optioneel /suffix).</translation>
+    </message>
+    <message>
+        <source>Full call in Tx1</source>
+        <translation>Volledige roepnaam in Tx1</translation>
+    </message>
+    <message>
+        <source>Full call in Tx3</source>
+        <translation>Volledige roepnaam in Tx3</translation>
+    </message>
+    <message>
+        <source>Full call in Tx5 only</source>
+        <translation>Volledige roepnaam alleen in Tx5</translation>
+    </message>
+    <message>
+        <source>IARU region:</source>
+        <translation>IARU-regio:</translation>
+    </message>
+    <message>
+        <source>Invalid profile</source>
+        <translation>Ongeldig profiel</translation>
+    </message>
+    <message>
+        <source>My callsign:</source>
+        <translation>Mijn roepnaam:</translation>
+    </message>
+    <message>
+        <source>My grid:</source>
+        <translation>Mijn locator:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Region 1</source>
+        <translation>Regio 1</translation>
+    </message>
+    <message>
+        <source>Region 2</source>
+        <translation>Regio 2</translation>
+    </message>
+    <message>
+        <source>Region 3</source>
+        <translation>Regio 3</translation>
+    </message>
+    <message>
+        <source>Remove profile</source>
+        <translation>Profiel verwijderen</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Opslaan</translation>
+    </message>
+    <message>
+        <source>This callsign already exists. Different /suffixes are allowed.</source>
+        <translation>Deze roepnaam bestaat al. Verschillende /suffixen zijn toegestaan.</translation>
+    </message>
+    <message>
+        <source>Type 2 callsign messages:</source>
+        <translation>Berichten met type 2-roepnaam:</translation>
+    </message>
+</context>
+<context>
+    <name>Blacklist</name>
+    <message>
+        <source>A base callsign blocks its portable prefixes and suffixes (K1ABC also blocks EA8/K1ABC and K1ABC/P). A callsign containing / blocks only that exact callsign.</source>
+        <translation>Een basisroepnaam blokkeert ook de portable voor- en achtervoegsels (K1ABC blokkeert ook EA8/K1ABC en K1ABC/P). Een roepnaam met / blokkeert alleen die exacte roepnaam.</translation>
+    </message>
+    <message>
+        <source>Blacklist changed in another program. Reload it before saving.</source>
+        <translation>De blokkeerlijst is in een ander programma gewijzigd. Laad deze opnieuw voordat u opslaat.</translation>
+    </message>
+    <message>
+        <source>Blacklist file is too large.</source>
+        <translation>Het blokkeerlijstbestand is te groot.</translation>
+    </message>
+    <message>
+        <source>Blacklist has too many entries.</source>
+        <translation>De blokkeerlijst bevat te veel vermeldingen.</translation>
+    </message>
+    <message>
+        <source>Blacklist is busy. Please retry.</source>
+        <translation>De blokkeerlijst is in gebruik. Probeer het opnieuw.</translation>
+    </message>
+    <message>
+        <source>Blacklist is not ready. Repair the existing file before saving.</source>
+        <translation>De blokkeerlijst is niet gereed. Herstel het bestaande bestand voordat u opslaat.</translation>
+    </message>
+    <message>
+        <source>Blacklist notes must not exceed 512 characters.</source>
+        <translation>Notities in de blokkeerlijst mogen maximaal 512 tekens bevatten.</translation>
+    </message>
+    <message>
+        <source>Cannot create blacklist directory.</source>
+        <translation>Kan de map voor de blokkeerlijst niet maken.</translation>
+    </message>
+    <message>
+        <source>Cannot open blacklist: %1</source>
+        <translation>Kan de blokkeerlijst niet openen: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save blacklist: %1</source>
+        <translation>Kan de blokkeerlijst niet opslaan: %1</translation>
+    </message>
+    <message>
+        <source>Duplicate callsign: %1</source>
+        <translation>Dubbele roepnaam: %1</translation>
+    </message>
+    <message>
+        <source>Invalid blacklist file; the original has been preserved.</source>
+        <translation>Ongeldig blokkeerlijstbestand; het origineel is behouden.</translation>
+    </message>
+    <message>
+        <source>Invalid callsign: %1</source>
+        <translation>Ongeldige roepnaam: %1</translation>
+    </message>
+    <message>
+        <source>Select an operator before editing the blacklist.</source>
+        <translation>Selecteer een operator voordat u de blokkeerlijst bewerkt.</translation>
+    </message>
+    <message>
+        <source>Unsupported blacklist file version.</source>
+        <translation>Niet-ondersteunde versie van het blokkeerlijstbestand.</translation>
+    </message>
+</context>
+<context>
+    <name>BlacklistDialog</name>
+    <message>
+        <source>Add</source>
+        <translation>Toevoegen</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Roepnaam toevoegen</translation>
+    </message>
+    <message>
+        <source>Callsign:</source>
+        <translation>Roepnaam:</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annuleren</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Bewerken</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Roepnaam bewerken</translation>
+    </message>
+    <message>
+        <source>Invalid entry</source>
+        <translation>Ongeldige vermelding</translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation>Notitie:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Permanent blacklist</source>
+        <translation>Permanente blokkeerlijst</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Verwijderen</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Opslaan</translation>
+    </message>
+</context>
+<context>
+    <name>AstroDialog</name>
+    <message>
+        <source>Astronomical Data</source>
+        <translation>Astronomische gegevens</translation>
+    </message>
+    <message>
+        <source>Call DX</source>
+        <translation>DX aanroepen</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Sluiten</translation>
+    </message>
+    <message>
+        <source>Constant frequency on the Moon</source>
+        <translation>Constante frequentie op de maan</translation>
+    </message>
+    <message>
+        <source>DX Moon Az / El: %1° / %2°</source>
+        <translation>Maan azimut/elevatie bij DX: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>Doppler tracking</source>
+        <translation>Doppler volgen</translation>
+    </message>
+    <message>
+        <source>Echo RIT</source>
+        <translation>Echo-RIT</translation>
+    </message>
+    <message>
+        <source>Echo delay: %1 s; spread: %2 / %3 Hz</source>
+        <translation>Echovertraging: %1 s; spreiding: %2 / %3 Hz</translation>
+    </message>
+    <message>
+        <source>Echo frequency dither (±10 Hz)</source>
+        <translation>Echofrequentie variëren (±10 Hz)</translation>
+    </message>
+    <message>
+        <source>Full Doppler to DX grid</source>
+        <translation>Volledige Dopplercorrectie naar DX-locator</translation>
+    </message>
+    <message>
+        <source>Method</source>
+        <translation>Methode</translation>
+    </message>
+    <message>
+        <source>Moon Az / El: %1° / %2°</source>
+        <translation>Maan azimut/elevatie: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>No Doppler correction</source>
+        <translation>Geen Dopplercorrectie</translation>
+    </message>
+    <message>
+        <source>On DX echo</source>
+        <translation>Op DX-echo</translation>
+    </message>
+    <message>
+        <source>Own / DX Doppler: %1 / %2 Hz</source>
+        <translation>Eigen/DX-Doppler: %1 / %2 Hz</translation>
+    </message>
+    <message>
+        <source>Own echo</source>
+        <translation>Eigen echo</translation>
+    </message>
+    <message>
+        <source>Set frequency</source>
+        <translation>Frequentie instellen</translation>
+    </message>
+    <message>
+        <source>Sky: %1 K; degradation: %2 dB; polarization: %3°</source>
+        <translation>Hemel: %1 K; verzwakking: %2 dB; polarisatie: %3°</translation>
+    </message>
+    <message>
+        <source>Sun Az / El: %1° / %2°</source>
+        <translation>Zon azimut/elevatie: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>TX frequency offset (MHz)</source>
+        <translation>TX-frequentieverschil (MHz)</translation>
+    </message>
+    <message>
+        <source>Waiting for astronomical data…</source>
+        <translation>Wachten op astronomische gegevens…</translation>
+    </message>
+</context>
+<context>
+    <name>HamlibUpdater</name>
+    <message>
+        <source>Another Hamlib update is in progress.</source>
+        <translation>Er wordt al een andere Hamlib-update uitgevoerd.</translation>
+    </message>
+    <message>
+        <source>Cannot read the Hamlib files.</source>
+        <translation>Kan de Hamlib-bestanden niet lezen.</translation>
+    </message>
+    <message>
+        <source>Cannot save the Hamlib restart request: %1</source>
+        <translation>Kan het Hamlib-herstartverzoek niet opslaan: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save the downloaded Hamlib file.</source>
+        <translation>Kan het gedownloade Hamlib-bestand niet opslaan.</translation>
+    </message>
+    <message>
+        <source>Cannot stage Hamlib: %1</source>
+        <translation>Kan Hamlib niet klaarzetten: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib compatibility checker: %1</source>
+        <translation>Kan de Hamlib-compatibiliteitscontrole niet starten: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib update helper.</source>
+        <translation>Kan het Hamlib-updatehulpprogramma niet starten.</translation>
+    </message>
+    <message>
+        <source>Checking Hamlib compatibility without connecting to a radio…</source>
+        <translation>Hamlib-compatibiliteit controleren zonder radioverbinding…</translation>
+    </message>
+    <message>
+        <source>Compatibility check passed. Restart JTDX-F to apply %1.</source>
+        <translation>Compatibiliteitscontrole geslaagd. Herstart JTDX-F om %1 toe te passen.</translation>
+    </message>
+    <message>
+        <source>Downloading the official Hamlib 4.7 branch update…</source>
+        <translation>Officiële update van de Hamlib 4.7-tak downloaden…</translation>
+    </message>
+    <message>
+        <source>Hamlib compatibility check failed: %1</source>
+        <translation>Hamlib-compatibiliteitscontrole mislukt: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib download failed: %1</source>
+        <translation>Hamlib downloaden mislukt: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib files changed after validation. Check the update again.</source>
+        <translation>Hamlib-bestanden zijn na controle gewijzigd. Controleer de update opnieuw.</translation>
+    </message>
+    <message>
+        <source>Hamlib update completed successfully.</source>
+        <translation>Hamlib is bijgewerkt.</translation>
+    </message>
+    <message>
+        <source>Hamlib update timed out. The current version is unchanged.</source>
+        <translation>Hamlib-update verlopen. De huidige versie is ongewijzigd.</translation>
+    </message>
+    <message>
+        <source>Hamlib update was not applied: %1</source>
+        <translation>Hamlib-update niet toegepast: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib updates require a 64-bit Windows installation.</source>
+        <translation>Hamlib-updates vereisen een 64-bits Windows-installatie.</translation>
+    </message>
+    <message>
+        <source>Invalid Hamlib update: %1</source>
+        <translation>Ongeldige Hamlib-update: %1</translation>
+    </message>
+    <message>
+        <source>No previous Hamlib version is available.</source>
+        <translation>Geen eerdere Hamlib-versie beschikbaar.</translation>
+    </message>
+    <message>
+        <source>On this platform, Hamlib is updated with JTDX-F.</source>
+        <translation>Op dit platform wordt Hamlib samen met JTDX-F bijgewerkt.</translation>
+    </message>
+    <message>
+        <source>Restarting JTDX-F to apply the Hamlib update…</source>
+        <translation>JTDX-F herstarten om de Hamlib-update toe te passen…</translation>
+    </message>
+    <message>
+        <source>The Hamlib download is too large or could not be saved.</source>
+        <translation>De Hamlib-download is te groot of kon niet worden opgeslagen.</translation>
+    </message>
+    <message>
+        <source>The Hamlib update helper is missing. Reinstall JTDX-F.</source>
+        <translation>Het Hamlib-updatehulpprogramma ontbreekt. Installeer JTDX-F opnieuw.</translation>
+    </message>
+    <message>
+        <source>The installation folder is not writable. Run JTDX-F with permission to update this folder.</source>
+        <translation>De installatiemap is niet schrijfbaar. Start JTDX-F met rechten om deze map bij te werken.</translation>
+    </message>
+</context>
+<context>
+    <name>OmniRigTransceiver</name>
+    <message>
+        <source>OmniRig: cannot initialize COM</source>
+        <translation>OmniRig: kan COM niet initialiseren</translation>
+    </message>
+    <message>
+        <source>OmniRig: no valid receive frequency was reported</source>
+        <translation>OmniRig: geen geldige ontvangstfrequentie gemeld</translation>
+    </message>
+</context>
+<context>
+    <name>Transceiver</name>
+    <message>
+        <source>This transceiver does not support PCM audio.</source>
+        <translation>Deze radio ondersteunt geen PCM-audio.</translation>
+    </message>
+</context>
+<context>
+    <name>UpstreamController</name>
+    <message>
+        <source>Cannot communicate with the WSJT-X backend.</source>
+        <translation>Kan niet communiceren met de WSJT-X-backend.</translation>
+    </message>
+    <message>
+        <source>Cannot prepare audio for the WSJT-X backend.</source>
+        <translation>Kan geen audio voorbereiden voor de WSJT-X-backend.</translation>
+    </message>
+    <message>
+        <source>Cannot read the prepared transmit audio.</source>
+        <translation>Kan de voorbereide zendaudio niet lezen.</translation>
+    </message>
+    <message>
+        <source>Invalid response from the WSJT-X backend.</source>
+        <translation>Ongeldig antwoord van de WSJT-X-backend.</translation>
+    </message>
+    <message>
+        <source>Invalid transmit audio from the WSJT-X backend.</source>
+        <translation>Ongeldige zendaudio van de WSJT-X-backend.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend rejected the request.</source>
+        <translation>De WSJT-X-backend heeft het verzoek geweigerd.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend stopped unexpectedly.</source>
+        <translation>De WSJT-X-backend is onverwacht gestopt.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend timed out. Reception can be restarted by selecting the mode again.</source>
+        <translation>De WSJT-X-backend reageerde niet op tijd. Selecteer de modus opnieuw om de ontvangst te herstarten.</translation>
+    </message>
+    <message>
+        <source>Unexpected response from the WSJT-X backend.</source>
+        <translation>Onverwacht antwoord van de WSJT-X-backend.</translation>
+    </message>
+</context>
+<context>
+    <name>OperatorLog</name>
+    <message>
+        <source>Log files changed during processing; originals retained. Please retry.</source>
+        <translation>Logbestanden zijn tijdens de verwerking gewijzigd; de originelen zijn behouden. Probeer het opnieuw.</translation>
+    </message>
+    <message>
+        <source>Cannot create the old backup directory; originals retained.</source>
+        <translation>De back-upmap old kan niet worden aangemaakt; de originelen zijn behouden.</translation>
+    </message>
+    <message>
+        <source>Backup contents differ; originals retained.</source>
+        <translation>De inhoud van de back-up verschilt; de originelen zijn behouden.</translation>
+    </message>
+    <message>
+        <source>Invalid QSO for the current station; originals retained.</source>
+        <translation>Ongeldig QSO voor het huidige station; de originelen zijn behouden.</translation>
     </message>
 </context>
 </TS>

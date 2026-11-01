@@ -1,0 +1,24 @@
+V3.6.3 发射波形完成事件及适用边界
+
+问题与修复
+1. startTx2 只请求音频线程开始，不证明声卡成功输出；endTransmitMessage 是停止请求，不是自然完成事件。
+2. stopTx 同时用于正常发射窗口结束和中止。它立即清 g_iptt，实际 PTT 释放需后续 stopTx2；因此不能以 g_iptt 为零或 Modulator Idle 单独判定完整发送。
+3. 传统调制器在波形之后继续补零，不能依赖 SoundOutput::drained。新增 Modulator::waveformConsumed，仅实际消费到波形末尾后发一次；取消、Tune、PCM 路径不触发该 legacy 信号。
+4. TCI 新增独立 Transceiver::waveformConsumed，经 Configuration::transceiver_waveform_consumed 转发。最后有效波形数据被消费且对应 WebSocket 数据包被传输层接受后才通知；取消或发送失败不通知，不改变原有 PCM 完成信号。
+5. 两个调制器的生成循环从 m_ic <= i1 改为 m_ic < i1。i1 是帧数，不是最后索引。FT8 生成 79×7680=606720 帧，原循环会访问 wave[606720]，超出 606720 项数组。FT4 为 105×2304=241920，FT2 为 105×1152=120960；改动保留最后合法样本，删除多读的一项。JT65/JT9/T10/WSPR 使用相同帧数边界。
+6. 新增 waveformStarted(quint64 generation)，与完成事件分开。本地传统调制器首次提供实际音调采样后发一次，TCI 在对应首包被接受后发一次；同步补零、Tune、首样本前取消均不触发。PCM 路径也传递 generation，并等待首个非零采样，避免前置同步静音触发日志。主流程可据此在 RR73/73 发出时记录日志，但仍由收尾协议决定何时换下一台。
+
+主流程集成条件
+waveformConsumed(quint64 generation) 只证明源数据已提供给输出端，不能独立确认 QSO 结束。generation 从发射请求经本地 Modulator 或 TCI TransceiverState 原样回传，主流程仅接受当前代次，避免 Stop 后立即开始新会话时旧队列事件污染。必须同时验证本次会话未取消、正常发射时窗结束及 PTT 尾延时完成；手动停止、CAT/SWR/音频错误均取消完成候选。
+Q65/MSK144 仍使用既有 PCM 消费完成与音频排空组合，以及 finishUpstreamTransmit；该 legacy 信号不取代 PCM 路径。
+
+实际硬件边界
+软件无法由源消费通知证明真实 DAC、外部 VAC、网络电台或空中射频已播放最后样本。Qt 5.15 的 processedUSecs 表示处理的音频时长；例如官方 PulseAudio 后端按已写入的字节数计算，包含尚在缓冲中的数据。Idle 要求源无数据且输出缓冲为空，而传统调制器在窗口结束前持续补零。本次保留既有输出时序，通过源耗尽和正常窗口/PTT 联合判断，不添加可能永久等待的 Idle 门槛。
+
+验证
+tests/ModulatorCompletionTests.hpp：FT8/FT4/FT2 精确帧数、末尾合法样本、之后补零、只通知一次、取消与 Tune 不通知；JT65/JT9/WSPR 尾部边界；带发送代次的开始事件、同步静音与 PCM 首样本；本机回环 WebSocket 验证 TCI 成功接纳、取消与发送失败。测试不连接真实电台、不打开声卡发送 RF。执行结果以本版本整体回归报告为准。
+
+官方源码参考
+https://raw.githubusercontent.com/qt/qtmultimedia/5.15/src/multimedia/audio/qaudiooutput.cpp
+https://raw.githubusercontent.com/qt/qtmultimedia/5.15/src/multimedia/audio/qaudio.cpp
+https://raw.githubusercontent.com/qt/qtmultimedia/5.15/src/plugins/pulseaudio/qaudiooutput_pulse.cpp

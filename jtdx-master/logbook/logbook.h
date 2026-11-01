@@ -22,6 +22,8 @@ class LogBook
 {
 public:
     void init(const QString mycall,const QString mygrid,const QString mydate,const QString operatorCall=QString());
+    void init(const QString mycall,const QString mygrid,const QString mydate,const QString operatorCall,QDir const& dataPath);
+    static QStringList databaseFiles(QDir const& dataPath);
     void matchCQZ(/*in*/ const QString call,
               /*out*/ QString &countryName,
                       bool &WorkedBefore,

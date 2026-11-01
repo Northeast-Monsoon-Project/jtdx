@@ -1,0 +1,65 @@
+JTDX-F V3.5.0 现代解码最终验证
+Fluxmancer · 2026-10-30
+
+结论
+在预先固定的新种子真实GFSK/PCM测试中，现代开关为混合报文增加了FT8 4条、FT4 15条正确解码，未丢失传统路径已正确解出的报文。CQ专项没有观察到增益。全部2150次独立解码进程均正常完成，未观察到错误报文；这不是零误报概率或实台性能保证。
+增加计算带来了实际代价：所有单线程有信号场景中，FT8平均CPU时间为传统路径的2.24倍，FT4为1.71倍。该开关默认关闭，关闭时仍使用传统搜索算法。
+
+1. 比较对象与开发/留出边界
+本项目原本已经有BP、OSD、AP和信号相减；本次并未把已有OSD包装成新发明。最终现代分支使用早期BP后验、固定权重组合与额外OSD搜索，并用原始符号度量交叉验证。FT8使用depth 3，FT4使用depth 2；同一候选最多3次救援，每次最多6个后验搜索。符号度量来自同一信号，存在相关性，不当成独立投票。
+开发阶段比较过分层和调度BP、归一化最小和、加权后验搜索、可靠性裁剪等候选；源码来源、许可、原始论文和未选方案见lib/MODERN_DECODER_PROVENANCE.txt。
+种子20261030用于开发与诊断。最初CQ-only波形没有增益；随后混合报文暴露了前两路预算遗漏第三符号度量、以及正确候选被单一距离门限拒绝的问题。后续参数选择使用了这些结果，所以这些数据不属于最终独立留出。FT4更深搜索虽多解了少量消息，但开发成本约为传统的5.5倍，因此未选用。
+最终核心冻结后才运行新种子20261031，参数与矩阵在查看结果前声明；没有根据本轮结果重新调参或挑选成功种子。每点第i帧种子为20261031+i*104729。相同种子跨信噪比和场景复用以便配对，因此不能把所有行视为相互独立的统计样本。
+两条最终路径都已包含CRC、OSD并发初始化以及FT4解包/消息校验/相减时机等共同修复。开发时曾出现的“传统3条错误→现代0条”不能计作本次开关的独立收益；本轮传统和现代均为0条错误。
+
+2. 测试方法
+测试入口为tests/ModernWaveform.f90和tests/test_modern_waveform.py。使用生产multimode_decoder，覆盖GFSK波形、12kHz PCM量化、同步、符号软度量、信道解码、消息解包和过滤全链路。没有只拿软比特结果冒充音频dB收益。
+每帧在独立进程运行，不输入己方呼号、目标呼号或上一轮QSO历史；传统/现代使用完全相同的PCM，逐帧按生成真值核对正确、新增、丢失和错误消息。每次试验交替先跑传统/现代，降低执行顺序带来的偏差。
+混合消息包含标准信号报告、R报告、RR73、73、自由文本和CQ共六种固定消息，变化噪声、频率和起始时间。覆盖面有限，不等于全部有效FT8/FT4报文类型。
+AWGN为高斯白噪声；脉冲为10次2ms均匀突发干扰；单音为邻近基频3.125Hz的连续干扰。拥塞为6个相隔350Hz的信号，交替信号增强5dB；这不是同频重叠的最坏情况，也不是Watterson/ITU衰落模型或真实HF电离层。信噪比以2500Hz带宽为参考。
+默认CTest另有一个开发时发现的FT4弱信号回归：seed20365759、-18dB、W9XYZ K1ABC R-09，用于防止第三度量接线/预算退化；它不计入本次最终留出统计。
+
+3. 最终固定矩阵与准确率
+组别                         每模式对照帧    FT8正确：传统→现代    FT4正确：传统→现代
+混合 AWGN/脉冲/拥塞          270             314/720→318/720      408/720→423/720
+CQ AWGN/单音                 60              15/60→15/60          14/60→14/60
+纯噪声/单音噪声              200             0误报→0误报          0误报→0误报
+FT8四线程混合拥塞            15（仅FT8）     46/90→46/90          不重复测串行FT4
+
+混合：每场景三个SNR点，每点30帧；FT8为-21/-22/-23dB，FT4为-17/-18/-19dB。
+CQ：AWGN和单音各三个SNR点，每点10帧；FT8为-20/-22/-24dB，FT4为-16/-18/-20dB。
+噪声：每模式各100帧纯噪声、100帧单音噪声。单音干扰下的有信号CQ样本两条路径均未解出，不能声称抗单音干扰能力提高。
+四线程：FT8混合拥塞每SNR点5帧，使用主矩阵对应的前5个种子；同帧单线程和四线程的正确消息集合一致。
+总计1075对、2150个进程。所有组逐帧丢失数为0，错误数为0。单线程有信号组合计FT8 329→333，FT4 422→437。没有据三个离散SNR点、六种固定报文推导“提升多少dB”的通用灵敏度指标。
+
+4. CPU、耗时、内存
+测试机：Intel(R) Xeon(R) CPU E3-1240 v6 @ 3.70GHz；Linux-7.2.11-zen1-1-zen-x86_64-with-glibc2.44；8逻辑CPU。
+以下主表为全部单线程有信号场景（混合+CQ，每模式330帧）。CPU为所有解码线程累计的CPU_TIME，墙钟时间包含本次进程的解码初始化；独立进程峰值RSS由wait4读取，不含完整Qt主界面，也不是应用总内存规格。
+模式/路径       平均CPU秒/帧  CPU倍数  墙钟中位秒  P95秒    最大秒   峰值RSS MiB
+FT8/传统       0.1952          1.000    0.1914       0.2520   0.5797   44.66
+FT8/现代       0.4378          2.243    0.4321       0.7501   1.0335   44.54
+FT4/传统       0.2123          1.000    0.1666       0.4115   0.5787   44.56
+FT4/现代       0.3630          1.709    0.2785       0.7743   1.2347   44.68
+
+单线程实际平均占用约0.99个CPU核；“2.24倍CPU”指同样一组帧累计花费的CPU时间，不是暗中创建2.24个线程。现代开关没有新增线程，FT8沿用用户所选的工作线程数，FT4仍串行。
+四线程FT8小样本：传统平均占用3.28核、现代2.81核；现代P95/最大墙钟均0.4611秒，峰值RSS60.46MiB。相同15帧现代路径单线程墙钟合计5.772秒，四线程4.159秒，但CPU合计从5.744秒增加到11.696秒。该小样本不支持线性加速承诺。
+纯噪声/单音噪声组现代FT8最大0.5372秒、FT4最大0.5672秒。全部测试均未超过FT8的15秒和FT4的7.5秒周期。真实使用会有不同候选数量、解码遍数、同时运行的应用和硬件；本机结果不构成所有电脑、Windows系统或拥挤频段的最坏时限保证。
+RSS小幅上下波动属于进程分配/测量波动，不宣称现代算法节省内存。最终性能数字来自本轮独占CPU窗口；开发阶段与构建交错的计时不作为发行指标。
+
+5. 误解码与实台边界
+早期软比特设计在另一组18000次输入试验中（seed915724；12000个AWGN码字、3000纯噪声、3000脉冲样本）虽多恢复400个正确码字，但FT4 sigma=1.05曾新增1个CRC通过、可解包却错误的码字，传统为0。该已知结果完整保留在provenance，不能用本轮PCM中未观察到错误掩盖它。它说明更宽的搜索并不自动保证更少误解码。
+本轮最终PCM的0误报只代表这个有限合成集合的观察值。未覆盖真实接收机AGC、声卡失真、频率漂移、深衰落、复杂同频冲突及所有消息格式；尚无充分真值的真实RF录音对照，不保证某次实台QSO一定多解出。
+共同修复关闭了明确的无效接受、CRC及错误候选污染残差路径；这是可定位的软件修复。现代搜索则提供本集合观察到的额外弱信号机会，需要分别陈述两者，不能宣传为全面降低误码率或消除乱码。
+
+6. 可复现记录
+冻结的Linux waveform可执行文件SHA256：7d39ee2f20785efd58673add97cf1f172860fec01065b3813a7783215e2f69f3
+原始逐帧JSON及每组日志在工作区logs/modern-waveform-v3.5.0-final-{mixed,noise,cq,threads4}-20261031.{json,log}。汇总为logs/modern-waveform-v3.5.0-final-summary.json。所有四组hash一致。
+测试脚本同时保存机器信息、种子、SNR、真值、实际消息、新增/丢失/错误、墙钟、CPU和峰值RSS。
+以下命令在包含jtdx-master/与build/的工作区根目录运行；需要先按项目构建说明生成fm_modern_waveform及build/test-data/ALLCALL7.TXT，并配置相应运行库。
+
+python3 jtdx-master/tests/test_modern_waveform.py build/fm_modern_waveform build/test-data --benchmark --seed 20261031 --trials 30 --threads 1 --messages mixed --scenarios awgn impulse crowded --snr8 -21 -22 -23 --snr4 -17 -18 -19 --output logs/modern-waveform-v3.5.0-final-mixed-20261031.json > logs/modern-waveform-v3.5.0-final-mixed-20261031.log
+python3 jtdx-master/tests/test_modern_waveform.py build/fm_modern_waveform build/test-data --benchmark --seed 20261031 --trials 100 --threads 1 --messages mixed --scenarios noise noise_tone --snr8 -21 --snr4 -17 --output logs/modern-waveform-v3.5.0-final-noise-20261031.json > logs/modern-waveform-v3.5.0-final-noise-20261031.log
+python3 jtdx-master/tests/test_modern_waveform.py build/fm_modern_waveform build/test-data --benchmark --seed 20261031 --trials 10 --threads 1 --messages cq --scenarios awgn tone --snr8 -20 -22 -24 --snr4 -16 -18 -20 --output logs/modern-waveform-v3.5.0-final-cq-20261031.json > logs/modern-waveform-v3.5.0-final-cq-20261031.log
+python3 jtdx-master/tests/test_modern_waveform.py build/fm_modern_waveform build/test-data --benchmark --seed 20261031 --trials 5 --threads 4 --modes 8 --messages mixed --scenarios crowded --snr8 -21 -22 -23 --output logs/modern-waveform-v3.5.0-final-threads4-20261031.json > logs/modern-waveform-v3.5.0-final-threads4-20261031.log
+
+这四条命令就是预先声明并执行的最终矩阵。Windows版本另外进行编译、DSP和界面回归；本报告的2150进程准确率/性能统计来自上述Linux测试机，不混称为Windows实测。

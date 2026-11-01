@@ -4,6 +4,7 @@ subroutine sync8(nfa,nfb,syncmin,nfqso,candidate,ncand,jzb,jzt,swl,ipass,lqsothr
   include 'ft8_params.f90'
   complex cx(0:NH1)
   real s(NH1,NHSYM),x(NFFT1),sync2d(NH1,jzb:jzt),red(NH1),candidate0(5,450),candidate(4,460),tall(30),freq,rcandthin,dtcenter
+  real residual(180000)
   integer jpeak(NH1),indx(NH1),ii(1)
   integer, intent(in) :: nfa,nfb,nfqso,jzb,jzt,ipass,ncandthin,ndtcenter
   logical(1) syncq(NH1,jzb:jzt),redcq(NH1),lcq,lcq2,lpass1,lpass2
@@ -17,14 +18,19 @@ subroutine sync8(nfa,nfb,syncmin,nfqso,candidate,ncand,jzb,jzt,swl,ipass,lqsothr
   rcandthin=ncandthin/100.; if(filter) rcandthin=min(rcandthin*3.0,1.0)
   dtcenter=ndtcenter/100.
 
+! Each spectrum uses one coherent residual, while other slices subtract.
+!$omp critical(ft8_residual)
+  residual=dd8
+!$omp end critical(ft8_residual)
+
   if(ipass.eq.1 .or. ipass.eq.4 .or. ipass.eq.7) then
     do j=1,NHSYM
       ia=(j-1)*NSTEP + 1
       ib=ia+NSPS-1
       x(1:759)=0.
-      if(j.ne.1) then; x(760:960)=dd8(ia-201:ia-1)*windowx(200:0:-1); else; x(760:960)=0.; endif
-      x(961:2880)=facx*dd8(ia:ib); x(961)=x(961)*1.9; x(2880)=x(2880)*1.9
-      if(j.ne.NHSYM) then; x(2881:3081)=dd8(ib+1:ib+201)*windowx; else; x(2881:3081)=0.; endif
+      if(j.ne.1) then; x(760:960)=residual(ia-201:ia-1)*windowx(200:0:-1); else; x(760:960)=0.; endif
+      x(961:2880)=facx*residual(ia:ib); x(961)=x(961)*1.9; x(2880)=x(2880)*1.9
+      if(j.ne.NHSYM) then; x(2881:3081)=residual(ib+1:ib+201)*windowx; else; x(2881:3081)=0.; endif
       x(3082:)=0.
       call four2a(cx,NFFT1,1,-1,0)              !r2c FFT
       do i=1,NH1
@@ -37,9 +43,9 @@ subroutine sync8(nfa,nfb,syncmin,nfqso,candidate,ncand,jzb,jzt,swl,ipass,lqsothr
       ia=(j-1)*NSTEP + 1
       ib=ia+NSPS-1
       x(1:759)=0.
-      if(j.ne.1) then; x(760:960)=dd8(ia-201:ia-1)*windowx(200:0:-1); else; x(760:960)=0.; endif
-      x(961:2880)=facx*dd8(ia:ib); x(961)=x(961)*1.9; x(2880)=x(2880)*1.9
-      if(j.ne.NHSYM) then; x(2881:3081)=dd8(ib+1:ib+201)*windowx; else; x(2881:3081)=0.; endif
+      if(j.ne.1) then; x(760:960)=residual(ia-201:ia-1)*windowx(200:0:-1); else; x(760:960)=0.; endif
+      x(961:2880)=facx*residual(ia:ib); x(961)=x(961)*1.9; x(2880)=x(2880)*1.9
+      if(j.ne.NHSYM) then; x(2881:3081)=residual(ib+1:ib+201)*windowx; else; x(2881:3081)=0.; endif
       x(3082:)=0.
       call four2a(cx,NFFT1,1,-1,0)              !r2c FFT
       do i=1,NH1
@@ -52,9 +58,9 @@ subroutine sync8(nfa,nfb,syncmin,nfqso,candidate,ncand,jzb,jzt,swl,ipass,lqsothr
       ia=(j-1)*NSTEP + 1
       ib=ia+NSPS-1
       x(1:759)=0.
-      if(j.ne.1) then; x(760:960)=dd8(ia-201:ia-1)*windowx(200:0:-1); else; x(760:960)=0.; endif
-      x(961:2880)=facx*dd8(ia:ib); x(961)=x(961)*1.9; x(2880)=x(2880)*1.9
-      if(j.ne.NHSYM) then; x(2881:3081)=dd8(ib+1:ib+201)*windowx; else; x(2881:3081)=0.; endif
+      if(j.ne.1) then; x(760:960)=residual(ia-201:ia-1)*windowx(200:0:-1); else; x(760:960)=0.; endif
+      x(961:2880)=facx*residual(ia:ib); x(961)=x(961)*1.9; x(2880)=x(2880)*1.9
+      if(j.ne.NHSYM) then; x(2881:3081)=residual(ib+1:ib+201)*windowx; else; x(2881:3081)=0.; endif
       x(3082:)=0.
       call four2a(cx,NFFT1,1,-1,0)              !r2c FFT
       do i=1,NH1

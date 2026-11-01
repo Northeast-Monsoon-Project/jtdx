@@ -32,7 +32,7 @@ public:
   JTDXDateTime * m_jtdxtime;
   QSize minimumSizeHint() const;
   QSize sizeHint() const;
-  bool    m_bScaleOK;
+  bool m_bScaleOK = false;
 
   void draw(float swide[], bool bScroll);		//Update the waterfall
   void SetRunningState(bool running);
@@ -104,27 +104,27 @@ private:
   int XfromFreq(float f);
   float FreqfromX(int x);
 
-  bool    m_bCurrent;
-  bool    m_bCumulative;
-  bool    m_lockTxFreq;
-  bool    m_filter;
-  bool    m_houndFilter;
-  bool	  m_useDarkStyle;
-  bool	  m_bars;
-  bool    m_freq;
-  float   m_fSpan;
+  bool m_bCurrent = false;
+  bool m_bCumulative = false;
+  bool m_lockTxFreq = false;
+  bool m_filter = false;
+  bool m_houndFilter = false;
+  bool m_useDarkStyle = false;
+  bool m_bars = false;
+  bool m_freq = false;
+  float m_fSpan = 0;
 
-  qint32  m_plotZero;
-  qint32  m_plotGain;
-  qint32  m_plot2dGain;
-  qint32  m_plot2dZero;
-  qint32  m_binsPerPixel;
-  qint32  m_waterfallAvg;
-  qint32  m_w;
-  qint32  m_Flatten;
-  qint32  m_nSubMode;
-  qint32  m_topJT65;
-  qint32  m_timestamp;
+  qint32 m_plotZero = 0;
+  qint32 m_plotGain = 0;
+  qint32 m_plot2dGain = 0;
+  qint32 m_plot2dZero = 0;
+  qint32 m_binsPerPixel = 1;
+  qint32 m_waterfallAvg = 1;
+  qint32 m_w = 0;
+  qint32 m_Flatten = 0;
+  qint32 m_nSubMode = 0;
+  qint32 m_topJT65 = 0;
+  qint32 m_timestamp = 0;
 
   QPixmap m_DialOverlayPixmap;
   QPixmap m_HoverOverlayPixmap;
@@ -140,40 +140,40 @@ private:
   QString m_modeTx;
   QString m_rxBand;
 
-  bool    m_Scale;
-  bool    m_Running;
-  bool    m_paintEventBusy;
-  bool    m_dataFromDisk;
+  bool m_Scale = false;
+  bool m_Running = false;
+  bool m_paintEventBusy = false;
+  bool m_dataFromDisk = false;
 
-  double  m_fftBinWidth;
-  double  m_dialFreq;
-  double  m_xOffset;
-  double  m_TRperiod;
+  double m_fftBinWidth = 0;
+  double m_dialFreq = 0;
+  double m_xOffset = 0;
+  double m_TRperiod = 1;
 
   float   m_sum[2048];
 
-  qint32  m_dBStepSize;
-  qint32  m_FreqUnits;
-  qint32  m_hdivs;
-  qint32  m_line;
-  qint32  m_fSample;
-  qint32  m_xClick;
-  qint32  m_freqPerDiv;
-  qint32  m_nsps;
-  qint32  m_Percent2DScreen;
-  qint32  m_Percent2DScreen0;
-  qint32  m_h;
-  qint32  m_h1;
-  qint32  m_h2;
-  qint32  m_rxFreq;
-  qint32  m_txFreq;
-  qint32  m_fMin;
-  qint32  m_fMax;
-  qint32  m_startFreq;
-  qint32  m_tol;
-  qint32  m_lastMouseX;
-  qint32  m_lastPaintedX;
-  char    m_sutc[6];
+  qint32 m_dBStepSize = 0;
+  qint32 m_FreqUnits = 0;
+  qint32 m_hdivs = 0;
+  qint32 m_line = 0;
+  qint32 m_fSample = 0;
+  qint32 m_xClick = 0;
+  qint32 m_freqPerDiv = 1;
+  qint32 m_nsps = 0;
+  qint32 m_Percent2DScreen = 0;
+  qint32 m_Percent2DScreen0 = 0;
+  qint32 m_h = 0;
+  qint32 m_h1 = 0;
+  qint32 m_h2 = 0;
+  qint32 m_rxFreq = 0;
+  qint32 m_txFreq = 0;
+  qint32 m_fMin = 0;
+  qint32 m_fMax = 0;
+  qint32 m_startFreq = 0;
+  qint32 m_tol = 0;
+  qint32 m_lastMouseX = 0;
+  qint32 m_lastPaintedX = 0;
+  char    m_sutc[6]{};
 
 private slots:
   void leaveEvent(QEvent *event);

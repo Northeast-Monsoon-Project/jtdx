@@ -205,7 +205,7 @@ void CPlotter::draw(float swide[], bool bScroll)                            //dr
   }
 
   if(swide[0]>1.0e29) m_line=0;
-  if(m_mode=="FT4" and m_line==34) m_line=0;
+  if((m_mode=="FT4" && m_line==34) || (m_mode=="FT2" && m_line==17))m_line=0;
   m_line++;
   if(m_timestamp!=0 || m_mode=="JT9+JT65") {
     if(m_line == 16) {
@@ -329,6 +329,8 @@ void CPlotter::DrawOverlay()                                 //DrawOverlay()
   float bw=0.0;
   if(m_modeTx=="FT8") bw=7*12000.0/1920.0;
   else if(m_mode=="FT4") bw=3*12000.0/576.0;
+  else if(m_mode=="FT2") bw=3*12000.0/288.0;
+  else if(m_mode=="JTTY") bw=127.0;
   else if(m_modeTx=="JT65") bw=66.0*11025.0/4096.0;
   else if(m_modeTx=="JT9") bw=9.0*12000.0/m_nsps;
   else if(m_modeTx=="T10") bw=9.0*4.0*12000.0/6912.0;

@@ -6,6 +6,7 @@ subroutine jt9a()
   use jt65_mod6
   use ft8_mod1, only : dd8
   use ft4_mod1, only : dd4
+  use ft2_decode, only : ft2_samples
   include 'jt9com.f90'
 
 ! These routines connect the shared memory region to the decoder.
@@ -69,6 +70,7 @@ subroutine jt9a()
 
   if(local_params%nmode.eq.8) then; npts1=180000
   else if(local_params%nmode.eq.4) then; npts1=73728
+  else if(local_params%nmode.eq.2) then; npts1=45000
   else; npts1=NPTS
   endif
 
@@ -91,6 +93,8 @@ subroutine jt9a()
      else if(local_params%nmode.eq.4) then
         rms=sum(abs(shared_data%dd2(1:10)))+sum(abs(shared_data%dd2(30001:30010)))+ &
             sum(abs(shared_data%dd2(60470:60480)))
+     else if(local_params%nmode.eq.2) then
+        rms=sum(abs(shared_data%dd2(1:10)))+sum(abs(shared_data%dd2(20001:20010)))
      else
         rms=sum(abs(shared_data%dd2(1:10)))+sum(abs(shared_data%dd2(300000:300010)))+ &
             sum(abs(shared_data%dd2(623991:624000)))
@@ -106,6 +110,10 @@ subroutine jt9a()
 
   if(local_params%nmode.eq.8) then; dd8(1:npts1)=dd(1:npts1)
   else if(local_params%nmode.eq.4) then; dd4(1:npts1)=dd(1:npts1)
+  else if(local_params%nmode.eq.2) then
+    ft2_samples=0
+    nvalid=max(0,min(npts1,local_params%kin))
+    ft2_samples(1:nvalid)=int(max(-32768.0,min(32767.0,dd(1:nvalid))),2)
   endif
 
 !  call timer('decoder ',0)

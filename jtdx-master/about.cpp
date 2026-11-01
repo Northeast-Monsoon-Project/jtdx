@@ -5,6 +5,7 @@
 #include <QTextBrowser>
 #include <QScreen>
 #include <QGuiApplication>
+#include <hamlib/rig.h>
 
 #include "revision_utils.hpp"
 
@@ -27,17 +28,18 @@ CAboutDlg::CAboutDlg(QWidget *parent) :
 
   text->setHtml ("<html><div align='center'><img src=':/logo-full.png' width='210' height='210'/><h2>"
                          + QString("JTDX-F V")
-                         + QCoreApplication::applicationVersion () + "  HF software" + "</h2>\n\n"
+                         + QCoreApplication::applicationVersion () + "</h2>\n\n"
                          + tr("JTDX-F is developed by the Fluxmancer team.<br>Based on JTDX and WSJT-X; upstream credits and GPLv3 are preserved.<br><br>") +
-                         "It is modified WSJT-X software forked from WSJT-X v1.7 r6462, <br>"
-                         "FT8 code is forked from WSJT-X v1.8 and v2.0, <br>"
-                         "FT4 code is forked from WSJT-X v2.1, <br>"
-                         "WSPR code is forked from WSJT-X v2.1.2, <br>"
+                         tr("FT8 / FT4: JTDX decoders, WSJT-X 3.0.2 protocol/waveforms, selected 3.3.0-beta5 performance/concurrency fixes, and Fluxmancer modern decoding.") + "<br>"
+                         + tr("WSPR: WSJT-X 3.0.2 decoder with 3.3.0-beta5 message validation and JTDX-F safety fixes.") + "<br>"
+                         + tr("JTTY: WSJT-X 3.3.0-beta5 decoder with Fluxmancer integration.") + "<br>"
+                         + tr("Q65 / MSK144 / Echo and astronomical calculations: WSJT-X 3.0.2.") + "<br>"
+                         + tr("FT2 / SuperFox: additional integrations; source revisions are documented with the source code.") + "<br>"
+                         + tr("Hamlib (radio control): %1").arg(QString::fromLatin1(hamlib_version2).toHtmlEscaped()) + "<br><br>"
+                         + tr("JTDX-F preserves JTDX's heritage and incorporates selected WSJT-X updates. Components retain their respective authors and licenses.") + "<br><br>"
+                         +
                          "&copy; 2001-2022 by Joe Taylor, K1JT, Bill Somerville, G4WJS, <br>"
                          "Steve Franke, K9AN, and Nico Palermo, IV3NWV.<br><br>"
-                         "JTDX supports FT8, FT4, JT9, T10 and JT65A digital modes for HF <br>"
-                         "amateur radio communication, focused on DXing <br>"
-                         "and being shaped by community of DXers. <br>"
                          "&copy; 2016-2022 by Igor Chernikov, UA3DJY, and Arvo Järve, ES1JA. <br>"
                          "It is created with contributions from 5P1KZX, 9A5CW, BD3OOX, CE2EC, CT1AXS,<br>"
                          "DK7UY, DO1IP, EA1AHY, EA3W, EA7QL, ES2HV, ES2MC, ES4AW, ES5TF, F1DSZ, F5RUE,<br>"

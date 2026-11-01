@@ -15,6 +15,7 @@ subroutine ft8_downsample(newdat1,f0,nqso,c0,c2,c3,lhighsens,lsubtracted,npos,fr
   logical(1) lsubtracted,ldofft
   equivalence (x,cx)
   save cxx
+  !$omp threadprivate(cxx)
 
   ldofft=.false.
   if(lsubtracted) then
@@ -25,7 +26,9 @@ subroutine ft8_downsample(newdat1,f0,nqso,c0,c2,c3,lhighsens,lsubtracted,npos,fr
 
   if(newdat1 .or. ldofft) then
 ! Data in dd have changed, recompute the long FFT
+!$omp critical(ft8_residual)
      x(1:180000)=dd8
+!$omp end critical(ft8_residual)
      x(180001:NFFT1)=0.                       !Zero-pad the x array
      call four2a(cx,NFFT1,1,-1,0)             !r2c FFT to freq domain
      newdat1=.false.; ldofft=.false.; npos=0

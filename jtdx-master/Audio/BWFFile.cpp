@@ -22,7 +22,7 @@ namespace
   struct Desc
   {
     Desc ()
-      : size_ {0}
+      : id_ {{'J','U','N','K'}}, size_ {0}
     {
     }
 
@@ -71,15 +71,17 @@ namespace
   };
 
   // "bext" chunk contents
+  #pragma pack(push, 1)
   struct BroadcastAudioExtension
   {
     using Version = BWFFile::BextVersion;
     using UMID = BWFFile::UMID;
 
     BroadcastAudioExtension (Version version = Version::v_0)
-      : version_ {static_cast<quint16> (version)}
-      , umid_ {{}}
+
     {
+      std::memset(this, 0, sizeof *this);
+      version_ = static_cast<quint16>(version);
       // set some sensible defaults for the "bext" fields
       auto now = QDateTime::currentDateTimeUtc ();
       std::strncpy (origination_date_,
@@ -96,7 +98,7 @@ namespace
     char originator_[32];
     char originator_reference_[32];
     char origination_date_[10];
-    char origination_time_[10];
+    char origination_time_[8];
     quint32 time_reference_low_;
     quint32 time_reference_high_;
     quint16 version_;
@@ -109,6 +111,25 @@ namespace
     quint8 reserved_[180];
     char coding_history_[];
   };
+  #pragma pack(pop)
+  static_assert(sizeof(BroadcastAudioExtension)==602,"EBU Tech 3285 bext size");
+
+  // Fixed-width strings on disk are not necessarily NUL-terminated.
+  template<size_t N> QByteArray boundedText(char const (&value)[N]) {
+    return QByteArray(value, int(std::find(value,value+N,'\0')-value));
+  }
+  void convertBext(BroadcastAudioExtension *p, bool bigEndian) {
+    auto u16=[bigEndian](quint16 v){return bigEndian?qFromBigEndian(v):qFromLittleEndian(v);};
+    auto u32=[bigEndian](quint32 v){return bigEndian?qFromBigEndian(v):qFromLittleEndian(v);};
+    p->time_reference_low_=u32(p->time_reference_low_);
+    p->time_reference_high_=u32(p->time_reference_high_);
+    p->version_=u16(p->version_);
+    p->loudness_value_=u16(p->loudness_value_);
+    p->loudness_range_=u16(p->loudness_range_);
+    p->max_true_peak_level_=u16(p->max_true_peak_level_);
+    p->max_momentary_loudness_=u16(p->max_momentary_loudness_);
+    p->max_short_term_loudness_=u16(p->max_short_term_loudness_);
+  }
 }
 
 class BWFFile::impl final
@@ -160,7 +181,6 @@ public:
   {
     if (bext_.isEmpty ())       // create a "bext" chunk in place
       {
-        bext_.data ();
         bext_.fill ('\0', sizeof (BroadcastAudioExtension));
         new (bext_.data ()) BroadcastAudioExtension {};
       }
@@ -193,85 +213,63 @@ bool BWFFile::impl::initialize (BWFFile * self, OpenMode mode)
 
 bool BWFFile::impl::read_header ()
 {
-  header_length_ = -1;
-  data_size_ = -1;
-  if (!(file_.openMode () & ReadOnly)) return false;
-  if (!file_.seek (0)) return false;
-  Desc outer_desc;
-  quint32 outer_offset = file_.pos ();
-  quint32 outer_size {0};
-  bool be {false};
-  while (outer_offset < sizeof outer_desc + outer_desc.size_ - 1) // allow for uncounted pad
-    {
-      if (file_.read (&outer_desc, sizeof outer_desc) != sizeof outer_desc) return false;
-      be = !memcmp (&outer_desc.id_, "RIFX", 4);
-      outer_size = be ? qFromBigEndian<quint32> (outer_desc.size_) : qFromLittleEndian<quint32> (outer_desc.size_);
-      if (!memcmp (&outer_desc.id_, "RIFF", 4) || be)
-        {
-          // RIFF or RIFX
-          char riff_item[4];
-          if (file_.read (riff_item, sizeof riff_item) != sizeof riff_item) return false;
-          if (!memcmp (riff_item, "WAVE", 4))
-            {
-              // WAVE
-              Desc wave_desc;
-              quint32 wave_offset = file_.pos ();
-              quint32 wave_size {0};
-              while (wave_offset < outer_offset + sizeof outer_desc + outer_size - 1)
-                {
-                  if (file_.read (&wave_desc, sizeof wave_desc) != sizeof wave_desc) return false;
-                  wave_size = be ? qFromBigEndian<quint32> (wave_desc.size_) : qFromLittleEndian<quint32> (wave_desc.size_);
-                  if (!memcmp (&wave_desc.id_, "bext", 4))
-                    {
-                      bext_ = file_.read (wave_size);
-                    }
-                  if (!memcmp (&wave_desc.id_, "fmt ", 4))
-                    {
-                      FormatChunk fmt;
-                      if (file_.read (reinterpret_cast<char *> (&fmt), sizeof fmt) != sizeof fmt) return false;
-                      auto audio_format = be ? qFromBigEndian<quint16> (fmt.audio_format) : qFromLittleEndian<quint16> (fmt.audio_format);
-                      if (audio_format != 0 && audio_format != 1) return false; // not PCM nor undefined
-                      format_.setByteOrder (be ? QAudioFormat::BigEndian : QAudioFormat::LittleEndian);
-                      format_.setChannelCount (be ? qFromBigEndian<quint16> (fmt.num_channels) : qFromLittleEndian<quint16> (fmt.num_channels));
-                      format_.setCodec ("audio/pcm");
-                      format_.setSampleRate (be ? qFromBigEndian<quint32> (fmt.sample_rate) : qFromLittleEndian<quint32> (fmt.sample_rate));
-                      int bits_per_sample {be ? qFromBigEndian<quint16> (fmt.bits_per_sample) : qFromLittleEndian<quint16> (fmt.bits_per_sample)};
-                      format_.setSampleSize (bits_per_sample);
-                      format_.setSampleType (8 == bits_per_sample ? QAudioFormat::UnSignedInt : QAudioFormat::SignedInt);
-                    }
-                  else if (!memcmp (&wave_desc.id_, "data", 4))
-                    {
-                      data_size_ = wave_size;
-                      header_length_ = file_.pos ();
-                    }
-                  else if (!memcmp (&wave_desc.id_, "LIST", 4))
-                    {
-                      char list_type[4];
-                      if (file_.read (list_type, sizeof list_type) != sizeof list_type) return false;
-                      if (!memcmp (list_type, "INFO", 4))
-                        {
-                          Desc info_desc;
-                          quint32 info_offset = file_.pos ();
-                          quint32 info_size {0};
-                          while (info_offset < wave_offset + sizeof wave_desc + wave_size - 1)
-                            {
-                              if (file_.read (&info_desc, sizeof info_desc) != sizeof info_desc) return false;
-                              info_size = be ? qFromBigEndian<quint32> (info_desc.size_) : qFromLittleEndian<quint32> (info_desc.size_);
-                              info_dictionary_[info_desc.id_] = file_.read (info_size);
-                              if (!file_.seek (info_offset + sizeof info_desc + (info_size + 1) / 2 * 2)) return false;;
-                              info_offset = file_.pos ();
-                            }
-                        }
-                    }
-                  if (!file_.seek (wave_offset + sizeof wave_desc + (wave_size + 1) / 2 * 2)) return false;
-                  wave_offset = file_.pos ();
-                }
-            }
+  header_length_=-1;data_size_=-1;
+  if(!(file_.openMode()&ReadOnly) || !file_.seek(0))return false;
+  Desc outer;
+  if(file_.read(&outer,sizeof outer)!=sizeof outer)return false;
+  bool be=!memcmp(outer.id_.data(),"RIFX",4);
+  if(!be && memcmp(outer.id_.data(),"RIFF",4))return false;
+  auto read32=[be](quint32 v){return be?qFromBigEndian(v):qFromLittleEndian(v);};
+  auto read16=[be](quint16 v){return be?qFromBigEndian(v):qFromLittleEndian(v);};
+  qint64 end=8+qint64(read32(outer.size_));
+  if(end<12 || end>file_.size() || file_.read(4)!="WAVE")return false;
+  InfoDictionary parsedInfo=info_dictionary_;QByteArray parsedBext;
+  bool haveFormat=false;
+  qint64 metadata=0;
+  while(file_.pos()<end) {
+    if(end-file_.pos()<qint64(sizeof(Desc)))return false;
+    Desc chunk;if(file_.read(&chunk,sizeof chunk)!=sizeof chunk)return false;
+    qint64 size=read32(chunk.size_),start=file_.pos();
+    if(size>end-start)return false;
+    if(!memcmp(chunk.id_.data(),"fmt ",4)) {
+      FormatChunk fmt{};
+      if(size<qint64(sizeof fmt) || file_.read(reinterpret_cast<char*>(&fmt),sizeof fmt)!=sizeof fmt)return false;
+      auto encoding=read16(fmt.audio_format);auto channels=read16(fmt.num_channels);
+      auto rate=read32(fmt.sample_rate);auto bits=read16(fmt.bits_per_sample);
+      if((encoding!=0 && encoding!=1) || channels<1 || channels>32 || rate<1 || rate>768000 ||
+         (bits!=8 && bits!=16 && bits!=24 && bits!=32) || read16(fmt.block_align)!=channels*(bits/8))return false;
+      format_.setByteOrder(be?QAudioFormat::BigEndian:QAudioFormat::LittleEndian);
+      format_.setChannelCount(channels);format_.setCodec("audio/pcm");format_.setSampleRate(rate);
+      format_.setSampleSize(bits);format_.setSampleType(bits==8?QAudioFormat::UnSignedInt:QAudioFormat::SignedInt);
+      haveFormat=true;
+    } else if(!memcmp(chunk.id_.data(),"data",4)) {
+      if(data_size_>=0)return false;
+      data_size_=size;header_length_=start;
+    } else if(!memcmp(chunk.id_.data(),"bext",4)) {
+      metadata+=size;
+      if(size<qint64(sizeof(BroadcastAudioExtension)) || metadata>16*1024*1024)return false;
+      parsedBext=file_.read(size);if(parsedBext.size()!=size)return false;
+    } else if(!memcmp(chunk.id_.data(),"LIST",4)) {
+      if(size<4)return false;
+      if(file_.read(4)=="INFO") {
+        qint64 limit=start+size;
+        while(file_.pos()<limit) {
+          Desc info;
+          if(limit-file_.pos()<qint64(sizeof info) || file_.read(&info,sizeof info)!=sizeof info)return false;
+          qint64 count=read32(info.size_),at=file_.pos();metadata+=count;
+          if(count>limit-at || metadata>16*1024*1024)return false;
+          auto value=file_.read(count);if(value.size()!=count)return false;
+          parsedInfo[info.id_]=value;
+          if(!file_.seek(qMin(limit,at+count+(count&1))))return false;
         }
-      if (!file_.seek (outer_offset + sizeof outer_desc + (outer_size + 1) / 2 * 2)) return false;
-      outer_offset = file_.pos ();
+      }
     }
-  return data_size_ >= 0 && file_.seek (header_length_);
+    // RIFF padding is external to the chunk length. Permit a missing final pad.
+    if(!file_.seek(qMin(end,start+size+(size&1))))return false;
+  }
+  if(!haveFormat || data_size_<0 || !file_.seek(header_length_))return false;
+  if(!parsedBext.isEmpty())convertBext(reinterpret_cast<BroadcastAudioExtension*>(parsedBext.data()),be);
+  bext_=parsedBext;info_dictionary_=parsedInfo;header_dirty_=false;return true;
 }
 
 bool BWFFile::impl::write_header (QAudioFormat format)
@@ -335,42 +333,9 @@ bool BWFFile::impl::update_header ()
       desc.set ("bext", be ? qToBigEndian<quint32> (size) : qToLittleEndian<quint32> (size));
       if ((file_.size () % 2) && file_.write ("\0", 1) != 1) return false;
       if (file_.write (&desc, sizeof desc) != sizeof desc) return false;
-      auto * data = reinterpret_cast<BroadcastAudioExtension *> (bext_.data ());
-      if (be)
-        {
-          data->time_reference_low_ = qToBigEndian<quint32> (data->time_reference_low_);
-          data->time_reference_high_ = qToBigEndian<quint32> (data->time_reference_high_);
-          switch (static_cast<BextVersion> (data->version_))
-            {
-            case BextVersion::v_0:
-              data->version_ = qToBigEndian<quint32> (data->version_);
-              // fall through
-            default:
-              data->loudness_value_ = qToBigEndian<quint16> (data->loudness_value_);
-              data->loudness_range_ = qToBigEndian<quint16> (data->loudness_range_);
-              data->max_true_peak_level_ = qToBigEndian<quint16> (data->max_true_peak_level_);
-              data->max_momentary_loudness_ = qToBigEndian<quint16> (data->max_momentary_loudness_);
-              data->max_short_term_loudness_ = qToBigEndian<quint16> (data->max_short_term_loudness_);
-            }
-        }
-      else
-        {
-          data->time_reference_low_ = qToLittleEndian<quint32> (data->time_reference_low_);
-          data->time_reference_high_ = qToLittleEndian<quint32> (data->time_reference_high_);
-          switch (static_cast<BextVersion> (data->version_))
-            {
-            case BextVersion::v_0:
-              data->version_ = qToLittleEndian<quint32> (data->version_);
-              // fall through
-            default:
-              data->loudness_value_ = qToLittleEndian<quint16> (data->loudness_value_);
-              data->loudness_range_ = qToLittleEndian<quint16> (data->loudness_range_);
-              data->max_true_peak_level_ = qToLittleEndian<quint16> (data->max_true_peak_level_);
-              data->max_momentary_loudness_ = qToLittleEndian<quint16> (data->max_momentary_loudness_);
-              data->max_short_term_loudness_ = qToLittleEndian<quint16> (data->max_short_term_loudness_);
-            }
-        }
-      if (file_.write (bext_) != size) return false;
+      auto wire = bext_;
+      convertBext(reinterpret_cast<BroadcastAudioExtension*>(wire.data()),be);
+      if (file_.write (wire) != size) return false;
     }
 
   if (info_dictionary_.size ())
@@ -530,7 +495,7 @@ auto BWFFile::list_info () -> InfoDictionary&
 // Broadcast Audio Extension fields
 auto BWFFile::bext_version () const -> BextVersion
 {
-  return static_cast<BextVersion> (m_->bext () ? 0 : m_->bext ()->version_);
+  return static_cast<BextVersion> (m_->bext () ? m_->bext ()->version_ : 0);
 }
 
 void BWFFile::bext_version (BextVersion version)
@@ -542,7 +507,7 @@ void BWFFile::bext_version (BextVersion version)
 QByteArray BWFFile::bext_description () const
 {
   if (!m_->bext ()) return {};
-  return QByteArray::fromRawData (m_->bext ()->description_, strlen (m_->bext ()->description_));
+  return boundedText(m_->bext ()->description_);
 }
 
 void BWFFile::bext_description (QByteArray const& description)
@@ -554,7 +519,7 @@ void BWFFile::bext_description (QByteArray const& description)
 QByteArray BWFFile::bext_originator () const
 {
   if (!m_->bext ()) return {};
-  return QByteArray::fromRawData (m_->bext ()->originator_, strlen (m_->bext ()->originator_));
+  return boundedText(m_->bext ()->originator_);
 }
 
 void BWFFile::bext_originator (QByteArray const& originator)
@@ -566,7 +531,7 @@ void BWFFile::bext_originator (QByteArray const& originator)
 QByteArray BWFFile::bext_originator_reference () const
 {
   if (!m_->bext ()) return {};
-  return QByteArray::fromRawData (m_->bext ()->originator_reference_, strlen (m_->bext ()->originator_reference_));
+  return boundedText(m_->bext ()->originator_reference_);
 }
 
 void BWFFile::bext_originator_reference (QByteArray const& reference)
@@ -578,18 +543,18 @@ void BWFFile::bext_originator_reference (QByteArray const& reference)
 QDateTime BWFFile::bext_origination_date_time () const
 {
   if (!m_->bext ()) return {};
-  return {QDate::fromString (m_->bext ()->origination_date_, "yyyy-MM-dd"),
-      QTime::fromString (m_->bext ()->origination_time_, "hh-mm-ss"), Qt::UTC};
+  return {QDate::fromString (QString::fromLatin1(boundedText(m_->bext ()->origination_date_)), "yyyy-MM-dd"),
+      QTime::fromString (QString::fromLatin1(boundedText(m_->bext ()->origination_time_)), "hh-mm-ss"), Qt::UTC};
 }
 
 void BWFFile::bext_origination_date_time (QDateTime const& dt)
 {
   m_->header_dirty_ = true;
   std::strncpy (m_->bext ()->origination_date_,
-                dt.date ().toString ("yyyy-MM-dd").toLocal8Bit ().constData (),
+                dt.toUTC().date ().toString ("yyyy-MM-dd").toLocal8Bit ().constData (),
                 sizeof (BroadcastAudioExtension::origination_date_));
   std::strncpy (m_->bext ()->origination_time_,
-                dt.time ().toString ("hh-mm-ss").toLocal8Bit ().constData (),
+                dt.toUTC().time ().toString ("hh-mm-ss").toLocal8Bit ().constData (),
                 sizeof (BroadcastAudioExtension::origination_time_));
 }
 
@@ -704,6 +669,7 @@ bool BWFFile::reset ()
 {
   if (m_->file_.isOpen ())
     {
+      if(!(m_->file_.openMode() & WriteOnly)) return QIODevice::reset();
       m_->info_dictionary_.clear ();
       m_->bext_.clear ();
       auto size = m_->data_size_ < 0 ? m_->file_.size () - m_->header_length_ : m_->data_size_;
@@ -717,16 +683,15 @@ bool BWFFile::reset ()
           QByteArray buffer;
           while (size)
             {
-              m_->file_.seek (old_pos);
+              if(!m_->file_.seek (old_pos))return false;
               buffer = m_->file_.read (std::min (size, qint64 (32768)));
-              m_->file_.seek (new_pos);
-              m_->file_.write (buffer);
+              if(buffer.isEmpty() || !m_->file_.seek (new_pos) || m_->file_.write(buffer)!=buffer.size())return false;
               new_pos += buffer.size ();
               old_pos += buffer.size ();
               size -= buffer.size ();
             }
         }
-      m_->file_.resize (m_->header_length_ + m_->data_size_);
+      if(!m_->file_.resize (m_->header_length_ + m_->data_size_))return false;
       m_->header_dirty_ = true;
     }
   return QIODevice::reset ();
@@ -758,7 +723,8 @@ bool BWFFile::seek (qint64 pos)
 
 qint64 BWFFile::readData (char * data, qint64 max_size)
 {
-  return m_->file_.read (data, max_size);
+  auto remaining=qMax(qint64(0),size()-(m_->file_.pos()-m_->header_length_));
+  return m_->file_.read (data, qMin(max_size,remaining));
 }
 
 qint64 BWFFile::writeData (char const* data, qint64 max_size)
@@ -805,6 +771,7 @@ auto BWFFile::permissions () const -> Permissions {return m_->file_.permissions 
 
 bool BWFFile::resize (qint64 new_size)
 {
+  if(new_size<0 || m_->header_length_<0)return false;
   auto size = m_->file_.size ();
   if (pos () > new_size) seek (new_size);
   auto result = m_->file_.resize (m_->header_length_ + new_size);
@@ -836,6 +803,7 @@ int BWFFile::handle () const {return m_->file_.handle ();}
 
 uchar * BWFFile::map (qint64 offset, qint64 size, MemoryMapFlags flags)
 {
+  if(offset<0 || size<0 || offset>this->size() || size>this->size()-offset)return nullptr;
   return m_->file_.map (offset + m_->header_length_, size, flags);
 }
 

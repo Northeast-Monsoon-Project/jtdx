@@ -25,3 +25,12 @@ MSYS2 的依赖源码、补丁和 PKGBUILD 配方： https://github.com/msys2/MI
 ## SuperFox 接收代码（V3.1.0）
 
 来自 [CE3TSK JTDX_CONTEST](https://github.com/ce3tsk/jtdx_contest)，保留其头部声明、测量程序和记录。该实现基于 WSJT-X 的 GPL 接收代码及 Nico Palermo 的 GPL polar codec。JTDX-F 未包含上游带额外限制的 `qpc_n127k50q128.c`；独立测量得到的定义、来源提交和相关许可说明见 `lib/superfox/PROVENANCE.txt` 与 `lib/superfox/qpc/measured/README.md`。当前集成用于接收，不包含远征身份在线认证。
+
+
+V3.4.0 新增 Decodium FT2 与 WSJT-X v3.3.0-beta4 JTTY 的 GPL 编解码源码；具体提交、移植范围、适配及测试来源分别记录于 `lib/ft2/PROVENANCE.txt` 和 `lib/jtty/PROVENANCE.txt`。运行包新增本地 JTTY 编解码助手 `jtdx-f-jtty.exe`；助手与主程序一起按 GPL 提供完整源码。
+
+
+V3.5.0 的可选现代解码扩展继续采用项目 GPLv3 许可；参考 WSJT-X 的后验辅助 OSD 与短码可靠度译码研究，并单独比较 layered SPA、normalized min-sum 和加权后验方案。来源固定提交、论文链接、移植边界与未采用的实验见 `lib/MODERN_DECODER_PROVENANCE.txt`。
+
+
+V3.6.0 固定正式 WSJT-X 3.0.2 的 Q65/MSK144/Echo/天文及 WSPR 组件，保留原 GPL、作者和源码头。具体修改边界见 `helpers/upstream/MIGRATION.txt`、`docs/WSPR升级与审计_V3.6.0.txt`。`upstream/wsjtx-3.0.2/SOURCE.json` 记录每个原样文件的 SHA-256 和明确排除项；受限制的 SuperFox 码表没有进入本项目发行源码或二进制。SLALIB 原文件的 GPLv2-or-later 声明保留，项目按兼容的 GPLv3 条款提供。`grid.dat` 来源和用途另记于 `docs/grid-data-provenance.txt`。

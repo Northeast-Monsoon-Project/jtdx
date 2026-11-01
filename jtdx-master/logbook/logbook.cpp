@@ -7,6 +7,10 @@
 #include <QFontMetrics>
 #include <QStandardPaths>
 #include <QDir>
+#include <QCryptographicHash>
+#include <QFile>
+#include <QMutex>
+#include <QMutexLocker>
 #include <iostream>
 
 namespace
@@ -17,7 +21,11 @@ namespace
 
 void LogBook::init(const QString mycall,const QString mygrid,const QString mydate,const QString operatorCall)
 {
-  QDir dataPath {QStandardPaths::writableLocation (QStandardPaths::DataLocation)};
+  init(mycall,mygrid,mydate,operatorCall,OperatorLog::root());
+}
+
+QStringList LogBook::databaseFiles(QDir const& dataPath)
+{
   QString countryDataFilename,lotwDataFilename;
   if (dataPath.exists (countryFileName))
     {
@@ -38,10 +46,39 @@ void LogBook::init(const QString mycall,const QString mygrid,const QString mydat
       lotwDataFilename = QString {":/"} + lotwFileName;
     }
 
-  _countries.init(countryDataFilename,lotwDataFilename);
-  _countries.load();
+  return {countryDataFilename,lotwDataFilename};
+}
 
-  _log.init(OperatorLog::files(operatorCall.isEmpty()?mycall:operatorCall), &_countries);
+void LogBook::init(const QString mycall,const QString mygrid,const QString mydate,
+                   const QString operatorCall,QDir const& dataPath)
+{
+  auto files=databaseFiles(dataPath);
+  // All operators use the same country/LoTW datasets. Share their immutable
+  // Qt containers and reload only after the file contents actually change.
+  static QMutex mutex;
+  static QByteArray previousFingerprint;
+  static CountryDat countries;
+  {
+    QMutexLocker guard(&mutex);
+    QCryptographicHash hash(QCryptographicHash::Sha256);
+    for(auto const& path:files) {
+      auto name=path.toUtf8();hash.addData(QByteArray::number(name.size())+':'+name);
+      QFile file(path);
+      if(file.open(QIODevice::ReadOnly)) {
+        hash.addData("1",1);hash.addData(QByteArray::number(file.size())+':');hash.addData(&file);
+      } else hash.addData("0",1);
+    }
+    hash.addData(CountryDat::tr("where?").toUtf8());
+    hash.addData(QDate::currentDate().toString(Qt::ISODate).toLatin1());
+    auto fingerprint=hash.result();
+    if(previousFingerprint!=fingerprint) {
+      countries.init(files[0],files[1]);countries.load();
+      previousFingerprint=fingerprint;
+    }
+    _countries=countries;
+  }
+
+  _log.init(OperatorLog::files(operatorCall.isEmpty()?mycall:operatorCall,dataPath), &_countries);
   _log.load(operatorCall.isEmpty()?mycall:operatorCall,mygrid,mydate);
 
   /*

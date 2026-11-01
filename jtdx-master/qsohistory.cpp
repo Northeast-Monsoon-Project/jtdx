@@ -4,6 +4,13 @@
  */
 
 #include "qsohistory.h"
+
+QsoHistory::QsoHistory(std::function<qint64()> monotonicNow)
+    : _monotonicNow(monotonicNow)
+{
+    _outgoingClock.start();
+}
+
 void QsoHistory::init()
 {
     as_active = false;
@@ -12,6 +19,8 @@ void QsoHistory::init()
     _data.clear();
     _blackdata.clear();
     _calldata.clear();
+    // History can reset on band changes or manual selection. Its independent
+    // outgoing cooldown lasts eight minutes even across those resets.
     _working = true;
     _CQ.call = "";    
     _CQ.status = NONE;
@@ -109,6 +118,36 @@ void QsoHistory::calllist(QString const& callsign, int level=-35, unsigned time=
       _calldata.insert(Radio::base_callsign (callsign),ret);
     }
   }
+}
+
+int QsoHistory::sent_count(QString const& callsign) const
+{
+    if (!_working || callsign.trimmed().isEmpty()) return 0;
+    auto it = _data.constFind(Radio::base_callsign(callsign));
+    return it == _data.cend() ? 0 : it->count;
+}
+
+qint64 QsoHistory::outgoingNow() const
+{
+    return _monotonicNow ? _monotonicNow() : _outgoingClock.elapsed();
+}
+
+void QsoHistory::deferOutgoingCall(QString const& callsign)
+{
+    auto const key = Radio::base_callsign(callsign.trimmed());
+    if (!_working || key.isEmpty()) return;
+    auto const now = outgoingNow();
+    for (auto it = _outgoingDeferredUntil.begin(); it != _outgoingDeferredUntil.end();)
+        if (it.value() <= now) it = _outgoingDeferredUntil.erase(it);
+        else ++it;
+    _outgoingDeferredUntil.insert(key, now + 8 * 60 * 1000);
+}
+
+bool QsoHistory::outgoingCallDeferred(QString const& callsign) const
+{
+    if (!_working) return false;
+    auto const it = _outgoingDeferredUntil.constFind(Radio::base_callsign(callsign.trimmed()));
+    return it != _outgoingDeferredUntil.cend() && outgoingNow() < it.value();
 }
 
 int QsoHistory::reset_count(QString const& callsign,Status status)
@@ -297,6 +336,9 @@ QsoHistory::Status QsoHistory::autoseq(QString &callsign, QString &grid, QString
               is_called.time=0;
               is_called=_calldata.value(key,is_called);
               tt=_data[key];
+              // RFIN represents another station's 73, RR73 or RRR. This gate
+              // deliberately excludes the incoming/reply passes above.
+              if (outgoingCallDeferred(tt.call)) continue;
               if ((is_called.rep == -35 || is_called.rep < tt.s_rep.toInt() || (tt.b_time > 300 && tt.b_time - is_called.time > 300) || (tt.b_time <= 300 && is_called.time - tt.b_time < 86100)) && on_black == 0 && tt.time == max_r_time && (tt.status == RCQ || tt.status == RFIN) && !tt.continent.isEmpty()) {
 //                printf("autosel:%s %d %d (%d,%d,%s,%d)\n",tt.call.toStdString().c_str(),ret,algo,tt.status,tt.priority,tt.s_rep.toStdString().c_str(),tt.distance);
                 if (tt.priority > priority || 
@@ -659,7 +701,10 @@ void QsoHistory::message(QString const& callsign, Status status, int priority, Q
                   t.srx_c = status;
                   if(!t.r_rep.isEmpty () && !t.s_rep.isEmpty () && t.status >= SREPORT)
                     {
-                      if (t.status == SRR73 || (t.srx_p != RRR73 && t.status == FIN))
+                      // A repeated final acknowledgement cannot reopen a
+                      // completed QSO. A fresh CQ or direct call has its own
+                      // state transition when the station wants another QSO.
+                      if (t.status == SRR73 || t.status == FIN)
                         {
                           old_status = t.status;
                           t.status = FIN;

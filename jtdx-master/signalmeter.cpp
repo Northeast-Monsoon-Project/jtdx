@@ -22,19 +22,21 @@ public:
   explicit Scale (QWidget * parent = 0)
     : QWidget {parent}
   {
-    setSizePolicy (QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
+    setSizePolicy (QSizePolicy::Minimum, QSizePolicy::Expanding);
   }
 
   QSize sizeHint () const override
   {
-    return minimumSizeHint ();
+    auto result = minimumSizeHint ();
+    result.setHeight ((fontMetrics ().height () + line_spacing) * (range + 1));
+    return result;
   }
 
   QSize minimumSizeHint () const override
   {
     QFontMetrics font_metrics {font (), nullptr};
-//    return {tick_length + text_indent + font_metrics.width ("00+"), (font_metrics.height () + line_spacing) * range};
-    return {tick_length + text_indent + font_metrics.boundingRect ("000000").width (), (font_metrics.height () + line_spacing) * range};
+    return {tick_length + text_indent + font_metrics.boundingRect ("90+").width (),
+            2 * (font_metrics.height () + line_spacing)};
   }
 
 protected:
@@ -46,15 +48,22 @@ protected:
     auto const& target = contentsRect ();
     QFontMetrics font_metrics {p.font (), this};
     auto font_offset = font_metrics.ascent () / 2;
+    int const span = qMax (0, target.height () - font_metrics.ascent () - font_metrics.descent ());
+    int const separation = font_metrics.height () + line_spacing;
+    int const step = span > 0 ? qBound (1, (range * separation + span - 1) / span, int (range)) : range;
     p.drawLine (target.left (), target.top () + font_offset, target.left (), target.bottom () - font_offset - font_metrics.descent ());
     for (int i = 0; i <= range; ++i)
       {
         p.save ();
         p.translate (target.left ()
-                     , target.top () + font_offset + i * (target.height () - font_metrics.ascent () - font_metrics.descent ()) / range);
+                     , target.top () + font_offset + i * span / range);
         p.drawLine (0, 0, tick_length, 0);
         auto text = i ? QString::number ((range - i) * scale) : QString {"%1%2"}.arg ((range - i) * scale).arg ('+');
-        p.drawText (tick_length + text_indent, font_offset, text);
+        // Keep the endpoints and all tick marks. In a short meter, label only
+        // the intermediate ticks that fit without touching either endpoint.
+        if (i == 0 || i == range || ((range - i) % step == 0
+            && i * span / range >= separation && (range - i) * span / range >= separation))
+          p.drawText (tick_length + text_indent, font_offset, text);
         p.restore ();
       }
   }
@@ -64,7 +73,7 @@ private:
   static int const tick_length {4};
 //  static int const text_indent {2};
   static int const text_indent {1};
-  static int const line_spacing {0};
+  static int const line_spacing {2};
   static int const range {9};
   static int const scale {10};
 };
@@ -74,9 +83,10 @@ SignalMeter::SignalMeter (QWidget * parent)
 {
   auto outer_layout = new QVBoxLayout;
   outer_layout->setSpacing (0);
+  outer_layout->setContentsMargins (0, 0, 0, 0);
 
   auto inner_layout = new QHBoxLayout;
-  inner_layout->setContentsMargins (9, 0, 9, 0);
+  inner_layout->setContentsMargins (2, 0, 2, 0);
   inner_layout->setSpacing (0);
 
   m_meter = new MeterWidget;

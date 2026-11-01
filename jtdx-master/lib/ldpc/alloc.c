@@ -33,7 +33,7 @@ void *chk_alloc
   p = calloc(n,size);
 
   if (p==0)
-  { fprintf(stderr,"Ran out of memory (while trying to allocate %d bytes)\n",
+  { fprintf(stderr,"Ran out of memory (while trying to allocate %u bytes)\n",
       n*size);
     exit(1);
   }

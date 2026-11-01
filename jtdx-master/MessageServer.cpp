@@ -77,8 +77,8 @@ public:
     Client& operator= (Client const&) = default;
 
     QHostAddress sender_address_;
-    port_type sender_port_;
-    quint32 negotiated_schema_number_;
+    port_type sender_port_ = 0;
+    quint32 negotiated_schema_number_ = 2;
     QDateTime last_activity_;
   };
   QHash<QString, Client> clients_; // maps id to Client

@@ -95,9 +95,11 @@ void SoundInput::suspend ()
 {
   if (m_stream)
     {
-      m_stream->suspend ();
-      bool err = audioError ();
-      if(!err && !QAudio::SuspendedState) { m_stream->stop (); audioError (); }
+      // WSJT-X 3.0.2 uses stop/start: Qt's suspend/resume can leave capture
+      // stalled on Linux and macOS. The former !SuspendedState expression
+      // tested an enum constant, never the stream's actual state.
+      m_stream->stop ();
+      audioError ();
     }
 }
 
@@ -108,9 +110,9 @@ void SoundInput::resume ()
       m_sink->reset ();
     }
 
-  if (m_stream)
+  if (m_stream && m_sink)
     {
-      m_stream->resume ();
+      m_stream->start (m_sink);
       audioError ();
     }
 }

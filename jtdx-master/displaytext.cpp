@@ -3,9 +3,16 @@
 #include <QtGlobal>
 #include <QApplication>
 #include <QMouseEvent>
+#include <QScopedValueRollback>
 #include <QTextCharFormat>
 #include <QFont>
 #include <QTextCursor>
+#include <QTextFrame>
+#include <QScrollBar>
+#include <QResizeEvent>
+#include <QDir>
+#include <QFileInfo>
+#include <QStandardPaths>
 
 #include "Configuration.hpp"
 #include "qt_helpers.hpp"
@@ -23,9 +30,28 @@ DisplayText::DisplayText(QWidget *parent) :
     document ()->setMaximumBlockCount (10000);
 }
 
-void DisplayText::setConfiguration(Configuration const * config)
+void DisplayText::setConfiguration(Configuration const * config, bool highVolume)
 {
-  scroll_ = config->scroll();
+  highVolume_ = highVolume || objectName() == "decodedTextBrowser";
+  decodesFromTop_ = config->decodes_from_top() && highVolume_;
+  scroll_ = config->scroll() && !decodesFromTop_;
+  detailedBlank_ = config->detailed_blank();
+  insertBlank_ = config->insert_blank();
+  displayDxcc_ = config->DXCC();
+  highlightDxCall_ = config->highlight_DXcall();
+  highlightDxGrid_ = config->highlight_DXgrid();
+  showDistance_ = config->showDistance();
+  showAzimuth_ = config->showAzimuth();
+  miles_ = config->miles();
+  stationGrid_ = config->my_grid();
+  gridMapEnabled_ = config->GridMap();
+  gridMapAll_ = config->GridMapAll();
+  alignColumns_ = config->align();
+  alignSteps_ = config->align_steps();
+  alignSteps2_ = config->align_steps2();
+  auto gridOverridePath = QDir(QStandardPaths::writableLocation(QStandardPaths::DataLocation)).filePath("grid.dat");
+  gridStates_.load(QFileInfo::exists(gridOverridePath) ? gridOverridePath : config->data_dir().filePath("grid.dat"));
+  updatePeriodMargin();
   useDarkStyle_ = config->useDarkStyle();
   displayCountryName_ = config->countryName();
   displayCountryPrefix_ = config->countryPrefix();
@@ -73,6 +99,7 @@ void DisplayText::setConfiguration(Configuration const * config)
   blueMarker_ = config->blueMarker();
   hidehintMarker_ = config->hidehintMarker();
   hide_TX_messages_ = config->hide_TX_messages();
+  ownTransmissionBackground_ = config->color_TxMsg().name();
   color_MyCall_ = config->color_MyCall().name();
   color_CQ_ = config->color_CQ().name();
   color_StandardCall_ = config->color_StandardCall().name();
@@ -93,6 +120,58 @@ void DisplayText::setConfiguration(Configuration const * config)
   countries_ = config->countries();
   callsigns_ = config->callsigns();
   myCall_ = config->my_callsign();   
+}
+
+void DisplayText::updatePeriodMargin()
+{
+  auto frame = document()->rootFrame();
+  auto format = frame->frameFormat();
+  format.setBottomMargin(decodesFromTop_ ? viewport()->height() : document()->documentMargin());
+  frame->setFrameFormat(format);
+}
+
+void DisplayText::resizeEvent(QResizeEvent* event)
+{
+  QTextEdit::resizeEvent(event);
+  updatePeriodMargin();
+}
+
+void DisplayText::new_period()
+{
+  explicitPeriod_ = true;
+  periodAnchorPending_ = decodesFromTop_;
+  updatePeriodMargin();
+}
+
+void DisplayText::insertPeriodSpacer(QDateTime const& utcStart, QString const& band, QString const& mode, bool fromFile)
+{
+  new_period();
+  if (insertBlank_) insertLineSpacer(DecodedPresentation::periodSeparator(utcStart,band,mode,detailedBlank_,fromFile));
+}
+
+void DisplayText::setDxHighlightTarget(QString const& call, QString const& grid)
+{
+  highlightCall_ = call.trimmed(); highlightGrid_ = grid.trimmed();
+}
+
+void DisplayText::highlightLastMessage(int messageLength, QString const& call, QString const& grid)
+{
+  if (lastAppendedLine_.isNull()) return;
+  auto cursor = lastAppendedLine_;
+  cursor.clearSelection();
+  cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::KeepAnchor);
+  auto text = cursor.selectedText().left(messageLength);
+  auto apply = [&](QString const& token, bool isGrid, QColor const& color) {
+    for (auto const& range : DecodedPresentation::tokenRanges(text,token,isGrid)) {
+      QTextCursor mark = lastAppendedLine_;
+      mark.setPosition(lastAppendedLine_.position()+range.first);
+      mark.setPosition(mark.position()+range.second,QTextCursor::KeepAnchor);
+      QTextCharFormat format;format.setForeground(color);format.setFontWeight(QFont::Bold);
+      mark.mergeCharFormat(format);
+    }
+  };
+  if (highlightDxCall_) apply(highlightCall_.isEmpty() ? call : highlightCall_,false,QColor(Radio::convert_dark("#cc0000",useDarkStyle_)));
+  if (highlightDxGrid_) apply(highlightGrid_.isEmpty() ? grid : highlightGrid_,true,QColor(Radio::convert_dark("#0000c8",useDarkStyle_)));
 }
 
 void DisplayText::setMyContinent(QString const& mycontinet)
@@ -127,6 +206,9 @@ void DisplayText::mouseDoubleClickEvent(QMouseEvent *e)
   bool ctrl = (e->modifiers() & Qt::ControlModifier);
   bool alt = (e->modifiers() & Qt::AltModifier);
   QTextEdit::mouseDoubleClickEvent(e);
+  // Only the synchronous left-button gesture may authorize a new TX session.
+  // Programmatic selections, queued signals and UDP replies have no authority.
+  QScopedValueRollback<bool> gesture(callSelectionInProgress_,e->button()==Qt::LeftButton);
   emit(selectCallsign(alt,ctrl));
 }
 
@@ -166,6 +248,10 @@ void DisplayText::appendText(QString const& text, QString const& bg, QString con
         } else
             cursor.insertText ("\n");
     }    
+    // Keep a live cursor: maximumBlockCount may trim the beginning while a
+    // later insertion is in progress, making an integer offset stale.
+    lastAppendedLine_ = cursor;
+    lastAppendedLine_.setKeepPositionOnInsert(true);
     if (forceBold) {
         if (bold_) { 
             m_charFormat.setFontWeight(QFont::Black);
@@ -181,7 +267,9 @@ void DisplayText::appendText(QString const& text, QString const& bg, QString con
     }
     m_charFormat.setForeground(QColor(color));
     m_charFormat.setBackground (QColor(bg));
-    if (text.length() < 50) {
+    static QRegularExpression const decodeRow("\\A[0-9]{4}(?:[0-9]{2})? +(?:Tx|[-+ ]?[0-9])");
+    bool longDecode = text.length() >= 50 && decodeRow.match(text).hasMatch();
+    if (text.length() < 50 || longDecode) {
         int ft = 23; 
         if (text.mid(4,1) == " ") ft = 21;
         cursor.insertText (text.left(ft),m_charFormat);
@@ -196,7 +284,7 @@ void DisplayText::appendText(QString const& text, QString const& bg, QString con
             m_charFormat.setFontItalic(true); m_charFormat.setForeground(QColor(color_MyCall_)); m_charFormat.setFontOverline(true);
             if (!underlined && !DXped) m_charFormat.setFontUnderline(true);
             }
-        cursor.insertText (text.mid(ft,26),m_charFormat);
+        cursor.insertText (longDecode ? text.mid(ft) : text.mid(ft,26),m_charFormat);
         if (wanted) {
             m_charFormat.setFontItalic(false); m_charFormat.setFontOverline(false);
             if (!underlined && !DXped) m_charFormat.setFontUnderline(false);
@@ -211,11 +299,19 @@ void DisplayText::appendText(QString const& text, QString const& bg, QString con
         cursor.insertText (cntry,m_charFormat);
     } else {
         cursor.insertText (text.trimmed(),m_charFormat);
+        if (!cntry.trimmed().isEmpty()) cursor.insertText(cntry,m_charFormat);
     }
     if (scroll_ && !overwrite) cursor.insertText ("\n");
     else cursor.movePosition (QTextCursor::StartOfLine);
-    setTextCursor (cursor);
-    ensureCursorVisible ();
+    if (!decodesFromTop_) {
+      setTextCursor (cursor);
+      ensureCursorVisible ();
+    } else if (periodAnchorPending_) {
+      auto anchor = lastAppendedLine_;
+      anchor.movePosition(QTextCursor::StartOfBlock);
+      verticalScrollBar()->setValue(verticalScrollBar()->value()+cursorRect(anchor).top()-int(document()->documentMargin()));
+      periodAnchorPending_ = false;
+    }
     document ()->setMaximumBlockCount (document ()->maximumBlockCount ());
 }
 
@@ -245,7 +341,8 @@ int DisplayText::displayDecodedText(DecodedText* decodedText, QString myCall, QS
     bool bwantedPrefix = false;
     bool bwantedGrid = false;
     bool bwantedCountry = false;
-    if (app_mode.startsWith("FT")) messageText = decodedText->string().left(49);
+    if (app_mode=="Q65" || app_mode=="MSK144") messageText = decodedText->string().left(60);
+    else if (app_mode.startsWith("FT")) messageText = decodedText->string().left(49);
     else if (app_mode == "WSPR-2") messageText = decodedText->string().trimmed();
     else messageText = decodedText->string().left(40);
     QString servis = " ";
@@ -268,6 +365,25 @@ int DisplayText::displayDecodedText(DecodedText* decodedText, QString myCall, QS
     unsigned c_time = 0;
     if (!decodedText->isDebug() && app_mode != "WSPR-2") {
         c_time = decodedText->timeInSeconds();
+        if (highVolume_ && int(c_time) != lastDecodedPeriod_) {
+            if (!explicitPeriod_) new_period();
+            explicitPeriod_ = false;
+            lastDecodedPeriod_ = int(c_time);
+        }
+        QString sender, senderGrid;
+        decodedText->deCallAndGrid(sender,senderGrid);
+        bool const ownTransmission = decodedText->isTX()
+          || (!myCall.isEmpty() && !sender.isEmpty()
+              && Radio::base_callsign(sender)==Radio::base_callsign(myCall));
+        if (ownTransmission) {
+            // Do not classify our own CQ/report as a new station or record it
+            // as an incoming automatic-sequencing candidate. In particular,
+            // a message addressed TO us has a different sender and continues
+            // through the normal receive path below.
+            displayOwnText(messageText);
+            wastx_ = false;
+            return 2;
+        }
         qsoHistory.time(c_time);
         if (c_time != max_r_time) {
             max_r_time = c_time;
@@ -919,15 +1035,48 @@ int DisplayText::displayDecodedText(DecodedText* decodedText, QString myCall, QS
         if (!decodedText->isWrong() && !checkCall.isEmpty () && (std_type == 1 || std_type == 2 || std_type == 4 || (std_type == 3 && !param.isEmpty()))) {
             // Selection must not depend on whether country labels are displayed.
             if (countryName.isEmpty()) logBook.getDXCC(checkCall, countryName);
-            qsoHistory.message(checkCall,status,priority,param,tyyp,countryName.left(2),mpx,c_time,decodedText->report(),decodedText->frequencyOffset(),checkMode);
+            // Rank 0..4 denotes an already worked/only-wanted station in the
+            // legacy selector. A disabled new-call highlight must not assign
+            // that rank to an unworked caller and silently disable CQ search.
+            bool worked=false,workedBandMode=false;QString workedCountry;
+            logBook.matchCall(checkCall,workedCountry,worked,workedBandMode,dialFreq,checkMode);
+            int selectionPriority=!workedBandMode && priority<5?5:priority;
+            qsoHistory.message(checkCall,status,selectionPriority,param,tyyp,countryName.left(2),mpx,c_time,decodedText->report(),decodedText->frequencyOffset(),checkMode);
         } 
     }
     if (show_line) {
+        // Enrich only the rendered row. The decoded payload, QSO history and
+        // selection priority above retain their original meanings.
+        QString onAirCall,onAirGrid;
+        decodedText->deCallAndGrid(onAirCall,onAirGrid);
+        auto words = decodedText->message().trimmed().split(' ',SkipEmptyParts);
+        bool advertisement = decodedText->message().startsWith("CQ ")
+          || (!words.isEmpty() && (words.last()=="73" || words.last()=="RR73"));
+        QString entity,state;
+        if (displayDxcc_ && (displayCountryName_ || advertisement)) {
+            if (countryName.isEmpty() && !checkCall.isEmpty()) logBook.getDXCC(checkCall,countryName);
+            auto fields = countryName.split(',');
+            entity = displayCountryPrefix_ ? fields.value(1) : fields.value(2);
+        }
+        if (displayDxcc_ && gridMapEnabled_ && (advertisement || gridMapAll_)) {
+            if (countryName.isEmpty() && !onAirCall.isEmpty()) logBook.getDXCC(onAirCall,countryName);
+            auto prefix = countryName.split(',').value(1);
+            if (prefix == "K" || prefix == "KL" || prefix == "KH6") state = gridStates_.state(onAirGrid);
+        }
+        auto geometry = DecodedPresentation::distanceAzimuth(stationGrid_,onAirGrid,showDistance_,showAzimuth_,miles_);
+        cntry = DecodedPresentation::appendage(messageText.size()+1,entity,state,geometry,alignColumns_,alignSteps_,alignSteps2_);
+        if (!displayDxcc_) {
+            strikethrough = false; underlined = false;
+            if ((std_type == 1 || std_type == 4) && !(bwantedCall || bwantedGrid || bwantedPrefix || bwantedCountry)) {
+                bgColor = Radio::convert_dark("#ffffff",useDarkStyle_);txtColor = color_CQ_;forceBold = false;
+            }
+        }
         if (std_type == 2) {
             if(!redMarker_) std_type = 0;
             else if(blueMarker_ && !hisCall.isEmpty () && checkCall.contains(hisCall)) std_type = 5;
         }
         appendText(messageText, bgColor, txtColor, std_type, servis, servisColor, cntry, forceBold, strikethrough, underlined, decodedText->isDXped(), false, bwantedCall||bwantedGrid||bwantedPrefix||bwantedCountry);
+        highlightLastMessage(messageText.size(),hisCall,hisGrid);
         wastx_ = false;
     }
         if (notified) inotified |= 1;
@@ -941,10 +1090,10 @@ int DisplayText::displayDecodedText(DecodedText* decodedText, QString myCall, QS
 
 
 void DisplayText::displayTransmittedText(QString text, QString myCall, QString hisCall, QString skip_tx1, QString modeTx, qint32 txFreq,
-                                         QColor color_TxMsg, QsoHistory& qsoHistory)
+                                         QColor color_TxMsg, QsoHistory& qsoHistory, bool display)
 {
     QsoHistory::Status status = QsoHistory::S73;
-    QString bg=color_TxMsg.name();
+    if (color_TxMsg.isValid()) ownTransmissionBackground_ = color_TxMsg.name();
     QString t;
     QString t1=" @ ";
     QString t2;
@@ -961,12 +1110,18 @@ void DisplayText::displayTransmittedText(QString text, QString myCall, QString h
     t2 = QString::asprintf("%4d",txFreq);
     if(modeTx=="FT8") t1=" ~ ";
     else if(modeTx=="FT4") t1=" : ";
+    else if(modeTx=="FT2") t1=" + ";
+    else if(modeTx=="Q65") t1=" : ";
+    else if(modeTx=="MSK144") t1=" & ";
     else if(modeTx=="JT65") t1=" # ";
     else if(modeTx=="T10") t1=" + ";
     
     QStringList txs = t.split ("; ");
     for (int i=0; i<txs.size(); i++) {
-        if(modeTx.startsWith("FT")) {
+        if(modeTx=="Q65" || modeTx=="MSK144") {
+          t=QDateTime::currentDateTimeUtc().toString("hhmmss")+"  Tx      "+t2+t1+txs.at(i).left(37);
+          t=t.leftJustified(60,' ');
+        } else if(modeTx.startsWith("FT")) {
           t = QDateTime::currentDateTimeUtc().toString("hhmmss") + \
             "  Tx      " + t2 + t1 + txs.at(i).left(24);
           t = t.leftJustified(49,' ');
@@ -1050,13 +1205,16 @@ void DisplayText::displayTransmittedText(QString text, QString myCall, QString h
             mystatus_ = status;
             qsoHistory.message(call,status,0,param,tyyp,"","",ttime,"",txFreq,modeTx);
           }
-        if (wastx_ && ttime - last_tx < 2 && hide_TX_messages_)
-            appendText(t,bg,Radio::convert_dark("#000000",useDarkStyle_),0," ",Radio::convert_dark("#000000",useDarkStyle_)," ",false,false,false,false,true);
-        else
-            appendText(t,bg,Radio::convert_dark("#000000",useDarkStyle_),0," ",Radio::convert_dark("#000000",useDarkStyle_));
+        if (display) displayOwnText(t,wastx_ && ttime-last_tx<2 && hide_TX_messages_);
     }
-    wastx_ = true;
+    wastx_ = display;
     last_tx = ttime;
+}
+
+void DisplayText::displayOwnText(QString const& text, bool overwrite)
+{
+    auto const foreground = qGray(QColor(ownTransmissionBackground_).rgb()) < 128 ? "#ffffff" : "#000000";
+    appendText(text,ownTransmissionBackground_,foreground,0," ",foreground," ",false,false,false,false,overwrite);
 }
 
 void DisplayText::displayQSY(QString text)

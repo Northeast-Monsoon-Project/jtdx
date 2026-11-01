@@ -2,6 +2,7 @@
 #define CONFIGURATION_HPP_
 #include "McpServer.hpp"
 #include "ManagedMode.hpp"
+#include "StationProfiles.hpp"
 
 #include <QObject>
 #include <QFont>
@@ -94,6 +95,9 @@ public:
   bool restart_audio_output () const;
   bool restart_tci () const;
   QString my_callsign () const;
+  QList<StationProfile> station_profiles() const;
+  bool station_switch_allowed() const;
+  bool select_station(QString const& callsign);
   void set_station_locked(bool locked);
   QString my_grid () const;
   QDir log_directory() const;
@@ -226,6 +230,47 @@ public:
   bool hide_TX_messages () const;
   bool split_mode () const;
   bool decode_at_52s () const;
+  // WSJT-X 3.0.2 General-tab features; these never authorize transmission.
+  bool DXCC () const;
+  bool highlight_DXcall () const;
+  bool highlight_DXgrid () const;
+  bool show_country_names () const;
+  bool ppfx () const;
+  bool decodes_from_top () const;
+  bool detailed_blank () const;
+  bool enable_VHF_features () const;
+  bool alternate_bindings () const;
+  bool quick_call () const;
+  bool disable_TX_on_73 () const;
+  void set_disable_TX_on_73 (bool);
+  bool auto_astro () const;
+  bool force_call_1st () const;
+  bool repeat_Tx () const;
+  bool kHz_without_k () const;
+  bool single_decode () const;
+  bool tune_watchdog () const;
+  int tune_watchdog_time () const;
+  bool progressBar_red () const;
+  bool set_RXtoTX () const;
+  bool showDistance () const;
+  bool erase_BandActivity () const;
+  void set_erase_BandActivity (bool);
+  bool clear_DXcall () const;
+  bool clear_DXgrid () const;
+  bool GridMap () const;
+  bool GridMapAll () const;
+  bool align () const;
+  int align_steps () const;
+  int align_steps2 () const;
+  bool alternate_erase_button () const;
+  bool Wait_features_enabled () const;
+  bool showAzimuth () const;
+  bool button_coloring_disabled () const;
+  bool full_duplex () const;
+  void set_full_duplex (bool);
+  double eme_delay () const;
+  bool PWR_and_SWR () const;
+  bool check_SWR () const;
   bool beepOnMyCall () const;
   bool beepOnNewCQZ () const;
   bool beepOnNewITUZ () const;
@@ -334,6 +379,8 @@ public:
   // Set/unset Audio streaming for TCI.
   //
   Q_SLOT void transceiver_audio (bool = false);
+  // PCM forwarding does not enable the rig or assert PTT. Empty PCM stops it.
+  Q_SLOT void transceiver_tx_pcm (QByteArray const&,quint64 generation=0);
 
   // Set/unset Tune for TCI.
   //
@@ -349,7 +396,7 @@ public:
 
   // Set modulation start TCI audio
   //
-  Q_SLOT void transceiver_modulator_start (unsigned = 79, double = 1920.0, double = 1500.0, double = -3.0, bool = true, double = 99., double = 60.0);
+  Q_SLOT void transceiver_modulator_start (unsigned = 79, double = 1920.0, double = 1500.0, double = -3.0, bool = true, double = 99., double = 60.0, quint64 generation=0);
 
   // Set modulation start TCI audio
   //
@@ -387,6 +434,8 @@ public:
   // for the decoded text.
   //
   Q_SIGNAL void decoded_text_font_changed (QFont);
+  // The updater helper waits for normal application shutdown before replacement.
+  Q_SIGNAL void hamlib_restart_requested ();
 
   //
   // This signal is emitted when the UDP server changes
@@ -404,6 +453,10 @@ public:
   Q_SIGNAL void transceiver_update (Transceiver::TransceiverState const&) const;
   Q_SIGNAL void transceiver_TCIframesWritten (qint64) const;
   Q_SIGNAL void transceiver_TCImodActive (bool) const;
+  Q_SIGNAL void transceiver_timed_pcm (QByteArray const&, qint64 endUtcMs) const;
+  Q_SIGNAL void transceiver_tx_pcm_finished () const;
+  Q_SIGNAL void transceiver_waveform_consumed (quint64 generation) const;
+  Q_SIGNAL void transceiver_waveform_started (quint64 generation) const;
 
   // Signals a failure of a control rig CAT or PTT connection.
   //

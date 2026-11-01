@@ -1,12 +1,14 @@
 subroutine ft8apset(lmycallstd,lhiscallstd,numthreads)
 
   use packjt77
-  use ft8_mod1, only : apsym,mycall,hiscall,apsymsp,lhound,apsymdxns1,apsymdxnsrrr,mybcall,hisbcall,apcqsym,hisgrid4,     &
+  use ft8_mod1, only : apsym,apsymtype,mycall,hiscall,apsymsp,lhound,apsymdxns1,apsymdxnsrrr,mybcall,hisbcall,apcqsym,hisgrid4, &
                        apsymdxnsrr73,apsymdxns73,apsymmyns1,apsymmyns2,apsymmynsrr73,apsymmyns73,apsymdxstd,apsymdxnsr73, &
                        apsymdxns732,apsymmynsrrr
   character*77 c77
   character*37 msg,msgchk
   character*12 hiscallt,mycallprev,hiscallprev
+  character*4 gridprev
+  data gridprev/'    '/
   logical lnohiscall,unpk77_success,first
   logical(1) lhoundprev
   logical(1), intent(in) :: lmycallstd,lhiscallstd
@@ -14,11 +16,18 @@ subroutine ft8apset(lmycallstd,lhiscallstd,numthreads)
   data hiscallprev/'QQ1QQ'/
   data lhoundprev/.false./
   data first/.true./
-  save hiscallprev,mycallprev,lhoundprev,first
+  save hiscallprev,mycallprev,lhoundprev,first,gridprev
 
-  if(hiscall.ne.hiscallprev .or. mycall.ne.mycallprev .or. (lhound.neqv.lhoundprev) .or. first) then ! first for lhound triggered
+  if(hiscall.ne.hiscallprev .or. mycall.ne.mycallprev .or. hisgrid4.ne.gridprev .or. &
+     (lhound.neqv.lhoundprev) .or. first) then
 
-    first=.false.; mycallprev=mycall; lhoundprev=lhound
+    first=.false.; mycallprev=mycall; lhoundprev=lhound; gridprev=hisgrid4
+    ! Never leave a valid-looking template for a previous station after an
+    ! unsupported message fails to pack. ft8b validates every pinned AP bit.
+    apsym=99; apsymtype=0; apcqsym=99; apsymsp=99; apsymdxstd=99
+    apsymdxns1=99; apsymdxnsrrr=99; apsymdxnsrr73=99; apsymdxns73=99
+    apsymdxnsr73=99; apsymdxns732=99; apsymmyns1=99; apsymmyns2=99
+    apsymmynsrrr=99; apsymmynsrr73=99; apsymmyns73=99
 
 ! shall hash both callsigns for making AP masks with nonstandard callsign message
     if(.not.lhound) call fillhash(numthreads,.true.)
@@ -30,8 +39,7 @@ subroutine ft8apset(lmycallstd,lhiscallstd,numthreads)
       lnohiscall=.true.
     endif
 
-    if(hiscall.ne.hiscallprev) then
-      hiscallprev=hiscall
+    hiscallprev=hiscall
 ! Encode a dummy standard message: i3=1, 28 1 28 1 1 15
       if(len_trim(hiscall).gt.2) then
         if(lhiscallstd .and. len_trim(hisgrid4).eq.4) then; msg='CQ '//trim(hiscall)//' '//trim(hisgrid4)
@@ -41,7 +49,8 @@ subroutine ft8apset(lmycallstd,lhiscallstd,numthreads)
         call pack77(msg,i3,n3,c77,0)
         call unpack77(c77,1,msgchk,unpk77_success,25)
 !read(c77(75:77),'(b3)') k3; print *,'i3 =',k3; print *,msgchk
-        if(lhiscallstd .and. i3.ne.1 .or. .not.lhiscallstd .and. i3.ne.4 .or. (msg.ne.msgchk) .or. .not.unpk77_success) go to 1
+        if(lhiscallstd .and. (i3.ne.1.and.i3.ne.2) .or. .not.lhiscallstd .and. i3.ne.4 .or. &
+           (msg.ne.msgchk) .or. .not.unpk77_success) go to 1
         read(c77,'(77i1)',err=1) apcqsym(1:77)
         apcqsym=2*apcqsym-1
       endif
@@ -52,7 +61,7 @@ subroutine ft8apset(lmycallstd,lhiscallstd,numthreads)
         call pack77(msg,i3,n3,c77,0)
         call unpack77(c77,1,msgchk,unpk77_success,25)
 !read(c77(75:77),'(b3)') k3; print *,'i3 =',k3; print *,msgchk
-        if(i3.ne.1 .or. (msg.ne.msgchk) .or. .not.unpk77_success) go to 2
+        if((i3.ne.1.and.i3.ne.2) .or. (msg.ne.msgchk) .or. .not.unpk77_success) go to 2
         read(c77,'(58i1)',err=2) apsymdxstd(1:58)
         apsymdxstd=2*apsymdxstd-1
       endif
@@ -75,7 +84,6 @@ subroutine ft8apset(lmycallstd,lhiscallstd,numthreads)
         read(c77,'(77i1)',err=4) apsymdxns73(1:77)
         apsymdxns73=2*apsymdxns73-1
       endif
-    endif
 
     if(.not.lhound .and. .not.lmycallstd .and. len_trim(mycall).gt.2) then
       if(lhiscallstd) then
@@ -125,8 +133,10 @@ subroutine ft8apset(lmycallstd,lhiscallstd,numthreads)
       call pack77(msg,i3,n3,c77,0)
       call unpack77(c77,1,msgchk,unpk77_success,25)
 !read(c77(75:77),'(b3)') k3; print *,'i3 =',k3; print *,msgchk
-      if(i3.ne.1 .or. (msg.ne.msgchk) .or. .not.unpk77_success) go to 9
+      if((i3.ne.1.and.i3.ne.2) .or. (msg.ne.msgchk) .or. .not.unpk77_success) go to 9
       read(c77,'(58i1)',err=9) apsym(1:58)
+      read(c77(75:77),'(3i1)',err=9) apsymtype
+      apsymtype=2*apsymtype-1
       apsym=2*apsym-1; if(lnohiscall) apsym(30)=99
     endif
 
@@ -214,3 +224,52 @@ subroutine ft8apset(lmycallstd,lhiscallstd,numthreads)
 
   return
 end subroutine ft8apset
+
+! Complete the type bits of standard AP templates after their payload/tail has
+! been installed. /P is Type2, /R is Type1: the suffix flags alone cannot tell
+! a decoder which one was transmitted. Never reinterpret Type4/Fox masks.
+subroutine ft8_apply_ap_type(iaptype,lmycallstd,lhiscallstd,apmag,apmask,llr)
+  use ft8_mod1, only: apsymtype,apcqsym,lhound
+  implicit none
+  integer, intent(in) :: iaptype
+  logical(1), intent(in) :: lmycallstd,lhiscallstd
+  real, intent(in) :: apmag
+  integer*1, intent(in) :: apmask(174)
+  real, intent(inout) :: llr(174)
+  integer :: typebits(3)
+  if(lhound.or.any(apmask(75:77).ne.1)) return
+  select case(iaptype)
+  case(2)
+    ! My-call-only AP is also used while DX Call is empty. ft8apset generates
+    ! its valid first 29 bits using a dummy second call in that case.
+    if(.not.lmycallstd) return
+    typebits=apsymtype
+  case(3:6)
+    if(.not.lmycallstd.or..not.lhiscallstd) return
+    typebits=apsymtype
+  case(31,35,36)
+    if(.not.lhiscallstd.or.abs(apcqsym(1)).ne.1) return
+    typebits=apcqsym(75:77)
+  case default
+    return
+  end select
+  if(any(abs(typebits).ne.1)) return
+  llr(75:77)=apmag*typebits
+end subroutine ft8_apply_ap_type
+
+! Invalid/uninitialized AP caches contain 99 or zero. They are sentinels, not
+! stronger evidence. Skip those hypotheses instead of feeding fabricated LLRs
+! to BP/OSD. Unhinted decoding remains available through its normal passes.
+logical function ft8_ap_mask_valid(apmag,apmask,llr) result(valid)
+  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite
+  implicit none
+  real, intent(in) :: apmag,llr(174)
+  integer*1, intent(in) :: apmask(174)
+  valid=.false.
+  if(.not.ieee_is_finite(apmag).or.apmag.le.0.) return
+  if(.not.any(apmask.eq.1)) return
+  if(any(apmask.ne.0.and.apmask.ne.1)) return
+  if(any(apmask.eq.1.and..not.ieee_is_finite(llr))) return
+  if(any(apmask.eq.1.and.abs(abs(llr)-apmag).gt.apmag*1.e-5)) return
+  valid=.true.
+end function ft8_ap_mask_valid

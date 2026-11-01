@@ -1,5 +1,6 @@
 #include "logqso.h"
 #include "OperatorLog.hpp"
+#include "LogForwarder.hpp"
 
 #include <QTcpSocket>
 #include <QString>
@@ -25,6 +26,20 @@ LogQSO::LogQSO(QSettings * settings, Configuration const * config, JTDXDateTime 
   , m_jtdxtime {jtdxtime}
 {
   ui->setupUi(this);
+  ui->start_date_time->setTimeSpec(Qt::UTC);
+  ui->end_date_time->setTimeSpec(Qt::UTC);
+  auto propagation=new QFormLayout;
+  m_propagation=new QComboBox(this);m_propagation->setObjectName("log_propagation");
+  m_propagation->addItem(tr("Unspecified"),"");m_propagation->addItem(tr("Satellite"),"SAT");
+  m_propagation->addItem(tr("Earth–Moon–Earth"),"EME");m_propagation->addItem(tr("Meteor scatter"),"MS");m_propagation->addItem(tr("Tropospheric"),"TR");
+  m_satellite=new QLineEdit(this);m_satellite->setObjectName("log_satellite");m_satellite->setMaxLength(32);
+  m_satMode=new QLineEdit(this);m_satMode->setObjectName("log_satellite_mode");m_satMode->setMaxLength(16);m_satMode->setPlaceholderText("U/V, V/U, S/X…");
+  m_receiveFrequency=new QDoubleSpinBox(this);m_receiveFrequency->setObjectName("log_rx_frequency");m_receiveFrequency->setDecimals(6);m_receiveFrequency->setRange(0,1000000);m_receiveFrequency->setSuffix(" MHz");m_receiveFrequency->setSpecialValueText(tr("Unspecified"));
+  m_keepPropagation=new QCheckBox(tr("Remember propagation and satellite"),this);
+  m_keepPropagation->setObjectName("log_remember_propagation");
+  propagation->addRow(tr("Propagation"),m_propagation);propagation->addRow(tr("Satellite name"),m_satellite);propagation->addRow(tr("Satellite mode"),m_satMode);propagation->addRow(tr("Receive frequency"),m_receiveFrequency);propagation->addRow(m_keepPropagation);
+  ui->verticalLayout_11->insertLayout(ui->verticalLayout_11->count()-1,propagation);
+  connect(m_propagation,QOverload<int>::of(&QComboBox::currentIndexChanged),this,[this]{bool satellite=m_propagation->currentData()=="SAT";m_satellite->setEnabled(satellite);m_satMode->setEnabled(satellite);});
   ui->buttonBox->button(QDialogButtonBox::Ok)->setText(tr("&OK"));
   ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("&Cancel"));
 //  setWindowTitle("JTDX " + versnumber.simplified () + " - Log QSO");
@@ -47,6 +62,12 @@ void LogQSO::loadSettings ()
   m_txPower = m_settings->value ("TxPower", "").toString ();
   m_comments = m_settings->value ("LogComments", "").toString();
   m_eqslcomments = m_settings->value ("LogEQSLComments", "").toString();
+  m_keepPropagation->setChecked(m_settings->value("SavePropagation",false).toBool());
+  if(m_keepPropagation->isChecked()) {
+    m_propagation->setCurrentIndex(qMax(0,m_propagation->findData(m_settings->value("Propagation",""))));
+    m_satellite->setText(m_settings->value("Satellite","").toString());m_satMode->setText(m_settings->value("SatelliteMode","").toString());m_receiveFrequency->setValue(m_settings->value("ReceiveFrequency",0).toDouble());
+  }
+  m_satellite->setEnabled(m_propagation->currentData()=="SAT");m_satMode->setEnabled(m_propagation->currentData()=="SAT");
   m_settings->endGroup ();
 }
 
@@ -60,15 +81,20 @@ void LogQSO::storeSettings () const
   m_settings->setValue ("TxPower", m_txPower);
   m_settings->setValue ("LogComments", m_comments);
   m_settings->setValue ("LogEQSLComments", m_eqslcomments);
+  m_settings->setValue("SavePropagation",m_keepPropagation->isChecked());m_settings->setValue("Propagation",m_propagation->currentData());m_settings->setValue("Satellite",m_satellite->text());m_settings->setValue("SatelliteMode",m_satMode->text());m_settings->setValue("ReceiveFrequency",m_receiveFrequency->value());
   m_settings->endGroup ();
 }
 
 void LogQSO::initLogQSO(QString const& hisCall, QString const& hisGrid, QString mode,
                         QString const& rptSent, QString const& rptRcvd, QString const& distance,
                         QString const& name, QDateTime const& dateTimeOn, QDateTime const& dateTimeOff,
-                        Radio::Frequency dialFreq, bool autologging)
+                        Radio::Frequency dialFreq, bool autologging,Radio::Frequency receiveFrequency)
 {
   m_send_to_eqsl=m_config->send_to_eqsl();
+  if(!m_keepPropagation->isChecked()) {m_propagation->setCurrentIndex(0);m_satellite->clear();m_satMode->clear();m_receiveFrequency->setValue(0);}
+  // Remembering the satellite must not carry a previous QSO's RX frequency
+  // into a same-frequency contact or one without a valid RX reading.
+  m_receiveFrequency->setValue(receiveFrequency>0 && receiveFrequency!=dialFreq ? receiveFrequency/1.e6 : 0);
   ui->call->setText(hisCall);
   ui->grid->setText(hisGrid);
   ui->name->setText(name);
@@ -97,8 +123,8 @@ void LogQSO::initLogQSO(QString const& hisCall, QString const& hisGrid, QString 
   ui->mode->setText(mode);
   ui->sent->setText(rptSent);
   ui->rcvd->setText(rptRcvd);
-  ui->start_date_time->setDateTime (dateTimeOn);
-  ui->end_date_time->setDateTime (dateTimeOff);
+  ui->start_date_time->setDateTime (dateTimeOn.toUTC());
+  ui->end_date_time->setDateTime (dateTimeOff.toUTC());
   m_dialFreq=dialFreq;
   m_myCall=m_config->my_callsign();
   m_myGrid=m_config->my_grid();
@@ -116,6 +142,13 @@ void LogQSO::initLogQSO(QString const& hisCall, QString const& hisGrid, QString 
   }
 }
 
+void LogQSO::updateSignoffSnapshot(QDateTime const& end,QString const& sent,QString const& received)
+{
+  ui->end_date_time->setDateTime(end.toUTC());
+  if(!sent.isEmpty())ui->sent->setText(sent);
+  if(!received.isEmpty())ui->rcvd->setText(received);
+}
+
 void LogQSO::accept()
 {
   QString hisCall,hisGrid,mode,rptSent,rptRcvd,time,band;
@@ -125,8 +158,8 @@ void LogQSO::accept()
   mode=ui->mode->text();
   rptSent=ui->sent->text();
   rptRcvd=ui->rcvd->text();
-  m_dateTimeOn = ui->start_date_time->dateTime ();
-  m_dateTimeOff = ui->end_date_time->dateTime ();
+  m_dateTimeOn = ui->start_date_time->dateTime ().toUTC();
+  m_dateTimeOff = ui->end_date_time->dateTime ().toUTC();
   band=ui->band->text();
   name=ui->name->text();
   m_txPower=ui->txPower->text();
@@ -135,12 +168,21 @@ void LogQSO::accept()
   eqslcomments=ui->eqslcomments->text();
   m_eqslcomments=eqslcomments;
   QString strDialFreq(QString::number(m_dialFreq / 1.e6,'f',6));
+  QMap<QString,QString> propagation;
+  if(!m_propagation->currentData().toString().isEmpty())propagation["PROP_MODE"]=m_propagation->currentData().toString();
+  if(propagation.value("PROP_MODE")=="SAT") {
+    propagation["SAT_NAME"]=m_satellite->text().trimmed().toUpper();propagation["SAT_MODE"]=m_satMode->text().trimmed().toUpper();
+  }
+  if(m_receiveFrequency->value()>0) {
+    propagation["FREQ_RX"]=QString::number(m_receiveFrequency->value(),'f',6);
+    propagation["BAND_RX"]=m_config->bands()->find(qRound64(m_receiveFrequency->value()*1e6));
+  }
 
   //Log this QSO to ADIF file "wsjtx_log.adi"
   ADIF adifile;
   auto adifilePath = OperatorLog::quarterFile(m_myCall,m_dateTimeOn.toUTC().date());
   adifile.init(adifilePath);
-  if (!adifile.addQSOToFile(hisCall,hisGrid,mode,rptSent,rptRcvd,m_dateTimeOn,m_dateTimeOff,band,comments,name,strDialFreq,m_myCall,m_myGrid,m_txPower,m_send_to_eqsl))
+  if (!adifile.addQSOToFile(hisCall,hisGrid,mode,rptSent,rptRcvd,m_dateTimeOn,m_dateTimeOff,band,comments,name,strDialFreq,m_myCall,m_myGrid,m_txPower,m_send_to_eqsl,propagation))
   {
       JTDXMessageBox::information_message(0,"","Cannot open file \"" + adifilePath + "\".");
       return; // Never report a QSO as saved when the write failed.
@@ -159,7 +201,7 @@ void LogQSO::accept()
     }
     myadif+=" <CALL:" + QString::number(hisCall.length()) + ">" + hisCall;
     myadif+=" <FREQ:" + QString::number(strDialFreq.length()) + ">" + strDialFreq;
-    if (mode == "FT4") myadif+=" <MODE:4>MFSK <SUBMODE:"  + QString::number(mode.length()) + ">" + mode;
+    if (mode == "FT4" || mode == "FT2" || mode == "JTTY" || mode == "Q65") myadif+=" <MODE:4>MFSK <SUBMODE:"  + QString::number(mode.length()) + ">" + mode;
     else myadif+=" <MODE:"  + QString::number(mode.length()) + ">" + mode;
     myadif+=" <QSO_DATE:8>" + m_dateTimeOn.date().toString("yyyyMMdd");
     myadif+=" <TIME_ON:6>" + m_dateTimeOn.time().toString("hhmmss");
@@ -182,6 +224,7 @@ void LogQSO::accept()
     if (m_send_to_eqsl) {
       myadif+=" <EQSL_QSL_SENT:1>Y <EQSL_QSLSDATE:8>" + m_jtdxtime->currentDateTimeUtc2().toString("yyyyMMdd");
     }
+    for(auto it=propagation.cbegin();it!=propagation.cend();++it)if(!it.value().isEmpty())myadif+=" <"+it.key()+":"+QString::number(it.value().size())+">"+it.value();
     myadif+=" <EOR> ";
     myadif2 = myadif.trimmed().toUtf8();
 
@@ -189,68 +232,10 @@ void LogQSO::accept()
   
   myadif="<command:3>Log <parameters:" + QString::number(myadif.length()) + "> " + myadif;
   myadif2 = myadif.toUtf8();
-  if (m_enable_tcp_connection){
-    QTcpSocket socket;
-    QFile f2 {OperatorLog::directory(m_myCall).absoluteFilePath("tcptrace.txt")};
-    bool fopen = false;
-    if(m_debug) { 
-      if(f2.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) fopen = true;
-      else {
-      JTDXMessageBox::warning_message (0, "", " File Open Error "
-                                  , tr ("Cannot open \"%1\" for append: %2")
-                                  .arg (f2.fileName ()).arg (f2.errorString ()));
-      }
-    }
-    if(fopen)  { QTextStream out2(&f2); out2 << m_jtdxtime->currentDateTimeUtc2().toString("yyyyMMdd_hhmmss.zzz") << "(" << m_jtdxtime->GetOffset() << ")" << " Connecting to " << m_tcp_server_name << ":" << m_tcp_server_port <<
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-                 endl;
-#else
-                 Qt::endl;
-#endif
- }
-    socket.connectToHost(m_tcp_server_name, m_tcp_server_port);
-    if (socket.waitForConnected(1000)) {
-      socket.write(myadif2);
-      if(fopen) { QTextStream out2(&f2); out2 << m_jtdxtime->currentDateTimeUtc2().toString("yyyyMMdd_hhmmss.zzz") << "(" << m_jtdxtime->GetOffset() << ")" << " Host connected, sent message: " << myadif2 <<
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-                 endl;
-#else
-                 Qt::endl;
-#endif
- }
-      if (socket.waitForReadyRead(1000)){
-        myadif2 = socket.readAll();
-        if(fopen) { QTextStream out2(&f2); out2 << m_jtdxtime->currentDateTimeUtc2().toString("yyyyMMdd_hhmmss.zzz") << "(" << m_jtdxtime->GetOffset() << ")" << " Received response from host: " << myadif2 <<
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-                 endl;
-#else
-                 Qt::endl;
-#endif
- }
-        if (myadif2.left(3) == "NAK") {
-          JTDXMessageBox::critical_message(0, "",myadif2 + " QSO data rejected by external software");
-        }
-      } else {
-      if(fopen) { QTextStream out2(&f2); out2 << m_jtdxtime->currentDateTimeUtc2().toString("yyyyMMdd_hhmmss.zzz") << "(" << m_jtdxtime->GetOffset() << ")" << " Getting response from host is timed out" <<
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-                 endl;
-#else
-                 Qt::endl;
-#endif
- }
-      }  
-      socket.close();
-    } else {
-      if(fopen) { QTextStream out2(&f2); out2 << m_jtdxtime->currentDateTimeUtc2().toString("yyyyMMdd_hhmmss.zzz") << "(" << m_jtdxtime->GetOffset() << ")" << " Host connection timed out" <<
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-                 endl;
-#else
-                 Qt::endl;
-#endif
- }
-      JTDXMessageBox::critical_message(0, "", "TCP QSO data transfer: " + socket.errorString());
-    }
-    if(fopen) f2.close();
+  if(m_enable_tcp_connection) {
+    auto sender=new LogForwarder(m_tcp_server_name,m_tcp_server_port,myadif2,
+        m_debug?OperatorLog::directory(m_myCall).filePath("tcptrace.txt"):QString{},this);
+    connect(sender,&LogForwarder::finished,this,[this](QString const& error){if(!error.isEmpty())emit forwardingError(error);});
   }
   QDialog::accept();
 }

@@ -125,7 +125,9 @@ int OmniRigTransceiver::do_start (JTDXDateTime * jtdxtime)
   m_jtdxtime = jtdxtime;
   if (wrapped_) wrapped_->start (0,m_jtdxtime);
 
-  CoInitializeEx (nullptr, 0 /*COINIT_APARTMENTTHREADED*/); // required because Qt only does this for GUI thread
+  auto comResult = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+  if (FAILED(comResult)) throw_qstring(tr("OmniRig: cannot initialize COM"));
+  com_initialized_ = true;
 
   omni_rig_.reset (new OmniRig::OmniRigX {this});
   if (omni_rig_->isNull ())
@@ -230,75 +232,11 @@ int OmniRigTransceiver::do_start (JTDXDateTime * jtdxtime)
       rig_->SetVfo (OmniRig::PM_VFOA);
     }
   f = state ().frequency ();
-  if (f % 10) return resolution; // 1Hz resolution
-  auto test_frequency = f - f % 100 + 55;
-  if (OmniRig::PM_FREQ & writable_params_)
-    {
-      rig_->SetFreq (test_frequency);
-    }
-  else if (reversed_ && (OmniRig::PM_FREQB & writable_params_))
-    {
-      rig_->SetFreqB (test_frequency);
-    }
-  else if (!reversed_ && (OmniRig::PM_FREQA & writable_params_))
-    {
-      rig_->SetFreqA (test_frequency);
-    }
-  else
-    {
-      throw_qstring (tr ("OmniRig: don't know how to set rig frequency"));
-    }
-  if (!await_notification_with_timeout (1000))
-    {
-      TRACE_CAT ("OmniRigTransceiver", "do_start 1: wait timed out");
-      throw_qstring (tr ("OmniRig: timeout waiting for update from rig"));
-    }
-  switch (rig_->GetRxFrequency () - test_frequency)
-    {
-    case -5: resolution = -1; break;  // 10Hz truncated
-    case 5: resolution = 1; break;    // 10Hz rounded
-    case -15: resolution = -2; break; // 20Hz truncated
-    case -55: resolution = -2; break; // 100Hz truncated
-    case 45: resolution = 2; break;   // 100Hz rounded
-    }
-  if (1 == resolution)  // may be 20Hz rounded
-    {
-      test_frequency = f - f % 100 + 51;
-      if (OmniRig::PM_FREQ & writable_params_)
-        {
-          rig_->SetFreq (test_frequency);
-        }
-      else if (reversed_ && (OmniRig::PM_FREQB & writable_params_))
-        {
-          rig_->SetFreqB (test_frequency);
-        }
-      else if (!reversed_ && (OmniRig::PM_FREQA & writable_params_))
-        {
-          rig_->SetFreqA (test_frequency);
-        }
-      if (!await_notification_with_timeout (2000))
-        {
-          TRACE_CAT ("OmniRigTransceiver", "do_start 2: wait timed out");
-          throw_qstring (tr ("OmniRig: timeout waiting for update from rig"));
-        }
-      if (9 == rig_->GetRxFrequency () - test_frequency)
-        {
-          resolution = 2;   // 20Hz rounded
-        }
-    }
-  if (OmniRig::PM_FREQ & writable_params_)
-    {
-      rig_->SetFreq (f);
-    }
-  else if (reversed_ && (OmniRig::PM_FREQB & writable_params_))
-    {
-      rig_->SetFreqB (f);
-    }
-  else if (!reversed_ && (OmniRig::PM_FREQA & writable_params_))
-    {
-      rig_->SetFreqA (f);
-    }
-  update_rx_frequency (f);
+  // WSJT-X 3.0.2 disables the frequency-resolution probe for OmniRig 1.20.
+  // Do not transmit speculative frequency changes during startup: delayed
+  // CAT notifications can otherwise leave a slow rig at the test frequency.
+  if (!f) throw_qstring(tr("OmniRig: no valid receive frequency was reported"));
+  update_rx_frequency(f);
   return resolution;
 }
 
@@ -326,8 +264,10 @@ void OmniRigTransceiver::do_stop ()
         }
       omni_rig_->clear ();
       omni_rig_.reset ();
-      CoUninitialize ();
+
     }
+  if (com_initialized_) { CoUninitialize(); com_initialized_ = false; }
+
   if (wrapped_) wrapped_->stop ();
   TRACE_CAT ("OmniRigTransceiver", "stopped");
 }

@@ -1,0 +1,29 @@
+JTDX-F V3.6.3 — Yaesu FT-450（非 D）功率读数
+
+用户现象：电台设置/显示 80 W，而 JTDX-F 显示约 28 W。
+
+已证实的软件问题
+随包 Hamlib 4.7.2 的 FT-450 后端提供 RFPOWER_METER（归一化输出功率表），没有声明 RFPOWER_METER_WATTS。
+原程序只识别直接瓦数功率表，忽略前一种接口，因而对 FT-450 退回 RFPOWER 设定控制值：读取 PC;，按控制值/255 归一化，再经 Hamlib 的 100 W 满量程换算。这个来源不是 RM5; 输出功率表，不能把它当成实际输出功率。
+FT-450 的官方 CAT 手册将 PC 定义为功率控制，参数 000–255；RM5 才是 PO 表读数。不能凭用户一次反馈，把所有 FT-450 读数乘以 80/28。
+
+本版修复
+1. 来源优先级为直接瓦数表 → 归一化输出表 → 设定值估算。FT-450 现在选择归一化输出表，由 Hamlib 发出 RM5; 并应用其 FT-450 校准表。
+2. 归一化输出表表示最大功率的比例：向 Hamlib 查询当前频率/模式的满量程，再乘表读数。设定控制值仍按其原有转换接口处理，避免把非线性控制曲线应用于百分比表。
+3. 已有功率表但本次读取失败时返回不可用，不拿设定值冒充测量；NaN、无穷、负数及越界读数也不使用。
+4. 不改电台功率、音频输出滑块、PTT 或 SWR 停发门限，不改 Hamlib DLL，也不复制 FT-450D 或其他机型校准数据。
+
+验证与限制
+RigPower 专项测试检查所有能力组合的来源优先级、实际加载的 FT-450 能力表、80%×100 W=80 W、非线性控制和功率表的区别、错误及非法数值。测试只读后端能力，不打开串口或发射。
+此项修正了可证实的错误数据来源；尚未取得用户那台电台的原始 PC/RM5 CAT 回复，不能断言精确的 28 W 数字已在实机复现。PO 转换仍依赖 Hamlib 校准表，实际显示需与电台 PO 表/外部功率计比较；设置 80 W 本身也不保证当前音频驱动下必然输出 80 W。
+验证运行结果以本版发行验证记录为准。
+
+一手资料
+Yaesu FT-450 CAT Operation Reference Book，第 13 页 PC、第 15 页 RM：
+https://www.yaesu.com/Files/4CB893D7-1018-01AF-FA97E9E9AD48B50C/FT-450_CAT_Operation_Reference_Book.pdf
+Hamlib 4.7.2 FT-450 能力及专属输出表：
+https://github.com/Hamlib/Hamlib/blob/4.7.2/rigs/yaesu/ft450.h
+Hamlib 4.7.2 newcat：PC/RM5 命令、RFPOWER_METER 校准和 power2mW：
+https://github.com/Hamlib/Hamlib/blob/4.7.2/rigs/yaesu/newcat.c
+RFPOWER_METER 与 RFPOWER_METER_WATTS 的接口定义：
+https://github.com/Hamlib/Hamlib/blob/4.7.2/include/hamlib/rig.h

@@ -53,7 +53,7 @@ class McpTransport(unittest.TestCase):
                                               'clientInfo': {'name': 'test', 'version': '1'}})
         self.assertEqual(status, 200)
         self.assertEqual(data['result']['serverInfo']['name'], 'JTDX-F')
-        self.assertEqual(len(self.rpc('tools/list')[1]['result']['tools']), 21)
+        self.assertEqual(len(self.rpc('tools/list')[1]['result']['tools']), 22)
         self.assertEqual(len(self.rpc('resources/list')[1]['result']['resources']), 5)
         self.assertEqual(self.rpc('resources/read', {'uri': 'jtdx://status'})[0], 200)
         self.assertEqual(self.rpc('prompts/get', {'name': 'operate_ft8'})[0], 200)
@@ -101,7 +101,7 @@ class McpTransport(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         lines = [json.loads(line) for line in result.stdout.splitlines()]
         self.assertEqual([line['id'] for line in lines], ['init', 2])
-        self.assertEqual(len(lines[1]['result']['tools']), 21)
+        self.assertEqual(len(lines[1]['result']['tools']), 22)
 
 
 if __name__ == '__main__':

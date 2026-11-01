@@ -24,6 +24,7 @@ QDebug operator << (QDebug d, Transceiver::TransceiverState const& s)
     << "; SYNCHRONIZE: " << (s.synchronize_ ? "on" : "off")
     << "; DBSNR: " << s.dbsnr_
     << "; TRPERIOD: " << s.trperiod_ << "sec."
+    << "; WAVEFORM_GENERATION: " << s.waveform_generation_
     << "; SPREAD: " << s.spread_
     << "; NSYM: " << s.nsym_
     << "; VOLUME: " << s.volume_
@@ -61,6 +62,7 @@ bool operator != (Transceiver::TransceiverState const& lhs, Transceiver::Transce
     || lhs.synchronize_ != rhs.synchronize_
     || lhs.dbsnr_ != rhs.dbsnr_
     || lhs.trperiod_ != rhs.trperiod_
+    || lhs.waveform_generation_ != rhs.waveform_generation_
     || lhs.spread_ != rhs.spread_
     || lhs.nsym_ != rhs.nsym_
     || lhs.volume_ != rhs.volume_

@@ -46,6 +46,43 @@
         <source>OK</source>
         <translation></translation>
     </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>Par JTDX-F</translation>
+    </message>
+    <message>
+        <source>JTDX-F is developed by the Fluxmancer team.&lt;br&gt;Based on JTDX and WSJT-X; upstream credits and GPLv3 are preserved.&lt;br&gt;&lt;br&gt;</source>
+        <translation>JTDX-F izstrādā Fluxmancer komanda.&lt;br&gt;Pamatā ir JTDX un WSJT-X; saglabāta atsauce uz sākotnējiem autoriem un GPLv3 licence.&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>JTDX-F is licensed under GNU GPLv3, without warranty.</source>
+        <translation>JTDX-F tiek izplatīts ar GNU GPLv3 licenci, bez garantijas.</translation>
+    </message>
+    <message>
+        <source>FT2 / SuperFox: additional integrations; source revisions are documented with the source code.</source>
+        <translation>FT2 / SuperFox: papildu integrācijas; pirmkoda versijas dokumentētas kopā ar kodu.</translation>
+    </message>
+    <message>
+        <source>FT8 / FT4: JTDX decoders, WSJT-X 3.0.2 protocol/waveforms, selected 3.3.0-beta5 performance/concurrency fixes, and Fluxmancer modern decoding.</source>
+        <translation>FT8 / FT4: JTDX dekoderi, WSJT-X 3.0.2 protokols un viļņu formas, atlasīti 3.3.0-beta5 veiktspējas un paralēlās apstrādes labojumi, kā arī Fluxmancer modernā dekodēšana.</translation>
+    </message>
+    <message>
+        <source>Hamlib (radio control): %1</source>
+        <translation>Hamlib (radio vadība): %1</translation>
+    </message>
+    <message>
+        <source>JTDX-F preserves JTDX's heritage and incorporates selected WSJT-X updates. Components retain their respective authors and licenses.</source>
+        <translation>JTDX-F saglabā JTDX mantojumu un iekļauj atlasītus WSJT-X atjauninājumus. Komponentiem saglabājas to autori un licences.</translation>
+    </message>
+    <message>
+        <source>Q65 / MSK144 / Echo and astronomical calculations: WSJT-X 3.0.2.</source>
+        <translation>Q65 / MSK144 / Echo un astronomiskie aprēķini: WSJT-X 3.0.2.</translation>
+    </message>
+    <message>
+        <source>WSPR: WSJT-X 3.0.2 decoder with 3.3.0-beta5 message validation and JTDX-F safety fixes.</source>
+        <translation>WSPR: WSJT-X 3.0.2 dekoderis ar 3.3.0-beta5 ziņojumu pārbaudi un JTDX-F drošības labojumiem.</translation>
+    </message>
+    <message><source>JTTY: WSJT-X 3.3.0-beta5 decoder with Fluxmancer integration.</source><translation>JTTY: WSJT-X 3.3.0-beta5 dekoderis ar Fluxmancer integrāciju.</translation></message>
 </context>
 <context>
     <name>CallsignDialog</name>
@@ -57,6 +94,10 @@
 </context>
 <context>
     <name>Configuration::impl</name>
+    <message>
+        <source>Own transmitted message</source>
+        <translation>Paša raidītais ziņojums</translation>
+    </message>
     <message>
         <location filename="../Configuration.cpp" line="1372"/>
         <source>&amp;OK</source>
@@ -321,6 +362,64 @@ Formāts:
         <location filename="../Configuration.cpp" line="6028"/>
         <source>Rig failure</source>
         <translation>Transīvers nereaģē</translation>
+    </message>
+    <message>
+        <source>Callsign management…</source>
+        <translation>Izsaukuma signālu pārvaldība…</translation>
+    </message>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Ievadiet derīgu NTP servera nosaukumu vai IP adresi.</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Automātiskais režīms</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization</source>
+        <translation>NTP laika sinhronizācija</translation>
+    </message>
+    <message>
+        <source>Current version: %1
+Previous version: %2</source>
+        <translation>Pašreizējā versija: %1
+Iepriekšējā versija: %2</translation>
+    </message>
+    <message>
+        <source>Halt Tx when SWR &gt; 2.5</source>
+        <translation>Apturēt TX, ja SWR &gt; 2,5</translation>
+    </message>
+    <message>
+        <source>Hamlib updates</source>
+        <translation>Hamlib atjauninājumi</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Nav</translation>
+    </message>
+    <message>
+        <source>Restart application</source>
+        <translation>Restartēt lietotni</translation>
+    </message>
+    <message>
+        <source>Restore previous Hamlib</source>
+        <translation>Atjaunot iepriekšējo Hamlib</translation>
+    </message>
+    <message>
+        <source>Stop transmission when a supported CAT radio reports SWR above 2.5. Unknown or unsupported readings are shown as unavailable. Protection also polls SWR when power display is off.</source>
+        <translation>Apturēt raidīšanu, ja atbalstīta CAT radio SWR pārsniedz 2,5. Nezināmi vai neatbalstīti rādījumi nav pieejami. Aizsardzība nolasa SWR arī tad, ja jaudas attēlošana ir izslēgta.</translation>
+    </message>
+    <message>
+        <source>Update Hamlib</source>
+        <translation>Atjaunināt Hamlib</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready to restore. Restart the application to apply it.</source>
+        <translation>Versija %1 ir gatava atjaunošanai. Lai to lietotu, restartējiet lietotni.</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready. Restart the application to apply it.</source>
+        <translation>Versija %1 ir gatava. Lai to lietotu, restartējiet lietotni.</translation>
     </message>
 </context>
 <context>
@@ -2485,6 +2584,18 @@ Error: %2 - %3</source>
         <source>Ham Radio Deluxe didn&apos;t respond to command &quot;%1&quot; as expected</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid frequency list</source>
+        <translation>Ham Radio Deluxe nosūtīja nederīgu frekvenču sarakstu</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid or incomplete reply</source>
+        <translation>Ham Radio Deluxe nosūtīja nederīgu vai nepilnīgu atbildi</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid radio list</source>
+        <translation>Ham Radio Deluxe nosūtīja nederīgu raiduztvērēju sarakstu</translation>
+    </message>
 </context>
 <context>
     <name>HamlibTransceiver</name>
@@ -2953,6 +3064,46 @@ Error: %2 - %3</source>
         <location filename="../logqso.cpp" line="222"/>
         <source>Cannot open &quot;%1&quot; for append: %2</source>
         <translation>Nevar atvērt &quot;%1&quot; lai pievienotu: %2&quot;</translation>
+    </message>
+    <message>
+        <source>Earth–Moon–Earth</source>
+        <translation>Zeme–Mēness–Zeme</translation>
+    </message>
+    <message>
+        <source>Meteor scatter</source>
+        <translation>Meteoru izkliede</translation>
+    </message>
+    <message>
+        <source>Propagation</source>
+        <translation>Izplatīšanās</translation>
+    </message>
+    <message>
+        <source>Receive frequency</source>
+        <translation>Uztveršanas frekvence</translation>
+    </message>
+    <message>
+        <source>Remember propagation and satellite</source>
+        <translation>Atcerēties izplatīšanās veidu un satelītu</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satelīts</translation>
+    </message>
+    <message>
+        <source>Satellite mode</source>
+        <translation>Satelīta režīms</translation>
+    </message>
+    <message>
+        <source>Satellite name</source>
+        <translation>Satelīta nosaukums</translation>
+    </message>
+    <message>
+        <source>Tropospheric</source>
+        <translation>Troposfēriska</translation>
+    </message>
+    <message>
+        <source>Unspecified</source>
+        <translation>Nav norādīts</translation>
     </message>
 </context>
 <context>
@@ -5220,6 +5371,310 @@ UDP server %2:%3</source>
         <source>WD %1m</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>A log import is already running.</source>
+        <translation>Žurnāls jau tiek importēts.</translation>
+    </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>Par JTDX-F</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC mednieks</translation>
+    </message>
+    <message>
+        <source>Decoder error: %1. TX stopped; restarting decoder.</source>
+        <translation>Dekodera kļūda: %1. Raidīšana apturēta; dekoders tiek pārstartēts.</translation>
+    </message>
+    <message>
+        <source>Decoder exited (code %1, crash %2)</source>
+        <translation>Dekoders beidza darbu (kods %1, avārija %2)</translation>
+    </message>
+    <message>
+        <source>Decoder restart failed repeatedly. Check decoder-errors.log and restart JTDX-F.</source>
+        <translation>Atkārtota dekodera palaišana vairākkārt neizdevās. Pārbaudiet decoder-errors.log un pārstartējiet JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Decoder restarted. Enable Monitor to resume reception; TX remains stopped.</source>
+        <translation>Dekoders pārstartēts. Ieslēdziet uztveršanu, lai turpinātu; raidīšana paliek apturēta.</translation>
+    </message>
+    <message>
+        <source>Enable TX manually, then Send each message (max. 80 characters).</source>
+        <translation>Manuāli ieslēdziet raidīšanu, pēc tam sūtiet katru ziņojumu atsevišķi (līdz 80 rakstzīmēm).</translation>
+    </message>
+    <message>
+        <source>FT2</source>
+        <translation>FT2</translation>
+    </message>
+    <message>
+        <source>JTTY</source>
+        <translation>JTTY</translation>
+    </message>
+    <message>
+        <source>JTTY requires a local audio input and output device.</source>
+        <translation>JTTY nepieciešamas vietējās audio ievades un izvades ierīces.</translation>
+    </message>
+    <message>
+        <source>JTTY transmission timed out; TX stopped.</source>
+        <translation>JTTY raidīšanas laiks pārsniegts; raidīšana apturēta.</translation>
+    </message>
+    <message>
+        <source>Listening…</source>
+        <translation>Klausīšanās…</translation>
+    </message>
+    <message>
+        <source>Log import: %1 new, %2 duplicates, %3 originals archived, %4 records from other stations skipped.</source>
+        <translation>Žurnāla imports: %1 jauni, %2 dublikāti, %3 oriģinālfaili arhivēti, %4 citu staciju ieraksti izlaisti.</translation>
+    </message>
+    <message>
+        <source>Log loading failed: %1</source>
+        <translation>Neizdevās ielādēt žurnālu: %1</translation>
+    </message>
+    <message>
+        <source>MCP %1</source>
+        <translation>MCP %1</translation>
+    </message>
+    <message>
+        <source>MCP error</source>
+        <translation>MCP kļūda</translation>
+    </message>
+    <message>
+        <source>MCP off</source>
+        <translation>MCP izsl.</translation>
+    </message>
+    <message>
+        <source>MCP settings: File &gt; Settings &gt; MCP</source>
+        <translation>MCP iestatījumi: Fails &gt; Iestatījumi &gt; MCP</translation>
+    </message>
+    <message>
+        <source>MCP: %1</source>
+        <translation>MCP: %1</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Automātiskais režīms</translation>
+    </message>
+    <message>
+        <source>Managed mode is listening. Enable TX manually to allow calls and scheduled CQ.</source>
+        <translation>Automātiskais režīms klausās. Manuāli ieslēdziet raidīšanu, lai atļautu izsaukumus un plānotos CQ.</translation>
+    </message>
+    <message>
+        <source>Managed mode is off.</source>
+        <translation>Automātiskais režīms izslēgts.</translation>
+    </message>
+    <message>
+        <source>Modern algorithm decoding</source>
+        <translation>Dekodēšana ar mūsdienīgu algoritmu</translation>
+    </message>
+    <message>
+        <source>My callsign</source>
+        <translation>Mans izsaukuma signāls</translation>
+    </message>
+    <message>
+        <source>No decoder completion within the timeout</source>
+        <translation>Dekoders nepabeidza darbu atļautajā laikā</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>Izslēgts</translation>
+    </message>
+    <message>
+        <source>Previous audio file is still being saved; this interval was skipped.</source>
+        <translation>Iepriekšējais audio fails vēl tiek saglabāts; šis intervāls izlaists.</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast</source>
+        <translation>QSO entuziasts</translation>
+    </message>
+    <message>
+        <source>Receiving</source>
+        <translation>Uztveršana</translation>
+    </message>
+    <message>
+        <source>Search around Rx frequency (Hz):</source>
+        <translation>Meklēt ap uztveršanas frekvenci (Hz):</translation>
+    </message>
+    <message>
+        <source>Select a callsign before importing logs.</source>
+        <translation>Pirms žurnālu importēšanas izvēlieties izsaukuma signālu.</translation>
+    </message>
+    <message>
+        <source>Select a valid callsign and grid in station settings before enabling TX.</source>
+        <translation>Pirms raidīšanas ieslēgšanas stacijas iestatījumos izvēlieties derīgu izsaukuma signālu un lokatoru.</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Sūtīt</translation>
+    </message>
+    <message>
+        <source>SuperFox decoding (SuperHound)</source>
+        <translation>SuperFox dekodēšana (SuperHound)</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance</source>
+        <translation>SuperFox frekvences pielaide</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance...</source>
+        <translation>SuperFox frekvences pielaide...</translation>
+    </message>
+    <message>
+        <source>SuperHound</source>
+        <translation>SuperHound</translation>
+    </message>
+    <message>
+        <source>TX watchdog expired. Finishing the current QSO before stopping.</source>
+        <translation>Raidīšanas uzraudzības taimeris beidzies. Pirms apstāšanās tiks pabeigts pašreizējais QSO.</translation>
+    </message>
+    <message>
+        <source>This mode requires local audio devices; TCI audio is unavailable.</source>
+        <translation>Šim režīmam vajadzīgas vietējās audio ierīces; TCI audio nav pieejams.</translation>
+    </message>
+    <message>
+        <source>Transmitting</source>
+        <translation>Raidīšana</translation>
+    </message>
+    <message>
+        <source>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</source>
+        <translation>Izmanto aposterioro varbūtību vērtējumus un papildu kandidātu pārbaudi. Ja izslēgts, tiek lietots tradicionālais dekoders. Stājas spēkā nākamajā dekodēšanā.</translation>
+    </message>
+    <message>
+        <source>WD %1:%2</source>
+        <translation>WD %1:%2</translation>
+    </message>
+    <message>
+        <source>WD finishing QSO</source>
+        <translation>WD: QSO</translation>
+    </message>
+    <message>
+        <source>WD unlimited</source>
+        <translation>WD ∞</translation>
+    </message>
+    <message>
+        <source>The current operator's log is not ready. Check the log files and try again.</source>
+        <translation>Pašreizējā operatora žurnāls nav gatavs. Pārbaudiet žurnāla failus un mēģiniet vēlreiz.</translation>
+    </message>
+    <message>
+        <source>Blacklist management</source>
+        <translation>Melnā saraksta pārvaldība</translation>
+    </message>
+    <message>
+        <source>CALL</source>
+        <translation>IZSAUK.</translation>
+    </message>
+    <message>
+        <source>REPORT</source>
+        <translation>RAPORTS</translation>
+    </message>
+    <message>
+        <source>This station is blocked, or the permanent blacklist is unavailable.</source>
+        <translation>Šī stacija ir bloķēta vai pastāvīgais melnais saraksts nav pieejams.</translation>
+    </message>
+    <message>
+        <source>Confirm switch</source>
+        <translation>Apstiprināt</translation>
+    </message>
+    <message>
+        <source>Average</source>
+        <translation>Vidējošana</translation>
+    </message>
+    <message>
+        <source>Clear average</source>
+        <translation>Notīrīt vidējošanu</translation>
+    </message>
+    <message>
+        <source>Click to erase the right window; double-click to erase both.</source>
+        <translation>Klikšķis notīra labo logu; dubultklikšķis — abus.</translation>
+    </message>
+    <message>
+        <source>EME presets</source>
+        <translation>EME priekšiestatījumi</translation>
+    </message>
+    <message>
+        <source>Echo: %1 dB; Δf %2 Hz; quality %3; averages %4</source>
+        <translation>Atbalss: %1 dB; Δf %2 Hz; kvalitāte %3; vidējojumi %4</translation>
+    </message>
+    <message>
+        <source>Enable TX manually to measure lunar echoes.</source>
+        <translation>Lai mērītu Mēness atbalsi, manuāli ieslēdziet TX.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX.</source>
+        <translation>Ieslēgt vai apturēt TX.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX. Right-click for Wait &amp; Reply, Wait &amp; Call or Wait &amp; Pounce. Waiting requires a manually enabled TX session.</source>
+        <translation>Ieslēgt vai apturēt TX. Labais klikšķis: gaidīt un atbildēt, izsaukt vai pārtvert. Gaidīšanai vajadzīga manuāli atļauta TX sesija.</translation>
+    </message>
+    <message>
+        <source>Full duplex</source>
+        <translation>Pilns duplekss</translation>
+    </message>
+    <message>
+        <source>Left-click to erase the left window; right-click to erase the right window; double-click to erase both.</source>
+        <translation>Kreisais klikšķis notīra kreiso logu, labais — labo, dubultklikšķis — abus.</translation>
+    </message>
+    <message>
+        <source>Period</source>
+        <translation>Periods</translation>
+    </message>
+    <message>
+        <source>SWR %1 exceeds 2.5. TX stopped; enable TX manually after checking the antenna.</source>
+        <translation>SWR %1 pārsniedz 2,5. TX apturēts; pēc antenas pārbaudes ieslēdziet TX manuāli.</translation>
+    </message>
+    <message>
+        <source>Set a valid station grid locator to calculate astronomical data.</source>
+        <translation>Astronomiskajiem aprēķiniem norādiet derīgu stacijas lokatoru.</translation>
+    </message>
+    <message>
+        <source>Stopped</source>
+        <translation>Apturēt</translation>
+    </message>
+    <message>
+        <source>The transmit slot was missed; enable TX again.</source>
+        <translation>Raidīšanas intervāls nokavēts; ieslēdziet TX vēlreiz.</translation>
+    </message>
+    <message>
+        <source>Transmission timed out; TX stopped.</source>
+        <translation>Raidīšanas laiks beidzies; TX apturēts.</translation>
+    </message>
+    <message>
+        <source>VHF / EME</source>
+        <translation>VHF / EME</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Call</source>
+        <translation>Gaidīt un izsaukt</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Pounce</source>
+        <translation>Gaidīt un pārtvert</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Reply</source>
+        <translation>Gaidīt un atbildēt</translation>
+    </message>
+    <message>
+        <source>Waiting is selected. Click Enable TX to authorize transmission; Stop cancels waiting.</source>
+        <translation>Izvēlēta gaidīšana. Lai atļautu raidīšanu, nospiediet Ieslēgt TX; Apturēt atceļ gaidīšanu.</translation>
+    </message>
+    <message>
+        <source>Waiting matched %1; continuing the manually enabled TX session.</source>
+        <translation>Gaidīšanas nosacījums izpildīts ar %1; turpinās manuāli atļautā TX sesija.</translation>
+    </message>
+    <message>
+        <source>Waiting timed out; TX stopped.</source>
+        <translation>Gaidīšanas laiks beidzies; TX apturēts.</translation>
+    </message>
+    <message>
+        <source>%1 is replying to another station; waiting for its CQ or final message.</source>
+        <translation>%1 atbild citai stacijai; gaida tās CQ vai noslēguma ziņojumu.</translation>
+    </message>
+    <message>
+        <source>%1 is available; continuing the manually enabled TX session.</source>
+        <translation>%1 ir pieejama; turpinās manuāli ieslēgtā TX sesija.</translation>
+    </message>
 </context>
 <context>
     <name>Modes</name>
@@ -5530,6 +5985,58 @@ Please verify the correct directory name was given.</source>
         <location filename="../WFPalette.cpp" line="258"/>
         <source>Error writing waterfall palette file &quot;%1&quot;: %2.</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Cannot create log directory</source>
+        <translation>Nevar izveidot žurnāla mapi</translation>
+    </message>
+    <message>
+        <source>Log files changed while loading. Please retry.</source>
+        <translation>Žurnāla faili mainījās ielādes laikā. Mēģiniet vēlreiz.</translation>
+    </message>
+    <message>
+        <source>Log is busy. Please retry.</source>
+        <translation>Žurnāls ir aizņemts. Mēģiniet vēlreiz.</translation>
+    </message>
+    <message>
+        <source>Unable to import the log files.</source>
+        <translation>Nevar importēt žurnāla failus.</translation>
+    </message>
+    <message>
+        <source>Unable to read the log files.</source>
+        <translation>Nevar nolasīt žurnāla failus.</translation>
+    </message>
+    <message>
+        <source>Ambiguous QSO identity; log unchanged</source>
+        <translation>QSO identitāte nav viennozīmīga; žurnāls nav mainīts</translation>
+    </message>
+    <message>
+        <source>Recorded QSO not found; log unchanged</source>
+        <translation>Ierakstītais QSO nav atrasts; žurnāls nav mainīts</translation>
+    </message>
+    <message>
+        <source>Cannot read pending log update</source>
+        <translation>Nevar nolasīt gaidošo žurnāla atjauninājumu</translation>
+    </message>
+    <message>
+        <source>Invalid pending log update; originals retained</source>
+        <translation>Gaidošais žurnāla atjauninājums nav derīgs; oriģināli ir saglabāti</translation>
+    </message>
+    <message>
+        <source>Cannot remove completed log update journal</source>
+        <translation>Nevar izdzēst pabeigtā žurnāla atjauninājuma atkopšanas failu</translation>
+    </message>
+    <message>
+        <source>QSO identity changed or timestamps are invalid; log unchanged</source>
+        <translation>QSO identitāte ir mainīta vai laika atzīmes nav derīgas; žurnāls nav mainīts</translation>
+    </message>
+    <message>
+        <source>Cannot revise a symbolic log link</source>
+        <translation>Nevar atjaunināt žurnālu, izmantojot simbolisko saiti</translation>
+    </message>
+    <message>
+        <source>QSO update exceeds the journal size limit</source>
+        <translation>QSO atjauninājums pārsniedz atkopšanas faila lieluma ierobežojumu</translation>
     </message>
 </context>
 <context>
@@ -6001,6 +6508,14 @@ Error(%2): %3</source>
         <location filename="../TCITransceiver.cpp" line="1740"/>
         <source>TCI modulator not Idle</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid TCI audio packet</source>
+        <translation>Nederīga TCI audio pakete</translation>
+    </message>
+    <message>
+        <source>TCI PCM playback requires an active, explicitly started transmission.</source>
+        <translation>TCI PCM atskaņošanai vajadzīga aktīva, apzināti sākta raidīšana.</translation>
     </message>
 </context>
 <context>
@@ -7125,13 +7640,13 @@ both here.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2233"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option is being used for non-overlapping spectra scenario. Tx will be halted if spectra have common frequencies with no respect to this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>With AutoSeq enabled, checking this option pauses calls to the selected station while it replies to someone else, keeping Enable TX on. Resume on its CQ, 73, RR73, RRR or a reply to you. When unchecked, do not pause for this reason. Call limits, the TX watchdog and Stop still apply.</source>
+        <translation>Ja AutoSeq ir ieslēgts, šī opcija aptur izvēlētās stacijas izsaukšanu, kamēr tā atbild citai stacijai, saglabājot TX ieslēgtu. Izsaukšana turpinās pēc tās CQ, 73, RR73, RRR vai jums adresētas atbildes. Ja opcija nav atzīmēta, šī iemesla dēļ izsaukšana netiek apturēta. Izsaukumu skaita ierobežojumi, TX uzraudzības taimeris un Apturēt joprojām darbojas.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2236"/>
-        <source>Halt TX if operator I called answered to other operator</source>
-        <translation type="unfinished"></translation>
+        <source>Wait if the called station replies to someone else</source>
+        <translation>Gaidīt, ja izsauktā stacija atbild citai stacijai</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2243"/>
@@ -7902,8 +8417,8 @@ Right click for insert and delete options.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3846"/>
-        <source>Transmitted message</source>
-        <translation type="unfinished"></translation>
+        <source>Own transmitted message</source>
+        <translation>Paša raidītais ziņojums</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3862"/>
@@ -8751,6 +9266,294 @@ resetting the radio interface and applying any
 soundcard changes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minūtes kopš raidīšanas ieslēgšanas, ieskaitot visus QSO; 0 = bez ierobežojuma, maksimums 999. Darbība neatiestata taimeri.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Access token</source>
+        <translation>Piekļuves marķieris</translation>
+    </message>
+    <message>
+        <source>Allow control (mode, frequency, QSO and options)</source>
+        <translation>Atļaut vadību (režīms, frekvence, QSO un opcijas)</translation>
+    </message>
+    <message>
+        <source>Allow starting TX and Tune (also requires control)</source>
+        <translation>Atļaut raidīšanas un noskaņošanas sākšanu (vajadzīga arī vadības atļauja)</translation>
+    </message>
+    <message>
+        <source>Connect an AI client to JTDX-F using MCP. Changes take effect after OK. Only this computer (127.0.0.1) can connect.</source>
+        <translation>Pievienojiet MI klientu JTDX-F, izmantojot MCP. Izmaiņas stājas spēkā pēc OK nospiešanas. Pieslēgties var tikai no šī datora (127.0.0.1).</translation>
+    </message>
+    <message>
+        <source>Copy token</source>
+        <translation>Kopēt marķieri</translation>
+    </message>
+    <message>
+        <source>Enable MCP server</source>
+        <translation>Ieslēgt MCP serveri</translation>
+    </message>
+    <message>
+        <source>Endpoint</source>
+        <translation>Savienojuma adrese</translation>
+    </message>
+    <message>
+        <source>Generate new token</source>
+        <translation>Ģenerēt jaunu marķieri</translation>
+    </message>
+    <message>
+        <source>MCP</source>
+        <translation>MCP</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>Ports</translation>
+    </message>
+    <message>
+        <source>Use Streamable HTTP with Authorization: Bearer TOKEN, or the bundled jtdx_mcp_bridge.py for stdio clients. Status, decodes and log are readable with a token. Stop TX is always available. See docs/MCP_zh.md.</source>
+        <translation>Lietojiet Streamable HTTP ar Authorization: Bearer TOKEN vai komplektā iekļauto jtdx_mcp_bridge.py stdio klientiem. Ar marķieri var nolasīt statusu, dekodētos ziņojumus un žurnālu. Raidīšanas apturēšana ir vienmēr pieejama. Skatiet docs/MCP_zh.md.</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Align the text for DXCC, distance and azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Līdzināt DXCC, attāluma un azimuta tekstu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allow kHz frequency offset entry without 'k' suffix.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Atļaut ievadīt frekvences nobīdi kHz bez piedēkļa k.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have decodes for a new period start at the top of the Band Activity window and not scroll off the top when the window is full.&lt;/p&gt;&lt;p&gt;This is to aid selecting decodes to double-click while decoding is still in progress. Use the Band Activity vertical scroll bar to reveal decodes past the bottom of the window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jaunā perioda dekodējumus sākt joslas aktivitātes loga augšā; kad logs piepildās, augšējās rindas automātiski nepārbīdīt.&lt;/p&gt;&lt;p&gt;Tas atvieglo stacijas izvēli ar dubultklikšķi dekodēšanas laikā. Lai redzētu zemāk esošās ziņas, izmantojiet vertikālo ritjoslu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase Band Activity and Rx frequency windows after band change.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pēc joslas maiņas notīrīt joslas aktivitātes un uztveršanas frekvences logus.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends a valid Maidenhead locator, calculate and show the great-circle azimuth in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Saņemot derīgu Maidenhead lokatoru, aprēķināt lielā loka azimutu un parādīt to joslas aktivitātes logā.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends locator, calculate and show the distance in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Saņemot lokatoru, aprēķināt attālumu un parādīt to joslas aktivitātes logā.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between DXCC and distance/azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Palielināt vai samazināt atstarpi starp DXCC un attālumu/azimutu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between message text and DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Palielināt vai samazināt atstarpi starp ziņas tekstu un DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open the Astronomical Data window automatically when switching to Q65 or JT65 mode and Decode after EME delay is enabled, and close it when no longer needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automātiski atvērt astronomisko datu logu, pārslēdzoties uz Q65 vai JT65, ja ieslēgta dekodēšana pēc EME aiztures. Aizvērt logu, kad tas vairs nav vajadzīgs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Turn the progress bar red while transmitting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Raidīšanas laikā progresa joslu rādīt sarkanu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tx until 73 is received when in MSK144 or Q65 mode. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;MSK144 vai Q65 režīmā raidīt līdz 73 saņemšanai.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>A deliberate double-click may enable TX only after the transmission safety checks pass. Startup, background messages and remote selection cannot grant transmission permission.</source>
+        <translation>Apzināts dubultklikšķis var ieslēgt TX tikai pēc drošības pārbaudēm. Palaišana, fona ziņas un attālināta izvēle nedod raidīšanas atļauju.</translation>
+    </message>
+    <message>
+        <source>Additional features</source>
+        <translation>Papildu funkcijas</translation>
+    </message>
+    <message>
+        <source>After a completed QSO, move the receive audio frequency to the transmit audio frequency. This does not enable the Tx=Rx lock.</source>
+        <translation>Pēc pabeigta QSO uztveršanas audiofrekvenci iestatīt vienādu ar raidīšanas audiofrekvenci. Tx=Rx bloķēšana netiek ieslēgta.</translation>
+    </message>
+    <message>
+        <source>Align DXCC/distance/azimuth</source>
+        <translation>Līdzināt DXCC/attālumu/azimutu</translation>
+    </message>
+    <message>
+        <source>Allow Tx frequency changes while transmitting</source>
+        <translation>Atļaut mainīt TX frekvenci raidīšanas laikā</translation>
+    </message>
+    <message>
+        <source>Allow the additional Earth–Moon–Earth propagation delay when collecting and decoding signals. This does not alter the UTC clock.</source>
+        <translation>Vācot un dekodējot signālus, ņemt vērā papildu Zeme–Mēness–Zeme izplatīšanās aizturi. UTC pulkstenis netiek mainīts.</translation>
+    </message>
+    <message>
+        <source>Alternate Erase button behavior</source>
+        <translation>Alternatīva tīrīšanas pogas darbība</translation>
+    </message>
+    <message>
+        <source>Alternate F1-F6 bindings</source>
+        <translation>Alternatīvi F1–F6 taustiņi</translation>
+    </message>
+    <message>
+        <source>Auto-open/close Astronomical data window</source>
+        <translation>Automātiski atvērt/aizvērt astronomijas logu</translation>
+    </message>
+    <message>
+        <source>Calling CQ forces Call 1st</source>
+        <translation>CQ raidīšana piespiež atbildēt pirmajam</translation>
+    </message>
+    <message>
+        <source>Clear DX Call after QSO</source>
+        <translation>Pēc QSO notīrīt DX izsaukuma signālu</translation>
+    </message>
+    <message>
+        <source>Clear DX Grid after QSO</source>
+        <translation>Pēc QSO notīrīt DX lokatoru</translation>
+    </message>
+    <message>
+        <source>Decode after EME delay</source>
+        <translation>Dekodēt pēc EME aiztures</translation>
+    </message>
+    <message>
+        <source>Di&amp;sable Tx after sending 73</source>
+        <translation>Apturēt TX pēc 73 nosūtīšanas</translation>
+    </message>
+    <message>
+        <source>Doubl&amp;e-click on call sets Tx enable</source>
+        <translation>Dubultklikšķis uz izsaukuma signāla ieslēdz TX</translation>
+    </message>
+    <message>
+        <source>Enable VHF and submode features</source>
+        <translation>Ieslēgt VHF un apakšrežīmu funkcijas</translation>
+    </message>
+    <message>
+        <source>Enable Wait &amp; Call, Wait &amp; Reply and Wait &amp; Pounce controls. They require a manually authorized TX session and cannot restart transmission after Stop. Managed mode keeps its own selection rules.</source>
+        <translation>Ieslēgt gaidīšanu ar izsaukšanu, atbildi vai CQ atbildi. Vajadzīga manuāli atļauta TX sesija; pēc Apturēt nospiešanas raidīšana netiek atsākta. Pārvaldītais režīms saglabā savus atlases noteikumus.</translation>
+    </message>
+    <message>
+        <source>Enable Wait features</source>
+        <translation>Ieslēgt gaidīšanas funkcijas</translation>
+    </message>
+    <message>
+        <source>Erase decodes after band change</source>
+        <translation>Pēc joslas maiņas notīrīt dekodējumus</translation>
+    </message>
+    <message>
+        <source>Finish one QSO and stop. This is the same setting as Single QSO in the main window. Leave it unchecked for continuous QSOs within the TX watchdog session.</source>
+        <translation>Pabeigt vienu QSO un apstāties. Tas ir tas pats iestatījums, kas galvenā loga Viens QSO. Neatzīmēts ļauj turpināt QSO TX uzrauga sesijas laikā.</translation>
+    </message>
+    <message>
+        <source>Font...</source>
+        <translation>Fonts…</translation>
+    </message>
+    <message>
+        <source>Highlight DX Call in message</source>
+        <translation>Izcelt ziņā DX izsaukuma signālu</translation>
+    </message>
+    <message>
+        <source>Highlight DX Grid in message</source>
+        <translation>Izcelt ziņā DX lokatoru</translation>
+    </message>
+    <message>
+        <source>Less button coloring (restart required)</source>
+        <translation>Mazāk pogu krāsu (vajadzīga pārstartēšana)</translation>
+    </message>
+    <message>
+        <source>MSK144/Q65: Tx until 73 is received</source>
+        <translation>MSK144/Q65: raidīt līdz 73 saņemšanai</translation>
+    </message>
+    <message>
+        <source>Map Grid locator to U.S. State</source>
+        <translation>Piesaistīt lokatoru ASV štatam</translation>
+    </message>
+    <message>
+        <source>Monitor returns to last used frequency</source>
+        <translation>Monitorings atgriežas pēdējā frekvencē</translation>
+    </message>
+    <message>
+        <source>Read and display PWR and SWR</source>
+        <translation>Nolasīt un rādīt jaudu un SWR</translation>
+    </message>
+    <message>
+        <source>Read and display transmit power and SWR through CAT. Unsupported readings are shown as unavailable.</source>
+        <translation>Ar CAT nolasīt un rādīt raidīšanas jaudu un SWR. Neatbalstīti rādījumi tiek parādīti kā nepieejami.</translation>
+    </message>
+    <message>
+        <source>Set Rx frequency to Tx frequency after QSO</source>
+        <translation>Pēc QSO iestatīt RX frekvenci uz TX</translation>
+    </message>
+    <message>
+        <source>Show &amp;DXCC, grid, and worked-before status    </source>
+        <translation>Rādīt DXCC, lokatoru un iepriekšēju sakaru</translation>
+    </message>
+    <message>
+        <source>Show DXCC for all messages</source>
+        <translation>Rādīt DXCC visās ziņās</translation>
+    </message>
+    <message>
+        <source>Show U.S. States in messages with grid</source>
+        <translation>Ziņās ar lokatoru rādīt ASV štatus</translation>
+    </message>
+    <message>
+        <source>Show azimuth in messages with grid</source>
+        <translation>Ziņās ar lokatoru rādīt azimutu</translation>
+    </message>
+    <message>
+        <source>Show blank line with time stamp</source>
+        <translation>Atdalošajā rindā rādīt laika zīmogu</translation>
+    </message>
+    <message>
+        <source>Show distance in messages with grid</source>
+        <translation>Ziņās ar lokatoru rādīt attālumu</translation>
+    </message>
+    <message>
+        <source>Show if decoded stations are new DXCC entities or worked before.</source>
+        <translation>Parādīt, vai dekodētās stacijas ir jaunas DXCC vienības vai ar tām jau bijuši sakari.</translation>
+    </message>
+    <message>
+        <source>Show principal prefix instead of country name        </source>
+        <translation>Valsts nosaukuma vietā rādīt galveno prefiksu</translation>
+    </message>
+    <message>
+        <source>Show the separator line between periods with time stamp of the decode period.</source>
+        <translation>Periodu atdalošajā rindā rādīt dekodēšanas perioda laika zīmogu.</translation>
+    </message>
+    <message>
+        <source>Single decode</source>
+        <translation>Viens dekodējums</translation>
+    </message>
+    <message>
+        <source>Start new period decodes at top</source>
+        <translation>Jaunā perioda dekodējumus sākt augšā</translation>
+    </message>
+    <message>
+        <source>Stop Tune after the selected number of seconds. A zero interval disables this timer.</source>
+        <translation>Apturēt noskaņošanu pēc izvēlētā sekunžu skaita. Nulle izslēdz taimeri.</translation>
+    </message>
+    <message>
+        <source>Tune watchdog   </source>
+        <translation>Noskaņošanas uzraugs</translation>
+    </message>
+    <message>
+        <source>Turn progress bar red while transmitting</source>
+        <translation>Raidot progresa josla ir sarkana</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. Transmission safety checks still apply.</source>
+        <translation>F1–F5 izvēlas CQ, raportu, R-raportu, apstiprinājumu un 73; F6 maina atbildes politiku. Raidīšanas drošības pārbaudes joprojām darbojas.</translation>
+    </message>
+    <message>
+        <source>kHz entry without k (restart required)</source>
+        <translation>Ievadīt kHz bez k (vajadzīga pārstartēšana)</translation>
+    </message>
+    <message>
+        <source>When checked, double-clicking a decoded callsign starts a TX session after the transmission safety checks pass. The session then follows the normal AutoSeq, Single QSO and watchdog settings. Off by default.</source>
+        <translation>Ja atzīmēts, dubultklikšķis uz dekodēta izsaukuma signāla sāk TX sesiju pēc sekmīgām raidīšanas drošības pārbaudēm. Pēc tam sesija ievēro parastos AutoSeq, viena QSO un raidīšanas uzraudzības taimera iestatījumus. Pēc noklusējuma izslēgts.</translation>
+    </message>
+    <message>
+        <source>Double-click a callsign to enable TX</source>
+        <translation>Dubultklikšķis uz izsaukuma signāla ieslēdz TX</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. These keys cannot start a TX session. Click Enable TX first.</source>
+        <translation>Taustiņi F1–F5 izvēlas CQ, raportu, R-raportu, apstiprinājumu un 73; F6 maina atbildēšanas kārtību. Šie taustiņi nevar sākt raidīšanas sesiju. Vispirms noklikšķiniet uz Atļaut TX.</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -8801,6 +9604,870 @@ soundcard changes</source>
         <location filename="../wf_palette_design_dialog.ui" line="23"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Double click a color to edit it.&lt;/p&gt;&lt;p&gt;Right click to insert or delete colors.&lt;/p&gt;&lt;p&gt;Colors at the top represent weak signals&lt;/p&gt;&lt;p&gt;and colors at the bottom represent strong&lt;/p&gt;&lt;p&gt;signals. You can have up to 256 colors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>JttyController</name>
+    <message>
+        <source>Cannot write to the JTTY decoder.</source>
+        <translation>Nevar nosūtīt datus JTTY dekoderam.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY decoder response.</source>
+        <translation>Nederīga JTTY dekodera atbilde.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY transmit audio.</source>
+        <translation>Nederīgi JTTY pārraides audio dati.</translation>
+    </message>
+    <message>
+        <source>JTTY audio backlog exceeded 10 seconds; reception restarted.</source>
+        <translation>JTTY audio rinda pārsniedza 10 sekundes; uztveršana atsākta.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder stopped unexpectedly.</source>
+        <translation>JTTY dekoders negaidīti pārtrauca darbu.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder timed out. Select JTTY again to restart it.</source>
+        <translation>JTTY dekodera gaidīšanas laiks beidzies. Lai to pārstartētu, vēlreiz izvēlieties JTTY.</translation>
+    </message>
+    <message>
+        <source>Unexpected JTTY decoder response.</source>
+        <translation>Negaidīta JTTY dekodera atbilde.</translation>
+    </message>
+</context>
+<context>
+    <name>LogForwarder</name>
+    <message>
+        <source>External logger did not acknowledge the QSO. Local logs are saved.</source>
+        <translation>Ārējā žurnāla programma neapstiprināja QSO. Vietējie žurnāli ir saglabāti.</translation>
+    </message>
+    <message>
+        <source>External logger disconnected before acknowledgement. Local logs are saved.</source>
+        <translation>Ārējā žurnāla programma atvienojās pirms apstiprinājuma. Vietējie žurnāli ir saglabāti.</translation>
+    </message>
+    <message>
+        <source>External logger rejected the QSO. Local logs are saved.</source>
+        <translation>Ārējā žurnāla programma noraidīja QSO. Vietējie žurnāli ir saglabāti.</translation>
+    </message>
+    <message>
+        <source>Invalid external logger response. Local logs are saved.</source>
+        <translation>Nederīga ārējās žurnāla programmas atbilde. Vietējie žurnāli ir saglabāti.</translation>
+    </message>
+    <message>
+        <source>Unexpected external logger response. Local logs are saved.</source>
+        <translation>Negaidīta ārējās žurnāla programmas atbilde. Vietējie žurnāli ir saglabāti.</translation>
+    </message>
+</context>
+<context>
+    <name>ManagedSettingsWidget</name>
+    <message>
+        <source>0 — unlimited</source>
+        <translation>0 — bez ierobežojuma</translation>
+    </message>
+    <message>
+        <source>Answer previously worked callsigns</source>
+        <translation>Atbildēt iepriekš strādātiem izsaukuma signāliem</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC mednieks</translation>
+    </message>
+    <message>
+        <source>New CQ zone</source>
+        <translation>Jauna CQ zona</translation>
+    </message>
+    <message>
+        <source>New DXCC</source>
+        <translation>Jauna DXCC vienība</translation>
+    </message>
+    <message>
+        <source>New ITU zone</source>
+        <translation>Jauna ITU zona</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode DXCC</source>
+        <translation>Jauns DXCC diapazonā &amp;&amp; režīmā</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode callsign</source>
+        <translation>Jauns izsaukuma signāls diapazonā &amp;&amp; režīmā</translation>
+    </message>
+    <message>
+        <source>New callsign</source>
+        <translation>Jauns izsaukuma signāls</translation>
+    </message>
+    <message>
+        <source>New grid</source>
+        <translation>Jauns lokators</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast (also prioritizes new DXCC entities and zones)</source>
+        <translation>QSO entuziasts (arī dod priekšroku jaunām DXCC vienībām un zonām)</translation>
+    </message>
+    <message>
+        <source>Send three CQ rounds every 15 minutes</source>
+        <translation>Raidīt trīs CQ ciklus ik pēc 15 minūtēm</translation>
+    </message>
+    <message>
+        <source>Unanswered call limit:</source>
+        <translation>Neatbildēto izsaukumu limits:</translation>
+    </message>
+    <message>
+        <source>Allow TX slot changes</source>
+        <translation>Atļaut TX laika intervāla maiņu</translation>
+    </message>
+    <message>
+        <source>Allow automatic TX slot changes between completed QSOs. After a slot change, wait 5 minutes before another automatic change. Manual changes are always allowed and restart this timer. Off: stay in the selected TX slot.</source>
+        <translation>Atļaut automātiski mainīt TX laika intervālu starp pabeigtiem QSO. Pēc maiņas jāgaida 5 minūtes līdz nākamajai automātiskajai maiņai. Manuāla maiņa vienmēr ir atļauta un restartē šo taimeri. Izslēgts: saglabāt izvēlēto TX laika intervālu.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpClient</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Ievadiet derīgu NTP servera nosaukumu vai IP adresi.</translation>
+    </message>
+    <message>
+        <source>Invalid NTP packet length.</source>
+        <translation>Nederīgs NTP paketes garums.</translation>
+    </message>
+    <message>
+        <source>NTP request timed out.</source>
+        <translation>NTP pieprasījuma gaidīšanas laiks beidzies.</translation>
+    </message>
+    <message>
+        <source>The NTP date is outside the supported range.</source>
+        <translation>NTP datums ir ārpus atbalstītā diapazona.</translation>
+    </message>
+    <message>
+        <source>The NTP response does not match this request.</source>
+        <translation>NTP atbilde neatbilst šim pieprasījumam.</translation>
+    </message>
+    <message>
+        <source>The NTP response has excessive delay or uncertainty.</source>
+        <translation>NTP atbildes aizkave vai nenoteiktība ir pārāk liela.</translation>
+    </message>
+    <message>
+        <source>The NTP server is not synchronized or refused the request.</source>
+        <translation>NTP serveris nav sinhronizēts vai noraidīja pieprasījumu.</translation>
+    </message>
+    <message>
+        <source>The clock changed during the NTP request, or the response was too slow.</source>
+        <translation>Pulkstenis mainījās NTP pieprasījuma laikā vai atbilde bija pārāk lēna.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpController</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Ievadiet derīgu NTP servera nosaukumu vai IP adresi.</translation>
+    </message>
+    <message>
+        <source>Install polkit/pkexec to authorize system time synchronization.</source>
+        <translation>Instalējiet polkit/pkexec, lai atļautu sistēmas laika sinhronizāciju.</translation>
+    </message>
+    <message>
+        <source>Permission granted. Synchronization follows the selected interval.</source>
+        <translation>Atļauja piešķirta. Sinhronizācija notiks izvēlētajā intervālā.</translation>
+    </message>
+    <message>
+        <source>Permission request timed out. System time is unchanged.</source>
+        <translation>Atļaujas pieprasījuma laiks beidzies. Sistēmas laiks nav mainīts.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted (Windows error %1). Using system time.</source>
+        <translation>Atļauja nav piešķirta (Windows kļūda %1). Tiek lietots sistēmas laiks.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted. Using system time.</source>
+        <translation>Atļauja nav piešķirta. Tiek lietots sistēmas laiks.</translation>
+    </message>
+    <message>
+        <source>Requesting permission to set the system time…</source>
+        <translation>Tiek pieprasīta atļauja iestatīt sistēmas laiku…</translation>
+    </message>
+    <message>
+        <source>Synchronization deferred while transmitting.</source>
+        <translation>Sinhronizācija atlikta raidīšanas laikā.</translation>
+    </message>
+    <message>
+        <source>Synchronization failed: %1. Retrying in 1 minute.</source>
+        <translation>Sinhronizācija neizdevās: %1. Atkārtots mēģinājums pēc 1 minūtes.</translation>
+    </message>
+    <message>
+        <source>The time synchronization helper is missing.</source>
+        <translation>Trūkst laika sinhronizācijas palīgprogrammas.</translation>
+    </message>
+    <message>
+        <source>Time synchronization stopped. Using system time.</source>
+        <translation>Laika sinhronizācija apturēta. Tiek lietots sistēmas laiks.</translation>
+    </message>
+    <message>
+        <source>Time synchronized; correction %1 ms. Next check in %2 minutes.</source>
+        <translation>Laiks sinhronizēts; korekcija %1 ms. Nākamā pārbaude pēc %2 minūtēm.</translation>
+    </message>
+    <message>
+        <source>Use system time. NTP synchronization is disabled.</source>
+        <translation>Tiek lietots sistēmas laiks. NTP sinhronizācija izslēgta.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpSettingsWidget</name>
+    <message>
+        <source>%1 hours</source>
+        <translation>%1 st.</translation>
+    </message>
+    <message>
+        <source>%1 minutes</source>
+        <translation>%1 min.</translation>
+    </message>
+    <message>
+        <source>Africa / Kenya / icolo</source>
+        <translation>Āfrika / Kenija / icolo</translation>
+    </message>
+    <message>
+        <source>Africa / Mauritius / Mauritius Telecom</source>
+        <translation>Āfrika / Maurīcija / Mauritius Telecom</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / INX-ZA</source>
+        <translation>Āfrika / Dienvidāfrika / INX-ZA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / NMISA</source>
+        <translation>Āfrika / Dienvidāfrika / NMISA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / SANReN</source>
+        <translation>Āfrika / Dienvidāfrika / SANReN</translation>
+    </message>
+    <message>
+        <source>Asia / Apple</source>
+        <translation>Āzija / Apple</translation>
+    </message>
+    <message>
+        <source>Asia / China / Alibaba</source>
+        <translation>Āzija / Ķīna / Alibaba</translation>
+    </message>
+    <message>
+        <source>Asia / China / Baidu</source>
+        <translation>Āzija / Ķīna / Baidu</translation>
+    </message>
+    <message>
+        <source>Asia / China / CAS NTSC</source>
+        <translation>Āzija / Ķīna / CAS NTSC</translation>
+    </message>
+    <message>
+        <source>Asia / China / NTP Pool</source>
+        <translation>Āzija / Ķīna / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tencent</source>
+        <translation>Āzija / Ķīna / Tencent</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tsinghua TUNA</source>
+        <translation>Āzija / Ķīna / Tsinghua TUNA</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Internet Multifeed</source>
+        <translation>Āzija / Japāna / Internet Multifeed</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / NICT</source>
+        <translation>Āzija / Japāna / NICT</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Sakura Internet</source>
+        <translation>Āzija / Japāna / Sakura Internet</translation>
+    </message>
+    <message>
+        <source>Asia / South Korea / KRISS</source>
+        <translation>Āzija / Dienvidkoreja / KRISS</translation>
+    </message>
+    <message>
+        <source>Europe / France / RDEM Systems</source>
+        <translation>Eiropa / Francija / RDEM Systems</translation>
+    </message>
+    <message>
+        <source>Europe / Germany / PTB</source>
+        <translation>Eiropa / Vācija / PTB</translation>
+    </message>
+    <message>
+        <source>Europe / Poland / GUM</source>
+        <translation>Eiropa / Polija / GUM</translation>
+    </message>
+    <message>
+        <source>Europe / Sweden / Netnod</source>
+        <translation>Eiropa / Zviedrija / Netnod</translation>
+    </message>
+    <message>
+        <source>Europe / UK / NPL</source>
+        <translation>Eiropa / Apvienotā Karaliste / NPL</translation>
+    </message>
+    <message>
+        <source>Global / Apple</source>
+        <translation>Globāls / Apple</translation>
+    </message>
+    <message>
+        <source>Global / Cloudflare</source>
+        <translation>Globāls / Cloudflare</translation>
+    </message>
+    <message>
+        <source>Global / Google</source>
+        <translation>Globāls / Google</translation>
+    </message>
+    <message>
+        <source>Global / Microsoft Windows</source>
+        <translation>Globāls / Microsoft Windows</translation>
+    </message>
+    <message>
+        <source>NTP hostname or IP address</source>
+        <translation>NTP servera nosaukums vai IP adrese</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization (requests administrator privileges when enabled)</source>
+        <translation>NTP laika sinhronizācija (ieslēdzot tiek pieprasītas administratora tiesības)</translation>
+    </message>
+    <message>
+        <source>North America / Canada / NRC</source>
+        <translation>Ziemeļamerika / Kanāda / NRC</translation>
+    </message>
+    <message>
+        <source>North America / USA / NIST</source>
+        <translation>Ziemeļamerika / ASV / NIST</translation>
+    </message>
+    <message>
+        <source>Oceania / Australia / NTP Pool</source>
+        <translation>Okeānija / Austrālija / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Oceania / New Zealand / MSL (NZ networks only)</source>
+        <translation>Okeānija / Jaunzēlande / MSL (tikai Jaunzēlandes tīkli)</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Cits</translation>
+    </message>
+    <message>
+        <source>South America / Argentina / INTI</source>
+        <translation>Dienvidamerika / Argentīna / INTI</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / NIC.br</source>
+        <translation>Dienvidamerika / Brazīlija / NIC.br</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / National Observatory</source>
+        <translation>Dienvidamerika / Brazīlija / Nacionālā observatorija</translation>
+    </message>
+    <message>
+        <source>South America / Chile / SHOA</source>
+        <translation>Dienvidamerika / Čīle / SHOA</translation>
+    </message>
+    <message>
+        <source>South America / Colombia / INM</source>
+        <translation>Dienvidamerika / Kolumbija / INM</translation>
+    </message>
+    <message>
+        <source>Synchronization interval:</source>
+        <translation>Sinhronizācijas intervāls:</translation>
+    </message>
+    <message>
+        <source>Uses system UTC time; the synchronization interval is configurable.</source>
+        <translation>Tiek lietots sistēmas UTC laiks; sinhronizācijas intervāls ir iestatāms.</translation>
+    </message>
+</context>
+<context>
+    <name>ProcessingDialog</name>
+    <message>
+        <source>Processing</source>
+        <translation>Apstrāde</translation>
+    </message>
+    <message>
+        <source>Stop TX</source>
+        <translation>Apturēt raidīšanu</translation>
+    </message>
+    <message>
+        <source>System processing, please wait…</source>
+        <translation>Notiek apstrāde, lūdzu, uzgaidiet…</translation>
+    </message>
+</context>
+<context>
+    <name>StationManager</name>
+    <message>
+        <source>Add</source>
+        <translation>Pievienot</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Pievienot izsaukuma signālu</translation>
+    </message>
+    <message>
+        <source>All regions</source>
+        <translation>Visi reģioni</translation>
+    </message>
+    <message>
+        <source>Callsign management</source>
+        <translation>Izsaukuma signālu pārvaldība</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Atcelt</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Rediģēt</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Rediģēt izsaukuma signālu</translation>
+    </message>
+    <message>
+        <source>Enter a valid 4, 6 or 8 character grid locator.</source>
+        <translation>Ievadiet derīgu 4, 6 vai 8 rakstzīmju lokatoru.</translation>
+    </message>
+    <message>
+        <source>Enter a valid callsign (3–12 letters/digits, optional /suffix).</source>
+        <translation>Ievadiet derīgu izsaukuma signālu (3–12 burti/cipari, neobligāts /sufikss).</translation>
+    </message>
+    <message>
+        <source>Full call in Tx1</source>
+        <translation>Pilns izsaukuma signāls Tx1</translation>
+    </message>
+    <message>
+        <source>Full call in Tx3</source>
+        <translation>Pilns izsaukuma signāls Tx3</translation>
+    </message>
+    <message>
+        <source>Full call in Tx5 only</source>
+        <translation>Pilns izsaukuma signāls tikai Tx5</translation>
+    </message>
+    <message>
+        <source>IARU region:</source>
+        <translation>IARU reģions:</translation>
+    </message>
+    <message>
+        <source>Invalid profile</source>
+        <translation>Nederīgs profils</translation>
+    </message>
+    <message>
+        <source>My callsign:</source>
+        <translation>Mans izsaukuma signāls:</translation>
+    </message>
+    <message>
+        <source>My grid:</source>
+        <translation>Mans lokators:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>Labi</translation>
+    </message>
+    <message>
+        <source>Region 1</source>
+        <translation>1. reģions</translation>
+    </message>
+    <message>
+        <source>Region 2</source>
+        <translation>2. reģions</translation>
+    </message>
+    <message>
+        <source>Region 3</source>
+        <translation>3. reģions</translation>
+    </message>
+    <message>
+        <source>Remove profile</source>
+        <translation>Noņemt profilu</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Saglabāt</translation>
+    </message>
+    <message>
+        <source>This callsign already exists. Different /suffixes are allowed.</source>
+        <translation>Šis izsaukuma signāls jau pastāv. Ir atļauti atšķirīgi /sufiksi.</translation>
+    </message>
+    <message>
+        <source>Type 2 callsign messages:</source>
+        <translation>2. tipa izsaukuma signāla ziņojumi:</translation>
+    </message>
+</context>
+<context>
+    <name>Blacklist</name>
+    <message>
+        <source>A base callsign blocks its portable prefixes and suffixes (K1ABC also blocks EA8/K1ABC and K1ABC/P). A callsign containing / blocks only that exact callsign.</source>
+        <translation>Pamata izsaukuma signāls bloķē arī variantus ar pārnēsājamas stacijas prefiksiem un sufiksiem (K1ABC bloķē arī EA8/K1ABC un K1ABC/P). Signāls ar / bloķē tikai precīzu atbilstību.</translation>
+    </message>
+    <message>
+        <source>Blacklist changed in another program. Reload it before saving.</source>
+        <translation>Melnais saraksts mainīts citā programmā. Pirms saglabāšanas ielādējiet to atkārtoti.</translation>
+    </message>
+    <message>
+        <source>Blacklist file is too large.</source>
+        <translation>Melnā saraksta fails ir pārāk liels.</translation>
+    </message>
+    <message>
+        <source>Blacklist has too many entries.</source>
+        <translation>Melnajā sarakstā ir pārāk daudz ierakstu.</translation>
+    </message>
+    <message>
+        <source>Blacklist is busy. Please retry.</source>
+        <translation>Melnais saraksts ir aizņemts. Mēģiniet vēlreiz.</translation>
+    </message>
+    <message>
+        <source>Blacklist is not ready. Repair the existing file before saving.</source>
+        <translation>Melnais saraksts nav gatavs. Pirms saglabāšanas izlabojiet esošo failu.</translation>
+    </message>
+    <message>
+        <source>Blacklist notes must not exceed 512 characters.</source>
+        <translation>Melnā saraksta piezīmes nedrīkst pārsniegt 512 rakstzīmes.</translation>
+    </message>
+    <message>
+        <source>Cannot create blacklist directory.</source>
+        <translation>Nevar izveidot melnā saraksta mapi.</translation>
+    </message>
+    <message>
+        <source>Cannot open blacklist: %1</source>
+        <translation>Nevar atvērt melno sarakstu: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save blacklist: %1</source>
+        <translation>Nevar saglabāt melno sarakstu: %1</translation>
+    </message>
+    <message>
+        <source>Duplicate callsign: %1</source>
+        <translation>Atkārtots izsaukuma signāls: %1</translation>
+    </message>
+    <message>
+        <source>Invalid blacklist file; the original has been preserved.</source>
+        <translation>Nederīgs melnā saraksta fails; oriģināls ir saglabāts.</translation>
+    </message>
+    <message>
+        <source>Invalid callsign: %1</source>
+        <translation>Nederīgs izsaukuma signāls: %1</translation>
+    </message>
+    <message>
+        <source>Select an operator before editing the blacklist.</source>
+        <translation>Pirms melnā saraksta rediģēšanas izvēlieties operatoru.</translation>
+    </message>
+    <message>
+        <source>Unsupported blacklist file version.</source>
+        <translation>Neatbalstīta melnā saraksta faila versija.</translation>
+    </message>
+</context>
+<context>
+    <name>BlacklistDialog</name>
+    <message>
+        <source>Add</source>
+        <translation>Pievienot</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Pievienot izsaukuma signālu</translation>
+    </message>
+    <message>
+        <source>Callsign:</source>
+        <translation>Izsaukuma signāls:</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Atcelt</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Rediģēt</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Rediģēt izsaukuma signālu</translation>
+    </message>
+    <message>
+        <source>Invalid entry</source>
+        <translation>Nederīgs ieraksts</translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation>Piezīme:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>Labi</translation>
+    </message>
+    <message>
+        <source>Permanent blacklist</source>
+        <translation>Pastāvīgais melnais saraksts</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Noņemt</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Saglabāt</translation>
+    </message>
+</context>
+<context>
+    <name>AstroDialog</name>
+    <message>
+        <source>Astronomical Data</source>
+        <translation>Astronomiskie dati</translation>
+    </message>
+    <message>
+        <source>Call DX</source>
+        <translation>Izsaukt DX</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Aizvērt</translation>
+    </message>
+    <message>
+        <source>Constant frequency on the Moon</source>
+        <translation>Nemainīga frekvence uz Mēness</translation>
+    </message>
+    <message>
+        <source>DX Moon Az / El: %1° / %2°</source>
+        <translation>Mēness azimuts / augstums DX stacijā: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>Doppler tracking</source>
+        <translation>Doplera sekošana</translation>
+    </message>
+    <message>
+        <source>Echo RIT</source>
+        <translation>Atbalss RIT</translation>
+    </message>
+    <message>
+        <source>Echo delay: %1 s; spread: %2 / %3 Hz</source>
+        <translation>Atbalss aizture: %1 s; izkliede: %2 / %3 Hz</translation>
+    </message>
+    <message>
+        <source>Echo frequency dither (±10 Hz)</source>
+        <translation>Atbalss frekvences svārstības (±10 Hz)</translation>
+    </message>
+    <message>
+        <source>Full Doppler to DX grid</source>
+        <translation>Pilna Doplera korekcija līdz DX lokatoram</translation>
+    </message>
+    <message>
+        <source>Method</source>
+        <translation>Metode</translation>
+    </message>
+    <message>
+        <source>Moon Az / El: %1° / %2°</source>
+        <translation>Mēness azimuts / augstums: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>No Doppler correction</source>
+        <translation>Bez Doplera korekcijas</translation>
+    </message>
+    <message>
+        <source>On DX echo</source>
+        <translation>Uz DX atbalss</translation>
+    </message>
+    <message>
+        <source>Own / DX Doppler: %1 / %2 Hz</source>
+        <translation>Savs / DX Doplers: %1 / %2 Hz</translation>
+    </message>
+    <message>
+        <source>Own echo</source>
+        <translation>Sava atbalss</translation>
+    </message>
+    <message>
+        <source>Set frequency</source>
+        <translation>Iestatīt frekvenci</translation>
+    </message>
+    <message>
+        <source>Sky: %1 K; degradation: %2 dB; polarization: %3°</source>
+        <translation>Debesis: %1 K; pasliktinājums: %2 dB; polarizācija: %3°</translation>
+    </message>
+    <message>
+        <source>Sun Az / El: %1° / %2°</source>
+        <translation>Saules azimuts / augstums: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>TX frequency offset (MHz)</source>
+        <translation>TX frekvences nobīde (MHz)</translation>
+    </message>
+    <message>
+        <source>Waiting for astronomical data…</source>
+        <translation>Gaida astronomiskos datus…</translation>
+    </message>
+</context>
+<context>
+    <name>HamlibUpdater</name>
+    <message>
+        <source>Another Hamlib update is in progress.</source>
+        <translation>Jau notiek cits Hamlib atjauninājums.</translation>
+    </message>
+    <message>
+        <source>Cannot read the Hamlib files.</source>
+        <translation>Nevar nolasīt Hamlib failus.</translation>
+    </message>
+    <message>
+        <source>Cannot save the Hamlib restart request: %1</source>
+        <translation>Nevar saglabāt Hamlib restartēšanas pieprasījumu: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save the downloaded Hamlib file.</source>
+        <translation>Nevar saglabāt lejupielādēto Hamlib failu.</translation>
+    </message>
+    <message>
+        <source>Cannot stage Hamlib: %1</source>
+        <translation>Nevar sagatavot Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib compatibility checker: %1</source>
+        <translation>Nevar palaist Hamlib saderības pārbaudi: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib update helper.</source>
+        <translation>Nevar palaist Hamlib atjaunināšanas palīgprogrammu.</translation>
+    </message>
+    <message>
+        <source>Checking Hamlib compatibility without connecting to a radio…</source>
+        <translation>Pārbauda Hamlib saderību bez savienojuma ar radio…</translation>
+    </message>
+    <message>
+        <source>Compatibility check passed. Restart JTDX-F to apply %1.</source>
+        <translation>Saderības pārbaude sekmīga. Lai lietotu %1, restartējiet JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Downloading the official Hamlib 4.7 branch update…</source>
+        <translation>Lejupielādē Hamlib 4.7 atzara oficiālo atjauninājumu…</translation>
+    </message>
+    <message>
+        <source>Hamlib compatibility check failed: %1</source>
+        <translation>Hamlib saderības pārbaude neizdevās: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib download failed: %1</source>
+        <translation>Hamlib lejupielāde neizdevās: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib files changed after validation. Check the update again.</source>
+        <translation>Hamlib faili pēc pārbaudes ir mainījušies. Pārbaudiet atjauninājumu vēlreiz.</translation>
+    </message>
+    <message>
+        <source>Hamlib update completed successfully.</source>
+        <translation>Hamlib veiksmīgi atjaunināts.</translation>
+    </message>
+    <message>
+        <source>Hamlib update timed out. The current version is unchanged.</source>
+        <translation>Beidzies Hamlib atjaunināšanas laiks. Pašreizējā versija nav mainīta.</translation>
+    </message>
+    <message>
+        <source>Hamlib update was not applied: %1</source>
+        <translation>Hamlib atjauninājums netika lietots: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib updates require a 64-bit Windows installation.</source>
+        <translation>Hamlib atjaunināšanai nepieciešama 64 bitu Windows.</translation>
+    </message>
+    <message>
+        <source>Invalid Hamlib update: %1</source>
+        <translation>Nederīgs Hamlib atjauninājums: %1</translation>
+    </message>
+    <message>
+        <source>No previous Hamlib version is available.</source>
+        <translation>Iepriekšējā Hamlib versija nav pieejama.</translation>
+    </message>
+    <message>
+        <source>On this platform, Hamlib is updated with JTDX-F.</source>
+        <translation>Šajā platformā Hamlib tiek atjaunināts kopā ar JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Restarting JTDX-F to apply the Hamlib update…</source>
+        <translation>Restartē JTDX-F, lai lietotu Hamlib atjauninājumu…</translation>
+    </message>
+    <message>
+        <source>The Hamlib download is too large or could not be saved.</source>
+        <translation>Hamlib lejupielāde ir pārāk liela vai to nevar saglabāt.</translation>
+    </message>
+    <message>
+        <source>The Hamlib update helper is missing. Reinstall JTDX-F.</source>
+        <translation>Trūkst Hamlib atjaunināšanas palīgprogrammas. Pārinstalējiet JTDX-F.</translation>
+    </message>
+    <message>
+        <source>The installation folder is not writable. Run JTDX-F with permission to update this folder.</source>
+        <translation>Instalācijas mapē nevar rakstīt. Palaidiet JTDX-F ar tiesībām atjaunināt šo mapi.</translation>
+    </message>
+</context>
+<context>
+    <name>OmniRigTransceiver</name>
+    <message>
+        <source>OmniRig: cannot initialize COM</source>
+        <translation>OmniRig: nevar inicializēt COM</translation>
+    </message>
+    <message>
+        <source>OmniRig: no valid receive frequency was reported</source>
+        <translation>OmniRig: nav saņemta derīga uztveršanas frekvence</translation>
+    </message>
+</context>
+<context>
+    <name>Transceiver</name>
+    <message>
+        <source>This transceiver does not support PCM audio.</source>
+        <translation>Šis transīvers neatbalsta PCM audio.</translation>
+    </message>
+</context>
+<context>
+    <name>UpstreamController</name>
+    <message>
+        <source>Cannot communicate with the WSJT-X backend.</source>
+        <translation>Nevar sazināties ar WSJT-X moduli.</translation>
+    </message>
+    <message>
+        <source>Cannot prepare audio for the WSJT-X backend.</source>
+        <translation>Nevar sagatavot audio WSJT-X modulim.</translation>
+    </message>
+    <message>
+        <source>Cannot read the prepared transmit audio.</source>
+        <translation>Nevar nolasīt sagatavoto raidīšanas audio.</translation>
+    </message>
+    <message>
+        <source>Invalid response from the WSJT-X backend.</source>
+        <translation>Nederīga WSJT-X moduļa atbilde.</translation>
+    </message>
+    <message>
+        <source>Invalid transmit audio from the WSJT-X backend.</source>
+        <translation>Nederīgs raidīšanas audio no WSJT-X moduļa.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend rejected the request.</source>
+        <translation>WSJT-X modulis noraidīja pieprasījumu.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend stopped unexpectedly.</source>
+        <translation>WSJT-X modulis negaidīti apstājās.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend timed out. Reception can be restarted by selecting the mode again.</source>
+        <translation>WSJT-X moduļa gaidīšanas laiks beidzies. Uztveršanu var atsākt, vēlreiz izvēloties režīmu.</translation>
+    </message>
+    <message>
+        <source>Unexpected response from the WSJT-X backend.</source>
+        <translation>Negaidīta WSJT-X moduļa atbilde.</translation>
+    </message>
+</context>
+<context>
+    <name>OperatorLog</name>
+    <message>
+        <source>Log files changed during processing; originals retained. Please retry.</source>
+        <translation>Žurnāla faili apstrādes laikā mainījās; oriģināli ir saglabāti. Lūdzu, mēģiniet vēlreiz.</translation>
+    </message>
+    <message>
+        <source>Cannot create the old backup directory; originals retained.</source>
+        <translation>Nevar izveidot rezerves kopiju mapi old; oriģināli ir saglabāti.</translation>
+    </message>
+    <message>
+        <source>Backup contents differ; originals retained.</source>
+        <translation>Rezerves kopijas saturs atšķiras; oriģināli ir saglabāti.</translation>
+    </message>
+    <message>
+        <source>Invalid QSO for the current station; originals retained.</source>
+        <translation>Nederīgs pašreizējās stacijas QSO; oriģināli ir saglabāti.</translation>
     </message>
 </context>
 </TS>

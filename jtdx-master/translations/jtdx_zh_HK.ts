@@ -46,6 +46,43 @@
         <source>OK</source>
         <translation>確定</translation>
     </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>關於 JTDX-F</translation>
+    </message>
+    <message>
+        <source>JTDX-F is developed by the Fluxmancer team.&lt;br&gt;Based on JTDX and WSJT-X; upstream credits and GPLv3 are preserved.&lt;br&gt;&lt;br&gt;</source>
+        <translation>JTDX-F 由 Fluxmancer 團隊開發。&lt;br&gt;基於 JTDX 和 WSJT-X，保留上游署名與 GPLv3 許可。&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>JTDX-F is licensed under GNU GPLv3, without warranty.</source>
+        <translation>JTDX-F 根據 GNU GPLv3 許可發佈，不提供擔保。</translation>
+    </message>
+    <message>
+        <source>FT2 / SuperFox: additional integrations; source revisions are documented with the source code.</source>
+        <translation>FT2 / SuperFox：額外集成；源代碼中記錄了對應修訂版本。</translation>
+    </message>
+    <message>
+        <source>FT8 / FT4: JTDX decoders, WSJT-X 3.0.2 protocol/waveforms, selected 3.3.0-beta5 performance/concurrency fixes, and Fluxmancer modern decoding.</source>
+        <translation>FT8 / FT4：JTDX 解碼器、WSJT-X 3.0.2 協定與波形、精選的 3.3.0-beta5 效能及並行修正，以及 Fluxmancer 現代解碼。</translation>
+    </message>
+    <message>
+        <source>Hamlib (radio control): %1</source>
+        <translation>Hamlib（電台控制）：%1</translation>
+    </message>
+    <message>
+        <source>JTDX-F preserves JTDX's heritage and incorporates selected WSJT-X updates. Components retain their respective authors and licenses.</source>
+        <translation>JTDX-F繼承JTDX，並集成部分WSJT-X更新。各組件保留其原作者和許可證。</translation>
+    </message>
+    <message>
+        <source>Q65 / MSK144 / Echo and astronomical calculations: WSJT-X 3.0.2.</source>
+        <translation>Q65 / MSK144 / Echo及天文計算：WSJT-X 3.0.2。</translation>
+    </message>
+    <message>
+        <source>WSPR: WSJT-X 3.0.2 decoder with 3.3.0-beta5 message validation and JTDX-F safety fixes.</source>
+        <translation>WSPR：WSJT-X 3.0.2 解碼器，加入 3.3.0-beta5 訊息驗證及 JTDX-F 安全修正。</translation>
+    </message>
+    <message><source>JTTY: WSJT-X 3.3.0-beta5 decoder with Fluxmancer integration.</source><translation>JTTY：WSJT-X 3.3.0-beta5 解碼器，由 Fluxmancer 整合。</translation></message>
 </context>
 <context>
     <name>CallsignDialog</name>
@@ -57,6 +94,10 @@
 </context>
 <context>
     <name>Configuration::impl</name>
+    <message>
+        <source>Own transmitted message</source>
+        <translation>自己發射的訊息</translation>
+    </message>
     <message>
         <location filename="../Configuration.cpp" line="1372"/>
         <source>&amp;OK</source>
@@ -326,6 +367,64 @@ Format:
         <location filename="../Configuration.cpp" line="6028"/>
         <source>Rig failure</source>
         <translation>無線電設備故障</translation>
+    </message>
+    <message>
+        <source>Callsign management…</source>
+        <translation>呼號管理…</translation>
+    </message>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>請輸入有效的 NTP 服務器域名或 IP 地址。</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>託管模式</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization</source>
+        <translation>NTP 校時</translation>
+    </message>
+    <message>
+        <source>Current version: %1
+Previous version: %2</source>
+        <translation>當前版本：%1
+上一版本：%2</translation>
+    </message>
+    <message>
+        <source>Halt Tx when SWR &gt; 2.5</source>
+        <translation>SWR &gt; 2.5時停止發射</translation>
+    </message>
+    <message>
+        <source>Hamlib updates</source>
+        <translation>Hamlib更新</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>無</translation>
+    </message>
+    <message>
+        <source>Restart application</source>
+        <translation>重新啓動軟件</translation>
+    </message>
+    <message>
+        <source>Restore previous Hamlib</source>
+        <translation>恢復上一版Hamlib</translation>
+    </message>
+    <message>
+        <source>Stop transmission when a supported CAT radio reports SWR above 2.5. Unknown or unsupported readings are shown as unavailable. Protection also polls SWR when power display is off.</source>
+        <translation>受支持的CAT電台報告SWR超過2.5時停止發射。未知或不支持的讀數顯示為不可用。即使關閉功率顯示，保護功能仍會查詢SWR。</translation>
+    </message>
+    <message>
+        <source>Update Hamlib</source>
+        <translation>更新Hamlib</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready to restore. Restart the application to apply it.</source>
+        <translation>已準備恢復版本%1。重啓軟件後生效。</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready. Restart the application to apply it.</source>
+        <translation>版本%1已準備就緒。重啓軟件後生效。</translation>
     </message>
 </context>
 <context>
@@ -2497,6 +2596,18 @@ Error: %2 - %3</source>
         <source>Ham Radio Deluxe didn&apos;t respond to command &quot;%1&quot; as expected</source>
         <translation>Ham Radio Deluxe 沒有回應預期的命令 &quot;%1&quot;</translation>
     </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid frequency list</source>
+        <translation>Ham Radio Deluxe 返回的頻率列表無效</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid or incomplete reply</source>
+        <translation>Ham Radio Deluxe 返回的應答無效或不完整</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid radio list</source>
+        <translation>Ham Radio Deluxe 返回的電台列表無效</translation>
+    </message>
 </context>
 <context>
     <name>HamlibTransceiver</name>
@@ -2965,6 +3076,46 @@ Error: %2 - %3</source>
         <location filename="../logqso.cpp" line="222"/>
         <source>Cannot open &quot;%1&quot; for append: %2</source>
         <translation>無法開啟 &quot;%1&quot; 對於附加: %2</translation>
+    </message>
+    <message>
+        <source>Earth–Moon–Earth</source>
+        <translation>地球—月球—地球</translation>
+    </message>
+    <message>
+        <source>Meteor scatter</source>
+        <translation>流星散射</translation>
+    </message>
+    <message>
+        <source>Propagation</source>
+        <translation>傳播方式</translation>
+    </message>
+    <message>
+        <source>Receive frequency</source>
+        <translation>接收頻率</translation>
+    </message>
+    <message>
+        <source>Remember propagation and satellite</source>
+        <translation>記住傳播方式和衞星</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>衞星</translation>
+    </message>
+    <message>
+        <source>Satellite mode</source>
+        <translation>衞星模式</translation>
+    </message>
+    <message>
+        <source>Satellite name</source>
+        <translation>衞星名稱</translation>
+    </message>
+    <message>
+        <source>Tropospheric</source>
+        <translation>對流層傳播</translation>
+    </message>
+    <message>
+        <source>Unspecified</source>
+        <translation>未指定</translation>
     </message>
 </context>
 <context>
@@ -5327,6 +5478,310 @@ UDP 伺服器 %2:%3</translation>
         <source>Tx watchdog expired</source>
         <translation>發射監管計時器已過期</translation>
     </message>
+    <message>
+        <source>A log import is already running.</source>
+        <translation>正在導入日誌，請稍候。</translation>
+    </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>關於 JTDX-F</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC獵人</translation>
+    </message>
+    <message>
+        <source>Decoder error: %1. TX stopped; restarting decoder.</source>
+        <translation>解碼器錯誤：%1。已停止發射，正在重啓解碼器。</translation>
+    </message>
+    <message>
+        <source>Decoder exited (code %1, crash %2)</source>
+        <translation>解碼進程退出（代碼 %1，崩潰 %2）</translation>
+    </message>
+    <message>
+        <source>Decoder restart failed repeatedly. Check decoder-errors.log and restart JTDX-F.</source>
+        <translation>解碼器多次重啓失敗。請查看 decoder-errors.log 並重啓 JTDX-F。</translation>
+    </message>
+    <message>
+        <source>Decoder restarted. Enable Monitor to resume reception; TX remains stopped.</source>
+        <translation>解碼器已重啓。點擊“監聽”恢復接收；發射保持停止。</translation>
+    </message>
+    <message>
+        <source>Enable TX manually, then Send each message (max. 80 characters).</source>
+        <translation>先手動開啓發射，再逐條發送（最多80字符）。</translation>
+    </message>
+    <message>
+        <source>FT2</source>
+        <translation>FT2</translation>
+    </message>
+    <message>
+        <source>JTTY</source>
+        <translation>JTTY</translation>
+    </message>
+    <message>
+        <source>JTTY requires a local audio input and output device.</source>
+        <translation>JTTY 需要使用本機音頻輸入和輸出設備。</translation>
+    </message>
+    <message>
+        <source>JTTY transmission timed out; TX stopped.</source>
+        <translation>JTTY 發射超時，已停止發射。</translation>
+    </message>
+    <message>
+        <source>Listening…</source>
+        <translation>正在監聽…</translation>
+    </message>
+    <message>
+        <source>Log import: %1 new, %2 duplicates, %3 originals archived, %4 records from other stations skipped.</source>
+        <translation>日誌導入：新增 %1 條，重複 %2 條，已備份 %3 個原始文件，略過其他電台記錄 %4 條。</translation>
+    </message>
+    <message>
+        <source>Log loading failed: %1</source>
+        <translation>日誌加載失敗：%1</translation>
+    </message>
+    <message>
+        <source>MCP %1</source>
+        <translation>MCP %1</translation>
+    </message>
+    <message>
+        <source>MCP error</source>
+        <translation>MCP 錯誤</translation>
+    </message>
+    <message>
+        <source>MCP off</source>
+        <translation>MCP 關閉</translation>
+    </message>
+    <message>
+        <source>MCP settings: File &gt; Settings &gt; MCP</source>
+        <translation>MCP 設置：文件 &gt; 設置 &gt; MCP</translation>
+    </message>
+    <message>
+        <source>MCP: %1</source>
+        <translation>MCP：%1</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>託管模式</translation>
+    </message>
+    <message>
+        <source>Managed mode is listening. Enable TX manually to allow calls and scheduled CQ.</source>
+        <translation>託管模式正在監聽。請人工開啓發射後，才會呼叫及定時發送 CQ。</translation>
+    </message>
+    <message>
+        <source>Managed mode is off.</source>
+        <translation>託管模式已關閉。</translation>
+    </message>
+    <message>
+        <source>Modern algorithm decoding</source>
+        <translation>現代算法解碼</translation>
+    </message>
+    <message>
+        <source>My callsign</source>
+        <translation>我的呼號</translation>
+    </message>
+    <message>
+        <source>No decoder completion within the timeout</source>
+        <translation>解碼器未在規定時間內完成</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>關閉</translation>
+    </message>
+    <message>
+        <source>Previous audio file is still being saved; this interval was skipped.</source>
+        <translation>上一段錄音尚未保存完成，已跳過本週期的錄音保存。</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast</source>
+        <translation>QSO愛好者</translation>
+    </message>
+    <message>
+        <source>Receiving</source>
+        <translation>接收中</translation>
+    </message>
+    <message>
+        <source>Search around Rx frequency (Hz):</source>
+        <translation>接收頻率兩側的搜索範圍（Hz）：</translation>
+    </message>
+    <message>
+        <source>Select a callsign before importing logs.</source>
+        <translation>請先選擇呼號，再導入日誌。</translation>
+    </message>
+    <message>
+        <source>Select a valid callsign and grid in station settings before enabling TX.</source>
+        <translation>啓用發射前，請先在電台資料中選擇有效的呼號和網格。</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>發送</translation>
+    </message>
+    <message>
+        <source>SuperFox decoding (SuperHound)</source>
+        <translation>SuperFox 解碼（SuperHound 模式）</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance</source>
+        <translation>SuperFox 頻率容差</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance...</source>
+        <translation>SuperFox 頻率容差…</translation>
+    </message>
+    <message>
+        <source>SuperHound</source>
+        <translation>SuperHound</translation>
+    </message>
+    <message>
+        <source>TX watchdog expired. Finishing the current QSO before stopping.</source>
+        <translation>發射監管已到期，完成當前通聯後停止。</translation>
+    </message>
+    <message>
+        <source>This mode requires local audio devices; TCI audio is unavailable.</source>
+        <translation>此模式需要本機音頻設備，暫不支持 TCI 音頻。</translation>
+    </message>
+    <message>
+        <source>Transmitting</source>
+        <translation>發射中</translation>
+    </message>
+    <message>
+        <source>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</source>
+        <translation>啓用增強解碼及額外的候選校驗。關閉時使用傳統算法，從下一次解碼起生效。</translation>
+    </message>
+    <message>
+        <source>WD %1:%2</source>
+        <translation>監管 %1:%2</translation>
+    </message>
+    <message>
+        <source>WD finishing QSO</source>
+        <translation>監管收尾</translation>
+    </message>
+    <message>
+        <source>WD unlimited</source>
+        <translation>監管 ∞</translation>
+    </message>
+    <message>
+        <source>The current operator's log is not ready. Check the log files and try again.</source>
+        <translation>當前操作員的日誌尚未就緒，請檢查日誌文件後重試。</translation>
+    </message>
+    <message>
+        <source>Blacklist management</source>
+        <translation>黑名單管理</translation>
+    </message>
+    <message>
+        <source>CALL</source>
+        <translation>呼號</translation>
+    </message>
+    <message>
+        <source>REPORT</source>
+        <translation>報告</translation>
+    </message>
+    <message>
+        <source>This station is blocked, or the permanent blacklist is unavailable.</source>
+        <translation>此電台已被封鎖，或永久黑名單無法使用。</translation>
+    </message>
+    <message>
+        <source>Confirm switch</source>
+        <translation>確認切換</translation>
+    </message>
+    <message>
+        <source>Average</source>
+        <translation>平均</translation>
+    </message>
+    <message>
+        <source>Clear average</source>
+        <translation>清除平均</translation>
+    </message>
+    <message>
+        <source>Click to erase the right window; double-click to erase both.</source>
+        <translation>單擊清空右側窗口，雙擊清空兩側窗口。</translation>
+    </message>
+    <message>
+        <source>EME presets</source>
+        <translation>EME預設</translation>
+    </message>
+    <message>
+        <source>Echo: %1 dB; Δf %2 Hz; quality %3; averages %4</source>
+        <translation>回波：%1 dB；Δf %2 Hz；質量%3；平均次數%4</translation>
+    </message>
+    <message>
+        <source>Enable TX manually to measure lunar echoes.</source>
+        <translation>請手動開啓發射以測量月面回波。</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX.</source>
+        <translation>開啓或停止發射。</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX. Right-click for Wait &amp; Reply, Wait &amp; Call or Wait &amp; Pounce. Waiting requires a manually enabled TX session.</source>
+        <translation>開啓或停止發射。右鍵選擇等待應答、等待呼叫或等待搶答。等待功能需要手動開啓發射會話。</translation>
+    </message>
+    <message>
+        <source>Full duplex</source>
+        <translation>全雙工</translation>
+    </message>
+    <message>
+        <source>Left-click to erase the left window; right-click to erase the right window; double-click to erase both.</source>
+        <translation>左鍵清空左側窗口，右鍵清空右側窗口，雙擊清空兩側窗口。</translation>
+    </message>
+    <message>
+        <source>Period</source>
+        <translation>週期</translation>
+    </message>
+    <message>
+        <source>SWR %1 exceeds 2.5. TX stopped; enable TX manually after checking the antenna.</source>
+        <translation>SWR %1超過2.5，已停止發射。檢查天線後請手動開啓發射。</translation>
+    </message>
+    <message>
+        <source>Set a valid station grid locator to calculate astronomical data.</source>
+        <translation>請設置有效的本台網格以計算天文數據。</translation>
+    </message>
+    <message>
+        <source>Stopped</source>
+        <translation>已停止</translation>
+    </message>
+    <message>
+        <source>The transmit slot was missed; enable TX again.</source>
+        <translation>已錯過發射時隙，請重新開啓發射。</translation>
+    </message>
+    <message>
+        <source>Transmission timed out; TX stopped.</source>
+        <translation>發射超時，已停止發射。</translation>
+    </message>
+    <message>
+        <source>VHF / EME</source>
+        <translation>VHF / EME</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Call</source>
+        <translation>等待呼叫</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Pounce</source>
+        <translation>等待搶答CQ</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Reply</source>
+        <translation>等待應答</translation>
+    </message>
+    <message>
+        <source>Waiting is selected. Click Enable TX to authorize transmission; Stop cancels waiting.</source>
+        <translation>已選擇等待。請點擊“開啓發射”授權發射；“停止”會取消等待。</translation>
+    </message>
+    <message>
+        <source>Waiting matched %1; continuing the manually enabled TX session.</source>
+        <translation>等待條件匹配%1，繼續已手動開啓的發射會話。</translation>
+    </message>
+    <message>
+        <source>Waiting timed out; TX stopped.</source>
+        <translation>等待超時，已停止發射。</translation>
+    </message>
+    <message>
+        <source>%1 is replying to another station; waiting for its CQ or final message.</source>
+        <translation>%1 正在回應其他電台；等待其 CQ 或結束訊息。</translation>
+    </message>
+    <message>
+        <source>%1 is available; continuing the manually enabled TX session.</source>
+        <translation>%1 已空閒；繼續先前人工啟用的發射會話。</translation>
+    </message>
 </context>
 <context>
     <name>Modes</name>
@@ -5639,6 +6094,58 @@ Please verify the correct directory name was given.</source>
         <location filename="../WFPalette.cpp" line="258"/>
         <source>Error writing waterfall palette file &quot;%1&quot;: %2.</source>
         <translation>讀取瀑布調色板檔案時錯誤 &quot;%1&quot;: %2.</translation>
+    </message>
+    <message>
+        <source>Cannot create log directory</source>
+        <translation>無法建立日誌目錄</translation>
+    </message>
+    <message>
+        <source>Log files changed while loading. Please retry.</source>
+        <translation>載入期間日誌檔案已變更，請重試。</translation>
+    </message>
+    <message>
+        <source>Log is busy. Please retry.</source>
+        <translation>日誌正在使用，請重試。</translation>
+    </message>
+    <message>
+        <source>Unable to import the log files.</source>
+        <translation>無法導入日誌文件。</translation>
+    </message>
+    <message>
+        <source>Unable to read the log files.</source>
+        <translation>無法讀取日誌文件。</translation>
+    </message>
+    <message>
+        <source>Ambiguous QSO identity; log unchanged</source>
+        <translation>通聯記錄的識別資訊不唯一；日誌未更改</translation>
+    </message>
+    <message>
+        <source>Recorded QSO not found; log unchanged</source>
+        <translation>找不到已記錄的通聯；日誌未更改</translation>
+    </message>
+    <message>
+        <source>Cannot read pending log update</source>
+        <translation>無法讀取待完成的日誌更新</translation>
+    </message>
+    <message>
+        <source>Invalid pending log update; originals retained</source>
+        <translation>待完成的日誌更新無效；原始檔案已保留</translation>
+    </message>
+    <message>
+        <source>Cannot remove completed log update journal</source>
+        <translation>無法刪除已完成日誌更新的復原記錄</translation>
+    </message>
+    <message>
+        <source>QSO identity changed or timestamps are invalid; log unchanged</source>
+        <translation>通聯識別資訊已更改或時間戳記無效；日誌未更改</translation>
+    </message>
+    <message>
+        <source>Cannot revise a symbolic log link</source>
+        <translation>無法更新符號連結指向的日誌</translation>
+    </message>
+    <message>
+        <source>QSO update exceeds the journal size limit</source>
+        <translation>通聯更新超過復原記錄的大小限制</translation>
     </message>
 </context>
 <context>
@@ -6119,6 +6626,14 @@ Error(%2): %3</source>
         <location filename="../TCITransceiver.cpp" line="1740"/>
         <source>TCI modulator not Idle</source>
         <translation>TCI 調製器不空閒</translation>
+    </message>
+    <message>
+        <source>Invalid TCI audio packet</source>
+        <translation>TCI 音頻數據包無效，已停止發射。</translation>
+    </message>
+    <message>
+        <source>TCI PCM playback requires an active, explicitly started transmission.</source>
+        <translation>TCI PCM播放需要處於明確手動開啓的發射狀態。</translation>
     </message>
 </context>
 <context>
@@ -7225,13 +7740,13 @@ both here.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2233"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option is being used for non-overlapping spectra scenario. Tx will be halted if spectra have common frequencies with no respect to this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;該選項用於非堆疊頻譜場景. 如果主叫台回答第三方電台, 發射將被停止&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>With AutoSeq enabled, checking this option pauses calls to the selected station while it replies to someone else, keeping Enable TX on. Resume on its CQ, 73, RR73, RRR or a reply to you. When unchecked, do not pause for this reason. Call limits, the TX watchdog and Stop still apply.</source>
+        <translation>啟用 AutoSeq 時，勾選此項可在所選電台回應其他人期間暫停呼叫，並保持「啟用發射」開啟。收到該台的 CQ、73、RR73、RRR 或直接回覆本機的訊息後恢復。未勾選時，不因該原因暫停。呼叫次數限制、發射監管計時器和「停止」仍然有效。</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2236"/>
-        <source>Halt TX if operator I called answered to other operator</source>
-        <translation>如果我呼叫的電台回應其他人則中止發射</translation>
+        <source>Wait if the called station replies to someone else</source>
+        <translation>對方回應其他電台時暫停呼叫並等待</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2243"/>
@@ -8051,8 +8566,8 @@ Right click for insert and delete options.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3846"/>
-        <source>Transmitted message</source>
-        <translation>正在發射的訊息</translation>
+        <source>Own transmitted message</source>
+        <translation>自己發射的訊息</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3862"/>
@@ -8916,6 +9431,294 @@ soundcard changes</source>
 重置無線電設備界面並應用任何
 聲卡更改</translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;從開啓發射開始累計計時，跨通聯保持；0 表示不限時，最大 999 分鐘。操作和通聯不會重置計時。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Access token</source>
+        <translation>訪問令牌</translation>
+    </message>
+    <message>
+        <source>Allow control (mode, frequency, QSO and options)</source>
+        <translation>允許控制（模式、頻率、通聯和選項）</translation>
+    </message>
+    <message>
+        <source>Allow starting TX and Tune (also requires control)</source>
+        <translation>允許開啓發射和調諧（同時需要允許控制）</translation>
+    </message>
+    <message>
+        <source>Connect an AI client to JTDX-F using MCP. Changes take effect after OK. Only this computer (127.0.0.1) can connect.</source>
+        <translation>通過 MCP 將 AI 客户端連接到 JTDX-F。點擊“確定”後生效，僅允許本機（127.0.0.1）連接。</translation>
+    </message>
+    <message>
+        <source>Copy token</source>
+        <translation>複製令牌</translation>
+    </message>
+    <message>
+        <source>Enable MCP server</source>
+        <translation>啓用 MCP 服務</translation>
+    </message>
+    <message>
+        <source>Endpoint</source>
+        <translation>連接地址</translation>
+    </message>
+    <message>
+        <source>Generate new token</source>
+        <translation>生成新令牌</translation>
+    </message>
+    <message>
+        <source>MCP</source>
+        <translation>MCP</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>端口</translation>
+    </message>
+    <message>
+        <source>Use Streamable HTTP with Authorization: Bearer TOKEN, or the bundled jtdx_mcp_bridge.py for stdio clients. Status, decodes and log are readable with a token. Stop TX is always available. See docs/MCP_zh.md.</source>
+        <translation>支持 Streamable HTTP（使用 Authorization: Bearer TOKEN），stdio 客户端可使用附帶的 jtdx_mcp_bridge.py。持有令牌即可讀取狀態、解碼和日誌，並可隨時停止發射。詳見 docs/MCP_zh.md。</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Align the text for DXCC, distance and azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;對齊DXCC、距離和方位角文字。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allow kHz frequency offset entry without 'k' suffix.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;允許輸入kHz頻率偏移時省略“k”後綴。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have decodes for a new period start at the top of the Band Activity window and not scroll off the top when the window is full.&lt;/p&gt;&lt;p&gt;This is to aid selecting decodes to double-click while decoding is still in progress. Use the Band Activity vertical scroll bar to reveal decodes past the bottom of the window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;每個新週期的解碼從“波段活動”窗口頂部開始，窗口滿後不自動把頂部消息滾走。&lt;/p&gt;&lt;p&gt;便於解碼仍在進行時雙擊選擇電台。使用“波段活動”的垂直滾動條查看下方消息。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase Band Activity and Rx frequency windows after band change.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;切換波段後清空“波段活動”和“接收頻率”窗口。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends a valid Maidenhead locator, calculate and show the great-circle azimuth in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;收到有效的Maidenhead網格時，計算並在“波段活動”中顯示大圓方位角。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends locator, calculate and show the distance in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;收到網格時，計算並在“波段活動”中顯示距離。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between DXCC and distance/azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;增大或縮小DXCC與距離/方位角之間的間距。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between message text and DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;增大或縮小消息文字與DXCC之間的間距。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open the Astronomical Data window automatically when switching to Q65 or JT65 mode and Decode after EME delay is enabled, and close it when no longer needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;切換到Q65或JT65模式且開啓EME延遲解碼時，自動打開天文數據窗口；不再需要時自動關閉。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Turn the progress bar red while transmitting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;發射時將進度條變為紅色。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tx until 73 is received when in MSK144 or Q65 mode. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;在MSK144或Q65模式下持續發射，直到收到73。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>A deliberate double-click may enable TX only after the transmission safety checks pass. Startup, background messages and remote selection cannot grant transmission permission.</source>
+        <translation>明確雙擊電台後，只有通過發射安全檢查才可開啓發射。啓動、後台消息和遠程選擇均不能授予發射權限。</translation>
+    </message>
+    <message>
+        <source>Additional features</source>
+        <translation>附加功能</translation>
+    </message>
+    <message>
+        <source>After a completed QSO, move the receive audio frequency to the transmit audio frequency. This does not enable the Tx=Rx lock.</source>
+        <translation>完成QSO後，將接收音頻頻率移到發射音頻頻率。不會開啓Tx=Rx鎖定。</translation>
+    </message>
+    <message>
+        <source>Align DXCC/distance/azimuth</source>
+        <translation>對齊DXCC/距離/方位角</translation>
+    </message>
+    <message>
+        <source>Allow Tx frequency changes while transmitting</source>
+        <translation>允許在發射時更改發射頻率</translation>
+    </message>
+    <message>
+        <source>Allow the additional Earth–Moon–Earth propagation delay when collecting and decoding signals. This does not alter the UTC clock.</source>
+        <translation>採集和解碼信號時，留出地球—月球—地球傳播帶來的額外延遲。不會更改UTC時鐘。</translation>
+    </message>
+    <message>
+        <source>Alternate Erase button behavior</source>
+        <translation>使用另一種清空按鈕操作方式</translation>
+    </message>
+    <message>
+        <source>Alternate F1-F6 bindings</source>
+        <translation>使用另一組F1-F6快捷鍵</translation>
+    </message>
+    <message>
+        <source>Auto-open/close Astronomical data window</source>
+        <translation>自動打開/關閉天文數據窗口</translation>
+    </message>
+    <message>
+        <source>Calling CQ forces Call 1st</source>
+        <translation>發送CQ時強制使用“首個呼叫”</translation>
+    </message>
+    <message>
+        <source>Clear DX Call after QSO</source>
+        <translation>QSO後清空DX呼號</translation>
+    </message>
+    <message>
+        <source>Clear DX Grid after QSO</source>
+        <translation>QSO後清空DX網格</translation>
+    </message>
+    <message>
+        <source>Decode after EME delay</source>
+        <translation>等待EME延遲後解碼</translation>
+    </message>
+    <message>
+        <source>Di&amp;sable Tx after sending 73</source>
+        <translation>發送73後停止發射(&amp;S)</translation>
+    </message>
+    <message>
+        <source>Doubl&amp;e-click on call sets Tx enable</source>
+        <translation>雙擊呼號開啓發射(&amp;E)</translation>
+    </message>
+    <message>
+        <source>Enable VHF and submode features</source>
+        <translation>啓用VHF及子模式功能</translation>
+    </message>
+    <message>
+        <source>Enable Wait &amp; Call, Wait &amp; Reply and Wait &amp; Pounce controls. They require a manually authorized TX session and cannot restart transmission after Stop. Managed mode keeps its own selection rules.</source>
+        <translation>啓用等待呼叫、等待應答和等待搶答功能。須有手動授權的發射會話，按“停止”後不會重新發射。託管模式繼續使用自己的選擇規則。</translation>
+    </message>
+    <message>
+        <source>Enable Wait features</source>
+        <translation>啓用等待功能</translation>
+    </message>
+    <message>
+        <source>Erase decodes after band change</source>
+        <translation>切換波段後清空解碼</translation>
+    </message>
+    <message>
+        <source>Finish one QSO and stop. This is the same setting as Single QSO in the main window. Leave it unchecked for continuous QSOs within the TX watchdog session.</source>
+        <translation>完成一次QSO後停止。與主窗口的“單次QSO”是同一設置。不勾選則在監管計時會話內連續通聯。</translation>
+    </message>
+    <message>
+        <source>Font...</source>
+        <translation>字體…</translation>
+    </message>
+    <message>
+        <source>Highlight DX Call in message</source>
+        <translation>高亮消息中的DX呼號</translation>
+    </message>
+    <message>
+        <source>Highlight DX Grid in message</source>
+        <translation>高亮消息中的DX網格</translation>
+    </message>
+    <message>
+        <source>Less button coloring (restart required)</source>
+        <translation>減少按鈕配色（需重啓）</translation>
+    </message>
+    <message>
+        <source>MSK144/Q65: Tx until 73 is received</source>
+        <translation>MSK144/Q65：發射直到收到73</translation>
+    </message>
+    <message>
+        <source>Map Grid locator to U.S. State</source>
+        <translation>按網格推定美國州</translation>
+    </message>
+    <message>
+        <source>Monitor returns to last used frequency</source>
+        <translation>監聽返回上次使用的頻率</translation>
+    </message>
+    <message>
+        <source>Read and display PWR and SWR</source>
+        <translation>讀取並顯示功率和SWR</translation>
+    </message>
+    <message>
+        <source>Read and display transmit power and SWR through CAT. Unsupported readings are shown as unavailable.</source>
+        <translation>通過CAT讀取並顯示發射功率和SWR。不支持的讀數顯示為不可用。</translation>
+    </message>
+    <message>
+        <source>Set Rx frequency to Tx frequency after QSO</source>
+        <translation>QSO後將接收頻率設為發射頻率</translation>
+    </message>
+    <message>
+        <source>Show &amp;DXCC, grid, and worked-before status    </source>
+        <translation>顯示DXCC、網格和已通聯狀態(&amp;D)</translation>
+    </message>
+    <message>
+        <source>Show DXCC for all messages</source>
+        <translation>所有消息均顯示DXCC</translation>
+    </message>
+    <message>
+        <source>Show U.S. States in messages with grid</source>
+        <translation>在含網格的消息中顯示美國州</translation>
+    </message>
+    <message>
+        <source>Show azimuth in messages with grid</source>
+        <translation>在含網格的消息中顯示方位角</translation>
+    </message>
+    <message>
+        <source>Show blank line with time stamp</source>
+        <translation>間隔行顯示時間戳</translation>
+    </message>
+    <message>
+        <source>Show distance in messages with grid</source>
+        <translation>在含網格的消息中顯示距離</translation>
+    </message>
+    <message>
+        <source>Show if decoded stations are new DXCC entities or worked before.</source>
+        <translation>顯示解碼電台是否為新DXCC實體或已通聯電台。</translation>
+    </message>
+    <message>
+        <source>Show principal prefix instead of country name        </source>
+        <translation>以主前綴代替國家名</translation>
+    </message>
+    <message>
+        <source>Show the separator line between periods with time stamp of the decode period.</source>
+        <translation>在週期間隔行上顯示該解碼週期的時間戳。</translation>
+    </message>
+    <message>
+        <source>Single decode</source>
+        <translation>單一解碼</translation>
+    </message>
+    <message>
+        <source>Start new period decodes at top</source>
+        <translation>新週期解碼從頂部開始</translation>
+    </message>
+    <message>
+        <source>Stop Tune after the selected number of seconds. A zero interval disables this timer.</source>
+        <translation>達到所選秒數後停止調諧發射。設為0則關閉此計時器。</translation>
+    </message>
+    <message>
+        <source>Tune watchdog   </source>
+        <translation>調諧監管計時器</translation>
+    </message>
+    <message>
+        <source>Turn progress bar red while transmitting</source>
+        <translation>發射時進度條顯示紅色</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. Transmission safety checks still apply.</source>
+        <translation>F1–F5分別選擇CQ、信號報告、R報告、確認及73；F6切換回復策略。仍須通過發射安全檢查。</translation>
+    </message>
+    <message>
+        <source>kHz entry without k (restart required)</source>
+        <translation>輸入kHz時省略k（需重啓）</translation>
+    </message>
+    <message>
+        <source>When checked, double-clicking a decoded callsign starts a TX session after the transmission safety checks pass. The session then follows the normal AutoSeq, Single QSO and watchdog settings. Off by default.</source>
+        <translation>勾選後，雙擊解碼出的呼號即可在通過發射安全檢查後啟動發射會話。之後按正常的自動程序、單次通聯及監管計時器設定運作。預設關閉。</translation>
+    </message>
+    <message>
+        <source>Double-click a callsign to enable TX</source>
+        <translation>雙擊呼號啟用發射</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. These keys cannot start a TX session. Click Enable TX first.</source>
+        <translation>F1–F5 分別選擇 CQ、報告、R 報告、確認和 73；F6 更改回覆策略。這些快捷鍵不能啟動發射工作階段。請先按「啟用發射」。</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -8966,6 +9769,870 @@ soundcard changes</source>
         <location filename="../wf_palette_design_dialog.ui" line="23"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Double click a color to edit it.&lt;/p&gt;&lt;p&gt;Right click to insert or delete colors.&lt;/p&gt;&lt;p&gt;Colors at the top represent weak signals&lt;/p&gt;&lt;p&gt;and colors at the bottom represent strong&lt;/p&gt;&lt;p&gt;signals. You can have up to 256 colors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;雙擊一種顏色進行編輯.&lt;/p&gt;&lt;p&gt;右鍵單擊可插入或刪除顏色.&lt;/p&gt;&lt;p&gt;頂部的顏色代表微弱的信號&lt;/p&gt;&lt;p&gt;底部的顏色代表強烈&lt;/p&gt;&lt;p&gt;信號. 您最多可以有256種顏色.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>JttyController</name>
+    <message>
+        <source>Cannot write to the JTTY decoder.</source>
+        <translation>無法向 JTTY 解碼進程寫入數據。</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY decoder response.</source>
+        <translation>JTTY 解碼進程返回無效數據。</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY transmit audio.</source>
+        <translation>JTTY 發射音頻無效。</translation>
+    </message>
+    <message>
+        <source>JTTY audio backlog exceeded 10 seconds; reception restarted.</source>
+        <translation>JTTY 音頻積壓超過 10 秒，已重新開始接收。</translation>
+    </message>
+    <message>
+        <source>JTTY decoder stopped unexpectedly.</source>
+        <translation>JTTY 解碼進程意外退出。</translation>
+    </message>
+    <message>
+        <source>JTTY decoder timed out. Select JTTY again to restart it.</source>
+        <translation>JTTY 解碼進程超時，請重新選擇 JTTY 模式以重啓。</translation>
+    </message>
+    <message>
+        <source>Unexpected JTTY decoder response.</source>
+        <translation>JTTY 解碼進程返回的請求編號不匹配。</translation>
+    </message>
+</context>
+<context>
+    <name>LogForwarder</name>
+    <message>
+        <source>External logger did not acknowledge the QSO. Local logs are saved.</source>
+        <translation>外部日誌軟件未確認接收，本地日誌已保存。</translation>
+    </message>
+    <message>
+        <source>External logger disconnected before acknowledgement. Local logs are saved.</source>
+        <translation>外部日誌軟件在確認前斷開連接，本地日誌已保存。</translation>
+    </message>
+    <message>
+        <source>External logger rejected the QSO. Local logs are saved.</source>
+        <translation>外部日誌軟件拒絕接收通聯，本地日誌已保存。</translation>
+    </message>
+    <message>
+        <source>Invalid external logger response. Local logs are saved.</source>
+        <translation>外部日誌軟件返回無效數據，本地日誌已保存。</translation>
+    </message>
+    <message>
+        <source>Unexpected external logger response. Local logs are saved.</source>
+        <translation>外部日誌軟件返回未知響應，本地日誌已保存。</translation>
+    </message>
+</context>
+<context>
+    <name>ManagedSettingsWidget</name>
+    <message>
+        <source>0 — unlimited</source>
+        <translation>0 — 不限制</translation>
+    </message>
+    <message>
+        <source>Answer previously worked callsigns</source>
+        <translation>回答曾經通聯過的呼號</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC獵人</translation>
+    </message>
+    <message>
+        <source>New CQ zone</source>
+        <translation>新CQ分區</translation>
+    </message>
+    <message>
+        <source>New DXCC</source>
+        <translation>新DXCC</translation>
+    </message>
+    <message>
+        <source>New ITU zone</source>
+        <translation>新ITU分區</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode DXCC</source>
+        <translation>新波段&amp;&amp;模式DXCC</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode callsign</source>
+        <translation>新波段&amp;&amp;模式呼號</translation>
+    </message>
+    <message>
+        <source>New callsign</source>
+        <translation>新呼號</translation>
+    </message>
+    <message>
+        <source>New grid</source>
+        <translation>新網格</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast (also prioritizes new DXCC entities and zones)</source>
+        <translation>QSO愛好者（開啓此模式也會優先呼叫新DXCC和新分區）</translation>
+    </message>
+    <message>
+        <source>Send three CQ rounds every 15 minutes</source>
+        <translation>每15分鐘發送三輪CQ</translation>
+    </message>
+    <message>
+        <source>Unanswered call limit:</source>
+        <translation>呼叫次數：</translation>
+    </message>
+    <message>
+        <source>Allow TX slot changes</source>
+        <translation>自由切換時序</translation>
+    </message>
+    <message>
+        <source>Allow automatic TX slot changes between completed QSOs. After a slot change, wait 5 minutes before another automatic change. Manual changes are always allowed and restart this timer. Off: stay in the selected TX slot.</source>
+        <translation>允許在一次通聯完整結束後自動切換發射時序。每次切換後，至少等待5分鐘才可再次自動切換。人工可隨時切換，並重新開始這5分鐘計時。關閉時僅使用目前選定的發射時序。</translation>
+    </message>
+</context>
+<context>
+    <name>NtpClient</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>請輸入有效的 NTP 服務器域名或 IP 地址。</translation>
+    </message>
+    <message>
+        <source>Invalid NTP packet length.</source>
+        <translation>NTP 回覆長度無效。</translation>
+    </message>
+    <message>
+        <source>NTP request timed out.</source>
+        <translation>NTP 請求超時。</translation>
+    </message>
+    <message>
+        <source>The NTP date is outside the supported range.</source>
+        <translation>NTP 日期超出支持範圍。</translation>
+    </message>
+    <message>
+        <source>The NTP response does not match this request.</source>
+        <translation>NTP 回覆與本次請求不匹配。</translation>
+    </message>
+    <message>
+        <source>The NTP response has excessive delay or uncertainty.</source>
+        <translation>NTP 回覆的延遲或時間誤差過大。</translation>
+    </message>
+    <message>
+        <source>The NTP server is not synchronized or refused the request.</source>
+        <translation>NTP 服務器未同步或拒絕了請求。</translation>
+    </message>
+    <message>
+        <source>The clock changed during the NTP request, or the response was too slow.</source>
+        <translation>請求期間系統時間已變化，或回覆延遲過高。</translation>
+    </message>
+</context>
+<context>
+    <name>NtpController</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>請輸入有效的 NTP 服務器域名或 IP 地址。</translation>
+    </message>
+    <message>
+        <source>Install polkit/pkexec to authorize system time synchronization.</source>
+        <translation>需要安裝 polkit/pkexec 才能申請系統校時權限。</translation>
+    </message>
+    <message>
+        <source>Permission granted. Synchronization follows the selected interval.</source>
+        <translation>已獲得校時權限，將按所選間隔自動校時。</translation>
+    </message>
+    <message>
+        <source>Permission request timed out. System time is unchanged.</source>
+        <translation>權限申請超時，系統時間未更改。</translation>
+    </message>
+    <message>
+        <source>Permission was not granted (Windows error %1). Using system time.</source>
+        <translation>未獲得校時權限（Windows 錯誤 %1），繼續使用系統時間。</translation>
+    </message>
+    <message>
+        <source>Permission was not granted. Using system time.</source>
+        <translation>未獲得校時權限，繼續使用系統時間。</translation>
+    </message>
+    <message>
+        <source>Requesting permission to set the system time…</source>
+        <translation>正在申請系統校時權限…</translation>
+    </message>
+    <message>
+        <source>Synchronization deferred while transmitting.</source>
+        <translation>發射期間暫緩校時。</translation>
+    </message>
+    <message>
+        <source>Synchronization failed: %1. Retrying in 1 minute.</source>
+        <translation>校時失敗：%1。將在 1 分鐘後重試。</translation>
+    </message>
+    <message>
+        <source>The time synchronization helper is missing.</source>
+        <translation>找不到系統校時輔助程序。</translation>
+    </message>
+    <message>
+        <source>Time synchronization stopped. Using system time.</source>
+        <translation>校時已停止，繼續使用系統時間。</translation>
+    </message>
+    <message>
+        <source>Time synchronized; correction %1 ms. Next check in %2 minutes.</source>
+        <translation>校時成功，修正 %1 毫秒；下次校時在 %2 分鐘後。</translation>
+    </message>
+    <message>
+        <source>Use system time. NTP synchronization is disabled.</source>
+        <translation>使用系統時間，NTP 校時未開啓。</translation>
+    </message>
+</context>
+<context>
+    <name>NtpSettingsWidget</name>
+    <message>
+        <source>%1 hours</source>
+        <translation>%1 小時</translation>
+    </message>
+    <message>
+        <source>%1 minutes</source>
+        <translation>%1 分鐘</translation>
+    </message>
+    <message>
+        <source>Africa / Kenya / icolo</source>
+        <translation>非洲 / 肯尼亞 / icolo</translation>
+    </message>
+    <message>
+        <source>Africa / Mauritius / Mauritius Telecom</source>
+        <translation>非洲 / 毛里求斯 / Mauritius Telecom</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / INX-ZA</source>
+        <translation>非洲 / 南非 / INX-ZA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / NMISA</source>
+        <translation>非洲 / 南非 / NMISA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / SANReN</source>
+        <translation>非洲 / 南非 / SANReN</translation>
+    </message>
+    <message>
+        <source>Asia / Apple</source>
+        <translation>亞洲 / Apple</translation>
+    </message>
+    <message>
+        <source>Asia / China / Alibaba</source>
+        <translation>亞洲 / 中國 / 阿里雲</translation>
+    </message>
+    <message>
+        <source>Asia / China / Baidu</source>
+        <translation>亞洲 / 中國 / 百度</translation>
+    </message>
+    <message>
+        <source>Asia / China / CAS NTSC</source>
+        <translation>亞洲 / 中國 / 中科院國家授時中心</translation>
+    </message>
+    <message>
+        <source>Asia / China / NTP Pool</source>
+        <translation>亞洲 / 中國 / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tencent</source>
+        <translation>亞洲 / 中國 / 騰訊雲</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tsinghua TUNA</source>
+        <translation>亞洲 / 中國 / 清華 TUNA</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Internet Multifeed</source>
+        <translation>亞洲 / 日本 / Internet Multifeed</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / NICT</source>
+        <translation>亞洲 / 日本 / NICT</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Sakura Internet</source>
+        <translation>亞洲 / 日本 / 櫻花網絡</translation>
+    </message>
+    <message>
+        <source>Asia / South Korea / KRISS</source>
+        <translation>亞洲 / 韓國 / KRISS</translation>
+    </message>
+    <message>
+        <source>Europe / France / RDEM Systems</source>
+        <translation>歐洲 / 法國 / RDEM Systems</translation>
+    </message>
+    <message>
+        <source>Europe / Germany / PTB</source>
+        <translation>歐洲 / 德國 / PTB</translation>
+    </message>
+    <message>
+        <source>Europe / Poland / GUM</source>
+        <translation>歐洲 / 波蘭 / GUM</translation>
+    </message>
+    <message>
+        <source>Europe / Sweden / Netnod</source>
+        <translation>歐洲 / 瑞典 / Netnod</translation>
+    </message>
+    <message>
+        <source>Europe / UK / NPL</source>
+        <translation>歐洲 / 英國 / NPL</translation>
+    </message>
+    <message>
+        <source>Global / Apple</source>
+        <translation>全球 / Apple</translation>
+    </message>
+    <message>
+        <source>Global / Cloudflare</source>
+        <translation>全球 / Cloudflare</translation>
+    </message>
+    <message>
+        <source>Global / Google</source>
+        <translation>全球 / Google</translation>
+    </message>
+    <message>
+        <source>Global / Microsoft Windows</source>
+        <translation>全球 / Microsoft Windows</translation>
+    </message>
+    <message>
+        <source>NTP hostname or IP address</source>
+        <translation>NTP 服務器域名或 IP 地址</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization (requests administrator privileges when enabled)</source>
+        <translation>NTP 校時（勾選後會自動申請管理員權限）</translation>
+    </message>
+    <message>
+        <source>North America / Canada / NRC</source>
+        <translation>北美洲 / 加拿大 / NRC</translation>
+    </message>
+    <message>
+        <source>North America / USA / NIST</source>
+        <translation>北美洲 / 美國 / NIST</translation>
+    </message>
+    <message>
+        <source>Oceania / Australia / NTP Pool</source>
+        <translation>大洋洲 / 澳大利亞 / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Oceania / New Zealand / MSL (NZ networks only)</source>
+        <translation>大洋洲 / 新西蘭 / MSL（限新西蘭網絡）</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>其他</translation>
+    </message>
+    <message>
+        <source>South America / Argentina / INTI</source>
+        <translation>南美洲 / 阿根廷 / INTI</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / NIC.br</source>
+        <translation>南美洲 / 巴西 / NIC.br</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / National Observatory</source>
+        <translation>南美洲 / 巴西 / 國家天文台</translation>
+    </message>
+    <message>
+        <source>South America / Chile / SHOA</source>
+        <translation>南美洲 / 智利 / SHOA</translation>
+    </message>
+    <message>
+        <source>South America / Colombia / INM</source>
+        <translation>南美洲 / 哥倫比亞 / INM</translation>
+    </message>
+    <message>
+        <source>Synchronization interval:</source>
+        <translation>校時間隔：</translation>
+    </message>
+    <message>
+        <source>Uses system UTC time; the synchronization interval is configurable.</source>
+        <translation>使用系統 UTC 時間，可選擇自動校時間隔。</translation>
+    </message>
+</context>
+<context>
+    <name>ProcessingDialog</name>
+    <message>
+        <source>Processing</source>
+        <translation>正在處理</translation>
+    </message>
+    <message>
+        <source>Stop TX</source>
+        <translation>停止發射</translation>
+    </message>
+    <message>
+        <source>System processing, please wait…</source>
+        <translation>系統處理中，請稍候…</translation>
+    </message>
+</context>
+<context>
+    <name>StationManager</name>
+    <message>
+        <source>Add</source>
+        <translation>新增</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>新增呼號</translation>
+    </message>
+    <message>
+        <source>All regions</source>
+        <translation>所有分區</translation>
+    </message>
+    <message>
+        <source>Callsign management</source>
+        <translation>呼號管理</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>修改</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>修改呼號</translation>
+    </message>
+    <message>
+        <source>Enter a valid 4, 6 or 8 character grid locator.</source>
+        <translation>請輸入有效的 4、6 或 8 位網格定位。</translation>
+    </message>
+    <message>
+        <source>Enter a valid callsign (3–12 letters/digits, optional /suffix).</source>
+        <translation>請輸入有效呼號（3～12 個字母或數字，可加 /後綴）。</translation>
+    </message>
+    <message>
+        <source>Full call in Tx1</source>
+        <translation>在 Tx1 中發送完整呼號</translation>
+    </message>
+    <message>
+        <source>Full call in Tx3</source>
+        <translation>在 Tx3 中發送完整呼號</translation>
+    </message>
+    <message>
+        <source>Full call in Tx5 only</source>
+        <translation>僅在 Tx5 中發送完整呼號</translation>
+    </message>
+    <message>
+        <source>IARU region:</source>
+        <translation>IARU 分區：</translation>
+    </message>
+    <message>
+        <source>Invalid profile</source>
+        <translation>呼號資料有誤</translation>
+    </message>
+    <message>
+        <source>My callsign:</source>
+        <translation>我的呼號：</translation>
+    </message>
+    <message>
+        <source>My grid:</source>
+        <translation>網格定位：</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>確定</translation>
+    </message>
+    <message>
+        <source>Region 1</source>
+        <translation>第 1 區</translation>
+    </message>
+    <message>
+        <source>Region 2</source>
+        <translation>第 2 區</translation>
+    </message>
+    <message>
+        <source>Region 3</source>
+        <translation>第 3 區</translation>
+    </message>
+    <message>
+        <source>Remove profile</source>
+        <translation>刪除呼號資料</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <source>This callsign already exists. Different /suffixes are allowed.</source>
+        <translation>該呼號已存在。可以使用不同的 /後綴。</translation>
+    </message>
+    <message>
+        <source>Type 2 callsign messages:</source>
+        <translation>第 2 類呼號發送方式：</translation>
+    </message>
+</context>
+<context>
+    <name>Blacklist</name>
+    <message>
+        <source>A base callsign blocks its portable prefixes and suffixes (K1ABC also blocks EA8/K1ABC and K1ABC/P). A callsign containing / blocks only that exact callsign.</source>
+        <translation>基礎呼號會一併封鎖其移動操作前綴及後綴（K1ABC 亦會封鎖 EA8/K1ABC 和 K1ABC/P）。含有 / 的呼號只會封鎖完全相同的呼號。</translation>
+    </message>
+    <message>
+        <source>Blacklist changed in another program. Reload it before saving.</source>
+        <translation>黑名單已由其他程式更改，請重新載入後再儲存。</translation>
+    </message>
+    <message>
+        <source>Blacklist file is too large.</source>
+        <translation>黑名單檔案過大。</translation>
+    </message>
+    <message>
+        <source>Blacklist has too many entries.</source>
+        <translation>黑名單的項目過多。</translation>
+    </message>
+    <message>
+        <source>Blacklist is busy. Please retry.</source>
+        <translation>黑名單使用中，請重試。</translation>
+    </message>
+    <message>
+        <source>Blacklist is not ready. Repair the existing file before saving.</source>
+        <translation>黑名單尚未準備完成，請先修復現有檔案再儲存。</translation>
+    </message>
+    <message>
+        <source>Blacklist notes must not exceed 512 characters.</source>
+        <translation>黑名單備註不得超過 512 個字元。</translation>
+    </message>
+    <message>
+        <source>Cannot create blacklist directory.</source>
+        <translation>無法建立黑名單目錄。</translation>
+    </message>
+    <message>
+        <source>Cannot open blacklist: %1</source>
+        <translation>無法開啟黑名單：%1</translation>
+    </message>
+    <message>
+        <source>Cannot save blacklist: %1</source>
+        <translation>無法儲存黑名單：%1</translation>
+    </message>
+    <message>
+        <source>Duplicate callsign: %1</source>
+        <translation>呼號重複：%1</translation>
+    </message>
+    <message>
+        <source>Invalid blacklist file; the original has been preserved.</source>
+        <translation>黑名單檔案無效，原始檔案已保留。</translation>
+    </message>
+    <message>
+        <source>Invalid callsign: %1</source>
+        <translation>呼號無效：%1</translation>
+    </message>
+    <message>
+        <source>Select an operator before editing the blacklist.</source>
+        <translation>編輯黑名單前請先選擇操作員。</translation>
+    </message>
+    <message>
+        <source>Unsupported blacklist file version.</source>
+        <translation>不支援此黑名單檔案版本。</translation>
+    </message>
+</context>
+<context>
+    <name>BlacklistDialog</name>
+    <message>
+        <source>Add</source>
+        <translation>新增</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>新增呼號</translation>
+    </message>
+    <message>
+        <source>Callsign:</source>
+        <translation>呼號：</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>修改</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>修改呼號</translation>
+    </message>
+    <message>
+        <source>Invalid entry</source>
+        <translation>項目無效</translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation>備註：</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>確定</translation>
+    </message>
+    <message>
+        <source>Permanent blacklist</source>
+        <translation>永久黑名單</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>刪除</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>儲存</translation>
+    </message>
+</context>
+<context>
+    <name>AstroDialog</name>
+    <message>
+        <source>Astronomical Data</source>
+        <translation>天文數據</translation>
+    </message>
+    <message>
+        <source>Call DX</source>
+        <translation>呼叫DX</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>關閉</translation>
+    </message>
+    <message>
+        <source>Constant frequency on the Moon</source>
+        <translation>月面恆定頻率</translation>
+    </message>
+    <message>
+        <source>DX Moon Az / El: %1° / %2°</source>
+        <translation>DX月球方位/仰角：%1° / %2°</translation>
+    </message>
+    <message>
+        <source>Doppler tracking</source>
+        <translation>多普勒跟蹤</translation>
+    </message>
+    <message>
+        <source>Echo RIT</source>
+        <translation>回波RIT</translation>
+    </message>
+    <message>
+        <source>Echo delay: %1 s; spread: %2 / %3 Hz</source>
+        <translation>回波延遲：%1秒；頻散：%2 / %3 Hz</translation>
+    </message>
+    <message>
+        <source>Echo frequency dither (±10 Hz)</source>
+        <translation>回波頻率微調（±10 Hz）</translation>
+    </message>
+    <message>
+        <source>Full Doppler to DX grid</source>
+        <translation>按DX網格補償完整多普勒偏移</translation>
+    </message>
+    <message>
+        <source>Method</source>
+        <translation>方法</translation>
+    </message>
+    <message>
+        <source>Moon Az / El: %1° / %2°</source>
+        <translation>月球方位/仰角：%1° / %2°</translation>
+    </message>
+    <message>
+        <source>No Doppler correction</source>
+        <translation>不作多普勒修正</translation>
+    </message>
+    <message>
+        <source>On DX echo</source>
+        <translation>跟隨DX回波</translation>
+    </message>
+    <message>
+        <source>Own / DX Doppler: %1 / %2 Hz</source>
+        <translation>本台/DX多普勒：%1 / %2 Hz</translation>
+    </message>
+    <message>
+        <source>Own echo</source>
+        <translation>本台回波</translation>
+    </message>
+    <message>
+        <source>Set frequency</source>
+        <translation>設置頻率</translation>
+    </message>
+    <message>
+        <source>Sky: %1 K; degradation: %2 dB; polarization: %3°</source>
+        <translation>天空噪聲：%1 K；損耗：%2 dB；極化：%3°</translation>
+    </message>
+    <message>
+        <source>Sun Az / El: %1° / %2°</source>
+        <translation>太陽方位/仰角：%1° / %2°</translation>
+    </message>
+    <message>
+        <source>TX frequency offset (MHz)</source>
+        <translation>發射頻率偏移（MHz）</translation>
+    </message>
+    <message>
+        <source>Waiting for astronomical data…</source>
+        <translation>正在等待天文數據…</translation>
+    </message>
+</context>
+<context>
+    <name>HamlibUpdater</name>
+    <message>
+        <source>Another Hamlib update is in progress.</source>
+        <translation>另一個Hamlib更新正在進行。</translation>
+    </message>
+    <message>
+        <source>Cannot read the Hamlib files.</source>
+        <translation>無法讀取Hamlib文件。</translation>
+    </message>
+    <message>
+        <source>Cannot save the Hamlib restart request: %1</source>
+        <translation>無法保存Hamlib重啓請求：%1</translation>
+    </message>
+    <message>
+        <source>Cannot save the downloaded Hamlib file.</source>
+        <translation>無法保存下載的Hamlib文件。</translation>
+    </message>
+    <message>
+        <source>Cannot stage Hamlib: %1</source>
+        <translation>無法暫存Hamlib：%1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib compatibility checker: %1</source>
+        <translation>無法啓動Hamlib兼容性檢查程序：%1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib update helper.</source>
+        <translation>無法啓動Hamlib更新輔助程序。</translation>
+    </message>
+    <message>
+        <source>Checking Hamlib compatibility without connecting to a radio…</source>
+        <translation>正在檢查Hamlib兼容性，不連接電台…</translation>
+    </message>
+    <message>
+        <source>Compatibility check passed. Restart JTDX-F to apply %1.</source>
+        <translation>兼容性檢查通過。重啓JTDX-F以應用%1。</translation>
+    </message>
+    <message>
+        <source>Downloading the official Hamlib 4.7 branch update…</source>
+        <translation>正在下載官方Hamlib 4.7分支更新…</translation>
+    </message>
+    <message>
+        <source>Hamlib compatibility check failed: %1</source>
+        <translation>Hamlib兼容性檢查失敗：%1</translation>
+    </message>
+    <message>
+        <source>Hamlib download failed: %1</source>
+        <translation>Hamlib下載失敗：%1</translation>
+    </message>
+    <message>
+        <source>Hamlib files changed after validation. Check the update again.</source>
+        <translation>Hamlib文件在校驗後發生變化。請重新檢查更新。</translation>
+    </message>
+    <message>
+        <source>Hamlib update completed successfully.</source>
+        <translation>Hamlib更新成功。</translation>
+    </message>
+    <message>
+        <source>Hamlib update timed out. The current version is unchanged.</source>
+        <translation>Hamlib更新超時，當前版本未改變。</translation>
+    </message>
+    <message>
+        <source>Hamlib update was not applied: %1</source>
+        <translation>Hamlib更新未應用：%1</translation>
+    </message>
+    <message>
+        <source>Hamlib updates require a 64-bit Windows installation.</source>
+        <translation>Hamlib更新需要64位Windows安裝。</translation>
+    </message>
+    <message>
+        <source>Invalid Hamlib update: %1</source>
+        <translation>無效的Hamlib更新：%1</translation>
+    </message>
+    <message>
+        <source>No previous Hamlib version is available.</source>
+        <translation>沒有可恢復的上一版Hamlib。</translation>
+    </message>
+    <message>
+        <source>On this platform, Hamlib is updated with JTDX-F.</source>
+        <translation>此平台的Hamlib隨JTDX-F一起更新。</translation>
+    </message>
+    <message>
+        <source>Restarting JTDX-F to apply the Hamlib update…</source>
+        <translation>正在重啓JTDX-F以應用Hamlib更新…</translation>
+    </message>
+    <message>
+        <source>The Hamlib download is too large or could not be saved.</source>
+        <translation>Hamlib下載文件過大或無法保存。</translation>
+    </message>
+    <message>
+        <source>The Hamlib update helper is missing. Reinstall JTDX-F.</source>
+        <translation>缺少Hamlib更新輔助程序。請重新安裝JTDX-F。</translation>
+    </message>
+    <message>
+        <source>The installation folder is not writable. Run JTDX-F with permission to update this folder.</source>
+        <translation>安裝目錄不可寫。請使用具有該目錄更新權限的身份運行JTDX-F。</translation>
+    </message>
+</context>
+<context>
+    <name>OmniRigTransceiver</name>
+    <message>
+        <source>OmniRig: cannot initialize COM</source>
+        <translation>OmniRig：無法初始化COM</translation>
+    </message>
+    <message>
+        <source>OmniRig: no valid receive frequency was reported</source>
+        <translation>OmniRig：未報告有效的接收頻率</translation>
+    </message>
+</context>
+<context>
+    <name>Transceiver</name>
+    <message>
+        <source>This transceiver does not support PCM audio.</source>
+        <translation>此電台不支持PCM音頻。</translation>
+    </message>
+</context>
+<context>
+    <name>UpstreamController</name>
+    <message>
+        <source>Cannot communicate with the WSJT-X backend.</source>
+        <translation>無法與WSJT-X後端通信。</translation>
+    </message>
+    <message>
+        <source>Cannot prepare audio for the WSJT-X backend.</source>
+        <translation>無法為WSJT-X後端準備音頻。</translation>
+    </message>
+    <message>
+        <source>Cannot read the prepared transmit audio.</source>
+        <translation>無法讀取準備好的發射音頻。</translation>
+    </message>
+    <message>
+        <source>Invalid response from the WSJT-X backend.</source>
+        <translation>WSJT-X後端返回無效響應。</translation>
+    </message>
+    <message>
+        <source>Invalid transmit audio from the WSJT-X backend.</source>
+        <translation>WSJT-X後端返回無效發射音頻。</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend rejected the request.</source>
+        <translation>WSJT-X後端拒絕了請求。</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend stopped unexpectedly.</source>
+        <translation>WSJT-X後端意外停止。</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend timed out. Reception can be restarted by selecting the mode again.</source>
+        <translation>WSJT-X後端超時。重新選擇模式可重啓接收。</translation>
+    </message>
+    <message>
+        <source>Unexpected response from the WSJT-X backend.</source>
+        <translation>WSJT-X後端返回意外響應。</translation>
+    </message>
+</context>
+<context>
+    <name>OperatorLog</name>
+    <message>
+        <source>Log files changed during processing; originals retained. Please retry.</source>
+        <translation>處理過程中日誌檔案發生變化；原始檔案已保留，請重試。</translation>
+    </message>
+    <message>
+        <source>Cannot create the old backup directory; originals retained.</source>
+        <translation>無法建立 old 備份目錄；原始檔案已保留。</translation>
+    </message>
+    <message>
+        <source>Backup contents differ; originals retained.</source>
+        <translation>備份內容不一致；原始檔案已保留。</translation>
+    </message>
+    <message>
+        <source>Invalid QSO for the current station; originals retained.</source>
+        <translation>目前電台的通聯記錄無效；原始檔案已保留。</translation>
     </message>
 </context>
 </TS>

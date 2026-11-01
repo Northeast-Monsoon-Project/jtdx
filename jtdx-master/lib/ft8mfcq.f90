@@ -2,7 +2,8 @@
 
 subroutine ft8mfcq(s8,itone,msgd,msg37,lft8sd)
 
-  use ft8_mod1, only : idtone25
+  use ft8_mod1, only : shared_idtone25=>idtone25
+  integer idtone25(25,58)
   real, intent(in) :: s8(0:7,79)
   real s8d(0:7,58)
   character*37 msgd,msg37,msgsent37
@@ -11,6 +12,7 @@ subroutine ft8mfcq(s8,itone,msgd,msg37,lft8sd)
   logical(1) lft8sd
 
   if(len_trim(msgd).lt.6) return
+  idtone25=shared_idtone25
   i3=-1; n3=-1
   call genft8sd(msgd,i3,n3,msgsent37,msgbits,itone)
   idtone25(1,1:29)=itone(8:36)

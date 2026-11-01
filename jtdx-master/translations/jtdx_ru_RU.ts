@@ -46,6 +46,43 @@
         <source>OK</source>
         <translation></translation>
     </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>О JTDX-F</translation>
+    </message>
+    <message>
+        <source>JTDX-F is developed by the Fluxmancer team.&lt;br&gt;Based on JTDX and WSJT-X; upstream credits and GPLv3 are preserved.&lt;br&gt;&lt;br&gt;</source>
+        <translation>JTDX-F разрабатывается командой Fluxmancer.&lt;br&gt;Основано на JTDX и WSJT-X; сохранены сведения об авторах и лицензия GPLv3.&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>JTDX-F is licensed under GNU GPLv3, without warranty.</source>
+        <translation>JTDX-F распространяется по лицензии GNU GPLv3 без каких-либо гарантий.</translation>
+    </message>
+    <message>
+        <source>FT2 / SuperFox: additional integrations; source revisions are documented with the source code.</source>
+        <translation>FT2 / SuperFox: дополнительные интеграции; ревизии исходников указаны в документации к коду.</translation>
+    </message>
+    <message>
+        <source>FT8 / FT4: JTDX decoders, WSJT-X 3.0.2 protocol/waveforms, selected 3.3.0-beta5 performance/concurrency fixes, and Fluxmancer modern decoding.</source>
+        <translation>FT8 / FT4: декодеры JTDX, протокол и формы сигналов WSJT-X 3.0.2, отдельные исправления производительности и параллельной обработки из 3.3.0-beta5 и современное декодирование Fluxmancer.</translation>
+    </message>
+    <message>
+        <source>Hamlib (radio control): %1</source>
+        <translation>Hamlib (управление радио): %1</translation>
+    </message>
+    <message>
+        <source>JTDX-F preserves JTDX's heritage and incorporates selected WSJT-X updates. Components retain their respective authors and licenses.</source>
+        <translation>JTDX-F сохраняет наследие JTDX и включает отдельные обновления WSJT-X. За компонентами сохраняются их авторы и лицензии.</translation>
+    </message>
+    <message>
+        <source>Q65 / MSK144 / Echo and astronomical calculations: WSJT-X 3.0.2.</source>
+        <translation>Q65 / MSK144 / Echo и астрономические расчёты: WSJT-X 3.0.2.</translation>
+    </message>
+    <message>
+        <source>WSPR: WSJT-X 3.0.2 decoder with 3.3.0-beta5 message validation and JTDX-F safety fixes.</source>
+        <translation>WSPR: декодер WSJT-X 3.0.2 с проверкой сообщений из 3.3.0-beta5 и исправлениями безопасности JTDX-F.</translation>
+    </message>
+    <message><source>JTTY: WSJT-X 3.3.0-beta5 decoder with Fluxmancer integration.</source><translation>JTTY: декодер WSJT-X 3.3.0-beta5, интегрированный Fluxmancer.</translation></message>
 </context>
 <context>
     <name>CallsignDialog</name>
@@ -57,6 +94,10 @@
 </context>
 <context>
     <name>Configuration::impl</name>
+    <message>
+        <source>Own transmitted message</source>
+        <translation>Сообщение своей станции</translation>
+    </message>
     <message>
         <location filename="../Configuration.cpp" line="1372"/>
         <source>&amp;OK</source>
@@ -327,6 +368,64 @@ Format:
         <location filename="../Configuration.cpp" line="6028"/>
         <source>Rig failure</source>
         <translation>Трансивер не отвечает</translation>
+    </message>
+    <message>
+        <source>Callsign management…</source>
+        <translation>Управление позывными…</translation>
+    </message>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Введите допустимое имя сервера NTP или IP-адрес.</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Автономный режим</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization</source>
+        <translation>Синхронизация времени NTP</translation>
+    </message>
+    <message>
+        <source>Current version: %1
+Previous version: %2</source>
+        <translation>Текущая версия: %1
+Предыдущая версия: %2</translation>
+    </message>
+    <message>
+        <source>Halt Tx when SWR &gt; 2.5</source>
+        <translation>Остановить TX при КСВ &gt; 2,5</translation>
+    </message>
+    <message>
+        <source>Hamlib updates</source>
+        <translation>Обновления Hamlib</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Не сохранять</translation>
+    </message>
+    <message>
+        <source>Restart application</source>
+        <translation>Перезапустить приложение</translation>
+    </message>
+    <message>
+        <source>Restore previous Hamlib</source>
+        <translation>Восстановить предыдущий Hamlib</translation>
+    </message>
+    <message>
+        <source>Stop transmission when a supported CAT radio reports SWR above 2.5. Unknown or unsupported readings are shown as unavailable. Protection also polls SWR when power display is off.</source>
+        <translation>Останавливать передачу, если поддерживаемое CAT-радио сообщает КСВ выше 2,5. Неизвестные или неподдерживаемые показания отмечены как недоступные. Защита опрашивает КСВ и при отключённом отображении мощности.</translation>
+    </message>
+    <message>
+        <source>Update Hamlib</source>
+        <translation>Обновить Hamlib</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready to restore. Restart the application to apply it.</source>
+        <translation>Версия %1 готова к восстановлению. Перезапустите приложение для применения.</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready. Restart the application to apply it.</source>
+        <translation>Версия %1 готова. Перезапустите приложение для применения.</translation>
     </message>
 </context>
 <context>
@@ -2498,6 +2597,18 @@ Error: %2 - %3</source>
         <source>Ham Radio Deluxe didn&apos;t respond to command &quot;%1&quot; as expected</source>
         <translation>Ham Radio Deluxe не отвечает на команду &quot;%1&quot;  как и ожидалось</translation>
     </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid frequency list</source>
+        <translation>Ham Radio Deluxe передал неверный список частот</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid or incomplete reply</source>
+        <translation>Ham Radio Deluxe передал неверный или неполный ответ</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid radio list</source>
+        <translation>Ham Radio Deluxe передал неверный список трансиверов</translation>
+    </message>
 </context>
 <context>
     <name>HamlibTransceiver</name>
@@ -2968,6 +3079,46 @@ Error: %2 - %3</source>
         <location filename="../logqso.cpp" line="222"/>
         <source>Cannot open &quot;%1&quot; for append: %2</source>
         <translation>Невозможно открыть &quot;%1&quot; для добавления: %2</translation>
+    </message>
+    <message>
+        <source>Earth–Moon–Earth</source>
+        <translation>Земля–Луна–Земля</translation>
+    </message>
+    <message>
+        <source>Meteor scatter</source>
+        <translation>Разброс метеоров</translation>
+    </message>
+    <message>
+        <source>Propagation</source>
+        <translation>Распространение</translation>
+    </message>
+    <message>
+        <source>Receive frequency</source>
+        <translation>Частота приёма</translation>
+    </message>
+    <message>
+        <source>Remember propagation and satellite</source>
+        <translation>Запоминать распространение и спутник</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Спутник</translation>
+    </message>
+    <message>
+        <source>Satellite mode</source>
+        <translation>Режим спутника</translation>
+    </message>
+    <message>
+        <source>Satellite name</source>
+        <translation>Название спутника</translation>
+    </message>
+    <message>
+        <source>Tropospheric</source>
+        <translation>Тропосферное</translation>
+    </message>
+    <message>
+        <source>Unspecified</source>
+        <translation>Не указано</translation>
     </message>
 </context>
 <context>
@@ -5342,6 +5493,310 @@ UDP сервер %2:%3</translation>
         <source>WD %1m</source>
         <translation>WD %1m</translation>
     </message>
+    <message>
+        <source>A log import is already running.</source>
+        <translation>Импорт журнала уже выполняется.</translation>
+    </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>О JTDX-F</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>Охота DXCC</translation>
+    </message>
+    <message>
+        <source>Decoder error: %1. TX stopped; restarting decoder.</source>
+        <translation>Ошибка декодера: %1. Передача остановлена; перезапуск декодера.</translation>
+    </message>
+    <message>
+        <source>Decoder exited (code %1, crash %2)</source>
+        <translation>Декодер завершился (код %1, сбой %2)</translation>
+    </message>
+    <message>
+        <source>Decoder restart failed repeatedly. Check decoder-errors.log and restart JTDX-F.</source>
+        <translation>Не удалось перезапустить декодер после нескольких попыток. Проверьте decoder-errors.log и перезапустите JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Decoder restarted. Enable Monitor to resume reception; TX remains stopped.</source>
+        <translation>Декодер перезапущен. Включите «Наблюдение» для приёма; передача остаётся выключенной.</translation>
+    </message>
+    <message>
+        <source>Enable TX manually, then Send each message (max. 80 characters).</source>
+        <translation>Вручную разрешите передачу, затем отправляйте каждое сообщение отдельно (до 80 символов).</translation>
+    </message>
+    <message>
+        <source>FT2</source>
+        <translation>FT2</translation>
+    </message>
+    <message>
+        <source>JTTY</source>
+        <translation>JTTY</translation>
+    </message>
+    <message>
+        <source>JTTY requires a local audio input and output device.</source>
+        <translation>Для JTTY нужны локальные устройства ввода и вывода звука.</translation>
+    </message>
+    <message>
+        <source>JTTY transmission timed out; TX stopped.</source>
+        <translation>Истекло время передачи JTTY; передача остановлена.</translation>
+    </message>
+    <message>
+        <source>Listening…</source>
+        <translation>Прослушивание…</translation>
+    </message>
+    <message>
+        <source>Log import: %1 new, %2 duplicates, %3 originals archived, %4 records from other stations skipped.</source>
+        <translation>Импорт журнала: новых %1, повторов %2, исходных файлов в архиве %3, пропущенных записей других станций %4.</translation>
+    </message>
+    <message>
+        <source>Log loading failed: %1</source>
+        <translation>Не удалось загрузить журнал: %1</translation>
+    </message>
+    <message>
+        <source>MCP %1</source>
+        <translation>MCP %1</translation>
+    </message>
+    <message>
+        <source>MCP error</source>
+        <translation>Ошибка MCP</translation>
+    </message>
+    <message>
+        <source>MCP off</source>
+        <translation>MCP выкл.</translation>
+    </message>
+    <message>
+        <source>MCP settings: File &gt; Settings &gt; MCP</source>
+        <translation>Настройки MCP: Файл &gt; Настройки &gt; MCP</translation>
+    </message>
+    <message>
+        <source>MCP: %1</source>
+        <translation>MCP: %1</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Автономный режим</translation>
+    </message>
+    <message>
+        <source>Managed mode is listening. Enable TX manually to allow calls and scheduled CQ.</source>
+        <translation>Автономный режим прослушивает эфир. Вручную разрешите передачу для вызовов и CQ по расписанию.</translation>
+    </message>
+    <message>
+        <source>Managed mode is off.</source>
+        <translation>Автономный режим выключен.</translation>
+    </message>
+    <message>
+        <source>Modern algorithm decoding</source>
+        <translation>Современный алгоритм декодирования</translation>
+    </message>
+    <message>
+        <source>My callsign</source>
+        <translation>Мой позывной</translation>
+    </message>
+    <message>
+        <source>No decoder completion within the timeout</source>
+        <translation>Декодер не завершил работу за отведённое время</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>Выкл.</translation>
+    </message>
+    <message>
+        <source>Previous audio file is still being saved; this interval was skipped.</source>
+        <translation>Предыдущий аудиофайл ещё сохраняется; этот интервал пропущен.</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast</source>
+        <translation>Любитель QSO</translation>
+    </message>
+    <message>
+        <source>Receiving</source>
+        <translation>Приём</translation>
+    </message>
+    <message>
+        <source>Search around Rx frequency (Hz):</source>
+        <translation>Поиск около частоты приёма (Гц):</translation>
+    </message>
+    <message>
+        <source>Select a callsign before importing logs.</source>
+        <translation>Перед импортом журналов выберите позывной.</translation>
+    </message>
+    <message>
+        <source>Select a valid callsign and grid in station settings before enabling TX.</source>
+        <translation>Перед разрешением передачи укажите допустимые позывной и локатор в настройках станции.</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Отправить</translation>
+    </message>
+    <message>
+        <source>SuperFox decoding (SuperHound)</source>
+        <translation>Декодирование SuperFox (SuperHound)</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance</source>
+        <translation>Допуск частоты SuperFox</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance...</source>
+        <translation>Допуск частоты SuperFox...</translation>
+    </message>
+    <message>
+        <source>SuperHound</source>
+        <translation>SuperHound</translation>
+    </message>
+    <message>
+        <source>TX watchdog expired. Finishing the current QSO before stopping.</source>
+        <translation>Таймер передачи истёк. Текущее QSO будет завершено перед остановкой.</translation>
+    </message>
+    <message>
+        <source>This mode requires local audio devices; TCI audio is unavailable.</source>
+        <translation>Для этого режима нужны локальные аудиоустройства; звук TCI недоступен.</translation>
+    </message>
+    <message>
+        <source>Transmitting</source>
+        <translation>Передача</translation>
+    </message>
+    <message>
+        <source>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</source>
+        <translation>Декодирование с использованием апостериорных оценок и дополнительной проверки кандидатов. Если выключено, используется обычный декодер. Действует со следующего декодирования.</translation>
+    </message>
+    <message>
+        <source>WD %1:%2</source>
+        <translation>WD %1:%2</translation>
+    </message>
+    <message>
+        <source>WD finishing QSO</source>
+        <translation>WD: QSO</translation>
+    </message>
+    <message>
+        <source>WD unlimited</source>
+        <translation>WD ∞</translation>
+    </message>
+    <message>
+        <source>The current operator's log is not ready. Check the log files and try again.</source>
+        <translation>Журнал текущего оператора ещё не готов. Проверьте файлы журнала и повторите попытку.</translation>
+    </message>
+    <message>
+        <source>Blacklist management</source>
+        <translation>Управление чёрным списком</translation>
+    </message>
+    <message>
+        <source>CALL</source>
+        <translation>ВЫЗОВ</translation>
+    </message>
+    <message>
+        <source>REPORT</source>
+        <translation>РАПОРТ</translation>
+    </message>
+    <message>
+        <source>This station is blocked, or the permanent blacklist is unavailable.</source>
+        <translation>Эта станция заблокирована либо постоянный чёрный список недоступен.</translation>
+    </message>
+    <message>
+        <source>Confirm switch</source>
+        <translation>Сменить</translation>
+    </message>
+    <message>
+        <source>Average</source>
+        <translation>Усреднение</translation>
+    </message>
+    <message>
+        <source>Clear average</source>
+        <translation>Очистить усреднение</translation>
+    </message>
+    <message>
+        <source>Click to erase the right window; double-click to erase both.</source>
+        <translation>Щелчок очищает правое окно; двойной щелчок — оба.</translation>
+    </message>
+    <message>
+        <source>EME presets</source>
+        <translation>Предустановки EME</translation>
+    </message>
+    <message>
+        <source>Echo: %1 dB; Δf %2 Hz; quality %3; averages %4</source>
+        <translation>Эхо: %1 дБ; Δf %2 Гц; качество %3; усреднений %4</translation>
+    </message>
+    <message>
+        <source>Enable TX manually to measure lunar echoes.</source>
+        <translation>Включите TX вручную для измерения лунного эха.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX.</source>
+        <translation>Включить или остановить TX.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX. Right-click for Wait &amp; Reply, Wait &amp; Call or Wait &amp; Pounce. Waiting requires a manually enabled TX session.</source>
+        <translation>Включить или остановить TX. Правый щелчок: ждать и ответить, вызвать или перехватить. Ожидание требует сеанса TX, включённого вручную.</translation>
+    </message>
+    <message>
+        <source>Full duplex</source>
+        <translation>Полный дуплекс</translation>
+    </message>
+    <message>
+        <source>Left-click to erase the left window; right-click to erase the right window; double-click to erase both.</source>
+        <translation>Левый щелчок очищает левое окно; правый — правое; двойной — оба.</translation>
+    </message>
+    <message>
+        <source>Period</source>
+        <translation>Период</translation>
+    </message>
+    <message>
+        <source>SWR %1 exceeds 2.5. TX stopped; enable TX manually after checking the antenna.</source>
+        <translation>КСВ %1 превышает 2,5. TX остановлен; проверьте антенну и включите TX вручную.</translation>
+    </message>
+    <message>
+        <source>Set a valid station grid locator to calculate astronomical data.</source>
+        <translation>Укажите корректный локатор станции для астрономических расчётов.</translation>
+    </message>
+    <message>
+        <source>Stopped</source>
+        <translation>Остановлен</translation>
+    </message>
+    <message>
+        <source>The transmit slot was missed; enable TX again.</source>
+        <translation>Пропущен интервал передачи; включите TX заново.</translation>
+    </message>
+    <message>
+        <source>Transmission timed out; TX stopped.</source>
+        <translation>Истекло время передачи; TX остановлен.</translation>
+    </message>
+    <message>
+        <source>VHF / EME</source>
+        <translation>УКВ / EME</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Call</source>
+        <translation>Ждать и вызвать</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Pounce</source>
+        <translation>Ждать и перехватить</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Reply</source>
+        <translation>Ждать и ответить</translation>
+    </message>
+    <message>
+        <source>Waiting is selected. Click Enable TX to authorize transmission; Stop cancels waiting.</source>
+        <translation>Выбрано ожидание. Нажмите «Включить TX» для разрешения передачи; «Стоп» отменяет ожидание.</translation>
+    </message>
+    <message>
+        <source>Waiting matched %1; continuing the manually enabled TX session.</source>
+        <translation>Условие ожидания совпало для %1; продолжается сеанс TX, включённый вручную.</translation>
+    </message>
+    <message>
+        <source>Waiting timed out; TX stopped.</source>
+        <translation>Истекло время ожидания; TX остановлен.</translation>
+    </message>
+    <message>
+        <source>%1 is replying to another station; waiting for its CQ or final message.</source>
+        <translation>%1 отвечает другой станции; ожидание её CQ или завершающего сообщения.</translation>
+    </message>
+    <message>
+        <source>%1 is available; continuing the manually enabled TX session.</source>
+        <translation>%1 доступна; продолжение вручную разрешённого сеанса TX.</translation>
+    </message>
 </context>
 <context>
     <name>Modes</name>
@@ -5654,6 +6109,58 @@ Please verify the correct directory name was given.</source>
         <location filename="../WFPalette.cpp" line="258"/>
         <source>Error writing waterfall palette file &quot;%1&quot;: %2.</source>
         <translation>Ошибка записи файла палитры водопада &quot;%1&quot;: %2.</translation>
+    </message>
+    <message>
+        <source>Cannot create log directory</source>
+        <translation>Не удалось создать каталог журнала</translation>
+    </message>
+    <message>
+        <source>Log files changed while loading. Please retry.</source>
+        <translation>Файлы журнала изменились при загрузке. Повторите попытку.</translation>
+    </message>
+    <message>
+        <source>Log is busy. Please retry.</source>
+        <translation>Журнал занят. Повторите попытку.</translation>
+    </message>
+    <message>
+        <source>Unable to import the log files.</source>
+        <translation>Не удалось импортировать файлы журнала.</translation>
+    </message>
+    <message>
+        <source>Unable to read the log files.</source>
+        <translation>Не удалось прочитать файлы журнала.</translation>
+    </message>
+    <message>
+        <source>Ambiguous QSO identity; log unchanged</source>
+        <translation>Идентификатор QSO неоднозначен; журнал не изменён</translation>
+    </message>
+    <message>
+        <source>Recorded QSO not found; log unchanged</source>
+        <translation>Записанное QSO не найдено; журнал не изменён</translation>
+    </message>
+    <message>
+        <source>Cannot read pending log update</source>
+        <translation>Не удалось прочитать ожидающее обновление журнала</translation>
+    </message>
+    <message>
+        <source>Invalid pending log update; originals retained</source>
+        <translation>Ожидающее обновление журнала некорректно; исходные файлы сохранены</translation>
+    </message>
+    <message>
+        <source>Cannot remove completed log update journal</source>
+        <translation>Не удалось удалить файл восстановления завершённого обновления журнала</translation>
+    </message>
+    <message>
+        <source>QSO identity changed or timestamps are invalid; log unchanged</source>
+        <translation>Идентификатор QSO изменён или отметки времени некорректны; журнал не изменён</translation>
+    </message>
+    <message>
+        <source>Cannot revise a symbolic log link</source>
+        <translation>Нельзя обновить журнал через символическую ссылку</translation>
+    </message>
+    <message>
+        <source>QSO update exceeds the journal size limit</source>
+        <translation>Обновление QSO превышает допустимый размер файла восстановления</translation>
     </message>
 </context>
 <context>
@@ -6134,6 +6641,14 @@ Error(%2): %3</source>
         <location filename="../TCITransceiver.cpp" line="1740"/>
         <source>TCI modulator not Idle</source>
         <translation>TCI модулятор уже используется</translation>
+    </message>
+    <message>
+        <source>Invalid TCI audio packet</source>
+        <translation>Неверный аудиопакет TCI</translation>
+    </message>
+    <message>
+        <source>TCI PCM playback requires an active, explicitly started transmission.</source>
+        <translation>Воспроизведение TCI PCM требует активной передачи, явно включённой оператором.</translation>
     </message>
 </context>
 <context>
@@ -7260,13 +7775,13 @@ both here.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2233"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option is being used for non-overlapping spectra scenario. Tx will be halted if spectra have common frequencies with no respect to this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;В любом случае передача будет отключена если спектр передаваемого сигнала пересекается со спектром корреспондента. Эта настройка применяется для сценария с непересекающимися спектрами.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>With AutoSeq enabled, checking this option pauses calls to the selected station while it replies to someone else, keeping Enable TX on. Resume on its CQ, 73, RR73, RRR or a reply to you. When unchecked, do not pause for this reason. Call limits, the TX watchdog and Stop still apply.</source>
+        <translation>При включённом AutoSeq эта опция приостанавливает вызовы выбранной станции, пока она отвечает другой; разрешение TX сохраняется. Вызовы возобновляются после её CQ, 73, RR73, RRR или ответа вам. Если опция выключена, по этой причине паузы не будет. Ограничения числа вызовов, таймер контроля TX и кнопка «Стоп» продолжают действовать.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2236"/>
-        <source>Halt TX if operator I called answered to other operator</source>
-        <translation>Остановить передачу, если вызываемый корреспондент ответил другому оператору</translation>
+        <source>Wait if the called station replies to someone else</source>
+        <translation>Ждать, если вызываемая станция отвечает другой</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2243"/>
@@ -8119,8 +8634,8 @@ Right click for insert and delete options.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3846"/>
-        <source>Transmitted message</source>
-        <translation>Передаваемое сообщение</translation>
+        <source>Own transmitted message</source>
+        <translation>Сообщение своей станции</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3862"/>
@@ -8983,6 +9498,294 @@ resetting the radio interface and applying any
 soundcard changes</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Отменить или применить изменения конфигурации, включая сброс радиоинтерфейса и изменения звуковой карты&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Минуты с момента разрешения передачи, включая все QSO; 0 = без ограничения, максимум 999. Активность не сбрасывает таймер.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Access token</source>
+        <translation>Токен доступа</translation>
+    </message>
+    <message>
+        <source>Allow control (mode, frequency, QSO and options)</source>
+        <translation>Разрешить управление (режим, частота, QSO и параметры)</translation>
+    </message>
+    <message>
+        <source>Allow starting TX and Tune (also requires control)</source>
+        <translation>Разрешить запуск передачи и настройки антенны (также требует разрешения управления)</translation>
+    </message>
+    <message>
+        <source>Connect an AI client to JTDX-F using MCP. Changes take effect after OK. Only this computer (127.0.0.1) can connect.</source>
+        <translation>Подключите клиент ИИ к JTDX-F через MCP. Изменения вступают в силу после нажатия OK. Подключение доступно только с этого компьютера (127.0.0.1).</translation>
+    </message>
+    <message>
+        <source>Copy token</source>
+        <translation>Копировать токен</translation>
+    </message>
+    <message>
+        <source>Enable MCP server</source>
+        <translation>Включить сервер MCP</translation>
+    </message>
+    <message>
+        <source>Endpoint</source>
+        <translation>Адрес подключения</translation>
+    </message>
+    <message>
+        <source>Generate new token</source>
+        <translation>Создать новый токен</translation>
+    </message>
+    <message>
+        <source>MCP</source>
+        <translation>MCP</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>Порт</translation>
+    </message>
+    <message>
+        <source>Use Streamable HTTP with Authorization: Bearer TOKEN, or the bundled jtdx_mcp_bridge.py for stdio clients. Status, decodes and log are readable with a token. Stop TX is always available. See docs/MCP_zh.md.</source>
+        <translation>Используйте Streamable HTTP с Authorization: Bearer TOKEN либо прилагаемый jtdx_mcp_bridge.py для клиентов stdio. По токену доступны статус, декодированные сообщения и журнал. Остановка передачи доступна всегда. См. docs/MCP_zh.md.</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Align the text for DXCC, distance and azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Выравнивать текст DXCC, расстояния и азимута.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allow kHz frequency offset entry without 'k' suffix.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Разрешить ввод смещения частоты в кГц без суффикса «k».&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have decodes for a new period start at the top of the Band Activity window and not scroll off the top when the window is full.&lt;/p&gt;&lt;p&gt;This is to aid selecting decodes to double-click while decoding is still in progress. Use the Band Activity vertical scroll bar to reveal decodes past the bottom of the window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Установите флажок, чтобы декодирование нового периода начиналось в верхней части окна «Декодирование в полосе обзора» и не прокручивалось вверх, когда окно заполнено.&lt;/p&gt;&lt;p&gt;Это предназначен для облегчения выбора декодирования двойным щелчком, когда декодирование все еще выполняется. Используйте вертикальную полосу прокрутки , чтобы показать декодирование за нижней частью окна.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase Band Activity and Rx frequency windows after band change.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Очищать окна активности диапазона и частоты RX после смены диапазона.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends a valid Maidenhead locator, calculate and show the great-circle azimuth in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если станция передаёт правильный локатор Maidenhead, вычислять и показывать азимут по дуге большого круга в окне активности диапазона.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends locator, calculate and show the distance in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если станция передаёт локатор, вычислять и показывать расстояние в окне активности диапазона.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between DXCC and distance/azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Увеличивать или уменьшать промежуток между DXCC и расстоянием/азимутом.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between message text and DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Увеличивать или уменьшать промежуток между текстом сообщения и DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open the Astronomical Data window automatically when switching to Q65 or JT65 mode and Decode after EME delay is enabled, and close it when no longer needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Автоматически открывать астрономические данные при переходе в Q65 или JT65, если включено декодирование с задержкой EME, и закрывать, когда окно больше не нужно.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Turn the progress bar red while transmitting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Окрашивать индикатор прогресса в красный при передаче.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tx until 73 is received when in MSK144 or Q65 mode. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;В режимах MSK144 и Q65 передавать до получения 73.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>A deliberate double-click may enable TX only after the transmission safety checks pass. Startup, background messages and remote selection cannot grant transmission permission.</source>
+        <translation>Намеренный двойной щелчок может разрешить TX только после проверок безопасности. Запуск программы, фоновые сообщения и удалённый выбор не дают разрешения на передачу.</translation>
+    </message>
+    <message>
+        <source>Additional features</source>
+        <translation>Дополнительные функции</translation>
+    </message>
+    <message>
+        <source>After a completed QSO, move the receive audio frequency to the transmit audio frequency. This does not enable the Tx=Rx lock.</source>
+        <translation>После завершения QSO установить частоту звука RX равной частоте TX. Блокировка Tx=Rx при этом не включается.</translation>
+    </message>
+    <message>
+        <source>Align DXCC/distance/azimuth</source>
+        <translation>Выравнивать DXCC/расстояние/азимут</translation>
+    </message>
+    <message>
+        <source>Allow Tx frequency changes while transmitting</source>
+        <translation>Разрешить изменение частоты Tx во время передачи</translation>
+    </message>
+    <message>
+        <source>Allow the additional Earth–Moon–Earth propagation delay when collecting and decoding signals. This does not alter the UTC clock.</source>
+        <translation>Учитывать дополнительную задержку распространения Земля–Луна–Земля при сборе и декодировании сигналов. Часы UTC не изменяются.</translation>
+    </message>
+    <message>
+        <source>Alternate Erase button behavior</source>
+        <translation>Альтернативное действие кнопки «Очистить»</translation>
+    </message>
+    <message>
+        <source>Alternate F1-F6 bindings</source>
+        <translation>Альтернативные привязки F1-F6</translation>
+    </message>
+    <message>
+        <source>Auto-open/close Astronomical data window</source>
+        <translation>Автоматически открывать/закрывать астрономические данные</translation>
+    </message>
+    <message>
+        <source>Calling CQ forces Call 1st</source>
+        <translation>Вызов CQ заставляет Call 1st</translation>
+    </message>
+    <message>
+        <source>Clear DX Call after QSO</source>
+        <translation>Очищать позывной DX после QSO</translation>
+    </message>
+    <message>
+        <source>Clear DX Grid after QSO</source>
+        <translation>Очищать локатор DX после QSO</translation>
+    </message>
+    <message>
+        <source>Decode after EME delay</source>
+        <translation>Декодировать после задержки EME</translation>
+    </message>
+    <message>
+        <source>Di&amp;sable Tx after sending 73</source>
+        <translation>Отключает передачу после отправки 73</translation>
+    </message>
+    <message>
+        <source>Doubl&amp;e-click on call sets Tx enable</source>
+        <translation>Двойной клик на позывном разрешает вызов и активирует TX</translation>
+    </message>
+    <message>
+        <source>Enable VHF and submode features</source>
+        <translation>Включить функции VHF и подрежима</translation>
+    </message>
+    <message>
+        <source>Enable Wait &amp; Call, Wait &amp; Reply and Wait &amp; Pounce controls. They require a manually authorized TX session and cannot restart transmission after Stop. Managed mode keeps its own selection rules.</source>
+        <translation>Включить «Ждать и вызвать», «Ждать и ответить» и «Ждать и перехватить». Для них нужна вручную разрешённая сессия TX; после «Стоп» они не возобновляют передачу. Управляемый режим сохраняет свои правила выбора.</translation>
+    </message>
+    <message>
+        <source>Enable Wait features</source>
+        <translation>Включить функции ожидания</translation>
+    </message>
+    <message>
+        <source>Erase decodes after band change</source>
+        <translation>Очищать декодирования после смены диапазона</translation>
+    </message>
+    <message>
+        <source>Finish one QSO and stop. This is the same setting as Single QSO in the main window. Leave it unchecked for continuous QSOs within the TX watchdog session.</source>
+        <translation>Завершить одно QSO и остановиться. Это та же настройка, что «Одно QSO» в главном окне. Снимите флажок для последовательных QSO в пределах сессии таймера TX.</translation>
+    </message>
+    <message>
+        <source>Font...</source>
+        <translation>Шрифт приложения</translation>
+    </message>
+    <message>
+        <source>Highlight DX Call in message</source>
+        <translation>Выделять позывной DX в сообщении</translation>
+    </message>
+    <message>
+        <source>Highlight DX Grid in message</source>
+        <translation>Выделять локатор DX в сообщении</translation>
+    </message>
+    <message>
+        <source>Less button coloring (restart required)</source>
+        <translation>Меньше цветных кнопок (нужен перезапуск)</translation>
+    </message>
+    <message>
+        <source>MSK144/Q65: Tx until 73 is received</source>
+        <translation>MSK144/Q65: передавать до получения 73</translation>
+    </message>
+    <message>
+        <source>Map Grid locator to U.S. State</source>
+        <translation>Определять штат США по локатору</translation>
+    </message>
+    <message>
+        <source>Monitor returns to last used frequency</source>
+        <translation>Монитор возвращается к последней использовавшейся частоте</translation>
+    </message>
+    <message>
+        <source>Read and display PWR and SWR</source>
+        <translation>Считывать и показывать мощность и КСВ</translation>
+    </message>
+    <message>
+        <source>Read and display transmit power and SWR through CAT. Unsupported readings are shown as unavailable.</source>
+        <translation>Считывать и показывать мощность передачи и КСВ через CAT. Неподдерживаемые показания отображаются как недоступные.</translation>
+    </message>
+    <message>
+        <source>Set Rx frequency to Tx frequency after QSO</source>
+        <translation>После QSO устанавливать RX на частоту TX</translation>
+    </message>
+    <message>
+        <source>Show &amp;DXCC, grid, and worked-before status    </source>
+        <translation>Показывать &amp;DXCC, локатор и прежние связи    </translation>
+    </message>
+    <message>
+        <source>Show DXCC for all messages</source>
+        <translation>Показывать DXCC для всех сообщений</translation>
+    </message>
+    <message>
+        <source>Show U.S. States in messages with grid</source>
+        <translation>Показывать штаты США в сообщениях с локатором</translation>
+    </message>
+    <message>
+        <source>Show azimuth in messages with grid</source>
+        <translation>Показывать азимут в сообщениях с локатором</translation>
+    </message>
+    <message>
+        <source>Show blank line with time stamp</source>
+        <translation>Показывать пустую строку с отметкой времени</translation>
+    </message>
+    <message>
+        <source>Show distance in messages with grid</source>
+        <translation>Показывать расстояние в сообщениях с локатором</translation>
+    </message>
+    <message>
+        <source>Show if decoded stations are new DXCC entities or worked before.</source>
+        <translation>Показать, являются ли декодированные станции новыми объектами DXCC или работали ранее.</translation>
+    </message>
+    <message>
+        <source>Show principal prefix instead of country name        </source>
+        <translation>Показывать основной префикс вместо названия страны        </translation>
+    </message>
+    <message>
+        <source>Show the separator line between periods with time stamp of the decode period.</source>
+        <translation>Показывать разделитель периодов с отметкой времени периода декодирования.</translation>
+    </message>
+    <message>
+        <source>Single decode</source>
+        <translation>Одиночное декодирование</translation>
+    </message>
+    <message>
+        <source>Start new period decodes at top</source>
+        <translation>Начать декодирование нового периода сверху</translation>
+    </message>
+    <message>
+        <source>Stop Tune after the selected number of seconds. A zero interval disables this timer.</source>
+        <translation>Останавливать настройку через выбранное число секунд. Ноль отключает этот таймер.</translation>
+    </message>
+    <message>
+        <source>Tune watchdog   </source>
+        <translation>Таймер настройки   </translation>
+    </message>
+    <message>
+        <source>Turn progress bar red while transmitting</source>
+        <translation>Красный индикатор прогресса при передаче</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. Transmission safety checks still apply.</source>
+        <translation>F1–F5 выбирают CQ, рапорт, R-рапорт, подтверждение и 73; F6 меняет правило ответа. Проверки безопасности передачи продолжают действовать.</translation>
+    </message>
+    <message>
+        <source>kHz entry without k (restart required)</source>
+        <translation>Ввод кГц без k (нужен перезапуск)</translation>
+    </message>
+    <message>
+        <source>When checked, double-clicking a decoded callsign starts a TX session after the transmission safety checks pass. The session then follows the normal AutoSeq, Single QSO and watchdog settings. Off by default.</source>
+        <translation>Если включено, двойной щелчок по декодированному позывному запускает сеанс TX после успешных проверок безопасности передачи. Затем сеанс следует обычным настройкам AutoSeq, одиночного QSO и контрольного таймера передачи. По умолчанию выключено.</translation>
+    </message>
+    <message>
+        <source>Double-click a callsign to enable TX</source>
+        <translation>Двойной щелчок по позывному включает TX</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. These keys cannot start a TX session. Click Enable TX first.</source>
+        <translation>Клавиши F1–F5 выбирают CQ, рапорт, R-рапорт, подтверждение и 73; F6 меняет порядок ответа. Эти клавиши не могут начать сеанс передачи. Сначала нажмите «Разрешить передачу».</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -9033,6 +9836,870 @@ soundcard changes</source>
         <location filename="../wf_palette_design_dialog.ui" line="23"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Double click a color to edit it.&lt;/p&gt;&lt;p&gt;Right click to insert or delete colors.&lt;/p&gt;&lt;p&gt;Colors at the top represent weak signals&lt;/p&gt;&lt;p&gt;and colors at the bottom represent strong&lt;/p&gt;&lt;p&gt;signals. You can have up to 256 colors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Дважды щелкните цвет, чтобы отредактировать его.&lt;/p&gt;&lt;p&gt;Щелкните правой кнопкой мыши , чтобы вставлять или удалять цвета.&lt;/p&gt;&lt;p&gt;Цвета в верхней части представляют слабые сигналы. и цвета внизу сильные.&lt;/p&gt;&lt;p&gt;Вы можете использовать до 256 цветов.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>JttyController</name>
+    <message>
+        <source>Cannot write to the JTTY decoder.</source>
+        <translation>Не удалось передать данные декодеру JTTY.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY decoder response.</source>
+        <translation>Неверный ответ декодера JTTY.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY transmit audio.</source>
+        <translation>Неверные аудиоданные для передачи JTTY.</translation>
+    </message>
+    <message>
+        <source>JTTY audio backlog exceeded 10 seconds; reception restarted.</source>
+        <translation>Очередь аудио JTTY превысила 10 секунд; приём перезапущен.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder stopped unexpectedly.</source>
+        <translation>Декодер JTTY неожиданно завершился.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder timed out. Select JTTY again to restart it.</source>
+        <translation>Декодер JTTY не ответил вовремя. Выберите JTTY ещё раз для перезапуска.</translation>
+    </message>
+    <message>
+        <source>Unexpected JTTY decoder response.</source>
+        <translation>Неожиданный ответ декодера JTTY.</translation>
+    </message>
+</context>
+<context>
+    <name>LogForwarder</name>
+    <message>
+        <source>External logger did not acknowledge the QSO. Local logs are saved.</source>
+        <translation>Внешняя программа журнала не подтвердила QSO. Локальные журналы сохранены.</translation>
+    </message>
+    <message>
+        <source>External logger disconnected before acknowledgement. Local logs are saved.</source>
+        <translation>Внешняя программа журнала отключилась до подтверждения. Локальные журналы сохранены.</translation>
+    </message>
+    <message>
+        <source>External logger rejected the QSO. Local logs are saved.</source>
+        <translation>Внешняя программа журнала отклонила QSO. Локальные журналы сохранены.</translation>
+    </message>
+    <message>
+        <source>Invalid external logger response. Local logs are saved.</source>
+        <translation>Неверный ответ внешней программы журнала. Локальные журналы сохранены.</translation>
+    </message>
+    <message>
+        <source>Unexpected external logger response. Local logs are saved.</source>
+        <translation>Неожиданный ответ внешней программы журнала. Локальные журналы сохранены.</translation>
+    </message>
+</context>
+<context>
+    <name>ManagedSettingsWidget</name>
+    <message>
+        <source>0 — unlimited</source>
+        <translation>0 — без ограничения</translation>
+    </message>
+    <message>
+        <source>Answer previously worked callsigns</source>
+        <translation>Отвечать ранее сработанным позывным</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>Охота DXCC</translation>
+    </message>
+    <message>
+        <source>New CQ zone</source>
+        <translation>Новая зона CQ</translation>
+    </message>
+    <message>
+        <source>New DXCC</source>
+        <translation>Новая территория DXCC</translation>
+    </message>
+    <message>
+        <source>New ITU zone</source>
+        <translation>Новая зона ITU</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode DXCC</source>
+        <translation>Новая DXCC на диапазоне &amp;&amp; виде модуляции</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode callsign</source>
+        <translation>Новый позывной на диапазоне &amp;&amp; виде модуляции</translation>
+    </message>
+    <message>
+        <source>New callsign</source>
+        <translation>Новый позывной</translation>
+    </message>
+    <message>
+        <source>New grid</source>
+        <translation>Новый локатор</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast (also prioritizes new DXCC entities and zones)</source>
+        <translation>Любитель QSO (также предпочитает новые DXCC и зоны)</translation>
+    </message>
+    <message>
+        <source>Send three CQ rounds every 15 minutes</source>
+        <translation>Передавать три цикла CQ каждые 15 минут</translation>
+    </message>
+    <message>
+        <source>Unanswered call limit:</source>
+        <translation>Число вызовов без ответа:</translation>
+    </message>
+    <message>
+        <source>Allow TX slot changes</source>
+        <translation>Разрешить смену интервала TX</translation>
+    </message>
+    <message>
+        <source>Allow automatic TX slot changes between completed QSOs. After a slot change, wait 5 minutes before another automatic change. Manual changes are always allowed and restart this timer. Off: stay in the selected TX slot.</source>
+        <translation>Разрешить автоматическую смену интервала TX между завершёнными QSO. После смены следующая автоматическая смена возможна через 5 минут. Ручная смена всегда разрешена и запускает этот таймер заново. Выключено: сохранять выбранный интервал TX.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpClient</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Введите допустимое имя сервера NTP или IP-адрес.</translation>
+    </message>
+    <message>
+        <source>Invalid NTP packet length.</source>
+        <translation>Неверная длина пакета NTP.</translation>
+    </message>
+    <message>
+        <source>NTP request timed out.</source>
+        <translation>Истекло время ожидания NTP.</translation>
+    </message>
+    <message>
+        <source>The NTP date is outside the supported range.</source>
+        <translation>Дата NTP вне поддерживаемого диапазона.</translation>
+    </message>
+    <message>
+        <source>The NTP response does not match this request.</source>
+        <translation>Ответ NTP не соответствует этому запросу.</translation>
+    </message>
+    <message>
+        <source>The NTP response has excessive delay or uncertainty.</source>
+        <translation>Слишком большая задержка или неопределённость ответа NTP.</translation>
+    </message>
+    <message>
+        <source>The NTP server is not synchronized or refused the request.</source>
+        <translation>Сервер NTP не синхронизирован или отклонил запрос.</translation>
+    </message>
+    <message>
+        <source>The clock changed during the NTP request, or the response was too slow.</source>
+        <translation>Часы изменились во время запроса NTP либо ответ пришёл слишком поздно.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpController</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Введите допустимое имя сервера NTP или IP-адрес.</translation>
+    </message>
+    <message>
+        <source>Install polkit/pkexec to authorize system time synchronization.</source>
+        <translation>Установите polkit/pkexec для разрешения синхронизации системного времени.</translation>
+    </message>
+    <message>
+        <source>Permission granted. Synchronization follows the selected interval.</source>
+        <translation>Разрешение получено. Синхронизация выполняется с выбранным интервалом.</translation>
+    </message>
+    <message>
+        <source>Permission request timed out. System time is unchanged.</source>
+        <translation>Истекло время ожидания разрешения. Системное время не изменено.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted (Windows error %1). Using system time.</source>
+        <translation>Разрешение не получено (ошибка Windows %1). Используется системное время.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted. Using system time.</source>
+        <translation>Разрешение не получено. Используется системное время.</translation>
+    </message>
+    <message>
+        <source>Requesting permission to set the system time…</source>
+        <translation>Запрос разрешения на изменение системного времени…</translation>
+    </message>
+    <message>
+        <source>Synchronization deferred while transmitting.</source>
+        <translation>Синхронизация отложена на время передачи.</translation>
+    </message>
+    <message>
+        <source>Synchronization failed: %1. Retrying in 1 minute.</source>
+        <translation>Ошибка синхронизации: %1. Повтор через 1 минуту.</translation>
+    </message>
+    <message>
+        <source>The time synchronization helper is missing.</source>
+        <translation>Отсутствует вспомогательная программа синхронизации времени.</translation>
+    </message>
+    <message>
+        <source>Time synchronization stopped. Using system time.</source>
+        <translation>Синхронизация времени остановлена. Используется системное время.</translation>
+    </message>
+    <message>
+        <source>Time synchronized; correction %1 ms. Next check in %2 minutes.</source>
+        <translation>Время синхронизировано; поправка %1 мс. Следующая проверка через %2 мин.</translation>
+    </message>
+    <message>
+        <source>Use system time. NTP synchronization is disabled.</source>
+        <translation>Используется системное время. Синхронизация NTP выключена.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpSettingsWidget</name>
+    <message>
+        <source>%1 hours</source>
+        <translation>%1 ч</translation>
+    </message>
+    <message>
+        <source>%1 minutes</source>
+        <translation>%1 мин</translation>
+    </message>
+    <message>
+        <source>Africa / Kenya / icolo</source>
+        <translation>Африка / Кения / icolo</translation>
+    </message>
+    <message>
+        <source>Africa / Mauritius / Mauritius Telecom</source>
+        <translation>Африка / Маврикий / Mauritius Telecom</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / INX-ZA</source>
+        <translation>Африка / ЮАР / INX-ZA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / NMISA</source>
+        <translation>Африка / ЮАР / NMISA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / SANReN</source>
+        <translation>Африка / ЮАР / SANReN</translation>
+    </message>
+    <message>
+        <source>Asia / Apple</source>
+        <translation>Азия / Apple</translation>
+    </message>
+    <message>
+        <source>Asia / China / Alibaba</source>
+        <translation>Азия / Китай / Alibaba</translation>
+    </message>
+    <message>
+        <source>Asia / China / Baidu</source>
+        <translation>Азия / Китай / Baidu</translation>
+    </message>
+    <message>
+        <source>Asia / China / CAS NTSC</source>
+        <translation>Азия / Китай / CAS NTSC</translation>
+    </message>
+    <message>
+        <source>Asia / China / NTP Pool</source>
+        <translation>Азия / Китай / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tencent</source>
+        <translation>Азия / Китай / Tencent</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tsinghua TUNA</source>
+        <translation>Азия / Китай / Tsinghua TUNA</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Internet Multifeed</source>
+        <translation>Азия / Япония / Internet Multifeed</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / NICT</source>
+        <translation>Азия / Япония / NICT</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Sakura Internet</source>
+        <translation>Азия / Япония / Sakura Internet</translation>
+    </message>
+    <message>
+        <source>Asia / South Korea / KRISS</source>
+        <translation>Азия / Южная Корея / KRISS</translation>
+    </message>
+    <message>
+        <source>Europe / France / RDEM Systems</source>
+        <translation>Европа / Франция / RDEM Systems</translation>
+    </message>
+    <message>
+        <source>Europe / Germany / PTB</source>
+        <translation>Европа / Германия / PTB</translation>
+    </message>
+    <message>
+        <source>Europe / Poland / GUM</source>
+        <translation>Европа / Польша / GUM</translation>
+    </message>
+    <message>
+        <source>Europe / Sweden / Netnod</source>
+        <translation>Европа / Швеция / Netnod</translation>
+    </message>
+    <message>
+        <source>Europe / UK / NPL</source>
+        <translation>Европа / Великобритания / NPL</translation>
+    </message>
+    <message>
+        <source>Global / Apple</source>
+        <translation>Глобальные / Apple</translation>
+    </message>
+    <message>
+        <source>Global / Cloudflare</source>
+        <translation>Глобальные / Cloudflare</translation>
+    </message>
+    <message>
+        <source>Global / Google</source>
+        <translation>Глобальные / Google</translation>
+    </message>
+    <message>
+        <source>Global / Microsoft Windows</source>
+        <translation>Глобальные / Microsoft Windows</translation>
+    </message>
+    <message>
+        <source>NTP hostname or IP address</source>
+        <translation>Имя сервера NTP или IP-адрес</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization (requests administrator privileges when enabled)</source>
+        <translation>Синхронизация времени NTP (при включении запрашиваются права администратора)</translation>
+    </message>
+    <message>
+        <source>North America / Canada / NRC</source>
+        <translation>Северная Америка / Канада / NRC</translation>
+    </message>
+    <message>
+        <source>North America / USA / NIST</source>
+        <translation>Северная Америка / США / NIST</translation>
+    </message>
+    <message>
+        <source>Oceania / Australia / NTP Pool</source>
+        <translation>Океания / Австралия / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Oceania / New Zealand / MSL (NZ networks only)</source>
+        <translation>Океания / Новая Зеландия / MSL (только сети Новой Зеландии)</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Другой</translation>
+    </message>
+    <message>
+        <source>South America / Argentina / INTI</source>
+        <translation>Южная Америка / Аргентина / INTI</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / NIC.br</source>
+        <translation>Южная Америка / Бразилия / NIC.br</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / National Observatory</source>
+        <translation>Южная Америка / Бразилия / Национальная обсерватория</translation>
+    </message>
+    <message>
+        <source>South America / Chile / SHOA</source>
+        <translation>Южная Америка / Чили / SHOA</translation>
+    </message>
+    <message>
+        <source>South America / Colombia / INM</source>
+        <translation>Южная Америка / Колумбия / INM</translation>
+    </message>
+    <message>
+        <source>Synchronization interval:</source>
+        <translation>Интервал синхронизации:</translation>
+    </message>
+    <message>
+        <source>Uses system UTC time; the synchronization interval is configurable.</source>
+        <translation>Используется системное время UTC; интервал синхронизации настраивается.</translation>
+    </message>
+</context>
+<context>
+    <name>ProcessingDialog</name>
+    <message>
+        <source>Processing</source>
+        <translation>Обработка</translation>
+    </message>
+    <message>
+        <source>Stop TX</source>
+        <translation>Остановить передачу</translation>
+    </message>
+    <message>
+        <source>System processing, please wait…</source>
+        <translation>Идёт обработка, подождите…</translation>
+    </message>
+</context>
+<context>
+    <name>StationManager</name>
+    <message>
+        <source>Add</source>
+        <translation>Добавить</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Добавить позывной</translation>
+    </message>
+    <message>
+        <source>All regions</source>
+        <translation>Все регионы</translation>
+    </message>
+    <message>
+        <source>Callsign management</source>
+        <translation>Управление позывными</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Изменить</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Изменить позывной</translation>
+    </message>
+    <message>
+        <source>Enter a valid 4, 6 or 8 character grid locator.</source>
+        <translation>Введите допустимый локатор из 4, 6 или 8 символов.</translation>
+    </message>
+    <message>
+        <source>Enter a valid callsign (3–12 letters/digits, optional /suffix).</source>
+        <translation>Введите допустимый позывной (3–12 букв/цифр, возможен /суффикс).</translation>
+    </message>
+    <message>
+        <source>Full call in Tx1</source>
+        <translation>Полный позывной в Tx1</translation>
+    </message>
+    <message>
+        <source>Full call in Tx3</source>
+        <translation>Полный позывной в Tx3</translation>
+    </message>
+    <message>
+        <source>Full call in Tx5 only</source>
+        <translation>Полный позывной только в Tx5</translation>
+    </message>
+    <message>
+        <source>IARU region:</source>
+        <translation>Регион IARU:</translation>
+    </message>
+    <message>
+        <source>Invalid profile</source>
+        <translation>Неверный профиль</translation>
+    </message>
+    <message>
+        <source>My callsign:</source>
+        <translation>Мой позывной:</translation>
+    </message>
+    <message>
+        <source>My grid:</source>
+        <translation>Мой локатор:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>ОК</translation>
+    </message>
+    <message>
+        <source>Region 1</source>
+        <translation>Регион 1</translation>
+    </message>
+    <message>
+        <source>Region 2</source>
+        <translation>Регион 2</translation>
+    </message>
+    <message>
+        <source>Region 3</source>
+        <translation>Регион 3</translation>
+    </message>
+    <message>
+        <source>Remove profile</source>
+        <translation>Удалить профиль</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Сохранить</translation>
+    </message>
+    <message>
+        <source>This callsign already exists. Different /suffixes are allowed.</source>
+        <translation>Этот позывной уже существует. Допускаются разные /суффиксы.</translation>
+    </message>
+    <message>
+        <source>Type 2 callsign messages:</source>
+        <translation>Сообщения с позывными типа 2:</translation>
+    </message>
+</context>
+<context>
+    <name>Blacklist</name>
+    <message>
+        <source>A base callsign blocks its portable prefixes and suffixes (K1ABC also blocks EA8/K1ABC and K1ABC/P). A callsign containing / blocks only that exact callsign.</source>
+        <translation>Базовый позывной блокирует также его переносные префиксы и суффиксы (K1ABC блокирует и EA8/K1ABC, и K1ABC/P). Позывной с / блокирует только точное совпадение.</translation>
+    </message>
+    <message>
+        <source>Blacklist changed in another program. Reload it before saving.</source>
+        <translation>Чёрный список изменён другой программой. Перед сохранением загрузите его заново.</translation>
+    </message>
+    <message>
+        <source>Blacklist file is too large.</source>
+        <translation>Файл чёрного списка слишком велик.</translation>
+    </message>
+    <message>
+        <source>Blacklist has too many entries.</source>
+        <translation>В чёрном списке слишком много записей.</translation>
+    </message>
+    <message>
+        <source>Blacklist is busy. Please retry.</source>
+        <translation>Чёрный список занят. Повторите попытку.</translation>
+    </message>
+    <message>
+        <source>Blacklist is not ready. Repair the existing file before saving.</source>
+        <translation>Чёрный список не готов. Перед сохранением исправьте существующий файл.</translation>
+    </message>
+    <message>
+        <source>Blacklist notes must not exceed 512 characters.</source>
+        <translation>Примечания в чёрном списке не должны превышать 512 символов.</translation>
+    </message>
+    <message>
+        <source>Cannot create blacklist directory.</source>
+        <translation>Не удалось создать каталог чёрного списка.</translation>
+    </message>
+    <message>
+        <source>Cannot open blacklist: %1</source>
+        <translation>Не удалось открыть чёрный список: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save blacklist: %1</source>
+        <translation>Не удалось сохранить чёрный список: %1</translation>
+    </message>
+    <message>
+        <source>Duplicate callsign: %1</source>
+        <translation>Повторяющийся позывной: %1</translation>
+    </message>
+    <message>
+        <source>Invalid blacklist file; the original has been preserved.</source>
+        <translation>Неверный файл чёрного списка; исходный файл сохранён.</translation>
+    </message>
+    <message>
+        <source>Invalid callsign: %1</source>
+        <translation>Неверный позывной: %1</translation>
+    </message>
+    <message>
+        <source>Select an operator before editing the blacklist.</source>
+        <translation>Перед изменением чёрного списка выберите оператора.</translation>
+    </message>
+    <message>
+        <source>Unsupported blacklist file version.</source>
+        <translation>Неподдерживаемая версия файла чёрного списка.</translation>
+    </message>
+</context>
+<context>
+    <name>BlacklistDialog</name>
+    <message>
+        <source>Add</source>
+        <translation>Добавить</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Добавить позывной</translation>
+    </message>
+    <message>
+        <source>Callsign:</source>
+        <translation>Позывной:</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Изменить</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Изменить позывной</translation>
+    </message>
+    <message>
+        <source>Invalid entry</source>
+        <translation>Неверная запись</translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation>Примечание:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>ОК</translation>
+    </message>
+    <message>
+        <source>Permanent blacklist</source>
+        <translation>Постоянный чёрный список</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Удалить</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Сохранить</translation>
+    </message>
+</context>
+<context>
+    <name>AstroDialog</name>
+    <message>
+        <source>Astronomical Data</source>
+        <translation>Астрономические данные</translation>
+    </message>
+    <message>
+        <source>Call DX</source>
+        <translation>Вызов DX</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Закрыть</translation>
+    </message>
+    <message>
+        <source>Constant frequency on the Moon</source>
+        <translation>Постоянная частота на Луне</translation>
+    </message>
+    <message>
+        <source>DX Moon Az / El: %1° / %2°</source>
+        <translation>Луна у DX, азимут / высота: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>Doppler tracking</source>
+        <translation>Отслеживание Доплера</translation>
+    </message>
+    <message>
+        <source>Echo RIT</source>
+        <translation>RIT для эха</translation>
+    </message>
+    <message>
+        <source>Echo delay: %1 s; spread: %2 / %3 Hz</source>
+        <translation>Задержка эха: %1 с; расширение: %2 / %3 Гц</translation>
+    </message>
+    <message>
+        <source>Echo frequency dither (±10 Hz)</source>
+        <translation>Колебание частоты эха (±10 Гц)</translation>
+    </message>
+    <message>
+        <source>Full Doppler to DX grid</source>
+        <translation>Полная доплеровская коррекция к локатору DX</translation>
+    </message>
+    <message>
+        <source>Method</source>
+        <translation>Метод</translation>
+    </message>
+    <message>
+        <source>Moon Az / El: %1° / %2°</source>
+        <translation>Луна, азимут / высота: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>No Doppler correction</source>
+        <translation>Без доплеровской коррекции</translation>
+    </message>
+    <message>
+        <source>On DX echo</source>
+        <translation>На эхе DX</translation>
+    </message>
+    <message>
+        <source>Own / DX Doppler: %1 / %2 Hz</source>
+        <translation>Свой / DX Доплер: %1 / %2 Гц</translation>
+    </message>
+    <message>
+        <source>Own echo</source>
+        <translation>Собственное эхо</translation>
+    </message>
+    <message>
+        <source>Set frequency</source>
+        <translation>Установить частоту</translation>
+    </message>
+    <message>
+        <source>Sky: %1 K; degradation: %2 dB; polarization: %3°</source>
+        <translation>Небо: %1 K; потери: %2 дБ; поляризация: %3°</translation>
+    </message>
+    <message>
+        <source>Sun Az / El: %1° / %2°</source>
+        <translation>Солнце, азимут / высота: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>TX frequency offset (MHz)</source>
+        <translation>Смещение частоты TX (МГц)</translation>
+    </message>
+    <message>
+        <source>Waiting for astronomical data…</source>
+        <translation>Ожидание астрономических данных…</translation>
+    </message>
+</context>
+<context>
+    <name>HamlibUpdater</name>
+    <message>
+        <source>Another Hamlib update is in progress.</source>
+        <translation>Уже выполняется другое обновление Hamlib.</translation>
+    </message>
+    <message>
+        <source>Cannot read the Hamlib files.</source>
+        <translation>Не удалось прочитать файлы Hamlib.</translation>
+    </message>
+    <message>
+        <source>Cannot save the Hamlib restart request: %1</source>
+        <translation>Не удалось сохранить запрос перезапуска Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save the downloaded Hamlib file.</source>
+        <translation>Не удалось сохранить загруженный файл Hamlib.</translation>
+    </message>
+    <message>
+        <source>Cannot stage Hamlib: %1</source>
+        <translation>Не удалось подготовить Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib compatibility checker: %1</source>
+        <translation>Не удалось запустить проверку совместимости Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib update helper.</source>
+        <translation>Не удалось запустить помощник обновления Hamlib.</translation>
+    </message>
+    <message>
+        <source>Checking Hamlib compatibility without connecting to a radio…</source>
+        <translation>Проверка совместимости Hamlib без подключения к радио…</translation>
+    </message>
+    <message>
+        <source>Compatibility check passed. Restart JTDX-F to apply %1.</source>
+        <translation>Совместимость проверена. Перезапустите JTDX-F для применения %1.</translation>
+    </message>
+    <message>
+        <source>Downloading the official Hamlib 4.7 branch update…</source>
+        <translation>Загрузка официального обновления ветки Hamlib 4.7…</translation>
+    </message>
+    <message>
+        <source>Hamlib compatibility check failed: %1</source>
+        <translation>Проверка совместимости Hamlib не пройдена: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib download failed: %1</source>
+        <translation>Ошибка загрузки Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib files changed after validation. Check the update again.</source>
+        <translation>Файлы Hamlib изменились после проверки. Проверьте обновление заново.</translation>
+    </message>
+    <message>
+        <source>Hamlib update completed successfully.</source>
+        <translation>Hamlib успешно обновлён.</translation>
+    </message>
+    <message>
+        <source>Hamlib update timed out. The current version is unchanged.</source>
+        <translation>Истекло время обновления Hamlib. Текущая версия не изменена.</translation>
+    </message>
+    <message>
+        <source>Hamlib update was not applied: %1</source>
+        <translation>Обновление Hamlib не применено: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib updates require a 64-bit Windows installation.</source>
+        <translation>Обновление Hamlib требует 64-разрядной Windows.</translation>
+    </message>
+    <message>
+        <source>Invalid Hamlib update: %1</source>
+        <translation>Недопустимое обновление Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>No previous Hamlib version is available.</source>
+        <translation>Предыдущая версия Hamlib недоступна.</translation>
+    </message>
+    <message>
+        <source>On this platform, Hamlib is updated with JTDX-F.</source>
+        <translation>На этой платформе Hamlib обновляется вместе с JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Restarting JTDX-F to apply the Hamlib update…</source>
+        <translation>Перезапуск JTDX-F для применения обновления Hamlib…</translation>
+    </message>
+    <message>
+        <source>The Hamlib download is too large or could not be saved.</source>
+        <translation>Загружаемый файл Hamlib слишком велик или не может быть сохранён.</translation>
+    </message>
+    <message>
+        <source>The Hamlib update helper is missing. Reinstall JTDX-F.</source>
+        <translation>Помощник обновления Hamlib отсутствует. Переустановите JTDX-F.</translation>
+    </message>
+    <message>
+        <source>The installation folder is not writable. Run JTDX-F with permission to update this folder.</source>
+        <translation>Нет права записи в папку установки. Запустите JTDX-F с правом обновления этой папки.</translation>
+    </message>
+</context>
+<context>
+    <name>OmniRigTransceiver</name>
+    <message>
+        <source>OmniRig: cannot initialize COM</source>
+        <translation>OmniRig: не удалось инициализировать COM</translation>
+    </message>
+    <message>
+        <source>OmniRig: no valid receive frequency was reported</source>
+        <translation>OmniRig: не получена корректная частота приёма</translation>
+    </message>
+</context>
+<context>
+    <name>Transceiver</name>
+    <message>
+        <source>This transceiver does not support PCM audio.</source>
+        <translation>Этот трансивер не поддерживает PCM-аудио.</translation>
+    </message>
+</context>
+<context>
+    <name>UpstreamController</name>
+    <message>
+        <source>Cannot communicate with the WSJT-X backend.</source>
+        <translation>Не удалось связаться с модулем WSJT-X.</translation>
+    </message>
+    <message>
+        <source>Cannot prepare audio for the WSJT-X backend.</source>
+        <translation>Не удалось подготовить аудио для модуля WSJT-X.</translation>
+    </message>
+    <message>
+        <source>Cannot read the prepared transmit audio.</source>
+        <translation>Не удалось прочитать подготовленное аудио передачи.</translation>
+    </message>
+    <message>
+        <source>Invalid response from the WSJT-X backend.</source>
+        <translation>Некорректный ответ модуля WSJT-X.</translation>
+    </message>
+    <message>
+        <source>Invalid transmit audio from the WSJT-X backend.</source>
+        <translation>Некорректное аудио передачи от модуля WSJT-X.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend rejected the request.</source>
+        <translation>Модуль WSJT-X отклонил запрос.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend stopped unexpectedly.</source>
+        <translation>Модуль WSJT-X неожиданно завершился.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend timed out. Reception can be restarted by selecting the mode again.</source>
+        <translation>Истекло время ожидания модуля WSJT-X. Чтобы возобновить приём, выберите режим заново.</translation>
+    </message>
+    <message>
+        <source>Unexpected response from the WSJT-X backend.</source>
+        <translation>Неожиданный ответ модуля WSJT-X.</translation>
+    </message>
+</context>
+<context>
+    <name>OperatorLog</name>
+    <message>
+        <source>Log files changed during processing; originals retained. Please retry.</source>
+        <translation>Файлы журнала изменились во время обработки; оригиналы сохранены. Повторите попытку.</translation>
+    </message>
+    <message>
+        <source>Cannot create the old backup directory; originals retained.</source>
+        <translation>Не удалось создать каталог резервных копий old; оригиналы сохранены.</translation>
+    </message>
+    <message>
+        <source>Backup contents differ; originals retained.</source>
+        <translation>Содержимое резервной копии отличается; оригиналы сохранены.</translation>
+    </message>
+    <message>
+        <source>Invalid QSO for the current station; originals retained.</source>
+        <translation>Недопустимое QSO для текущей станции; оригиналы сохранены.</translation>
     </message>
 </context>
 </TS>

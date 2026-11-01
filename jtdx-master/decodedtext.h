@@ -34,7 +34,7 @@ class DecodedText : public QObject
 {
 Q_OBJECT;
 public:
-    explicit DecodedText (QString const& message, QObject *parent = nullptr);
+    explicit DecodedText (QString const& message, QObject *parent = nullptr, bool extended = false);
 
     QString string();
     QString message() { return message_; };
@@ -79,6 +79,7 @@ public:
     QString report();
 
 private:
+     bool extended_ = false;
      enum Columns { column_time    = 0,
                     column_snr     = 5,
                     column_dt      = 9,

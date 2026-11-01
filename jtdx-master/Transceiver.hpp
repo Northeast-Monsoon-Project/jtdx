@@ -2,6 +2,7 @@
 #define TRANSCEIVER_HPP__
 
 #include <QObject>
+#include <QByteArray>
 
 #include "qt_helpers.hpp"
 #include "Radio.hpp"
@@ -123,6 +124,7 @@ public:
     bool synchronize () const {return synchronize_;}
     double dbsnr () const {return dbsnr_;}
     double trperiod () const {return trperiod_;}
+    quint64 waveform_generation () const {return waveform_generation_;}
     double spread () const {return spread_;}
     int nsym () const {return nsym_;}
     qreal volume () const {return volume_;}
@@ -150,6 +152,7 @@ public:
     void synchronize (bool synchronize) {synchronize_ = synchronize;}
     void dbsnr (double dbsnr) {dbsnr_ = dbsnr;}
     void trperiod (double trperiod) {trperiod_ = trperiod;}
+    void waveform_generation (quint64 generation) {waveform_generation_ = generation;}
     void spread (double spread) {spread_ = spread;}
     void nsym (int nsym) {nsym_ = nsym;}
     void volume (qreal volume) {volume_ = volume;}
@@ -178,6 +181,7 @@ public:
     bool synchronize_;
     double dbsnr_;
     double trperiod_;
+    quint64 waveform_generation_=0;
     double spread_;
     int nsym_;
     qreal volume_;
@@ -211,6 +215,16 @@ public:
   // Connect and disconnect.
   Q_SLOT virtual void start (unsigned sequence_number,JTDXDateTime* jtdxtime) noexcept = 0;
   Q_SLOT virtual void stop () noexcept = 0;
+  // Optional raw-audio transport. Supplying audio never grants PTT permission.
+  Q_SLOT virtual void set_tx_pcm(QByteArray const& pcm, quint64 generation=0) noexcept {
+    Q_UNUSED(generation);
+    if (!pcm.isEmpty()) Q_EMIT failure(tr("This transceiver does not support PCM audio."));
+  }
+  Q_SIGNAL void timedPcmWritten(QByteArray pcm, qint64 endUtcMs);
+  Q_SIGNAL void txPcmFinished();
+  Q_SIGNAL void waveformStarted(quint64 generation);
+  // Legacy waveform handed to the audio transport; not hardware playback.
+  Q_SIGNAL void waveformConsumed(quint64 generation);
 
   //
   // asynchronous status updates

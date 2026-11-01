@@ -39,6 +39,7 @@ public:
   // forward everything else to wrapped Transceiver
   void start (unsigned sequence_number, JTDXDateTime* jtdxtime) noexcept override {wrapped_->start (sequence_number,jtdxtime);}
   void stop () noexcept override {wrapped_->stop ();}
+  void set_tx_pcm (QByteArray const& pcm, quint64 generation=0) noexcept override {wrapped_->set_tx_pcm (pcm,generation);}
 
 private:
   void handle_update (TransceiverState const&, unsigned seqeunce_number);

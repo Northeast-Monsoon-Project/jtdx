@@ -46,6 +46,43 @@
         <source>OK</source>
         <translation>OK</translation>
     </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>Om JTDX-F</translation>
+    </message>
+    <message>
+        <source>JTDX-F is developed by the Fluxmancer team.&lt;br&gt;Based on JTDX and WSJT-X; upstream credits and GPLv3 are preserved.&lt;br&gt;&lt;br&gt;</source>
+        <translation>JTDX-F utvecklas av Fluxmancer-teamet.&lt;br&gt;Bygger på JTDX och WSJT-X; ursprungliga upphovsmän och GPLv3 bevaras.&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>JTDX-F is licensed under GNU GPLv3, without warranty.</source>
+        <translation>JTDX-F licensieras enligt GNU GPLv3, utan garanti.</translation>
+    </message>
+    <message>
+        <source>FT2 / SuperFox: additional integrations; source revisions are documented with the source code.</source>
+        <translation>FT2 / SuperFox: ytterligare integrationer; källversionerna dokumenteras med källkoden.</translation>
+    </message>
+    <message>
+        <source>FT8 / FT4: JTDX decoders, WSJT-X 3.0.2 protocol/waveforms, selected 3.3.0-beta5 performance/concurrency fixes, and Fluxmancer modern decoding.</source>
+        <translation>FT8 / FT4: JTDX-avkodare, protokoll och vågformer från WSJT-X 3.0.2, utvalda prestanda- och parallellbearbetningsrättningar från 3.3.0-beta5 samt modern avkodning från Fluxmancer.</translation>
+    </message>
+    <message>
+        <source>Hamlib (radio control): %1</source>
+        <translation>Hamlib (radiostyrning): %1</translation>
+    </message>
+    <message>
+        <source>JTDX-F preserves JTDX's heritage and incorporates selected WSJT-X updates. Components retain their respective authors and licenses.</source>
+        <translation>JTDX-F bygger vidare på JTDX och inför utvalda WSJT-X-uppdateringar. Delarna behåller sina respektive upphovspersoner och licenser.</translation>
+    </message>
+    <message>
+        <source>Q65 / MSK144 / Echo and astronomical calculations: WSJT-X 3.0.2.</source>
+        <translation>Q65 / MSK144 / Echo och astronomiska beräkningar: WSJT-X 3.0.2.</translation>
+    </message>
+    <message>
+        <source>WSPR: WSJT-X 3.0.2 decoder with 3.3.0-beta5 message validation and JTDX-F safety fixes.</source>
+        <translation>WSPR: WSJT-X 3.0.2-avkodare med meddelandevalidering från 3.3.0-beta5 och säkerhetsrättningar från JTDX-F.</translation>
+    </message>
+    <message><source>JTTY: WSJT-X 3.3.0-beta5 decoder with Fluxmancer integration.</source><translation>JTTY: WSJT-X 3.3.0-beta5-avkodare integrerad av Fluxmancer.</translation></message>
 </context>
 <context>
     <name>CallsignDialog</name>
@@ -57,6 +94,10 @@
 </context>
 <context>
     <name>Configuration::impl</name>
+    <message>
+        <source>Own transmitted message</source>
+        <translation>Eget sänt meddelande</translation>
+    </message>
     <message>
         <location filename="../Configuration.cpp" line="1372"/>
         <source>&amp;OK</source>
@@ -322,6 +363,64 @@ Formatera:
         <location filename="../Configuration.cpp" line="5453"/>
         <source>Are you sure you want to discard your current working frequencies and replace them with the loaded ones?</source>
         <translation>Är du säker på att du vill kassera dina nuvarande arbetsfrekvenser och ersätta dem med de laddade frekvenserna?</translation>
+    </message>
+    <message>
+        <source>Callsign management…</source>
+        <translation>Hantera anropssignaler…</translation>
+    </message>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Ange ett giltigt NTP-värdnamn eller en IP-adress.</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Automatisk drift</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization</source>
+        <translation>NTP-tidssynkronisering</translation>
+    </message>
+    <message>
+        <source>Current version: %1
+Previous version: %2</source>
+        <translation>Aktuell version: %1
+Tidigare version: %2</translation>
+    </message>
+    <message>
+        <source>Halt Tx when SWR &gt; 2.5</source>
+        <translation>Stoppa TX vid SWR &gt; 2.5</translation>
+    </message>
+    <message>
+        <source>Hamlib updates</source>
+        <translation>Hamlib-uppdateringar</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Ingen</translation>
+    </message>
+    <message>
+        <source>Restart application</source>
+        <translation>Starta om programmet</translation>
+    </message>
+    <message>
+        <source>Restore previous Hamlib</source>
+        <translation>Återställ tidigare Hamlib</translation>
+    </message>
+    <message>
+        <source>Stop transmission when a supported CAT radio reports SWR above 2.5. Unknown or unsupported readings are shown as unavailable. Protection also polls SWR when power display is off.</source>
+        <translation>Stoppa TX när en CAT-radio som stöds rapporterar SWR över 2.5. Okända värden visas som otillgängliga. Skyddet läser SWR även när effektvisningen är avstängd.</translation>
+    </message>
+    <message>
+        <source>Update Hamlib</source>
+        <translation>Uppdatera Hamlib</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready to restore. Restart the application to apply it.</source>
+        <translation>Version %1 är klar för återställning. Starta om programmet för att tillämpa den.</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready. Restart the application to apply it.</source>
+        <translation>Version %1 är klar. Starta om programmet för att tillämpa den.</translation>
     </message>
 </context>
 <context>
@@ -2493,6 +2592,18 @@ Error: %2 - %3</translation>
         <source>Ham Radio Deluxe didn&apos;t respond to command &quot;%1&quot; as expected</source>
         <translation>Ham Radio Deluxe svarade inte på kommandot &quot;%1&quot; som förväntat</translation>
     </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid frequency list</source>
+        <translation>Ham Radio Deluxe skickade en ogiltig frekvenslista</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid or incomplete reply</source>
+        <translation>Ham Radio Deluxe skickade ett ogiltigt eller ofullständigt svar</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid radio list</source>
+        <translation>Ham Radio Deluxe skickade en ogiltig radiolista</translation>
+    </message>
 </context>
 <context>
     <name>HamlibTransceiver</name>
@@ -2961,6 +3072,46 @@ Error: %2 - %3</translation>
         <location filename="../logqso.cpp" line="222"/>
         <source>Cannot open &quot;%1&quot; for append: %2</source>
         <translation>Kan inte  öppna &quot;%1&quot; för bilaga:%2</translation>
+    </message>
+    <message>
+        <source>Earth–Moon–Earth</source>
+        <translation>Jord–måne–jord</translation>
+    </message>
+    <message>
+        <source>Meteor scatter</source>
+        <translation>Meteorspridning</translation>
+    </message>
+    <message>
+        <source>Propagation</source>
+        <translation>Utbredning</translation>
+    </message>
+    <message>
+        <source>Receive frequency</source>
+        <translation>Mottagningsfrekvens</translation>
+    </message>
+    <message>
+        <source>Remember propagation and satellite</source>
+        <translation>Kom ihåg utbredning och satellit</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satellit</translation>
+    </message>
+    <message>
+        <source>Satellite mode</source>
+        <translation>Satellitläge</translation>
+    </message>
+    <message>
+        <source>Satellite name</source>
+        <translation>Satellitnamn</translation>
+    </message>
+    <message>
+        <source>Tropospheric</source>
+        <translation>Troposfärisk</translation>
+    </message>
+    <message>
+        <source>Unspecified</source>
+        <translation>Ej angivet</translation>
     </message>
 </context>
 <context>
@@ -5251,6 +5402,310 @@ UDP-server%2:%3</translation>
         <source>WD %1m</source>
         <translation>WD%1m</translation>
     </message>
+    <message>
+        <source>A log import is already running.</source>
+        <translation>En loggimport pågår redan.</translation>
+    </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>Om JTDX-F</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC-jägare</translation>
+    </message>
+    <message>
+        <source>Decoder error: %1. TX stopped; restarting decoder.</source>
+        <translation>Avkodarfel: %1. TX stoppad; avkodaren startas om.</translation>
+    </message>
+    <message>
+        <source>Decoder exited (code %1, crash %2)</source>
+        <translation>Avkodaren avslutades (kod %1, krasch %2)</translation>
+    </message>
+    <message>
+        <source>Decoder restart failed repeatedly. Check decoder-errors.log and restart JTDX-F.</source>
+        <translation>Avkodaren kunde inte startas om efter flera försök. Kontrollera decoder-errors.log och starta om JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Decoder restarted. Enable Monitor to resume reception; TX remains stopped.</source>
+        <translation>Avkodaren har startats om. Aktivera Monitor för att återuppta mottagningen; TX förblir stoppad.</translation>
+    </message>
+    <message>
+        <source>Enable TX manually, then Send each message (max. 80 characters).</source>
+        <translation>Aktivera TX manuellt och skicka sedan varje meddelande (högst 80 tecken).</translation>
+    </message>
+    <message>
+        <source>FT2</source>
+        <translation>FT2</translation>
+    </message>
+    <message>
+        <source>JTTY</source>
+        <translation>JTTY</translation>
+    </message>
+    <message>
+        <source>JTTY requires a local audio input and output device.</source>
+        <translation>JTTY kräver en lokal ljudingång och ljudutgång.</translation>
+    </message>
+    <message>
+        <source>JTTY transmission timed out; TX stopped.</source>
+        <translation>JTTY-sändningens tidsgräns överskreds; TX stoppades.</translation>
+    </message>
+    <message>
+        <source>Listening…</source>
+        <translation>Lyssnar…</translation>
+    </message>
+    <message>
+        <source>Log import: %1 new, %2 duplicates, %3 originals archived, %4 records from other stations skipped.</source>
+        <translation>Loggimport: %1 nya, %2 dubbletter, %3 original arkiverade, %4 poster från andra stationer överhoppade.</translation>
+    </message>
+    <message>
+        <source>Log loading failed: %1</source>
+        <translation>Loggen kunde inte läsas in: %1</translation>
+    </message>
+    <message>
+        <source>MCP %1</source>
+        <translation>MCP %1</translation>
+    </message>
+    <message>
+        <source>MCP error</source>
+        <translation>MCP-fel</translation>
+    </message>
+    <message>
+        <source>MCP off</source>
+        <translation>MCP av</translation>
+    </message>
+    <message>
+        <source>MCP settings: File &gt; Settings &gt; MCP</source>
+        <translation>MCP-inställningar: Arkiv &gt; Inställningar &gt; MCP</translation>
+    </message>
+    <message>
+        <source>MCP: %1</source>
+        <translation>MCP: %1</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Automatisk drift</translation>
+    </message>
+    <message>
+        <source>Managed mode is listening. Enable TX manually to allow calls and scheduled CQ.</source>
+        <translation>Automatisk drift lyssnar. Aktivera TX manuellt för att tillåta anrop och schemalagda CQ-anrop.</translation>
+    </message>
+    <message>
+        <source>Managed mode is off.</source>
+        <translation>Automatisk drift är avstängd.</translation>
+    </message>
+    <message>
+        <source>Modern algorithm decoding</source>
+        <translation>Avkodning med modern algoritm</translation>
+    </message>
+    <message>
+        <source>My callsign</source>
+        <translation>Min anropssignal</translation>
+    </message>
+    <message>
+        <source>No decoder completion within the timeout</source>
+        <translation>Avkodaren blev inte klar inom tidsgränsen</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>Av</translation>
+    </message>
+    <message>
+        <source>Previous audio file is still being saved; this interval was skipped.</source>
+        <translation>Föregående ljudfil sparas fortfarande; detta intervall hoppades över.</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast</source>
+        <translation>QSO-entusiast</translation>
+    </message>
+    <message>
+        <source>Receiving</source>
+        <translation>Tar emot</translation>
+    </message>
+    <message>
+        <source>Search around Rx frequency (Hz):</source>
+        <translation>Sök runt Rx-frekvensen (Hz):</translation>
+    </message>
+    <message>
+        <source>Select a callsign before importing logs.</source>
+        <translation>Välj en anropssignal innan du importerar loggar.</translation>
+    </message>
+    <message>
+        <source>Select a valid callsign and grid in station settings before enabling TX.</source>
+        <translation>Välj en giltig anropssignal och lokator i stationsinställningarna innan TX aktiveras.</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Skicka</translation>
+    </message>
+    <message>
+        <source>SuperFox decoding (SuperHound)</source>
+        <translation>SuperFox-avkodning (SuperHound)</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance</source>
+        <translation>SuperFox-frekvenstolerans</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance...</source>
+        <translation>SuperFox-frekvenstolerans...</translation>
+    </message>
+    <message>
+        <source>SuperHound</source>
+        <translation>SuperHound</translation>
+    </message>
+    <message>
+        <source>TX watchdog expired. Finishing the current QSO before stopping.</source>
+        <translation>TX-vakttiden har löpt ut. Pågående QSO avslutas innan TX stoppas.</translation>
+    </message>
+    <message>
+        <source>This mode requires local audio devices; TCI audio is unavailable.</source>
+        <translation>Detta läge kräver lokala ljudenheter; TCI-ljud är inte tillgängligt.</translation>
+    </message>
+    <message>
+        <source>Transmitting</source>
+        <translation>Sänder</translation>
+    </message>
+    <message>
+        <source>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</source>
+        <translation>Använd avkodning med posteriorinformation och ytterligare kandidatkontroll. När funktionen är av används den traditionella avkodaren. Gäller från nästa avkodning.</translation>
+    </message>
+    <message>
+        <source>WD %1:%2</source>
+        <translation>WD %1:%2</translation>
+    </message>
+    <message>
+        <source>WD finishing QSO</source>
+        <translation>WD: QSO</translation>
+    </message>
+    <message>
+        <source>WD unlimited</source>
+        <translation>WD ∞</translation>
+    </message>
+    <message>
+        <source>The current operator's log is not ready. Check the log files and try again.</source>
+        <translation>Den aktuella operatörens logg är inte klar. Kontrollera loggfilerna och försök igen.</translation>
+    </message>
+    <message>
+        <source>Blacklist management</source>
+        <translation>Hantera spärrlista</translation>
+    </message>
+    <message>
+        <source>CALL</source>
+        <translation>ANROP</translation>
+    </message>
+    <message>
+        <source>REPORT</source>
+        <translation>RAPPORT</translation>
+    </message>
+    <message>
+        <source>This station is blocked, or the permanent blacklist is unavailable.</source>
+        <translation>Denna station är spärrad eller den permanenta spärrlistan är inte tillgänglig.</translation>
+    </message>
+    <message>
+        <source>Confirm switch</source>
+        <translation>Bekräfta</translation>
+    </message>
+    <message>
+        <source>Average</source>
+        <translation>Medelvärde</translation>
+    </message>
+    <message>
+        <source>Clear average</source>
+        <translation>Rensa medelvärde</translation>
+    </message>
+    <message>
+        <source>Click to erase the right window; double-click to erase both.</source>
+        <translation>Klicka för att rensa höger fönster; dubbelklicka för båda.</translation>
+    </message>
+    <message>
+        <source>EME presets</source>
+        <translation>EME-förval</translation>
+    </message>
+    <message>
+        <source>Echo: %1 dB; Δf %2 Hz; quality %3; averages %4</source>
+        <translation>Eko: %1 dB; Δf %2 Hz; kvalitet %3; medelvärden %4</translation>
+    </message>
+    <message>
+        <source>Enable TX manually to measure lunar echoes.</source>
+        <translation>Aktivera TX manuellt för att mäta månekon.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX.</source>
+        <translation>Aktivera eller stoppa TX.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX. Right-click for Wait &amp; Reply, Wait &amp; Call or Wait &amp; Pounce. Waiting requires a manually enabled TX session.</source>
+        <translation>Aktivera eller stoppa TX. Högerklicka för att vänta och svara, anropa eller svara på CQ. Vänteläget kräver en manuellt aktiverad TX-session.</translation>
+    </message>
+    <message>
+        <source>Full duplex</source>
+        <translation>Full duplex</translation>
+    </message>
+    <message>
+        <source>Left-click to erase the left window; right-click to erase the right window; double-click to erase both.</source>
+        <translation>Vänsterklick rensar vänster fönster, högerklick höger, dubbelklick båda.</translation>
+    </message>
+    <message>
+        <source>Period</source>
+        <translation>Period</translation>
+    </message>
+    <message>
+        <source>SWR %1 exceeds 2.5. TX stopped; enable TX manually after checking the antenna.</source>
+        <translation>SWR %1 överstiger 2.5. TX stoppad; aktivera TX manuellt efter antennkontroll.</translation>
+    </message>
+    <message>
+        <source>Set a valid station grid locator to calculate astronomical data.</source>
+        <translation>Ange en giltig stationslokator för att beräkna astronomiska data.</translation>
+    </message>
+    <message>
+        <source>Stopped</source>
+        <translation>Stoppad</translation>
+    </message>
+    <message>
+        <source>The transmit slot was missed; enable TX again.</source>
+        <translation>Sändningstidsluckan missades; aktivera TX igen.</translation>
+    </message>
+    <message>
+        <source>Transmission timed out; TX stopped.</source>
+        <translation>Tidsgränsen för sändning överskreds; TX stoppad.</translation>
+    </message>
+    <message>
+        <source>VHF / EME</source>
+        <translation>VHF / EME</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Call</source>
+        <translation>Vänta och anropa</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Pounce</source>
+        <translation>Vänta och svara på CQ</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Reply</source>
+        <translation>Vänta och svara</translation>
+    </message>
+    <message>
+        <source>Waiting is selected. Click Enable TX to authorize transmission; Stop cancels waiting.</source>
+        <translation>Vänteläge valt. Klicka på Aktivera TX för att tillåta sändning; Stopp avbryter väntan.</translation>
+    </message>
+    <message>
+        <source>Waiting matched %1; continuing the manually enabled TX session.</source>
+        <translation>Vänteläget matchade %1; den manuellt aktiverade TX-sessionen fortsätter.</translation>
+    </message>
+    <message>
+        <source>Waiting timed out; TX stopped.</source>
+        <translation>Väntetiden överskreds; TX stoppad.</translation>
+    </message>
+    <message>
+        <source>%1 is replying to another station; waiting for its CQ or final message.</source>
+        <translation>%1 svarar en annan station; väntar på dess CQ eller avslutande meddelande.</translation>
+    </message>
+    <message>
+        <source>%1 is available; continuing the manually enabled TX session.</source>
+        <translation>%1 är tillgänglig; den manuellt aktiverade TX-sessionen fortsätter.</translation>
+    </message>
 </context>
 <context>
     <name>Modes</name>
@@ -5563,6 +6018,58 @@ Kontrollera att rätt katalognamn anges.</translation>
         <location filename="../WFPalette.cpp" line="258"/>
         <source>Error writing waterfall palette file &quot;%1&quot;: %2.</source>
         <translation>Fel vid skrivning av vattenfallspalettfilen &quot;%1&quot;:%2.</translation>
+    </message>
+    <message>
+        <source>Cannot create log directory</source>
+        <translation>Det går inte att skapa loggmappen</translation>
+    </message>
+    <message>
+        <source>Log files changed while loading. Please retry.</source>
+        <translation>Loggfilerna ändrades under inläsningen. Försök igen.</translation>
+    </message>
+    <message>
+        <source>Log is busy. Please retry.</source>
+        <translation>Loggen är upptagen. Försök igen.</translation>
+    </message>
+    <message>
+        <source>Unable to import the log files.</source>
+        <translation>Det går inte att importera loggfilerna.</translation>
+    </message>
+    <message>
+        <source>Unable to read the log files.</source>
+        <translation>Det går inte att läsa loggfilerna.</translation>
+    </message>
+    <message>
+        <source>Ambiguous QSO identity; log unchanged</source>
+        <translation>QSO-identiteten är inte entydig; loggen är oförändrad</translation>
+    </message>
+    <message>
+        <source>Recorded QSO not found; log unchanged</source>
+        <translation>Det registrerade QSO:t hittades inte; loggen är oförändrad</translation>
+    </message>
+    <message>
+        <source>Cannot read pending log update</source>
+        <translation>Den väntande logguppdateringen kan inte läsas</translation>
+    </message>
+    <message>
+        <source>Invalid pending log update; originals retained</source>
+        <translation>Den väntande logguppdateringen är ogiltig; originalen har bevarats</translation>
+    </message>
+    <message>
+        <source>Cannot remove completed log update journal</source>
+        <translation>Återställningsfilen för den slutförda logguppdateringen kan inte tas bort</translation>
+    </message>
+    <message>
+        <source>QSO identity changed or timestamps are invalid; log unchanged</source>
+        <translation>QSO-identiteten har ändrats eller tidsstämplarna är ogiltiga; loggen är oförändrad</translation>
+    </message>
+    <message>
+        <source>Cannot revise a symbolic log link</source>
+        <translation>En logg via en symbolisk länk kan inte uppdateras</translation>
+    </message>
+    <message>
+        <source>QSO update exceeds the journal size limit</source>
+        <translation>QSO-uppdateringen överskrider återställningsfilens storleksgräns</translation>
     </message>
 </context>
 <context>
@@ -6043,6 +6550,14 @@ Fel (%2):%3</translation>
         <location filename="../TCITransceiver.cpp" line="1480"/>
         <source>TCI failed set txfreq</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid TCI audio packet</source>
+        <translation>Ogiltigt TCI-ljudpaket</translation>
+    </message>
+    <message>
+        <source>TCI PCM playback requires an active, explicitly started transmission.</source>
+        <translation>TCI PCM-uppspelning kräver en aktiv, uttryckligen startad sändning.</translation>
     </message>
 </context>
 <context>
@@ -7149,13 +7664,13 @@ båda här.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2233"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option is being used for non-overlapping spectra scenario. Tx will be halted if spectra have common frequencies with no respect to this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; Det här alternativet används för ett överlappande spektorscenario. Tx stoppas om spektra har vanliga frekvenser utan respekt för denna inställning. &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
+        <source>With AutoSeq enabled, checking this option pauses calls to the selected station while it replies to someone else, keeping Enable TX on. Resume on its CQ, 73, RR73, RRR or a reply to you. When unchecked, do not pause for this reason. Call limits, the TX watchdog and Stop still apply.</source>
+        <translation>När AutoSeq är aktiverat pausar detta val anropen till den valda stationen medan den svarar någon annan, med Aktivera TX fortsatt på. Anropen återupptas vid dess CQ, 73, RR73, RRR eller ett svar till dig. Om valet är avmarkerat pausas inte av denna anledning. Anropsgränser, TX-vakttimern och Stopp gäller fortfarande.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2236"/>
-        <source>Halt TX if operator I called answered to other operator</source>
-        <translation>Stoppa TX om operatören jag anropade svarade till annan operatör</translation>
+        <source>Wait if the called station replies to someone else</source>
+        <translation>Vänta om den anropade stationen svarar någon annan</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2243"/>
@@ -7979,8 +8494,8 @@ Högerklicka för att infoga och ta bort alternativ.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3846"/>
-        <source>Transmitted message</source>
-        <translation>Skickat meddelande</translation>
+        <source>Own transmitted message</source>
+        <translation>Eget sänt meddelande</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3862"/>
@@ -8845,6 +9360,294 @@ soundcard changes</source>
 återställa radiogränssnittet och tillämpa valfritt
 ljudkort ändras</translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minuter från att TX aktiveras, över flera QSO:n; 0 = obegränsat, högst 999. Aktivitet återställer inte timern.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Access token</source>
+        <translation>Åtkomsttoken</translation>
+    </message>
+    <message>
+        <source>Allow control (mode, frequency, QSO and options)</source>
+        <translation>Tillåt styrning (trafiksätt, frekvens, QSO och inställningar)</translation>
+    </message>
+    <message>
+        <source>Allow starting TX and Tune (also requires control)</source>
+        <translation>Tillåt start av TX och Tune (kräver även styrning)</translation>
+    </message>
+    <message>
+        <source>Connect an AI client to JTDX-F using MCP. Changes take effect after OK. Only this computer (127.0.0.1) can connect.</source>
+        <translation>Anslut en AI-klient till JTDX-F via MCP. Ändringarna gäller efter OK. Endast denna dator (127.0.0.1) kan ansluta.</translation>
+    </message>
+    <message>
+        <source>Copy token</source>
+        <translation>Kopiera token</translation>
+    </message>
+    <message>
+        <source>Enable MCP server</source>
+        <translation>Aktivera MCP-server</translation>
+    </message>
+    <message>
+        <source>Endpoint</source>
+        <translation>Slutpunkt</translation>
+    </message>
+    <message>
+        <source>Generate new token</source>
+        <translation>Skapa ny token</translation>
+    </message>
+    <message>
+        <source>MCP</source>
+        <translation>MCP</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>Port</translation>
+    </message>
+    <message>
+        <source>Use Streamable HTTP with Authorization: Bearer TOKEN, or the bundled jtdx_mcp_bridge.py for stdio clients. Status, decodes and log are readable with a token. Stop TX is always available. See docs/MCP_zh.md.</source>
+        <translation>Använd Streamable HTTP med Authorization: Bearer TOKEN, eller medföljande jtdx_mcp_bridge.py för stdio-klienter. Status, avkodningar och logg kan läsas med en token. Stoppa TX är alltid tillgängligt. Se docs/MCP_zh.md.</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Align the text for DXCC, distance and azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Justera text för DXCC, avstånd och azimut.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allow kHz frequency offset entry without 'k' suffix.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tillåt inmatning av frekvensförskjutning i kHz utan suffixet k.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have decodes for a new period start at the top of the Band Activity window and not scroll off the top when the window is full.&lt;/p&gt;&lt;p&gt;This is to aid selecting decodes to double-click while decoding is still in progress. Use the Band Activity vertical scroll bar to reveal decodes past the bottom of the window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Visa den nya periodens avkodningar överst i bandaktivitetsfönstret utan att rulla bort dem när fönstret fylls.&lt;/p&gt;&lt;p&gt;Det gör det lättare att dubbelklicka på en avkodning medan avkodningen pågår. Använd den lodräta rullningslisten för att se meddelanden längre ned.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase Band Activity and Rx frequency windows after band change.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rensa bandaktivitet och mottagningsfrekvens efter bandbyte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends a valid Maidenhead locator, calculate and show the great-circle azimuth in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beräkna storcirkelazimut för en giltig Maidenhead-lokator och visa den i bandaktivitetsfönstret.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends locator, calculate and show the distance in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beräkna avståndet när en lokator tas emot och visa det i bandaktivitetsfönstret.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between DXCC and distance/azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Öka eller minska mellanrummet mellan DXCC och avstånd/azimut.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between message text and DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Öka eller minska mellanrummet mellan meddelandetext och DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open the Astronomical Data window automatically when switching to Q65 or JT65 mode and Decode after EME delay is enabled, and close it when no longer needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Öppna Astronomiska data automatiskt vid Q65 eller JT65 när avkodning efter EME-fördröjning är aktiverad; stäng när fönstret inte längre behövs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Turn the progress bar red while transmitting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gör förloppsindikatorn röd under sändning.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tx until 73 is received when in MSK144 or Q65 mode. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fortsätt sända i MSK144 eller Q65 tills 73 tas emot.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>A deliberate double-click may enable TX only after the transmission safety checks pass. Startup, background messages and remote selection cannot grant transmission permission.</source>
+        <translation>En avsiktlig dubbelklickning kan aktivera TX först efter säkerhetskontrollerna. Start, bakgrundsmeddelanden och fjärrval ger inte sändningstillstånd.</translation>
+    </message>
+    <message>
+        <source>Additional features</source>
+        <translation>Ytterligare funktioner</translation>
+    </message>
+    <message>
+        <source>After a completed QSO, move the receive audio frequency to the transmit audio frequency. This does not enable the Tx=Rx lock.</source>
+        <translation>Sätt mottagningens ljudfrekvens till sändningens efter ett avslutat QSO. Tx=Rx-låset aktiveras inte.</translation>
+    </message>
+    <message>
+        <source>Align DXCC/distance/azimuth</source>
+        <translation>Justera DXCC/avstånd/azimut</translation>
+    </message>
+    <message>
+        <source>Allow Tx frequency changes while transmitting</source>
+        <translation>Tillåt byte av TX-frekvens under sändning</translation>
+    </message>
+    <message>
+        <source>Allow the additional Earth–Moon–Earth propagation delay when collecting and decoding signals. This does not alter the UTC clock.</source>
+        <translation>Tillåt den extra jord–måne–jord-fördröjningen vid insamling och avkodning. UTC-klockan ändras inte.</translation>
+    </message>
+    <message>
+        <source>Alternate Erase button behavior</source>
+        <translation>Alternativ funktion för rensningsknappen</translation>
+    </message>
+    <message>
+        <source>Alternate F1-F6 bindings</source>
+        <translation>Alternativa F1-F6-tangenter</translation>
+    </message>
+    <message>
+        <source>Auto-open/close Astronomical data window</source>
+        <translation>Öppna/stäng astronomiska data automatiskt</translation>
+    </message>
+    <message>
+        <source>Calling CQ forces Call 1st</source>
+        <translation>CQ tvingar svar till första anrop</translation>
+    </message>
+    <message>
+        <source>Clear DX Call after QSO</source>
+        <translation>Rensa DX-anropssignal efter QSO</translation>
+    </message>
+    <message>
+        <source>Clear DX Grid after QSO</source>
+        <translation>Rensa DX-lokator efter QSO</translation>
+    </message>
+    <message>
+        <source>Decode after EME delay</source>
+        <translation>Avkoda efter EME-fördröjning</translation>
+    </message>
+    <message>
+        <source>Di&amp;sable Tx after sending 73</source>
+        <translation>Stoppa TX efter sändning av 73</translation>
+    </message>
+    <message>
+        <source>Doubl&amp;e-click on call sets Tx enable</source>
+        <translation>Dubbelklick på anropssignal aktiverar TX</translation>
+    </message>
+    <message>
+        <source>Enable VHF and submode features</source>
+        <translation>Aktivera VHF- och underlägesfunktioner</translation>
+    </message>
+    <message>
+        <source>Enable Wait &amp; Call, Wait &amp; Reply and Wait &amp; Pounce controls. They require a manually authorized TX session and cannot restart transmission after Stop. Managed mode keeps its own selection rules.</source>
+        <translation>Aktivera väntan med anrop, svar eller CQ-svar. En manuellt godkänd TX-session krävs och sändningen återstartas inte efter Stopp. Hanterat läge behåller sina urvalsregler.</translation>
+    </message>
+    <message>
+        <source>Enable Wait features</source>
+        <translation>Aktivera väntefunktioner</translation>
+    </message>
+    <message>
+        <source>Erase decodes after band change</source>
+        <translation>Rensa avkodningar efter bandbyte</translation>
+    </message>
+    <message>
+        <source>Finish one QSO and stop. This is the same setting as Single QSO in the main window. Leave it unchecked for continuous QSOs within the TX watchdog session.</source>
+        <translation>Avsluta ett QSO och stoppa. Detta är samma inställning som Enstaka QSO i huvudfönstret. Avmarkerad tillåter fortsatta QSO inom TX-vakttiden.</translation>
+    </message>
+    <message>
+        <source>Font...</source>
+        <translation>Teckensnitt…</translation>
+    </message>
+    <message>
+        <source>Highlight DX Call in message</source>
+        <translation>Markera DX-anropssignal i meddelanden</translation>
+    </message>
+    <message>
+        <source>Highlight DX Grid in message</source>
+        <translation>Markera DX-lokator i meddelanden</translation>
+    </message>
+    <message>
+        <source>Less button coloring (restart required)</source>
+        <translation>Färre knappfärger (omstart krävs)</translation>
+    </message>
+    <message>
+        <source>MSK144/Q65: Tx until 73 is received</source>
+        <translation>MSK144/Q65: sänd tills 73 tas emot</translation>
+    </message>
+    <message>
+        <source>Map Grid locator to U.S. State</source>
+        <translation>Koppla lokator till USA-delstat</translation>
+    </message>
+    <message>
+        <source>Monitor returns to last used frequency</source>
+        <translation>Monitor återgår till senast använda frekvens</translation>
+    </message>
+    <message>
+        <source>Read and display PWR and SWR</source>
+        <translation>Läs och visa effekt och SWR</translation>
+    </message>
+    <message>
+        <source>Read and display transmit power and SWR through CAT. Unsupported readings are shown as unavailable.</source>
+        <translation>Läs och visa sändareffekt och SWR via CAT. Värden som inte stöds visas som otillgängliga.</translation>
+    </message>
+    <message>
+        <source>Set Rx frequency to Tx frequency after QSO</source>
+        <translation>Sätt RX-frekvens till TX efter QSO</translation>
+    </message>
+    <message>
+        <source>Show &amp;DXCC, grid, and worked-before status    </source>
+        <translation>Visa DXCC, lokator och tidigare kontakt</translation>
+    </message>
+    <message>
+        <source>Show DXCC for all messages</source>
+        <translation>Visa DXCC för alla meddelanden</translation>
+    </message>
+    <message>
+        <source>Show U.S. States in messages with grid</source>
+        <translation>Visa USA-delstat i meddelanden med lokator</translation>
+    </message>
+    <message>
+        <source>Show azimuth in messages with grid</source>
+        <translation>Visa azimut i meddelanden med lokator</translation>
+    </message>
+    <message>
+        <source>Show blank line with time stamp</source>
+        <translation>Visa tidsstämpel på avskiljningsrad</translation>
+    </message>
+    <message>
+        <source>Show distance in messages with grid</source>
+        <translation>Visa avstånd i meddelanden med lokator</translation>
+    </message>
+    <message>
+        <source>Show if decoded stations are new DXCC entities or worked before.</source>
+        <translation>Visa om avkodade stationer är nya DXCC-enheter eller tidigare kontaktade.</translation>
+    </message>
+    <message>
+        <source>Show principal prefix instead of country name        </source>
+        <translation>Visa huvudprefix i stället för landsnamn</translation>
+    </message>
+    <message>
+        <source>Show the separator line between periods with time stamp of the decode period.</source>
+        <translation>Visa avkodningsperiodens tidsstämpel på avskiljningsraden.</translation>
+    </message>
+    <message>
+        <source>Single decode</source>
+        <translation>Enkel avkodning</translation>
+    </message>
+    <message>
+        <source>Start new period decodes at top</source>
+        <translation>Börja ny periods avkodningar överst</translation>
+    </message>
+    <message>
+        <source>Stop Tune after the selected number of seconds. A zero interval disables this timer.</source>
+        <translation>Stoppa avstämning efter valt antal sekunder. Noll stänger av timern.</translation>
+    </message>
+    <message>
+        <source>Tune watchdog   </source>
+        <translation>Avstämningsvakt</translation>
+    </message>
+    <message>
+        <source>Turn progress bar red while transmitting</source>
+        <translation>Röd förloppsindikator vid sändning</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. Transmission safety checks still apply.</source>
+        <translation>F1–F5 väljer CQ, rapport, R-rapport, kvittens och 73; F6 ändrar svarspolicy. Säkerhetskontrollerna för sändning gäller fortfarande.</translation>
+    </message>
+    <message>
+        <source>kHz entry without k (restart required)</source>
+        <translation>Ange kHz utan k (omstart krävs)</translation>
+    </message>
+    <message>
+        <source>When checked, double-clicking a decoded callsign starts a TX session after the transmission safety checks pass. The session then follows the normal AutoSeq, Single QSO and watchdog settings. Off by default.</source>
+        <translation>När detta är markerat startar ett dubbelklick på en avkodad anropssignal en TX-session efter godkända säkerhetskontroller för sändning. Sessionen följer sedan de vanliga inställningarna för AutoSeq, enstaka QSO och övervakningstimern. Avstängt som standard.</translation>
+    </message>
+    <message>
+        <source>Double-click a callsign to enable TX</source>
+        <translation>Dubbelklicka på en anropssignal för att aktivera TX</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. These keys cannot start a TX session. Click Enable TX first.</source>
+        <translation>Använd F1–F5 för att välja CQ, rapport, R-rapport, bekräftelse och 73; F6 ändrar svarspolicyn. Dessa tangenter kan inte starta en TX-session. Klicka först på Aktivera TX.</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -8895,6 +9698,870 @@ ljudkort ändras</translation>
         <location filename="../wf_palette_design_dialog.ui" line="23"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Double click a color to edit it.&lt;/p&gt;&lt;p&gt;Right click to insert or delete colors.&lt;/p&gt;&lt;p&gt;Colors at the top represent weak signals&lt;/p&gt;&lt;p&gt;and colors at the bottom represent strong&lt;/p&gt;&lt;p&gt;signals. You can have up to 256 colors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; Dubbelklicka på en färg för att redigera den. &lt;/p&gt; &lt;p&gt; Högerklicka för att infoga eller ta bort färger. &lt;/p&gt; &lt;p&gt; Färger överst representerar svaga signaler &lt;/p&gt; &lt;p&gt; och färger längst ner representerar starka &lt;/p&gt; &lt;p&gt; signaler. Du kan ha upp till 256 färger. &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>JttyController</name>
+    <message>
+        <source>Cannot write to the JTTY decoder.</source>
+        <translation>Det går inte att skriva till JTTY-avkodaren.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY decoder response.</source>
+        <translation>Ogiltigt svar från JTTY-avkodaren.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY transmit audio.</source>
+        <translation>Ogiltigt JTTY-sändningsljud.</translation>
+    </message>
+    <message>
+        <source>JTTY audio backlog exceeded 10 seconds; reception restarted.</source>
+        <translation>JTTY:s ljudkö överskred 10 sekunder; mottagningen startades om.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder stopped unexpectedly.</source>
+        <translation>JTTY-avkodaren stoppades oväntat.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder timed out. Select JTTY again to restart it.</source>
+        <translation>JTTY-avkodarens tidsgräns överskreds. Välj JTTY igen för att starta om den.</translation>
+    </message>
+    <message>
+        <source>Unexpected JTTY decoder response.</source>
+        <translation>Oväntat svar från JTTY-avkodaren.</translation>
+    </message>
+</context>
+<context>
+    <name>LogForwarder</name>
+    <message>
+        <source>External logger did not acknowledge the QSO. Local logs are saved.</source>
+        <translation>Det externa loggprogrammet bekräftade inte QSO:t. Lokala loggar har sparats.</translation>
+    </message>
+    <message>
+        <source>External logger disconnected before acknowledgement. Local logs are saved.</source>
+        <translation>Det externa loggprogrammet kopplades från före bekräftelsen. Lokala loggar har sparats.</translation>
+    </message>
+    <message>
+        <source>External logger rejected the QSO. Local logs are saved.</source>
+        <translation>Det externa loggprogrammet avvisade QSO:t. Lokala loggar har sparats.</translation>
+    </message>
+    <message>
+        <source>Invalid external logger response. Local logs are saved.</source>
+        <translation>Ogiltigt svar från det externa loggprogrammet. Lokala loggar har sparats.</translation>
+    </message>
+    <message>
+        <source>Unexpected external logger response. Local logs are saved.</source>
+        <translation>Oväntat svar från det externa loggprogrammet. Lokala loggar har sparats.</translation>
+    </message>
+</context>
+<context>
+    <name>ManagedSettingsWidget</name>
+    <message>
+        <source>0 — unlimited</source>
+        <translation>0 — obegränsat</translation>
+    </message>
+    <message>
+        <source>Answer previously worked callsigns</source>
+        <translation>Svara tidigare körda anropssignaler</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC-jägare</translation>
+    </message>
+    <message>
+        <source>New CQ zone</source>
+        <translation>Ny CQ-zon</translation>
+    </message>
+    <message>
+        <source>New DXCC</source>
+        <translation>Nytt DXCC</translation>
+    </message>
+    <message>
+        <source>New ITU zone</source>
+        <translation>Ny ITU-zon</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode DXCC</source>
+        <translation>Nytt DXCC på band &amp;&amp; trafiksätt</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode callsign</source>
+        <translation>Ny anropssignal på band &amp;&amp; trafiksätt</translation>
+    </message>
+    <message>
+        <source>New callsign</source>
+        <translation>Ny anropssignal</translation>
+    </message>
+    <message>
+        <source>New grid</source>
+        <translation>Ny lokator</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast (also prioritizes new DXCC entities and zones)</source>
+        <translation>QSO-entusiast (prioriterar även nya DXCC-områden och zoner)</translation>
+    </message>
+    <message>
+        <source>Send three CQ rounds every 15 minutes</source>
+        <translation>Sänd tre CQ-omgångar var 15:e minut</translation>
+    </message>
+    <message>
+        <source>Unanswered call limit:</source>
+        <translation>Gräns för obesvarade anrop:</translation>
+    </message>
+    <message>
+        <source>Allow TX slot changes</source>
+        <translation>Tillåt byte av TX-tidslucka</translation>
+    </message>
+    <message>
+        <source>Allow automatic TX slot changes between completed QSOs. After a slot change, wait 5 minutes before another automatic change. Manual changes are always allowed and restart this timer. Off: stay in the selected TX slot.</source>
+        <translation>Tillåt automatiskt byte av TX-tidslucka mellan avslutade QSO:n. Vänta 5 minuter efter ett byte innan nästa automatiska byte. Manuella byten är alltid tillåtna och startar om timern. Av: behåll den valda TX-tidsluckan.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpClient</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Ange ett giltigt NTP-värdnamn eller en IP-adress.</translation>
+    </message>
+    <message>
+        <source>Invalid NTP packet length.</source>
+        <translation>Ogiltig NTP-paketlängd.</translation>
+    </message>
+    <message>
+        <source>NTP request timed out.</source>
+        <translation>NTP-begärans tidsgräns överskreds.</translation>
+    </message>
+    <message>
+        <source>The NTP date is outside the supported range.</source>
+        <translation>NTP-datumet ligger utanför det stödda intervallet.</translation>
+    </message>
+    <message>
+        <source>The NTP response does not match this request.</source>
+        <translation>NTP-svaret matchar inte denna begäran.</translation>
+    </message>
+    <message>
+        <source>The NTP response has excessive delay or uncertainty.</source>
+        <translation>NTP-svaret har för stor fördröjning eller osäkerhet.</translation>
+    </message>
+    <message>
+        <source>The NTP server is not synchronized or refused the request.</source>
+        <translation>NTP-servern är inte synkroniserad eller avvisade begäran.</translation>
+    </message>
+    <message>
+        <source>The clock changed during the NTP request, or the response was too slow.</source>
+        <translation>Klockan ändrades under NTP-begäran, eller svaret tog för lång tid.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpController</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Ange ett giltigt NTP-värdnamn eller en IP-adress.</translation>
+    </message>
+    <message>
+        <source>Install polkit/pkexec to authorize system time synchronization.</source>
+        <translation>Installera polkit/pkexec för att godkänna synkronisering av systemtiden.</translation>
+    </message>
+    <message>
+        <source>Permission granted. Synchronization follows the selected interval.</source>
+        <translation>Behörighet beviljad. Synkronisering sker med valt intervall.</translation>
+    </message>
+    <message>
+        <source>Permission request timed out. System time is unchanged.</source>
+        <translation>Tidsgränsen för behörighetsbegäran överskreds. Systemtiden är oförändrad.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted (Windows error %1). Using system time.</source>
+        <translation>Behörighet beviljades inte (Windows-fel %1). Systemtiden används.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted. Using system time.</source>
+        <translation>Behörighet beviljades inte. Systemtiden används.</translation>
+    </message>
+    <message>
+        <source>Requesting permission to set the system time…</source>
+        <translation>Begär behörighet att ställa in systemtiden…</translation>
+    </message>
+    <message>
+        <source>Synchronization deferred while transmitting.</source>
+        <translation>Synkronisering skjuts upp under sändning.</translation>
+    </message>
+    <message>
+        <source>Synchronization failed: %1. Retrying in 1 minute.</source>
+        <translation>Synkroniseringen misslyckades: %1. Försöker igen om 1 minut.</translation>
+    </message>
+    <message>
+        <source>The time synchronization helper is missing.</source>
+        <translation>Hjälpprogrammet för tidssynkronisering saknas.</translation>
+    </message>
+    <message>
+        <source>Time synchronization stopped. Using system time.</source>
+        <translation>Tidssynkroniseringen stoppades. Systemtiden används.</translation>
+    </message>
+    <message>
+        <source>Time synchronized; correction %1 ms. Next check in %2 minutes.</source>
+        <translation>Tiden har synkroniserats; korrigering %1 ms. Nästa kontroll om %2 minuter.</translation>
+    </message>
+    <message>
+        <source>Use system time. NTP synchronization is disabled.</source>
+        <translation>Använd systemtiden. NTP-synkronisering är avstängd.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpSettingsWidget</name>
+    <message>
+        <source>%1 hours</source>
+        <translation>%1 timmar</translation>
+    </message>
+    <message>
+        <source>%1 minutes</source>
+        <translation>%1 minuter</translation>
+    </message>
+    <message>
+        <source>Africa / Kenya / icolo</source>
+        <translation>Afrika / Kenya / icolo</translation>
+    </message>
+    <message>
+        <source>Africa / Mauritius / Mauritius Telecom</source>
+        <translation>Afrika / Mauritius / Mauritius Telecom</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / INX-ZA</source>
+        <translation>Afrika / Sydafrika / INX-ZA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / NMISA</source>
+        <translation>Afrika / Sydafrika / NMISA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / SANReN</source>
+        <translation>Afrika / Sydafrika / SANReN</translation>
+    </message>
+    <message>
+        <source>Asia / Apple</source>
+        <translation>Asien / Apple</translation>
+    </message>
+    <message>
+        <source>Asia / China / Alibaba</source>
+        <translation>Asien / Kina / Alibaba</translation>
+    </message>
+    <message>
+        <source>Asia / China / Baidu</source>
+        <translation>Asien / Kina / Baidu</translation>
+    </message>
+    <message>
+        <source>Asia / China / CAS NTSC</source>
+        <translation>Asien / Kina / CAS NTSC</translation>
+    </message>
+    <message>
+        <source>Asia / China / NTP Pool</source>
+        <translation>Asien / Kina / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tencent</source>
+        <translation>Asien / Kina / Tencent</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tsinghua TUNA</source>
+        <translation>Asien / Kina / Tsinghua TUNA</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Internet Multifeed</source>
+        <translation>Asien / Japan / Internet Multifeed</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / NICT</source>
+        <translation>Asien / Japan / NICT</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Sakura Internet</source>
+        <translation>Asien / Japan / Sakura Internet</translation>
+    </message>
+    <message>
+        <source>Asia / South Korea / KRISS</source>
+        <translation>Asien / Sydkorea / KRISS</translation>
+    </message>
+    <message>
+        <source>Europe / France / RDEM Systems</source>
+        <translation>Europa / Frankrike / RDEM Systems</translation>
+    </message>
+    <message>
+        <source>Europe / Germany / PTB</source>
+        <translation>Europa / Tyskland / PTB</translation>
+    </message>
+    <message>
+        <source>Europe / Poland / GUM</source>
+        <translation>Europa / Polen / GUM</translation>
+    </message>
+    <message>
+        <source>Europe / Sweden / Netnod</source>
+        <translation>Europa / Sverige / Netnod</translation>
+    </message>
+    <message>
+        <source>Europe / UK / NPL</source>
+        <translation>Europa / Storbritannien / NPL</translation>
+    </message>
+    <message>
+        <source>Global / Apple</source>
+        <translation>Globalt / Apple</translation>
+    </message>
+    <message>
+        <source>Global / Cloudflare</source>
+        <translation>Globalt / Cloudflare</translation>
+    </message>
+    <message>
+        <source>Global / Google</source>
+        <translation>Globalt / Google</translation>
+    </message>
+    <message>
+        <source>Global / Microsoft Windows</source>
+        <translation>Globalt / Microsoft Windows</translation>
+    </message>
+    <message>
+        <source>NTP hostname or IP address</source>
+        <translation>NTP-värdnamn eller IP-adress</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization (requests administrator privileges when enabled)</source>
+        <translation>NTP-tidssynkronisering (begär administratörsbehörighet vid aktivering)</translation>
+    </message>
+    <message>
+        <source>North America / Canada / NRC</source>
+        <translation>Nordamerika / Kanada / NRC</translation>
+    </message>
+    <message>
+        <source>North America / USA / NIST</source>
+        <translation>Nordamerika / USA / NIST</translation>
+    </message>
+    <message>
+        <source>Oceania / Australia / NTP Pool</source>
+        <translation>Oceanien / Australien / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Oceania / New Zealand / MSL (NZ networks only)</source>
+        <translation>Oceanien / Nya Zeeland / MSL (endast nätverk i Nya Zeeland)</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Annan</translation>
+    </message>
+    <message>
+        <source>South America / Argentina / INTI</source>
+        <translation>Sydamerika / Argentina / INTI</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / NIC.br</source>
+        <translation>Sydamerika / Brasilien / NIC.br</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / National Observatory</source>
+        <translation>Sydamerika / Brasilien / Nationella observatoriet</translation>
+    </message>
+    <message>
+        <source>South America / Chile / SHOA</source>
+        <translation>Sydamerika / Chile / SHOA</translation>
+    </message>
+    <message>
+        <source>South America / Colombia / INM</source>
+        <translation>Sydamerika / Colombia / INM</translation>
+    </message>
+    <message>
+        <source>Synchronization interval:</source>
+        <translation>Synkroniseringsintervall:</translation>
+    </message>
+    <message>
+        <source>Uses system UTC time; the synchronization interval is configurable.</source>
+        <translation>Använder systemets UTC-tid; synkroniseringsintervallet kan ställas in.</translation>
+    </message>
+</context>
+<context>
+    <name>ProcessingDialog</name>
+    <message>
+        <source>Processing</source>
+        <translation>Bearbetar</translation>
+    </message>
+    <message>
+        <source>Stop TX</source>
+        <translation>Stoppa TX</translation>
+    </message>
+    <message>
+        <source>System processing, please wait…</source>
+        <translation>Systemet arbetar, vänta…</translation>
+    </message>
+</context>
+<context>
+    <name>StationManager</name>
+    <message>
+        <source>Add</source>
+        <translation>Lägg till</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Lägg till anropssignal</translation>
+    </message>
+    <message>
+        <source>All regions</source>
+        <translation>Alla regioner</translation>
+    </message>
+    <message>
+        <source>Callsign management</source>
+        <translation>Hantering av anropssignaler</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Avbryt</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Redigera</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Redigera anropssignal</translation>
+    </message>
+    <message>
+        <source>Enter a valid 4, 6 or 8 character grid locator.</source>
+        <translation>Ange en giltig lokator med 4, 6 eller 8 tecken.</translation>
+    </message>
+    <message>
+        <source>Enter a valid callsign (3–12 letters/digits, optional /suffix).</source>
+        <translation>Ange en giltig anropssignal (3–12 bokstäver/siffror, valfritt /suffix).</translation>
+    </message>
+    <message>
+        <source>Full call in Tx1</source>
+        <translation>Fullständig anropssignal i Tx1</translation>
+    </message>
+    <message>
+        <source>Full call in Tx3</source>
+        <translation>Fullständig anropssignal i Tx3</translation>
+    </message>
+    <message>
+        <source>Full call in Tx5 only</source>
+        <translation>Fullständig anropssignal endast i Tx5</translation>
+    </message>
+    <message>
+        <source>IARU region:</source>
+        <translation>IARU-region:</translation>
+    </message>
+    <message>
+        <source>Invalid profile</source>
+        <translation>Ogiltig profil</translation>
+    </message>
+    <message>
+        <source>My callsign:</source>
+        <translation>Min anropssignal:</translation>
+    </message>
+    <message>
+        <source>My grid:</source>
+        <translation>Min lokator:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Region 1</source>
+        <translation>Region 1</translation>
+    </message>
+    <message>
+        <source>Region 2</source>
+        <translation>Region 2</translation>
+    </message>
+    <message>
+        <source>Region 3</source>
+        <translation>Region 3</translation>
+    </message>
+    <message>
+        <source>Remove profile</source>
+        <translation>Ta bort profil</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Spara</translation>
+    </message>
+    <message>
+        <source>This callsign already exists. Different /suffixes are allowed.</source>
+        <translation>Denna anropssignal finns redan. Olika /suffix är tillåtna.</translation>
+    </message>
+    <message>
+        <source>Type 2 callsign messages:</source>
+        <translation>Meddelanden med typ 2-anropssignal:</translation>
+    </message>
+</context>
+<context>
+    <name>Blacklist</name>
+    <message>
+        <source>A base callsign blocks its portable prefixes and suffixes (K1ABC also blocks EA8/K1ABC and K1ABC/P). A callsign containing / blocks only that exact callsign.</source>
+        <translation>En grundanropssignal spärrar även dess portabla prefix och suffix (K1ABC spärrar även EA8/K1ABC och K1ABC/P). En anropssignal med / spärrar bara exakt den anropssignalen.</translation>
+    </message>
+    <message>
+        <source>Blacklist changed in another program. Reload it before saving.</source>
+        <translation>Spärrlistan har ändrats i ett annat program. Läs in den igen innan du sparar.</translation>
+    </message>
+    <message>
+        <source>Blacklist file is too large.</source>
+        <translation>Spärrlistans fil är för stor.</translation>
+    </message>
+    <message>
+        <source>Blacklist has too many entries.</source>
+        <translation>Spärrlistan har för många poster.</translation>
+    </message>
+    <message>
+        <source>Blacklist is busy. Please retry.</source>
+        <translation>Spärrlistan är upptagen. Försök igen.</translation>
+    </message>
+    <message>
+        <source>Blacklist is not ready. Repair the existing file before saving.</source>
+        <translation>Spärrlistan är inte klar. Reparera den befintliga filen innan du sparar.</translation>
+    </message>
+    <message>
+        <source>Blacklist notes must not exceed 512 characters.</source>
+        <translation>Anteckningar i spärrlistan får innehålla högst 512 tecken.</translation>
+    </message>
+    <message>
+        <source>Cannot create blacklist directory.</source>
+        <translation>Det går inte att skapa mappen för spärrlistan.</translation>
+    </message>
+    <message>
+        <source>Cannot open blacklist: %1</source>
+        <translation>Det går inte att öppna spärrlistan: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save blacklist: %1</source>
+        <translation>Det går inte att spara spärrlistan: %1</translation>
+    </message>
+    <message>
+        <source>Duplicate callsign: %1</source>
+        <translation>Anropssignalen finns redan: %1</translation>
+    </message>
+    <message>
+        <source>Invalid blacklist file; the original has been preserved.</source>
+        <translation>Ogiltig spärrlistefil; originalet har bevarats.</translation>
+    </message>
+    <message>
+        <source>Invalid callsign: %1</source>
+        <translation>Ogiltig anropssignal: %1</translation>
+    </message>
+    <message>
+        <source>Select an operator before editing the blacklist.</source>
+        <translation>Välj en operatör innan du redigerar spärrlistan.</translation>
+    </message>
+    <message>
+        <source>Unsupported blacklist file version.</source>
+        <translation>Spärrlistans filversion stöds inte.</translation>
+    </message>
+</context>
+<context>
+    <name>BlacklistDialog</name>
+    <message>
+        <source>Add</source>
+        <translation>Lägg till i databasen</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Lägg till anropssignal</translation>
+    </message>
+    <message>
+        <source>Callsign:</source>
+        <translation>Anropssignal:</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annullera</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Redigera</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Redigera anropssignal</translation>
+    </message>
+    <message>
+        <source>Invalid entry</source>
+        <translation>Ogiltig post</translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation>Anteckning:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Permanent blacklist</source>
+        <translation>Permanent spärrlista</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Ta bort</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Spara</translation>
+    </message>
+</context>
+<context>
+    <name>AstroDialog</name>
+    <message>
+        <source>Astronomical Data</source>
+        <translation>Astronomiska data</translation>
+    </message>
+    <message>
+        <source>Call DX</source>
+        <translation>Anropa DX</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Stäng</translation>
+    </message>
+    <message>
+        <source>Constant frequency on the Moon</source>
+        <translation>Konstant frekvens på månen</translation>
+    </message>
+    <message>
+        <source>DX Moon Az / El: %1° / %2°</source>
+        <translation>Månens azimut/elevation vid DX: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>Doppler tracking</source>
+        <translation>Dopplerspårning</translation>
+    </message>
+    <message>
+        <source>Echo RIT</source>
+        <translation>Eko-RIT</translation>
+    </message>
+    <message>
+        <source>Echo delay: %1 s; spread: %2 / %3 Hz</source>
+        <translation>Ekofördröjning: %1 s; spridning: %2 / %3 Hz</translation>
+    </message>
+    <message>
+        <source>Echo frequency dither (±10 Hz)</source>
+        <translation>Variera ekofrekvensen (±10 Hz)</translation>
+    </message>
+    <message>
+        <source>Full Doppler to DX grid</source>
+        <translation>Full dopplerkorrigering till DX-lokator</translation>
+    </message>
+    <message>
+        <source>Method</source>
+        <translation>Metod</translation>
+    </message>
+    <message>
+        <source>Moon Az / El: %1° / %2°</source>
+        <translation>Månens azimut/elevation: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>No Doppler correction</source>
+        <translation>Ingen dopplerkorrigering</translation>
+    </message>
+    <message>
+        <source>On DX echo</source>
+        <translation>Följ DX-eko</translation>
+    </message>
+    <message>
+        <source>Own / DX Doppler: %1 / %2 Hz</source>
+        <translation>Egen/DX-doppler: %1 / %2 Hz</translation>
+    </message>
+    <message>
+        <source>Own echo</source>
+        <translation>Eget eko</translation>
+    </message>
+    <message>
+        <source>Set frequency</source>
+        <translation>Ställ in frekvens</translation>
+    </message>
+    <message>
+        <source>Sky: %1 K; degradation: %2 dB; polarization: %3°</source>
+        <translation>Himmel: %1 K; försämring: %2 dB; polarisation: %3°</translation>
+    </message>
+    <message>
+        <source>Sun Az / El: %1° / %2°</source>
+        <translation>Solens azimut/elevation: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>TX frequency offset (MHz)</source>
+        <translation>TX-frekvensförskjutning (MHz)</translation>
+    </message>
+    <message>
+        <source>Waiting for astronomical data…</source>
+        <translation>Väntar på astronomiska data…</translation>
+    </message>
+</context>
+<context>
+    <name>HamlibUpdater</name>
+    <message>
+        <source>Another Hamlib update is in progress.</source>
+        <translation>En annan Hamlib-uppdatering pågår.</translation>
+    </message>
+    <message>
+        <source>Cannot read the Hamlib files.</source>
+        <translation>Kan inte läsa Hamlib-filerna.</translation>
+    </message>
+    <message>
+        <source>Cannot save the Hamlib restart request: %1</source>
+        <translation>Kan inte spara Hamlibs omstartsbegäran: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save the downloaded Hamlib file.</source>
+        <translation>Kan inte spara den hämtade Hamlib-filen.</translation>
+    </message>
+    <message>
+        <source>Cannot stage Hamlib: %1</source>
+        <translation>Kan inte förbereda Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib compatibility checker: %1</source>
+        <translation>Kan inte starta Hamlibs kompatibilitetskontroll: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib update helper.</source>
+        <translation>Kan inte starta Hamlibs uppdateringshjälpprogram.</translation>
+    </message>
+    <message>
+        <source>Checking Hamlib compatibility without connecting to a radio…</source>
+        <translation>Kontrollerar Hamlib-kompatibilitet utan radioanslutning…</translation>
+    </message>
+    <message>
+        <source>Compatibility check passed. Restart JTDX-F to apply %1.</source>
+        <translation>Kompatibilitetskontrollen godkänd. Starta om JTDX-F för att tillämpa %1.</translation>
+    </message>
+    <message>
+        <source>Downloading the official Hamlib 4.7 branch update…</source>
+        <translation>Hämtar den officiella uppdateringen av Hamlib 4.7-grenen…</translation>
+    </message>
+    <message>
+        <source>Hamlib compatibility check failed: %1</source>
+        <translation>Hamlibs kompatibilitetskontroll misslyckades: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib download failed: %1</source>
+        <translation>Hämtning av Hamlib misslyckades: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib files changed after validation. Check the update again.</source>
+        <translation>Hamlib-filerna ändrades efter kontrollen. Kontrollera uppdateringen igen.</translation>
+    </message>
+    <message>
+        <source>Hamlib update completed successfully.</source>
+        <translation>Hamlib har uppdaterats.</translation>
+    </message>
+    <message>
+        <source>Hamlib update timed out. The current version is unchanged.</source>
+        <translation>Tidsgränsen för Hamlib-uppdateringen överskreds. Aktuell version är oförändrad.</translation>
+    </message>
+    <message>
+        <source>Hamlib update was not applied: %1</source>
+        <translation>Hamlib-uppdateringen tillämpades inte: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib updates require a 64-bit Windows installation.</source>
+        <translation>Hamlib-uppdateringar kräver en 64-bitars Windows-installation.</translation>
+    </message>
+    <message>
+        <source>Invalid Hamlib update: %1</source>
+        <translation>Ogiltig Hamlib-uppdatering: %1</translation>
+    </message>
+    <message>
+        <source>No previous Hamlib version is available.</source>
+        <translation>Ingen tidigare Hamlib-version finns.</translation>
+    </message>
+    <message>
+        <source>On this platform, Hamlib is updated with JTDX-F.</source>
+        <translation>På denna plattform uppdateras Hamlib tillsammans med JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Restarting JTDX-F to apply the Hamlib update…</source>
+        <translation>Startar om JTDX-F för att tillämpa Hamlib-uppdateringen…</translation>
+    </message>
+    <message>
+        <source>The Hamlib download is too large or could not be saved.</source>
+        <translation>Hamlib-filen är för stor eller kunde inte sparas.</translation>
+    </message>
+    <message>
+        <source>The Hamlib update helper is missing. Reinstall JTDX-F.</source>
+        <translation>Hamlibs uppdateringshjälpprogram saknas. Installera om JTDX-F.</translation>
+    </message>
+    <message>
+        <source>The installation folder is not writable. Run JTDX-F with permission to update this folder.</source>
+        <translation>Installationsmappen är inte skrivbar. Kör JTDX-F med behörighet att uppdatera mappen.</translation>
+    </message>
+</context>
+<context>
+    <name>OmniRigTransceiver</name>
+    <message>
+        <source>OmniRig: cannot initialize COM</source>
+        <translation>OmniRig: kan inte initiera COM</translation>
+    </message>
+    <message>
+        <source>OmniRig: no valid receive frequency was reported</source>
+        <translation>OmniRig: ingen giltig mottagningsfrekvens rapporterades</translation>
+    </message>
+</context>
+<context>
+    <name>Transceiver</name>
+    <message>
+        <source>This transceiver does not support PCM audio.</source>
+        <translation>Denna radio stöder inte PCM-ljud.</translation>
+    </message>
+</context>
+<context>
+    <name>UpstreamController</name>
+    <message>
+        <source>Cannot communicate with the WSJT-X backend.</source>
+        <translation>Kan inte kommunicera med WSJT-X-bakänden.</translation>
+    </message>
+    <message>
+        <source>Cannot prepare audio for the WSJT-X backend.</source>
+        <translation>Kan inte förbereda ljud för WSJT-X-bakänden.</translation>
+    </message>
+    <message>
+        <source>Cannot read the prepared transmit audio.</source>
+        <translation>Kan inte läsa det förberedda sändningsljudet.</translation>
+    </message>
+    <message>
+        <source>Invalid response from the WSJT-X backend.</source>
+        <translation>Ogiltigt svar från WSJT-X-bakänden.</translation>
+    </message>
+    <message>
+        <source>Invalid transmit audio from the WSJT-X backend.</source>
+        <translation>Ogiltigt sändningsljud från WSJT-X-bakänden.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend rejected the request.</source>
+        <translation>WSJT-X-bakänden avvisade begäran.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend stopped unexpectedly.</source>
+        <translation>WSJT-X-bakänden stoppades oväntat.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend timed out. Reception can be restarted by selecting the mode again.</source>
+        <translation>WSJT-X-bakänden fick timeout. Välj läget igen för att starta om mottagningen.</translation>
+    </message>
+    <message>
+        <source>Unexpected response from the WSJT-X backend.</source>
+        <translation>Oväntat svar från WSJT-X-bakänden.</translation>
+    </message>
+</context>
+<context>
+    <name>OperatorLog</name>
+    <message>
+        <source>Log files changed during processing; originals retained. Please retry.</source>
+        <translation>Loggfilerna ändrades under behandlingen; originalen har bevarats. Försök igen.</translation>
+    </message>
+    <message>
+        <source>Cannot create the old backup directory; originals retained.</source>
+        <translation>Kan inte skapa säkerhetskopieringsmappen old; originalen har bevarats.</translation>
+    </message>
+    <message>
+        <source>Backup contents differ; originals retained.</source>
+        <translation>Säkerhetskopians innehåll skiljer sig; originalen har bevarats.</translation>
+    </message>
+    <message>
+        <source>Invalid QSO for the current station; originals retained.</source>
+        <translation>Ogiltigt QSO för den aktuella stationen; originalen har bevarats.</translation>
     </message>
 </context>
 </TS>

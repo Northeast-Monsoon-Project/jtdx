@@ -10,12 +10,6 @@
     <height>514</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>733</width>
-    <height>422</height>
-   </size>
-  </property>
   <property name="maximumSize">
    <size>
     <width>16777215</width>
@@ -1730,7 +1724,7 @@
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>110</width>
+                  <width>16777215</width>
                   <height>40</height>
                  </size>
                 </property>
@@ -2672,13 +2666,13 @@ ZD8,ZD9,ZF,ZK3,ZL,ZL7,ZL8,ZL9,ZP,ZS,ZS8&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</str
               </property>
               <property name="minimumSize">
                <size>
-                <width>65</width>
+                <width>0</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>100</width>
+                <width>16777215</width>
                 <height>60</height>
                </size>
               </property>
@@ -2720,13 +2714,13 @@ ZD8,ZD9,ZF,ZK3,ZL,ZL7,ZL8,ZL9,ZP,ZS,ZS8&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</str
               </property>
               <property name="minimumSize">
                <size>
-                <width>65</width>
+                <width>0</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>100</width>
+                <width>16777215</width>
                 <height>60</height>
                </size>
               </property>
@@ -2765,13 +2759,13 @@ ZD8,ZD9,ZF,ZK3,ZL,ZL7,ZL8,ZL9,ZP,ZS,ZS8&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</str
               </property>
               <property name="minimumSize">
                <size>
-                <width>65</width>
+                <width>0</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>100</width>
+                <width>16777215</width>
                 <height>60</height>
                </size>
               </property>
@@ -2793,13 +2787,13 @@ ZD8,ZD9,ZF,ZK3,ZL,ZL7,ZL8,ZL9,ZP,ZS,ZS8&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</str
               </property>
               <property name="minimumSize">
                <size>
-                <width>65</width>
+                <width>0</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>100</width>
+                <width>16777215</width>
                 <height>60</height>
                </size>
               </property>
@@ -2821,13 +2815,13 @@ ZD8,ZD9,ZF,ZK3,ZL,ZL7,ZL8,ZL9,ZP,ZS,ZS8&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</str
               </property>
               <property name="minimumSize">
                <size>
-                <width>65</width>
+                <width>0</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>100</width>
+                <width>16777215</width>
                 <height>60</height>
                </size>
               </property>
@@ -2849,13 +2843,13 @@ ZD8,ZD9,ZF,ZK3,ZL,ZL7,ZL8,ZL9,ZP,ZS,ZS8&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</str
               </property>
               <property name="minimumSize">
                <size>
-                <width>65</width>
+                <width>0</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>100</width>
+                <width>16777215</width>
                 <height>60</height>
                </size>
               </property>
@@ -2891,13 +2885,13 @@ ZD8,ZD9,ZF,ZK3,ZL,ZL7,ZL8,ZL9,ZP,ZS,ZS8&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</str
               </property>
               <property name="minimumSize">
                <size>
-                <width>65</width>
+                <width>0</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>100</width>
+                <width>16777215</width>
                 <height>60</height>
                </size>
               </property>
@@ -2933,13 +2927,13 @@ ZD8,ZD9,ZF,ZK3,ZL,ZL7,ZL8,ZL9,ZP,ZS,ZS8&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</str
               </property>
               <property name="minimumSize">
                <size>
-                <width>65</width>
+                <width>0</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>100</width>
+                <width>16777215</width>
                 <height>60</height>
                </size>
               </property>
@@ -2966,13 +2960,13 @@ ZD8,ZD9,ZF,ZK3,ZL,ZL7,ZL8,ZL9,ZP,ZS,ZS8&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</str
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>65</width>
+                  <width>0</width>
                   <height>0</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>100</width>
+                  <width>16777215</width>
                   <height>60</height>
                  </size>
                 </property>
@@ -3011,13 +3005,13 @@ ZD8,ZD9,ZF,ZK3,ZL,ZL7,ZL8,ZL9,ZP,ZS,ZS8&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</str
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>65</width>
+                  <width>0</width>
                   <height>0</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>100</width>
+                  <width>16777215</width>
                   <height>60</height>
                  </size>
                 </property>
@@ -3064,13 +3058,13 @@ Click by right mouse's button sets JTDX internal time back to system time.&lt;/p
               </property>
               <property name="minimumSize">
                <size>
-                <width>65</width>
+                <width>0</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>100</width>
+                <width>16777215</width>
                 <height>60</height>
                </size>
               </property>
@@ -3237,7 +3231,7 @@ Click by right mouse's button sets JTDX internal time back to system time.&lt;/p
                            </property>
                            <property name="minimumSize">
                             <size>
-                             <width>60</width>
+                             <width>0</width>
                              <height>0</height>
                             </size>
                            </property>
@@ -4560,7 +4554,7 @@ list. The list can be maintained in Settings (F2).</string>
              <bool>true</bool>
             </property>
             <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
               <horstretch>1</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -4713,6 +4707,8 @@ list. The list can be maintained in Settings (F2).</string>
      <addaction name="actionFT8EarlyStart"/>
      <addaction name="separator"/>
      <addaction name="actionFT8WidebandDXCallSearch"/>
+     <addaction name="separator"/>
+     <addaction name="actionModernFT8Decode"/>
     </widget>
     <widget class="QMenu" name="menuFT4_decoding">
      <property name="title">
@@ -4721,6 +4717,8 @@ list. The list can be maintained in Settings (F2).</string>
      <addaction name="actionFT4fast"/>
      <addaction name="actionFT4medium"/>
      <addaction name="actionFT4deep"/>
+     <addaction name="separator"/>
+     <addaction name="actionModernFT4Decode"/>
     </widget>
     <addaction name="actionInclude_averaging"/>
     <addaction name="actionInclude_correlation"/>
@@ -4784,6 +4782,8 @@ list. The list can be maintained in Settings (F2).</string>
     </property>
     <addaction name="actionFT8"/>
     <addaction name="actionFT4"/>
+    <addaction name="actionFT2"/>
+    <addaction name="actionJTTY"/>
     <addaction name="actionJT65"/>
     <addaction name="actionJT9_JT65"/>
     <addaction name="actionJT9"/>
@@ -5991,6 +5991,8 @@ list. The list can be maintained in Settings (F2).</string>
     <string>Hide FT contest messages</string>
    </property>
   </action>
+  <action name="actionJTTY"><property name="checkable"><bool>true</bool></property><property name="text"><string>JTTY</string></property></action>
+  <action name="actionFT2"><property name="checkable"><bool>true</bool></property><property name="text"><string>FT2</string></property></action>
   <action name="actionFT4">
    <property name="checkable">
     <bool>true</bool>
@@ -6025,6 +6027,16 @@ list. The list can be maintained in Settings (F2).</string>
    <property name="text">
     <string>deep</string>
    </property>
+  </action>
+  <action name="actionModernFT8Decode">
+   <property name="checkable"><bool>true</bool></property>
+   <property name="text"><string>Modern algorithm decoding</string></property>
+   <property name="toolTip"><string>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</string></property>
+  </action>
+  <action name="actionModernFT4Decode">
+   <property name="checkable"><bool>true</bool></property>
+   <property name="text"><string>Modern algorithm decoding</string></property>
+   <property name="toolTip"><string>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</string></property>
   </action>
   <action name="actionFT8WidebandDXCallSearch">
    <property name="checkable">

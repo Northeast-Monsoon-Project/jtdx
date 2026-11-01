@@ -17,6 +17,10 @@ EmulateSplitTransceiver::EmulateSplitTransceiver (std::unique_ptr<Transceiver> w
   connect (wrapped_.get (), &Transceiver::resolution, this, &Transceiver::resolution);
   connect (wrapped_.get (), &Transceiver::tciframeswritten, this, &Transceiver::tciframeswritten);
   connect (wrapped_.get (), &Transceiver::tci_mod_active, this, &Transceiver::tci_mod_active);
+  connect (wrapped_.get (), &Transceiver::timedPcmWritten, this, &Transceiver::timedPcmWritten);
+  connect (wrapped_.get (), &Transceiver::txPcmFinished, this, &Transceiver::txPcmFinished);
+  connect (wrapped_.get (), &Transceiver::waveformStarted, this, &Transceiver::waveformStarted);
+  connect (wrapped_.get (), &Transceiver::waveformConsumed, this, &Transceiver::waveformConsumed);
   connect (wrapped_.get (), &Transceiver::finished, this, &Transceiver::finished);
   connect (wrapped_.get (), &Transceiver::failure, this, &Transceiver::failure);
 }

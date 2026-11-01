@@ -30,10 +30,13 @@ public:
   //
   Detector (unsigned frameRate, double periodLengthInSeconds, JTDXDateTime * jtdxtime, unsigned downSampleFactor = 4, QObject * parent = 0);
 
-  void setPeriod(double p) {m_period=p;}
+  Q_SLOT void setPeriod(double p) {m_period=qBound(1.0,p,120.0);}
   bool reset () override;
 
   Q_SIGNAL void framesWritten (qint64) const;
+  Q_SIGNAL void pcmWritten(QByteArray pcm) const;
+  Q_SIGNAL void timedPcmWritten(QByteArray pcm,qint64 endUtcMs) const;
+  Q_SLOT void setContinuous(bool enabled) {m_continuous=enabled;clear();}
   Q_SLOT void setBlockSize (unsigned);
 
 protected:
@@ -48,6 +51,7 @@ private:
   void clear ();		// discard buffer contents
 
   unsigned m_frameRate;
+  bool m_continuous=false;
   double m_period;
   unsigned m_downSampleFactor;
   qint32 m_samplesPerFFT;	// after any down sampling

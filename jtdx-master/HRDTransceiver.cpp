@@ -1,5 +1,5 @@
 #include "HRDTransceiver.hpp"
-#include <QtEndian>
+#include "HRDMessage.hpp"
 
 #include <algorithm>
 #include <QHostAddress>
@@ -19,7 +19,7 @@ namespace
 
   // some commands require a settling time, particularly "RX A" and
   // "RX B" on the Yaesu FTdx3000.
-  int constexpr yaesu_delay {250};
+  int constexpr yaesu_delay {350};
 }
 
 #include "moc_HRDTransceiver.cpp"
@@ -28,48 +28,6 @@ void HRDTransceiver::register_transceivers (TransceiverFactory::Transceivers * r
 {
   (*registry)[HRD_transceiver_name] = TransceiverFactory::Capabilities (id, TransceiverFactory::Capabilities::network, true, true /* maybe */);
 }
-
-struct HRDMessage
-{
-  // Placement style new overload for outgoing messages that does the
-  // construction too.
-  static void * operator new (size_t size, QString const& payload)
-  {
-    size += sizeof (QChar) * (payload.size () + 1); // space for terminator too
-    HRDMessage * storage (reinterpret_cast<HRDMessage *> (new char[size]));
-    storage->size_ = size ;
-    ushort const * pl (payload.utf16 ());
-    std::copy (pl, pl + payload.size () + 1, storage->payload_); // copy terminator too
-    storage->magic_1_ = magic_1_value_;
-    storage->magic_2_ = magic_2_value_;
-    storage->checksum_ = 0;
-    return storage;
-  }
-
-  // Placement style new overload for incoming messages that does the
-  // construction too.
-  //
-  // No memory allocation here.
-  static void * operator new (size_t /* size */, QByteArray const& message)
-  {
-    // Nasty const_cast here to avoid copying the message buffer.
-    return const_cast<HRDMessage *> (reinterpret_cast<HRDMessage const *> (message.data ()));
-  }
-
-  void operator delete (void * p, size_t)
-  {
-    delete [] reinterpret_cast<char *> (p); // Mirror allocation in operator new above.
-  }
-
-  quint32 size_;
-  qint32 magic_1_;
-  qint32 magic_2_;
-  qint32 checksum_;            // Apparently not used.
-  QChar payload_[0];           // UTF-16 (which is wchar_t on Windows)
-
-  static qint32 constexpr magic_1_value_ = 0x1234ABCD;
-  static qint32 constexpr magic_2_value_ = 0xABCD1234;
-};
 
 HRDTransceiver::HRDTransceiver (std::unique_ptr<TransceiverBase> wrapped
                                 , QString const& server
@@ -1077,8 +1035,8 @@ QString HRDTransceiver::send_command (QString const& cmd, bool no_debug, bool pr
   else
     {
       auto string = prepend_context ? context + cmd : cmd;
-      QScopedPointer<HRDMessage> message {new (string) HRDMessage};
-      if (!write_to_port (reinterpret_cast<char const *> (message.data ()), message->size_))
+      auto message = HRDMessage::make(string);
+      if (!write_to_port (message.constData(), message.size()))
         {
           TRACE_CAT ("HRDTransceiver", "failed to write command" << cmd << "to HRD");
           throw error {
@@ -1095,18 +1053,14 @@ QString HRDTransceiver::send_command (QString const& cmd, bool no_debug, bool pr
     }
   else
     {
-      while (buffer.size() < int(offsetof(HRDMessage, payload_))) buffer += read_reply(cmd, deadline);
-      auto u32 = [&buffer](int offset) { return qFromLittleEndian<quint32>(reinterpret_cast<const uchar *>(buffer.constData()+offset)); };
-      const quint32 size = u32(0);
-      if (u32(4) != quint32(HRDMessage::magic_1_value_) || u32(8) != quint32(HRDMessage::magic_2_value_)
-          || size < offsetof(HRDMessage, payload_) + sizeof(QChar) || size > 1024 * 1024
-          || size % sizeof(QChar))
+      auto parsed = HRDMessage::parse(buffer);
+      while (parsed.valid && !parsed.complete) {
+        buffer += read_reply(cmd, deadline);
+        parsed = HRDMessage::parse(buffer);
+      }
+      if (!parsed.valid)
         throw error {tr("Ham Radio Deluxe sent an invalid reply to our command \"%1\"").arg(cmd)};
-      while (buffer.size() < int(size)) buffer += read_reply(cmd, deadline);
-      const int header = offsetof(HRDMessage, payload_);
-      result.reserve((size-header)/2);
-      for (int i=header; i<int(size); i+=2)
-        result.append(QChar(qFromLittleEndian<quint16>(reinterpret_cast<const uchar *>(buffer.constData()+i))));
+      result = parsed.payload;
       int terminator = result.indexOf(QChar(0));
       if (terminator >= 0) result.truncate(terminator);
     }

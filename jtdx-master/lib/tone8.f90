@@ -1,7 +1,8 @@
 subroutine tone8(lmycallstd,lhiscallstd)
 
   use ft8_mod1, only : itone56,idtone56,msg,csynce,mycall,hiscall,idtonecqdxcns,idtonedxcns73,mybcall,hisbcall,lhound, &
-                       idtonefox73,idtonespec
+                       idtonefox73,idtonespec,legacy_rr73_valid
+  use ft8_shared_state, only: ft8_prepare_legacy_rr73
   complex csig0(151680)
   character msg37*37,msgsent37*37,mycall14*14,hiscall14*14
   character*4 rpt(56)
@@ -20,6 +21,7 @@ subroutine tone8(lmycallstd,lhiscallstd)
 !    integer itone56(56,79),idtone56(56,58)
 !    character*37 msg(56)
 
+  legacy_rr73_valid=.false.
   if(lhound .and. len_trim(mybcall).gt.2 .and. len_trim(hisbcall).gt.2) then
     msg37=''; msg37=trim(mybcall)//' '//trim(hisbcall)//' RR73'
     i3=-1; n3=-1
@@ -58,6 +60,7 @@ subroutine tone8(lmycallstd,lhiscallstd)
       msg(i)=msg37
       i3=-1; n3=-1
       call genft8(msg37,i3,n3,0,msgsent37,msgbits,itone)
+      if(i.eq.55) call ft8_prepare_legacy_rr73(msgbits)
       if(i.eq.1) itone1=itone
       idtone56(i,1:29)=itone(8:36)
       idtone56(i,30:58)=itone(44:72)

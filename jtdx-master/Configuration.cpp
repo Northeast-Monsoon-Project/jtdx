@@ -1,5 +1,8 @@
 #include "ManagedSettings.hpp"
+#include "WSJTXGeneralSettings.hpp"
+#include "HamlibUpdater.hpp"
 #include "Configuration.hpp"
+#include "JtAlertCompatibility.hpp"
 #include "StationProfiles.hpp"
 #include "OperatorLog.hpp"
 #include "NtpController.hpp"
@@ -8,6 +11,8 @@
 #include <QSignalBlocker>
 #include <QUuid>
 #include <QClipboard>
+#include <QCheckBox>
+#include <QProgressBar>
 
 //
 // Read me!
@@ -382,7 +387,7 @@ public:
   void transceiver_tune (bool);
   void transceiver_period (double);
   void transceiver_blocksize (qint32);
-  void transceiver_modulator_start (unsigned, double, double, double, bool, double, double);
+  void transceiver_modulator_start (unsigned, double, double, double, bool, double, double, quint64);
   void transceiver_modulator_stop (bool);
   void transceiver_spread (double);
   void transceiver_nsym (int);
@@ -402,6 +407,7 @@ private:
   void select_profile(int index);
   void read_settings ();
   void write_settings ();
+  void sync_udp_discovery ();
 
   bool load_audio_devices (QAudio::Mode, QComboBox *, QAudioDeviceInfo *);
   void update_audio_channels (QComboBox const *, int, QComboBox *, bool);
@@ -559,6 +565,7 @@ private:
   Q_SIGNAL void set_transceiver (Transceiver::TransceiverState const&,
                                  unsigned sequence_number) const;
   Q_SIGNAL void stop_transceiver () const;
+  Q_SIGNAL void set_tx_pcm (QByteArray const&,quint64 generation) const;
 
   Configuration * const self_;	// back pointer to public interface
 
@@ -857,6 +864,7 @@ private:
   int watchdog_;
   McpSettings mcp_;
   ManagedSettings managed_;
+  WSJTXGeneralSettings general_;
   ManagedSettingsWidget *managed_widget_=nullptr;
   NtpSettings ntp_;
   NtpSettingsWidget *ntp_widget_=nullptr;
@@ -932,6 +940,30 @@ bool Configuration::restart_audio_output () const {return m_->restart_sound_outp
 bool Configuration::restart_tci () const {return m_->restart_tci_device_;}
 auto Configuration::type_2_msg_gen () const -> Type2MsgGen {return m_->type_2_msg_gen_;}
 QString Configuration::my_callsign () const {return m_->my_callsign_;}
+QList<StationProfile> Configuration::station_profiles() const {return m_->profiles_;}
+bool Configuration::station_switch_allowed() const {
+  return !m_->station_locked_ && !m_->cached_rig_state_.ptt() && !is_active();
+}
+bool Configuration::select_station(QString const& callsign) {
+  if(!station_switch_allowed())return false;
+  auto call=StationProfiles::normalize(callsign);
+  for(auto const& profile:m_->profiles_) {
+    if(profile.call!=call)continue;
+    if(!StationProfiles::validate(profile).isEmpty())return false;
+    m_->my_callsign_=profile.call;m_->my_grid_=profile.grid;
+    m_->region_=static_cast<IARURegions::Region>(profile.region);
+    m_->type_2_msg_gen_=static_cast<Type2MsgGen>(profile.type2);
+    m_->next_profiles_=m_->profiles_;m_->refresh_profiles(call);
+    SettingsGroup group{m_->settings_,"Configuration"};
+    m_->settings_->setValue("MyCall",m_->my_callsign_);
+    m_->settings_->setValue("MyGrid",m_->my_grid_);
+    m_->settings_->setValue("Region",QVariant::fromValue(m_->region_));
+    m_->settings_->setValue("Type2MsgGen",QVariant::fromValue(m_->type_2_msg_gen_));
+    m_->sync_udp_discovery();
+    return true;
+  }
+  return false;
+}
 void Configuration::set_station_locked(bool locked) {
   m_->station_locked_=locked;
   m_->profile_selector_->setEnabled(!locked && !m_->cached_rig_state_.ptt());
@@ -1101,7 +1133,7 @@ bool Configuration::newGrid () const {return m_->newGrid_;}
 bool Configuration::newGridBand () const {return m_->newGridBand_;}
 bool Configuration::newGridBandMode () const {return m_->newGridBandMode_;}
 bool Configuration::newPotential () const {return m_->newPotential_;}
-bool Configuration::clear_DX () const {return m_->clear_DX_;}
+bool Configuration::clear_DX () const {return m_->general_.clearDxCall && m_->general_.clearDxGrid;}
 bool Configuration::clear_DX_exit () const {return m_->clear_DX_exit_;}
 bool Configuration::miles () const {return m_->miles_;}
 bool Configuration::scroll () const {return m_->scroll_;}
@@ -1114,10 +1146,64 @@ void Configuration::set_watchdog(int minutes) {
   m_->ui_->tx_watchdog_spin_box->setValue(m_->watchdog_);
   m_->write_settings();
 }
-int Configuration::tunetimer () const {return m_->tunetimer_;}
+int Configuration::tunetimer () const {return m_->general_.tuneWatchdog ? m_->tunetimer_ : 0;}
 bool Configuration::TX_messages () const {return m_->TX_messages_;}
 bool Configuration::hide_TX_messages () const {return m_->hide_TX_messages_;}
 bool Configuration::decode_at_52s () const {return m_->decode_at_52s_;}
+bool Configuration::DXCC () const {return m_->general_.dxcc;}
+bool Configuration::highlight_DXcall () const {return m_->general_.highlightDxCall;}
+bool Configuration::highlight_DXgrid () const {return m_->general_.highlightDxGrid;}
+bool Configuration::show_country_names () const {return m_->countryName_;}
+bool Configuration::ppfx () const {return m_->countryPrefix_;}
+bool Configuration::decodes_from_top () const {return m_->general_.decodesFromTop;}
+bool Configuration::detailed_blank () const {return m_->general_.detailedBlank;}
+bool Configuration::enable_VHF_features () const {return m_->general_.enableVhf;}
+bool Configuration::alternate_bindings () const {return m_->general_.alternateBindings;}
+bool Configuration::quick_call () const {return m_->general_.quickCall;}
+bool Configuration::disable_TX_on_73 () const {return m_->general_.disableTxAfter73;}
+bool Configuration::auto_astro () const {return m_->general_.autoAstro;}
+bool Configuration::force_call_1st () const {return m_->general_.forceCallFirst;}
+bool Configuration::repeat_Tx () const {return m_->general_.repeatTx;}
+bool Configuration::kHz_without_k () const {return m_->general_.khzWithoutK;}
+bool Configuration::single_decode () const {return m_->general_.singleDecode;}
+bool Configuration::tune_watchdog () const {return m_->general_.tuneWatchdog;}
+int Configuration::tune_watchdog_time () const {return m_->tunetimer_;}
+bool Configuration::progressBar_red () const {return m_->general_.progressBarRed;}
+bool Configuration::set_RXtoTX () const {return m_->general_.rxToTxAfterQso;}
+bool Configuration::showDistance () const {return m_->general_.showDistance;}
+bool Configuration::erase_BandActivity () const {return m_->general_.eraseBandActivity;}
+bool Configuration::clear_DXcall () const {return m_->general_.clearDxCall;}
+bool Configuration::clear_DXgrid () const {return m_->general_.clearDxGrid;}
+bool Configuration::GridMap () const {return m_->general_.gridMap;}
+bool Configuration::GridMapAll () const {return m_->general_.gridMapAll;}
+bool Configuration::align () const {return m_->general_.align;}
+int Configuration::align_steps () const {return m_->general_.alignSteps;}
+int Configuration::align_steps2 () const {return m_->general_.alignSteps2;}
+bool Configuration::alternate_erase_button () const {return m_->general_.alternateErase;}
+bool Configuration::Wait_features_enabled () const {return m_->general_.waitFeatures;}
+bool Configuration::showAzimuth () const {return m_->general_.showAzimuth;}
+bool Configuration::button_coloring_disabled () const {return m_->general_.lessButtonColoring;}
+bool Configuration::full_duplex () const {return m_->general_.fullDuplex;}
+double Configuration::eme_delay () const {return m_->decode_at_52s_ ? 2.5 : 0.;}
+bool Configuration::PWR_and_SWR () const {return m_->do_pwr_;}
+bool Configuration::check_SWR () const {return m_->general_.checkSwr;}
+void Configuration::set_disable_TX_on_73 (bool value) {
+  m_->general_.disableTxAfter73 = value;
+  m_->ui_->disable_TX_on_73_check_box->setChecked(value);
+  SettingsGroup group{m_->settings_, "Configuration"};
+  m_->settings_->setValue("73TxDisable", value);
+}
+void Configuration::set_erase_BandActivity (bool value) {
+  m_->general_.eraseBandActivity = value;
+  m_->ui_->cbEraseBandActivity->setChecked(value);
+  SettingsGroup group{m_->settings_, "Configuration"};
+  m_->settings_->setValue("erase_BandActivity", value);
+}
+void Configuration::set_full_duplex (bool value) {
+  m_->general_.fullDuplex = value;
+  SettingsGroup group{m_->settings_, "Configuration"};
+  m_->settings_->setValue("FullDuplexMode", value);
+}
 bool Configuration::beepOnMyCall () const {return m_->beepOnMyCall_;}
 bool Configuration::beepOnNewCQZ () const {return m_->beepOnNewCQZ_;}
 bool Configuration::beepOnNewITUZ () const {return m_->beepOnNewITUZ_;}
@@ -1252,6 +1338,11 @@ void Configuration::transceiver_audio (bool on)
   m_->transceiver_audio (on);
 }
 
+void Configuration::transceiver_tx_pcm (QByteArray const& pcm,quint64 generation)
+{
+  if (m_->is_tci_ && m_->tci_audio_) Q_EMIT m_->set_tx_pcm(pcm,generation);
+}
+
 void Configuration::transceiver_tune (bool on)
 {
 #if WSJT_TRACE_CAT
@@ -1280,13 +1371,13 @@ void Configuration::transceiver_blocksize (qint32 blocksize)
 }
 
 void Configuration::transceiver_modulator_start(unsigned symbolslength, double framespersymbol, double trfrequency,
-                     double tonespacing, bool synchronize, double dbsnr, double trperiod)
+                     double tonespacing, bool synchronize, double dbsnr, double trperiod, quint64 generation)
 {
 #if WSJT_TRACE_CAT
   qDebug () << "Configuration::transceiver_modulator_start:" << symbolslength << m_->cached_rig_state_;
 #endif
 
-  m_->transceiver_modulator_start(symbolslength,framespersymbol,trfrequency,tonespacing,synchronize,dbsnr,trperiod);
+  m_->transceiver_modulator_start(symbolslength,framespersymbol,trfrequency,tonespacing,synchronize,dbsnr,trperiod,generation);
 }
 
 void Configuration::transceiver_modulator_stop (bool on)
@@ -1429,9 +1520,77 @@ Configuration::impl::impl (Configuration * self, QSettings * settings, QWidget *
   ui_->callsign_label->setBuddy(profile_selector_);
   ui_->gridLayout_14->addWidget(profile_selector_,0,1,1,4);
   ui_->gridLayout_14->addWidget(profile_manager_,0,5,1,2);
-  ui_->CW_id_after_73_check_box->hide();
-  ui_->CW_id_interval_spin_box->hide();
-  ui_->label->hide();
+  // The independent Call/Grid options replace the old combined control.
+  ui_->clear_DX_check_box->hide();
+  auto swr = new QCheckBox(tr("Halt Tx when SWR > 2.5"), ui_->radio_tab);
+  swr->setObjectName("check_SWR_check_box");
+  swr->setToolTip(tr("Stop transmission when a supported CAT radio reports SWR above 2.5. Unknown or unsupported readings are shown as unavailable. Protection also polls SWR when power display is off."));
+  ui_->gridLayout_3->addWidget(swr, ui_->gridLayout_3->rowCount(), 0, 1, 4);
+  auto hamlib = new HamlibUpdater(this);
+  auto hamlibBox = new QGroupBox(tr("Hamlib updates"), ui_->radio_tab);
+  hamlibBox->setObjectName("hamlib_update_group");
+  auto hamlibLayout = new QVBoxLayout(hamlibBox);
+  auto hamlibVersion = new QLabel(hamlibBox);
+  hamlibVersion->setObjectName("hamlib_version_label");
+  hamlibVersion->setWordWrap(true);
+  auto hamlibStatus = new QLabel(hamlibBox);
+  hamlibStatus->setObjectName("hamlib_update_status");
+  hamlibStatus->setWordWrap(true);
+  auto hamlibProgress = new QProgressBar(hamlibBox);
+  hamlibProgress->setObjectName("hamlib_update_progress");
+  hamlibProgress->hide();
+  auto hamlibButtons = new QHBoxLayout;
+  auto updateHamlib = new QPushButton(tr("Update Hamlib"), hamlibBox);
+  updateHamlib->setObjectName("hamlib_update_button");
+  auto restoreHamlib = new QPushButton(tr("Restore previous Hamlib"), hamlibBox);
+  restoreHamlib->setObjectName("hamlib_restore_button");
+  auto restartHamlib = new QPushButton(tr("Restart application"), hamlibBox);
+  restartHamlib->setObjectName("hamlib_restart_button");
+  hamlibButtons->addWidget(updateHamlib);
+  hamlibButtons->addWidget(restoreHamlib);
+  hamlibButtons->addWidget(restartHamlib);
+  hamlibLayout->addWidget(hamlibVersion);
+  hamlibLayout->addLayout(hamlibButtons);
+  hamlibLayout->addWidget(hamlibProgress);
+  hamlibLayout->addWidget(hamlibStatus);
+  ui_->gridLayout_3->addWidget(hamlibBox, ui_->gridLayout_3->rowCount(), 0, 1, 4);
+  auto updateHamlibControls = [this,hamlib,hamlibVersion,updateHamlib,restoreHamlib,restartHamlib,hamlibProgress] {
+    hamlibVersion->setText(tr("Current version: %1\nPrevious version: %2")
+                          .arg(hamlib->currentVersion(), hamlib->backupVersion().isEmpty() ? tr("None") : hamlib->backupVersion()));
+    updateHamlib->setEnabled(hamlib->canUpdate() && !hamlib->busy());
+    restoreHamlib->setEnabled(hamlib->canUpdate() && !hamlib->busy() && !hamlib->backupVersion().isEmpty());
+    restartHamlib->setVisible(!hamlib->readyVersion().isEmpty());
+    restartHamlib->setEnabled(!hamlib->busy());
+    if (!hamlib->busy()) hamlibProgress->hide();
+  };
+  connect(updateHamlib, &QPushButton::clicked, hamlib, &HamlibUpdater::downloadUpdate);
+  connect(restoreHamlib, &QPushButton::clicked, hamlib, &HamlibUpdater::rollback);
+  connect(restartHamlib, &QPushButton::clicked, hamlib, &HamlibUpdater::restartApplication);
+  connect(hamlib, &HamlibUpdater::statusChanged, this, [hamlibStatus,updateHamlibControls](QString const& status) {
+    hamlibStatus->setText(status);updateHamlibControls();
+  });
+  connect(hamlib, &HamlibUpdater::failed, this, [hamlibStatus,updateHamlibControls](QString const& error) {
+    hamlibStatus->setText(error);updateHamlibControls();
+  });
+  connect(hamlib, &HamlibUpdater::readyToRestart, this, [this,hamlibStatus,updateHamlibControls](QString const& version, bool rollback) {
+    hamlibStatus->setText(rollback ? tr("Version %1 is ready to restore. Restart the application to apply it.").arg(version)
+                                 : tr("Version %1 is ready. Restart the application to apply it.").arg(version));
+    updateHamlibControls();
+  });
+  connect(hamlib, &HamlibUpdater::progress, this, [hamlibProgress](qint64 received, qint64 total) {
+    hamlibProgress->setRange(0, total > 0 ? 100 : 0);
+    if (total > 0) hamlibProgress->setValue(qBound(0, int(100.0*received/total), 100));
+    hamlibProgress->show();
+  });
+  connect(hamlib, &HamlibUpdater::restartRequested, this, [this] {
+    // Unwind the settings modal loop first. Restarting Hamlib must not accept
+    // unrelated edits, or leave the helper waiting for an open modal dialog.
+    reject();
+    QMetaObject::invokeMethod(self_, "hamlib_restart_requested", Qt::QueuedConnection);
+  });
+  hamlibStatus->setText(hamlib->availabilityReason());
+  updateHamlibControls();
+  WSJTXGeneralSettings::connectControls(this);
   managed_widget_=new ManagedSettingsWidget;
   auto managedScroll=new QScrollArea;managedScroll->setWidgetResizable(true);managedScroll->setFrameShape(QFrame::NoFrame);managedScroll->setWidget(managed_widget_);
   ui_->configuration_tabs->insertTab(ui_->configuration_tabs->indexOf(ui_->scheduler_tab),managedScroll,tr("Managed mode"));
@@ -1579,8 +1738,8 @@ Configuration::impl::impl (Configuration * self, QSettings * settings, QWidget *
   ui_->udp2_server_port_spin_box->setMaximum (std::numeric_limits<port_type>::max ());
 
   // Dependent checkboxes 
-  ui_->countryPrefix_check_box->setChecked(countryName_ && countryPrefix_);
-  ui_->countryPrefix_check_box->setEnabled(countryName_);
+  ui_->countryPrefix_check_box->setChecked(countryPrefix_);
+  ui_->countryPrefix_check_box->setEnabled(general_.dxcc);
   ui_->gridNotif_check_box->setChecked(callNotif_ && gridNotif_);
   ui_->gridNotif_check_box->setEnabled(callNotif_);
   ui_->blueMarker_check_box->setChecked(redMarker_ && blueMarker_);
@@ -1802,6 +1961,7 @@ Configuration::impl::impl (Configuration * self, QSettings * settings, QWidget *
   transceiver_thread_ = new QThread {this};
   transceiver_thread_->start ();
   QTimer::singleShot(0,ntp_controller_,[this]{ntp_controller_->configure(ntp_);});
+  sync_udp_discovery();
 
 }
 
@@ -1816,6 +1976,7 @@ Configuration::impl::~impl ()
 
 void Configuration::impl::initialize_models ()
 {
+  general_.initializeControls(this);
   //
   // setup PTT port combo box drop down content
   //
@@ -1839,7 +2000,8 @@ void Configuration::impl::initialize_models ()
   ui_->content_line_edit->setText (content_);
   ui_->countries_line_edit->setText (countries_);
   ui_->callsigns_line_edit->setText (callsigns_);
-  ui_->labTx->setStyleSheet(QString("background: %1").arg(useDarkStyle_? color_TxMsg_dark_.name() : color_TxMsg_.name()));
+  auto const txColor = useDarkStyle_ ? color_TxMsg_dark_ : color_TxMsg_;
+  ui_->labTx->setStyleSheet(QString("background: %1; color: %2").arg(txColor.name(),qGray(txColor.rgb())<128 ? "#ffffff" : "#000000"));
   ui_->test_PTT_push_button->setStyleSheet(QString("QPushButton:checked { background-color: %1; border-style: outset; border-width: 1px; border-radius: 5px; border-color: %2; min-width: 5em; padding: 3px;}").arg(Radio::convert_dark("#ff0000",useDarkStyle_),Radio::convert_dark("#000000",useDarkStyle_)));
   ui_->macros_list_view->setStyleSheet(QString("QListView { show-decoration-selected: 1; } "
 "QListView::item:alternate { background: %1; } "
@@ -2054,7 +2216,6 @@ Radio::convert_dark("#fafbfe",useDarkStyle_),Radio::convert_dark("#dcdef1",useDa
   ui_->labNewScCallBand->setVisible((newCallBandMode_ || newCallBand_) && newPotential_);
   ui_->labWorkedScCall->setVisible((newCQZ_ || newITUZ_ || newDXCC_ || newGrid_ || newPx_ || newCall_) && newPotential_);
 
-  ui_->CW_id_interval_spin_box->setValue (id_interval_);  
   ui_->sbNtrials->setValue (ntrials_);
   ui_->sbTxDelay->setValue (txDelay_);
   ui_->sbNtrials10->setValue (ntrials10_);
@@ -2095,7 +2256,6 @@ Radio::convert_dark("#fafbfe",useDarkStyle_),Radio::convert_dark("#dcdef1",useDa
 
   ui_->PTT_method_button_group->button (rig_params_.ptt_type)->setChecked (true);
   ui_->save_path_display_label->setText (save_directory_.absolutePath ());
-  ui_->CW_id_after_73_check_box->setChecked (id_after_73_);
   ui_->tx_QSY_check_box->setChecked (tx_QSY_allowed_);
   ui_->psk_reporter_check_box->setChecked (spot_to_psk_reporter_);
   ui_->dxsummit_check_box->setChecked (spot_to_dxsummit_);
@@ -2140,7 +2300,7 @@ Radio::convert_dark("#fafbfe",useDarkStyle_),Radio::convert_dark("#dcdef1",useDa
   ui_->insert_blank_check_box->setChecked (insert_blank_);
   ui_->useDarkStyle_check_box->setChecked (useDarkStyle_);
   ui_->countryName_check_box->setChecked (countryName_);
-  ui_->countryPrefix_check_box->setChecked (countryName_ && countryPrefix_);
+  ui_->countryPrefix_check_box->setChecked (countryPrefix_);
   ui_->callNotif_check_box->setChecked (callNotif_);
   ui_->gridNotif_check_box->setChecked (gridNotif_ && callNotif_);
   ui_->otherMessagesMarker_check_box->setChecked (otherMessagesMarker_);
@@ -2280,6 +2440,8 @@ void Configuration::impl::done (int r)
 
 void Configuration::impl::read_settings ()
 {
+  WSJTXGeneralSettings::migrateDefaultsV361(*settings_);
+  general_.readRoot(*settings_);
   SettingsGroup g {settings_, "Configuration"};
   restoreGeometry (settings_->value ("window/geometry").toByteArray ());
 
@@ -2295,10 +2457,18 @@ void Configuration::impl::read_settings ()
   content_ = settings_->value ("Content", "").toString ();
   countries_= settings_->value ("CountryFilterList", "").toString ();
   callsigns_= settings_->value ("CallsignFilterList", "").toString ();
+  if (!settings_->value("OwnTransmissionColorV361",false).toBool()) {
+    // Replace the former default yellows once, preserving custom palettes.
+    if (QColor(settings_->value("colorTxMsg","#eeee00").toString())==QColor("#eeee00"))
+      settings_->setValue("colorTxMsg",QColor("#7AD6CA"));
+    if (QColor(settings_->value("colorTxMsg_dark","#aeae00").toString())==QColor("#aeae00"))
+      settings_->setValue("colorTxMsg_dark",QColor("#7AD6CA"));
+    settings_->setValue("OwnTransmissionColorV361",true);
+  }
   next_color_CQ_ = color_CQ_ = settings_->value("colorCQ","#000000").toString();
   next_color_MyCall_ = color_MyCall_ = settings_->value("colorMyCall","#ff0000").toString();
   next_color_StandardCall_ = color_StandardCall_ = settings_->value("colorStandardCall","#707070").toString();
-  next_color_TxMsg_ = color_TxMsg_ = settings_->value("colorTxMsg","#eeee00").toString();
+  next_color_TxMsg_ = color_TxMsg_ = settings_->value("colorTxMsg","#7AD6CA").toString();
   next_color_NewCQZ_ = color_NewCQZ_ = settings_->value("colorNewCQZ","#c08000").toString();
   next_color_NewCQZBand_ = color_NewCQZBand_ = settings_->value("colorNewCQZBand","#c0a080").toString();
   next_color_NewITUZ_ = color_NewITUZ_ = settings_->value("colorNewITUZ","#90b000").toString();
@@ -2315,7 +2485,7 @@ void Configuration::impl::read_settings ()
   next_color_CQ_dark_ = color_CQ_dark_ = settings_->value("colorCQ_dark","#e6dcd2").toString();
   next_color_MyCall_dark_ = color_MyCall_dark_ = settings_->value("colorMyCall_dark","#bf0000").toString();
   next_color_StandardCall_dark_ = color_StandardCall_dark_ = settings_->value("colorStandardCall_dark","#96aca2").toString();
-  next_color_TxMsg_dark_ = color_TxMsg_dark_ = settings_->value("colorTxMsg_dark","#aeae00").toString();
+  next_color_TxMsg_dark_ = color_TxMsg_dark_ = settings_->value("colorTxMsg_dark","#7AD6CA").toString();
   next_color_NewCQZ_dark_ = color_NewCQZ_dark_ = settings_->value("colorNewCQZ_dark","#804000").toString();
   next_color_NewCQZBand_dark_ = color_NewCQZBand_dark_ = settings_->value("colorNewCQZBand_dark","#806040").toString();
   next_color_NewITUZ_dark_ = color_NewITUZ_dark_ = settings_->value("colorNewITUZ_dark","#507000").toString();
@@ -2586,6 +2756,28 @@ void Configuration::impl::read_settings ()
       frequencies_.reset_to_defaults ();
     }
 
+  if(!settings_->value("NewModesV340",false).toBool()) {
+    FrequencyList_v2 defaults(&bands_);defaults.reset_to_defaults();
+    FrequencyList_v2::FrequencyItems additions;
+    for(auto const& item:defaults.frequency_list())
+      if(item.mode_==Modes::FT2 || item.mode_==Modes::JTTY)additions.append(item);
+    frequencies_.frequency_list_merge(additions);
+    settings_->setValue("FrequenciesForModes",QVariant::fromValue(frequencies_.frequency_list()));
+    settings_->setValue("NewModesV340",true);
+  }
+
+  if(!settings_->value("UpstreamFrequenciesV360",false).toBool()) {
+    FrequencyList_v2 defaults(&bands_);defaults.reset_to_defaults();
+    FrequencyList_v2::FrequencyItems additions;
+    for(auto const& item:defaults.frequency_list())
+      if(item.mode_==Modes::Q65 || item.mode_==Modes::MSK144)additions.append(item);
+    // merge() compares frequency, region and mode; it does not overwrite an
+    // operator's existing row or its choice of default flag.
+    frequencies_.frequency_list_merge(additions);
+    settings_->setValue("FrequenciesForModes",QVariant::fromValue(frequencies_.frequency_list()));
+    settings_->setValue("UpstreamFrequenciesV360",true);
+  }
+
   stations_.station_list (settings_->value ("stations").value<StationList::Stations> ());
 
   log_as_RTTY_ = settings_->value ("toRTTY", false).toBool ();
@@ -2617,8 +2809,8 @@ void Configuration::impl::read_settings ()
   countries_ = settings_->value ("CountryFilterList", "").toString ();
   callsigns_ = settings_->value ("CallsignFilterList", "").toString ();
   insert_blank_ = settings_->value ("InsertBlank", true).toBool ();
-  countryName_ = settings_->value ("countryName", true).toBool ();
-  countryPrefix_ = settings_->value ("countryPrefix", false).toBool ();
+  countryName_ = settings_->value ("AlwaysShowCountryNames", settings_->value("countryName", true)).toBool ();
+  countryPrefix_ = settings_->value ("PrincipalPrefix", settings_->value("countryPrefix", false)).toBool ();
 
   if(settings_->value ("callsignLogFiltering").toString()=="false" || settings_->value ("callsignLogFiltering").toString()=="true")
     callNotif_ = settings_->value ("callsignLogFiltering").toBool ();
@@ -2746,6 +2938,7 @@ void Configuration::set_jtdxtime (JTDXDateTime * jtdxtime)
 void Configuration::impl::write_settings ()
 {
   SettingsGroup g {settings_, "Configuration"};
+  general_.write(*settings_);
 
   settings_->setValue("StationProfiles",StationProfiles::encode(profiles_));
   settings_->setValue ("MyCall", my_callsign_);
@@ -2914,6 +3107,8 @@ void Configuration::impl::write_settings ()
   settings_->setValue ("UseDarkStyle", useDarkStyle_);
   settings_->setValue ("countryName", countryName_);
   settings_->setValue ("countryPrefix", countryPrefix_);
+  settings_->setValue ("AlwaysShowCountryNames", countryName_);
+  settings_->setValue ("PrincipalPrefix", countryPrefix_);
   settings_->setValue ("callsignLogFiltering", callNotif_);
   settings_->setValue ("gridLogFiltering", gridNotif_);
   settings_->setValue ("OtherStandardMessagesMarker", otherMessagesMarker_);
@@ -2945,7 +3140,7 @@ void Configuration::impl::write_settings ()
   settings_->setValue ("newGridBand", newGridBand_);
   settings_->setValue ("newGridBandMode", newGridBandMode_);
   settings_->setValue ("newPotential", newPotential_);
-  settings_->setValue ("ClearCallGrid", clear_DX_);
+  settings_->setValue ("ClearCallGrid", general_.clearDxCall && general_.clearDxGrid);
   settings_->setValue ("ClearCallGridExit", clear_DX_exit_);
   settings_->setValue ("Miles", miles_);
   settings_->setValue ("Scroll", scroll_);
@@ -2998,6 +3193,25 @@ void Configuration::impl::write_settings ()
   settings_->setValue ("pwrBandTxMemory", pwrBandTxMemory_);
   settings_->setValue ("pwrBandTuneMemory", pwrBandTuneMemory_);
   settings_->setValue ("Region", QVariant::fromValue (region_));  
+  sync_udp_discovery();
+}
+
+void Configuration::impl::sync_udp_discovery()
+{
+#ifdef Q_OS_WIN
+  auto name=QCoreApplication::applicationName();
+  if(name!="JTDX-F" && !name.startsWith("JTDX-F - "))return;
+  auto root=QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation);
+  if(root.isEmpty()) {qWarning()<<"JTAlert discovery: configuration root unavailable";return;}
+  // JTAlert derives this discovery path from the JTDX-compatible title.
+  // Keep it separate from the authoritative JTDX-F settings and log tree.
+  QVariantMap values{{"UDPServer",udp_server_name_},{"UDPServerPort",udp_server_port_},
+    {"AcceptUDPRequests",accept_udp_requests_},{"MyCall",my_callsign_},{"MyGrid",my_grid_}};
+  QString error;
+  if(!JtAlertCompatibility::writeDiscovery(
+       QDir(root),
+       name,settings_->fileName(),values,&error))qWarning()<<"JTAlert discovery:"<<error;
+#endif
 }
 
 void Configuration::impl::set_rig_invariants ()
@@ -3019,6 +3233,10 @@ void Configuration::impl::set_rig_invariants ()
   ui_->CAT_poll_interval_spin_box->setEnabled (!asynchronous_CAT);
 
   auto port_type = transceiver_factory_.CAT_port_type (rig);
+  if (auto swr = findChild<QCheckBox*>("check_SWR_check_box"))
+    swr->setEnabled(TransceiverFactory::basic_transceiver_name_ != rig
+                    && !rig.startsWith("OmniRig") && !rig.startsWith("DX Lab")
+                    && !rig.startsWith("Ham Radio"));
 
   bool is_serial_CAT (TransceiverFactory::Capabilities::serial == port_type);
   auto const& cat_port = ui_->CAT_port_combo_box->currentText ();
@@ -3257,7 +3475,8 @@ TransceiverFactory::ParameterPack Configuration::impl::gather_rig_data ()
   result.rts_high = ui_->force_RTS_combo_box->isEnabled () && 1 == ui_->force_RTS_combo_box->currentIndex ();
   result.poll_interval = ui_->CAT_poll_interval_spin_box->value ();
   if(ui_->S_meter_check_box->isChecked ()) result.poll_interval |= do__snr;
-  if(ui_->output_power_check_box->isChecked ()) result.poll_interval |= do__pwr;
+  auto swr = findChild<QCheckBox*>("check_SWR_check_box");
+  if(ui_->output_power_check_box->isChecked () || (swr && swr->isEnabled() && swr->isChecked())) result.poll_interval |= do__pwr;
   if(ui_->rig_power_check_box->isChecked ()) result.poll_interval |= rig__power;
   if(ui_->rig_power_off_check_box->isChecked ()) result.poll_interval |= rig__power_off;
   if(ui_->rig_ptt_share_check_box->isChecked ()) result.poll_interval |= ptt__share;
@@ -3301,6 +3520,8 @@ void Configuration::impl::accept ()
                                 // delegates in views get flushed to
                                 // the underlying models before we
                                 // access them
+
+  general_.acceptControls(this);
 
   sync_transceiver (true);	// force an update
 
@@ -3736,8 +3957,8 @@ void Configuration::impl::on_font_push_button_clicked ()
 
 void Configuration::impl::on_countryName_check_box_clicked(bool checked)
 {
-  ui_->countryPrefix_check_box->setChecked(checked && countryPrefix_);
-  ui_->countryPrefix_check_box->setEnabled(checked);
+  Q_UNUSED(checked);
+  ui_->countryPrefix_check_box->setEnabled(ui_->DXCC_check_box->isChecked());
 }
 
 void Configuration::impl::on_callNotif_check_box_clicked(bool checked)
@@ -4644,11 +4865,11 @@ void Configuration::impl::on_pbStandardCall_clicked()
 
 void Configuration::impl::on_pbTxMsg_clicked()
 {
-  auto new_color = QColorDialog::getColor(QColor(useDarkStyle_? next_color_TxMsg_dark_.name() : next_color_TxMsg_.name()), this, "Tx Messages Color");
+  auto new_color = QColorDialog::getColor(QColor(useDarkStyle_? next_color_TxMsg_dark_.name() : next_color_TxMsg_.name()), this, tr("Own transmitted message"));
   if (new_color.isValid ())
     {
       if (useDarkStyle_) next_color_TxMsg_dark_ = new_color; else next_color_TxMsg_ = new_color;
-      ui_->labTx->setStyleSheet(QString("background: %1").arg(useDarkStyle_? next_color_TxMsg_dark_.name() : next_color_TxMsg_.name()));
+      ui_->labTx->setStyleSheet(QString("background: %1; color: %2").arg(new_color.name(),qGray(new_color.rgb())<128 ? "#ffffff" : "#000000"));
     }
 }
 
@@ -5831,6 +6052,11 @@ bool Configuration::impl::open_rig (bool force)
             });
           rig_connections_ << connect (rig.get (), &Transceiver::tciframeswritten, this, &Configuration::impl::handle_transceiver_tciframeswritten);
           rig_connections_ << connect (rig.get (), &Transceiver::tci_mod_active, this, &Configuration::impl::handle_transceiver_tci_mod_active);
+          rig_connections_ << connect (this, &Configuration::impl::set_tx_pcm, rig.get (), &Transceiver::set_tx_pcm, Qt::QueuedConnection);
+          rig_connections_ << connect (rig.get (), &Transceiver::timedPcmWritten, self_, &Configuration::transceiver_timed_pcm, Qt::QueuedConnection);
+          rig_connections_ << connect (rig.get (), &Transceiver::txPcmFinished, self_, &Configuration::transceiver_tx_pcm_finished, Qt::QueuedConnection);
+          rig_connections_ << connect (rig.get (), &Transceiver::waveformConsumed, self_, &Configuration::transceiver_waveform_consumed, Qt::QueuedConnection);
+          rig_connections_ << connect (rig.get (), &Transceiver::waveformStarted, self_, &Configuration::transceiver_waveform_started, Qt::QueuedConnection);
           rig_connections_ << connect (rig.get (), &Transceiver::update, this, &Configuration::impl::handle_transceiver_update);
           rig_connections_ << connect (rig.get (), &Transceiver::failure, this, &Configuration::impl::handle_transceiver_failure);
 
@@ -5916,24 +6142,19 @@ void Configuration::impl::transceiver_tx_frequency (Frequency f)
   if (split_mode ())
     {
       cached_rig_state_.online (true); // we want the rig online
+      auto previous_mode = cached_rig_state_.mode ();
       set_cached_mode ();
-      if (cached_rig_state_.split() != f ||  cached_rig_state_.tx_frequency() != f ||
-         (f && (current_tx_offset_ != stations_.offset (f) || cached_rig_state_.tx_frequency() != apply_calibration (f + current_tx_offset_))))
+      auto offset = f ? stations_.offset (f) : FrequencyDelta {0};
+      auto desired = f ? apply_calibration (f + offset) : Frequency {0};
+      // Compare like units: split is a flag, and the cached frequency already
+      // includes calibration/transverter offset. Repeated identical requests
+      // must not queue CAT work or invalidate a pending command's reply.
+      if (cached_rig_state_.split() != bool(f) || cached_rig_state_.tx_frequency() != desired
+          || current_tx_offset_ != offset || cached_rig_state_.mode() != previous_mode)
       {
-        cached_rig_state_.split (f);
-        cached_rig_state_.tx_frequency (f);
-
-        // lookup offset for tx and apply calibration
-        if (f)
-          {
-            // apply and offset and calibration
-            // we store the offset here for use in feedback from the
-            // rig, we cannot absolutely determine if the offset should
-            // apply but by simply picking an offset when the Rx
-            // frequency is set and sticking to it we get sane behaviour
-            current_tx_offset_ = stations_.offset (f);
-            cached_rig_state_.tx_frequency (apply_calibration (f + current_tx_offset_));
-          }
+        cached_rig_state_.split (bool(f));
+        current_tx_offset_ = offset;
+        cached_rig_state_.tx_frequency (desired);
 
 //        printf("%s(%0.1f) Configuration #:%d transceiver_tx_frequency: %lld\n",jtdxtime_->currentDateTimeUtc2().toString("hh:mm:ss.zzz").toStdString().c_str(),jtdxtime_->GetOffset(),transceiver_command_number_+1,f);
         Q_EMIT set_transceiver (cached_rig_state_, ++transceiver_command_number_);
@@ -6071,7 +6292,7 @@ void Configuration::impl::transceiver_txvolume (double txvolume)
   }
 }
 
-void Configuration::impl::transceiver_modulator_start (unsigned symbolslength, double framespersymbol, double frequency, double tonespacing, bool synchronize, double dbsnr, double trperiod)
+void Configuration::impl::transceiver_modulator_start (unsigned symbolslength, double framespersymbol, double frequency, double tonespacing, bool synchronize, double dbsnr, double trperiod, quint64 generation)
 {
   cached_rig_state_.online (true); // we want the rig online
   set_cached_mode ();
@@ -6085,6 +6306,7 @@ void Configuration::impl::transceiver_modulator_start (unsigned symbolslength, d
     cached_rig_state_.synchronize (synchronize);
     cached_rig_state_.dbsnr (dbsnr);
     cached_rig_state_.trperiod (trperiod);
+    cached_rig_state_.waveform_generation (generation);
 //    printf("%s(%0.1f) Configuration #:%d modulator_start: symbolslength=%d framespersymbol=%0.1f frequency=%0.1f tonespacing=%0.1f synchronize= %d dbsnr=%0.1f trperiod=%0.1f\n",jtdxtime_->currentDateTimeUtc2().toString("hh:mm:ss.zzz").toStdString().c_str(),jtdxtime_->GetOffset(),transceiver_command_number_+1,symbolslength,framespersymbol,frequency,tonespacing,synchronize,dbsnr,trperiod);
     Q_EMIT set_transceiver (cached_rig_state_, ++transceiver_command_number_);
   }

@@ -41,10 +41,7 @@ subroutine genft4(msg0,ichk,ntxhash,msgsent,msgbits,i4tone)
         exit
      endif
   enddo
-  do i=1,37                               !Strip leading blanks
-     if(message(1:1).ne.' ') exit
-     message=message(i+1:)
-  enddo
+  message=adjustl(message)
 
   i3=-1
   n3=-1

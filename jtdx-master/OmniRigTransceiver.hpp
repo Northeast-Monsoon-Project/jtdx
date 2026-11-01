@@ -41,6 +41,7 @@ public:
   void do_ptt (bool on) override;
 
 private:
+  bool com_initialized_ = false;
   bool await_notification_with_timeout (int timeout);
   Q_SIGNAL void notified () const;
   // Q_SLOT void timeout_check ();

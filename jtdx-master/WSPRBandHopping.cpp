@@ -230,7 +230,7 @@ public:
   // and tune
   QBitArray bands_[num_periods];
 
-  int gray_line_duration_;
+  int gray_line_duration_ = 60;
   QPointer<Dialog> dialog_;
 };
 

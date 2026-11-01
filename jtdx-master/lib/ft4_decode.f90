@@ -24,6 +24,7 @@ contains
   subroutine decode(this,callback,nQSOProgress,nfqso,nfa,nfb,ndepth,stophint,swl)
 !    use timer_module, only: timer
     use packjt77
+    use modern174, only : modern_ft4, modern174_decode, modern174_valid
     use ft4_mod1, only : nFT4decd,nfafilt,nfbfilt,lfilter,lhidetest,lhidetelemetry
     use ft8_mod1, only : sumxdtt,avexdt,mycall,hiscall
     include 'ft4/ft4_params.f90'
@@ -45,8 +46,11 @@ contains
     real candidate(2,100)
     integer apbits(2*ND)
     integer*1 message77(77),rvec(77),apmask(2*ND),cw(2*ND)
+    integer*1 modern_message(77),modern_cw(174)
+    real modern_distance
     integer*1 hbits(2*NN)
     integer i4tone(103)
+    integer nmoderntries,modern_errors
     integer nappasses(0:5)    ! # of decoding passes for QSO States 0-5
     integer naptypes(0:5,4)   ! nQSOProgress, decoding pass
     integer mcq(29),mrrr(19),m73(19),mrr73(19)
@@ -147,6 +151,7 @@ contains
       call getcandidates4(fa,fb,syncmin,nfqso,maxcand,candidate,ncand)
       dobigfft=.true.
       do icand=1,ncand
+        nmoderntries=0
         f0=candidate(1,icand)
         nf0=nint(f0); if(lfilter .and. (nf0.lt.nfafilt .or. nf0.gt.nfbfilt)) cycle
         snr=candidate(2,icand)-1.0
@@ -281,17 +286,32 @@ contains
 !              if(abs(nfqso-f1).le.napwid) ndeep=4
               call osd4_174_91(llr,apmask,ndeep,message77,cw,nharderror,dmin)
             endif
+            if(modern_ft4) then
+              if(nharderror.ge.0)then
+                if(.not.modern174_valid(llr,apmask,cw)) nharderror=-1
+              endif
+              if(nharderror.lt.0 .and. iaptype.eq.0 .and. nmoderntries.lt.3)then
+                nmoderntries=nmoderntries+1
+                call modern174_decode(llr,apmask,.true.,1,modern_message,modern_cw,modern_errors,modern_distance, &
+                  reshape((/llra,llrb,llrc/),(/174,3/)))
+                if(modern_errors.ge.0)then
+                  message77=modern_message;cw=modern_cw;nharderror=modern_errors;dmin=modern_distance
+                endif
+              endif
+            endif
 
             if(sum(message77).eq.0) cycle
             if(nharderror.ge.0) then
               message77=mod(message77+rvec,2) ! remove rvec scrambling
               write(c77,'(77i1)') message77(1:77); read(c77(72:74),'(b3)') n3; read(c77(75:77),'(b3)') i3
               call unpack77(c77,1,message,unpk77_success,1)
-              if(message.eq."") cycle ! being treated as false decode
-              if(unpk77_success.and.dosubtract) then
-                call get_ft4_tones_from_77bits(message77,i4tone)
-                dt=real(ibest)/666.67
-                call subtractft4(i4tone,f1,dt)
+              if(message.eq."") then
+                nharderror=-1
+                cycle
+              endif
+              if(.not.unpk77_success) then
+                nharderror=-1
+                cycle
               endif
 
               lhidemsg=.false.
@@ -324,10 +344,6 @@ contains
                 endif
               endif
 
-              idupe=0
-              do i=1,ndecodes; if(decodes(i).eq.message) idupe=1; enddo
-              if(idupe.eq.1) exit
-              ndecodes=ndecodes+1; decodes(ndecodes)=message
               if(snr.gt.0.0) then; xsnr=10*log10(snr)-14.8; else; xsnr=-21.0; endif
               nsnr=nint(max(-21.0,xsnr))
               xdt=ibest/666.67 - 0.5
@@ -339,11 +355,19 @@ contains
                 ispc3=index(message((ispc2+1):),' ')+ispc2
                 call_a=''; call_b=''; call_a=message(ispc1+1:ispc2-1); call_b=message(ispc2+1:ispc3-1)
                 falsedec=.false.; call chkflscall(call_a,call_b,falsedec)
-                if(falsedec) then; message=''; cycle; endif
+                if(falsedec) then
+                  message=''
+                  nharderror=-1
+                  cycle
+                endif
               endif
               if(iaptype.eq.1 .and. xsnr.lt.-15.) then
                 nbadcrc=0; call chkfalse8(message,i3,n3,nbadcrc,iaptype,.false.)
-                if(nbadcrc.eq.1) then; message=''; cycle; endif
+                if(nbadcrc.eq.1) then
+                  message=''
+                  nharderror=-1
+                  cycle
+                endif
               endif
 ! EA1AHY M83WN/R R QA79   *
 ! MS8QQS UX3QBS/P R NG63  i3=2 n3=7
@@ -372,11 +396,26 @@ contains
                     call_b=message(ispc1+1:ispc2-1)
                   endif
                   falsedec=.false.; call chkflscall(call_a,call_b,falsedec)
-                  if(falsedec) then; nbadcrc=1; message=''; return; endif
+                  if(falsedec) then
+                    nbadcrc=1; message=''
+                    nharderror=-1;cycle
+                  endif
                 endif
               endif
 !write(21,'(i6.6,i5,2x,f4.1,i6,2x,a37,2x,f4.1,3i3,f5.1,i4,i4,i4)') &
 !  nutc,nsnr,xdt,nint(f1),message,smax,iaptype,ipass,isp,dmin,nsync_qual,nharderror,iseg
+              ! Do not poison cancellation or the duplicate list with a
+              ! candidate that subsequently fails message/false-decode checks.
+              idupe=0
+              do i=1,ndecodes; if(decodes(i).eq.message) idupe=1; enddo
+              if(idupe.eq.1) exit
+              if(ndecodes.ge.size(decodes)) return
+              ndecodes=ndecodes+1;decodes(ndecodes)=message
+              if(dosubtract)then
+                call get_ft4_tones_from_77bits(message77,i4tone)
+                dt=real(ibest)/666.67
+                call subtractft4(i4tone,f1,dt)
+              endif
               if(i3.eq.0 .and. n3.eq.1) then ! special DXpedition msg
                 call msgparser(message,msg37_2)
                 servis4="1"

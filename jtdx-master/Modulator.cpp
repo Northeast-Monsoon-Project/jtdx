@@ -8,6 +8,7 @@
 #include <QRandomGenerator>
 #endif
 #include <QDebug>
+#include <QtEndian>
 #include "mainwindow.h"
 #include "soundout.h"
 #include "commons.h"
@@ -47,7 +48,7 @@ Modulator::Modulator (unsigned frameRate, double periodLengthInSeconds, JTDXDate
 void Modulator::start (unsigned symbolsLength, double framesPerSymbol,
                        double frequency, double toneSpacing,
                        SoundOutput * stream, Channel channel,
-                       bool synchronize, double dBSNR, double TRperiod)
+                       bool synchronize, double dBSNR, double TRperiod, quint64 generation)
 {
   QThread::currentThread()->setPriority(QThread::HighPriority);
   Q_ASSERT (stream);
@@ -62,6 +63,8 @@ void Modulator::start (unsigned symbolsLength, double framesPerSymbol,
 //  qDebug() << "ModStart" << m_jtdxtime->currentDateTimeUtc().toString("hh:mm:ss.sss");
   unsigned mstr = ms0 % int(1000.0*m_period); // ms into the nominal Tx start time
   if (m_state != Idle) stop ();
+  m_pcmMode=false;m_pcm.clear();m_waveformConsumed=false;m_waveformStarted=false;
+  m_waveformGeneration=generation;
   m_quickClose = false;
   m_symbolsLength = symbolsLength;
   m_isym0 = std::numeric_limits<unsigned>::max (); // big number
@@ -75,7 +78,7 @@ void Modulator::start (unsigned symbolsLength, double framesPerSymbol,
   m_TRperiod=TRperiod;
   unsigned delay_ms=1000;
   if(m_nsps==1920) delay_ms=500;   //FT8
-  else if(m_nsps==576) {
+  else if(m_nsps==576 || m_nsps==288) {
     delay_ms=500;   //FT4
   }
   // noise generator parameters
@@ -108,7 +111,7 @@ void Modulator::start (unsigned symbolsLength, double framesPerSymbol,
   Q_EMIT stateChanged ((m_state = (synchronize && m_silentFrames) ?
                         Synchronizing : Active));
   m_stream = stream;
-  if (m_stream) m_stream->restart (this);
+  if (m_stream) m_stream->restart (this, m_waveformGeneration);
 }
 
 void Modulator::tune (bool newState)
@@ -129,8 +132,19 @@ void Modulator::stop (bool quick)
   close ();
 }
 
+void Modulator::startPcm(QByteArray pcm,SoundOutput* stream,Channel channel,quint64 generation)
+{
+  stop(true);
+  if(!stream || pcm.isEmpty() || pcm.size()%2)return;
+  m_pcm=std::move(pcm);m_pcmOffset=0;m_pcmMode=true;m_quickClose=false;m_tuning=false;
+  m_waveformGeneration=generation;
+  initialize(QIODevice::ReadOnly,channel);m_stream=stream;
+  Q_EMIT stateChanged((m_state=Active));m_stream->restart(this, m_waveformGeneration);
+}
+
 void Modulator::close ()
 {
+  m_waveformConsumed=false;m_waveformStarted=false;
   if(m_stream) {
     if(m_quickClose) { m_stream->reset (); }
     else { m_stream->stop (); }
@@ -141,6 +155,25 @@ void Modulator::close ()
 
 qint64 Modulator::readData (char * data, qint64 maxSize)
 {
+  if(m_pcmMode) {
+    auto count=qMin<qint64>(maxSize/bytesPerFrame(),(m_pcm.size()-m_pcmOffset)/2);
+    auto out=reinterpret_cast<qint16*>(data);
+    bool audio=false;
+    for(qint64 i=0;i<count;++i) {
+      auto sample=qFromLittleEndian<qint16>(reinterpret_cast<uchar const*>(m_pcm.constData()+m_pcmOffset));
+      audio=audio || sample!=0;
+      out=load(sample,out);m_pcmOffset+=2;
+    }
+    if(audio && !m_waveformStarted && m_state!=Idle) {m_waveformStarted=true;Q_EMIT waveformStarted(m_waveformGeneration);}
+    if(m_pcmOffset==m_pcm.size() && m_state!=Idle) {
+      m_state=Idle;
+      if(m_stream)m_stream->sourceExhausted(m_waveformGeneration);
+      m_waveformConsumed=true;
+      Q_EMIT waveformConsumed(m_waveformGeneration);
+      Q_EMIT pcmConsumed();Q_EMIT stateChanged(Idle);
+    }
+    return count*bytesPerFrame();
+  }
   double toneFrequency=1500.0;
   if(m_nsps==6) {
     toneFrequency=1000.0;
@@ -214,6 +247,7 @@ qint64 Modulator::readData (char * data, qint64 maxSize)
               debugFilePrintf(pFile,"%s(%0.1f) Modulator Idle1 %lld frames generated\n",m_jtdxtime->currentDateTimeUtc2().toString("hh:mm:ss.zzz").toStdString().c_str(),m_jtdxtime->GetOffset(),framesGenerated);
               debugFileClose(pFile);
 #endif
+              if(!m_waveformConsumed) {m_waveformConsumed=true;Q_EMIT waveformConsumed(m_waveformGeneration);}
               Q_EMIT stateChanged ((m_state = Idle));
               return framesGenerated * bytesPerFrame ();
             }
@@ -239,7 +273,7 @@ qint64 Modulator::readData (char * data, qint64 maxSize)
         }
 
         sample=0;
-        for (unsigned i = 0; i < numFrames && m_ic <= i1; ++i) {
+        for (unsigned i = 0; i < numFrames && m_ic < i1; ++i) {
           if(m_TRperiod > 16.0 || m_tuning) {
             isym=0;
             if(!m_tuning) isym=m_ic / (4.0 * m_nsps);         //Actual fsample=48000
@@ -289,6 +323,16 @@ qint64 Modulator::readData (char * data, qint64 maxSize)
           ++framesGenerated; ++m_ic;
         }
 
+        if(!m_tuning && framesGenerated && !m_waveformStarted) {
+          m_waveformStarted=true;Q_EMIT waveformStarted(m_waveformGeneration);
+        }
+        // i1 is a frame count, not the last valid wave[]/tone index. Keep
+        // padding silence below, but distinguish source exhaustion from a
+        // user stop or an audio error. The receiver must still wait for the
+        // normal transmit window and the sequencer's PTT tail to finish.
+        if(!m_tuning && framesGenerated && m_ic>=i1 && icw[0]==0 && !m_waveformConsumed) {
+          m_waveformConsumed=true;Q_EMIT waveformConsumed(m_waveformGeneration);
+        }
         if (m_amp == 0.0) { // TODO G4WJS: compare double with zero might not be wise
           if (icw[0] == 0) {
             // no CW ID to send

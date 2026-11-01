@@ -1,0 +1,22 @@
+JTDX-F WSPR implementation provenance (V3.7.0)
+
+Source: WSJT-X, https://github.com/WSJTX/wsjtx
+Base decoder: v3.0.2, ccdfaf3c1c109010d15399674ce278167cfde848
+Message utility update: v3.3.0-beta5,
+  d89fe30ca1dfd3c38def8f17228f09f042829f95
+License: GNU GPL v3 or later; see COPYING and individual source headers.
+Upstream authors retain copyright; Fluxmancer integration changes, 2026.
+
+V3.7.0 imports wsprd_utils.c/.h from beta5, adapting the existing wsprd.c
+hash-file loader to use the shared bounded parser. This rejects reserved
+message type 63 and invalid suffixes whose values previously wrapped in
+a char, and bounds message formatting and hash-line token parsing.
+tests/WsprUnpack.c derives from the same commit's test_wsprd_utils.c,
+with JTDX-F negative-input/corrupt-hash-slot regressions added.
+
+Local protections retained: negative grid validation, longitude wrapping,
+nonterminated/oversized type-3 hash-slot handling, WAV/C2 length and header
+checks, bounded hash storage, Fano limits and simulation input validation.
+The full decoder, candidate search and FEC have not been replaced wholesale
+with beta5; see docs/WSPR升级与审计_V3.6.0.txt for the earlier core upgrade.
+No WSPR wire format or working-frequency policy is changed.

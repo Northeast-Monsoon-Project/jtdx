@@ -106,7 +106,7 @@ public:
   //
   enum class BextVersion : quint16 {v_0, v_1, v_2};
   BextVersion bext_version () const;
-  void bext_version (BextVersion = BextVersion::v_2);
+  void bext_version (BextVersion);
 
   QByteArray bext_description () const;
   void bext_description (QByteArray const&); // max 256 bytes

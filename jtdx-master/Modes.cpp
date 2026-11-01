@@ -18,7 +18,12 @@ namespace
     "T10",
     "FT8",
     "FT4",
-    "WSPR"
+    "WSPR",
+    "FT2",
+    "JTTY",
+    "Q65",
+    "Echo",
+    "MSK144"
   };
 }
 

@@ -3,6 +3,9 @@
 
 #include "adif.h"
 #include "../OperatorLog.hpp"
+#include "../Bands.hpp"
+#include <cmath>
+#include <limits>
 #include <QSet>
 #include "../Radio.hpp"
 #include <QFile>
@@ -113,6 +116,7 @@ void ADIF::load(const QString mycall,const QString mygrid,const QString mydate)
                 QSO q;
                 q.call = fields.value("CALL").trimmed().toUpper();
                 q.band = fields.value("BAND").trimmed().toLower();
+                if(q.band=="2200m")q.band="2190m"; // Legacy JTDX alias.
                 if(q.band.isEmpty()) q.band=bandFromFrequency(fields.value("FREQ").toDouble());
                 q.mode = fields.value("MODE").toUpper();
                 if (q.mode == "MFSK") q.mode = fields.value("SUBMODE").toUpper();
@@ -127,10 +131,11 @@ void ADIF::load(const QString mycall,const QString mygrid,const QString mydate)
                     _callsbandWorked.insert(q.call+q.band,_callsbandWorked.value(q.call+q.band,0)+1);
                     _callsmodeWorked.insert(q.call+q.mode,_callsmodeWorked.value(q.call+q.mode,0)+1);
                     _callsbandmodeWorked.insert(q.call+q.band+q.mode,_callsbandmodeWorked.value(q.call+q.band+q.mode,0)+1);
-                    _pxsWorked.insert(Radio::striped_prefix(Radio::effective_prefix(q.call)), _pxsWorked.value(Radio::striped_prefix(Radio::effective_prefix(q.call)),0)+1);
-                    _pxsbandWorked.insert(Radio::striped_prefix(Radio::effective_prefix(q.call))+q.band, _pxsbandWorked.value(Radio::striped_prefix(Radio::effective_prefix(q.call))+q.band,0)+1);
-                    _pxsmodeWorked.insert(Radio::striped_prefix(Radio::effective_prefix(q.call))+q.mode, _pxsmodeWorked.value(Radio::striped_prefix(Radio::effective_prefix(q.call))+q.mode,0)+1);
-                    _pxsbandmodeWorked.insert(Radio::striped_prefix(Radio::effective_prefix(q.call))+q.band+q.mode, _pxsbandmodeWorked.value(Radio::striped_prefix(Radio::effective_prefix(q.call))+q.band+q.mode,0)+1);
+                    auto prefix=Radio::striped_prefix(Radio::effective_prefix(q.call));
+                    _pxsWorked.insert(prefix, _pxsWorked.value(prefix,0)+1);
+                    _pxsbandWorked.insert(prefix+q.band, _pxsbandWorked.value(prefix+q.band,0)+1);
+                    _pxsmodeWorked.insert(prefix+q.mode, _pxsmodeWorked.value(prefix+q.mode,0)+1);
+                    _pxsbandmodeWorked.insert(prefix+q.band+q.mode, _pxsbandmodeWorked.value(prefix+q.band+q.mode,0)+1);
                     _counts.insert(q.mode,_counts.value(q.mode,0)+1);
                     QString country = _countries.find(q.call);
                     if (!country.isEmpty ()) { //  country was found
@@ -189,7 +194,8 @@ void ADIF::add(const QString call, const QString band, const QString mode, const
 {
     QSO q;
     q.call = call;
-    q.band = band;
+    q.band = band.trimmed().toLower();
+    if(q.band=="2200m")q.band="2190m";
     q.mode = mode;
     q.date = date;
     q.gridsquare = gridsquare;
@@ -338,19 +344,19 @@ int ADIF::getCount(const QString mode)
 
 // open ADIF file and append the QSO details. Return true on success
 bool ADIF::addQSOToFile(const QString hisCall, const QString hisGrid, const QString mode, const QString rptSent, const QString rptRcvd, QDateTime const& dateTimeOn, QDateTime const& dateTimeOff, const QString band,
-                        const QString comments, const QString name, const QString strDialFreq, const QString m_myCall, const QString m_myGrid, const QString m_txPower,const bool send_to_eqsl)
+                        const QString comments, const QString name, const QString strDialFreq, const QString m_myCall, const QString m_myGrid, const QString m_txPower,const bool send_to_eqsl, QMap<QString,QString> const& propagation)
 {
         QString t;
         t="<call:" + QString::number(hisCall.length()) + ">" + hisCall;
         t+=" <gridsquare:" + QString::number(hisGrid.length()) + ">" + hisGrid;
-        if (mode == "FT4") t+=" <mode:4>MFSK <submode:" + QString::number(mode.length()) + ">" + mode;
+        if (mode == "FT4" || mode=="FT2" || mode=="JTTY" || mode=="Q65") t+=" <mode:4>MFSK <submode:" + QString::number(mode.length()) + ">" + mode;
         else t+=" <mode:" + QString::number(mode.length()) + ">" + mode;
         t+=" <rst_sent:" + QString::number(rptSent.length()) + ">" + rptSent;
         t+=" <rst_rcvd:" + QString::number(rptRcvd.length()) + ">" + rptRcvd;
-        t+=" <qso_date:8>" + dateTimeOn.date ().toString ("yyyyMMdd");
-        t+=" <time_on:6>" + dateTimeOn.time ().toString ("hhmmss");
-        t+=" <qso_date_off:8>" + dateTimeOff.date ().toString ("yyyyMMdd");
-        t+=" <time_off:6>" + dateTimeOff.time ().toString ("hhmmss");
+        t+=" <qso_date:8>" + dateTimeOn.toUTC().date ().toString ("yyyyMMdd");
+        t+=" <time_on:6>" + dateTimeOn.toUTC().time ().toString ("hhmmss");
+        t+=" <qso_date_off:8>" + dateTimeOff.toUTC().date ().toString ("yyyyMMdd");
+        t+=" <time_off:6>" + dateTimeOff.toUTC().time ().toString ("hhmmss");
         t+=" <band:" + QString::number(band.length()) + ">" + band;
         t+=" <freq:" + QString::number(strDialFreq.length()) + ">" + strDialFreq;
         t+=" <station_callsign:" + QString::number(m_myCall.length()) + ">" +
@@ -364,38 +370,18 @@ bool ADIF::addQSOToFile(const QString hisCall, const QString hisGrid, const QStr
         if(!name.isEmpty ()) t+=" <name:" + QString::number(name.length()) +
                 ">" + name;
         if (send_to_eqsl) t+=" <eqsl_qsl_sent:1>Y";
+        for(auto it=propagation.cbegin();it!=propagation.cend();++it)
+            if(QStringList{"PROP_MODE","SAT_NAME","SAT_MODE","FREQ_RX","BAND_RX"}.contains(it.key()) && !it.value().isEmpty())
+                t+=" <"+it.key()+":"+QString::number(it.value().size())+">"+it.value();
         t+=" <eor>";
         return OperatorLog::append(_filename,t+"\n");
 }
 
 QString ADIF::bandFromFrequency(double dialFreq)
 {
-    QString band="";
-    if(dialFreq>0.135 and dialFreq<0.139) band="2200m";
-    else if(dialFreq>0.45 and dialFreq<0.55) band="630m";
-    else if(dialFreq>1.8 and dialFreq<2.0) band="160m";
-    else if(dialFreq>3.5 and dialFreq<4.0) band="80m";
-    else if(dialFreq>5.1 and dialFreq<5.45) band="60m";
-    else if(dialFreq>7.0 and dialFreq<7.3) band="40m";
-    else if(dialFreq>10.0 and dialFreq<10.15) band="30m";
-    else if(dialFreq>14.0 and dialFreq<14.35) band="20m";
-    else if(dialFreq>18.068 and dialFreq<18.168) band="17m";
-    else if(dialFreq>21.0 and dialFreq<21.45) band="15m";
-    else if(dialFreq>24.890 and dialFreq<24.990) band="12m";
-    else if(dialFreq>28.0 and dialFreq<29.7) band="10m";
-    else if(dialFreq>50.0 and dialFreq<54.0) band="6m";
-    else if(dialFreq>70.0 and dialFreq<71.0) band="4m";
-    else if(dialFreq>144.0 and dialFreq<148.0) band="2m";
-    else if(dialFreq>222.0 and dialFreq<225.0) band="1.25m";
-    else if(dialFreq>420.0 and dialFreq<450.0) band="70cm";
-    else if(dialFreq>902.0 and dialFreq<928.0) band="33cm";
-    else if(dialFreq>1240.0 and dialFreq<1300.0) band="23cm";
-    else if(dialFreq>2300.0 and dialFreq<2450.0) band="13cm";
-    else if(dialFreq>3300.0 and dialFreq<3500.0) band="9cm";
-    else if(dialFreq>5650.0 and dialFreq<5925.0) band="6cm";
-    else if(dialFreq>10000.0 and dialFreq<10500.0) band="3cm";
-    else if(dialFreq>24000.0 and dialFreq<24250.0) band="1.25cm";
-    else if(dialFreq>47000.0 and dialFreq<47200.0) band="6mm";
-    else if(dialFreq>75500.0 and dialFreq<81000.0) band="4mm";
-    return band;
+    // Use the same complete, inclusive band table as the selector. An absent
+    // band was previously interpreted as an all-band match by the log index.
+    double hz=dialFreq*1.e6;
+    if(!std::isfinite(hz) || hz<=0 || hz>=double(std::numeric_limits<qint64>::max()))return {};
+    return Bands::findBand(quint64(qRound64(hz)));
 }

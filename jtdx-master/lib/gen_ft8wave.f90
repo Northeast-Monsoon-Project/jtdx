@@ -8,11 +8,15 @@ subroutine gen_ft8wave(itone,nsym,nsps,bt,fsample,f0,cwave,wave,icmplx,nwave)
   real pulse(23040)
   real dphi(0:(nsym+2)*nsps-1)
   integer itone(nsym)
-  data ibt0/0/
-  save pulse,twopi,dt,hmod,ibt0,ctab
+  integer last_nsps
+  real last_bt,last_fsample
+  data last_nsps/0/,last_bt/-1.0/,last_fsample/0.0/
+  save pulse,twopi,dt,hmod,last_nsps,last_bt,last_fsample,ctab
+! Each decoder thread owns its cache. WSJT-X 3.0.2 invalidates this cache
+! when waveform parameters change; compare the actual tuple, not its sum.
+!$omp threadprivate(pulse,twopi,dt,hmod,last_nsps,last_bt,last_fsample,ctab)
 
-  ibt=nint(10*bt)
-  if(ibt0.ne.ibt) then
+  if(nsps.ne.last_nsps .or. bt.ne.last_bt .or. fsample.ne.last_fsample) then
      twopi=8.0*atan(1.0)
      dt=1.0/fsample
      hmod=1.0
@@ -21,11 +25,13 @@ subroutine gen_ft8wave(itone,nsym,nsps,bt,fsample,f0,cwave,wave,icmplx,nwave)
         tt=(i-1.5*nsps)/real(nsps)
         pulse(i)=gfsk_pulse(bt,tt)
      enddo
-     ibt0=nint(10*bt)
      do i=0,NTAB-1
         phi=i*twopi/NTAB
         ctab(i)=cmplx(cos(phi),sin(phi))
      enddo
+     last_nsps=nsps
+     last_bt=bt
+     last_fsample=fsample
   endif
 
 ! Compute the smoothed frequency waveform.

@@ -108,6 +108,8 @@ typedef struct dec_data {
     bool lforcesync;
     bool learlystart;
     int nsftol; // 0 disables SuperFox receive; otherwise sync tolerance in Hz
+    int nmodernft8; // Opt-in posterior-assisted decoding; 0 preserves legacy path.
+    int nmodernft4;
     } params;
 } dec_data_t;
 

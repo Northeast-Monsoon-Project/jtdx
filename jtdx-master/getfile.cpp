@@ -173,7 +173,7 @@ int ptt(int nport, int ntx, int* iptt, int* nopen)
 {
 #ifdef WIN32
   static HANDLE hFile;
-  char s[10];
+  char s[32];
   int i3=1,i4=1,i5=1,i6=1,i9=1,i00=1;  //Defs to silence compiler warning
 
   if(nport==0) {
@@ -182,7 +182,7 @@ int ptt(int nport, int ntx, int* iptt, int* nopen)
   }
 
   if(ntx && (!(*nopen))) {
-    sprintf(s,"\\\\.\\COM%d",nport);
+    snprintf(s,sizeof(s),"\\\\.\\COM%d",nport);
     hFile=CreateFile(TEXT(s),GENERIC_WRITE,0,NULL,OPEN_EXISTING,
                      FILE_ATTRIBUTE_NORMAL,NULL);
     if(hFile==INVALID_HANDLE_VALUE) {

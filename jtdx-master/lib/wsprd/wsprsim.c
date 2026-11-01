@@ -9,6 +9,14 @@
 #include "wsprsim_utils.h"
 #include "wsprd_utils.h"
 #include "fano.h"
+static void *fm_checked_malloc(size_t size) {
+    void *p=malloc(size);
+    if(!p){fputs("WSPR: out of memory\n",stderr);exit(EXIT_FAILURE);}
+    return p;
+}
+
+
+
 
 int printdata=0;
 
@@ -102,9 +110,15 @@ unsigned long writec2file(char *c2filename, int trmin, double freq
         fprintf(stderr, "Could not open c2 file '%s'\n", c2filename);
         return 0;
     }
-    unsigned long nwrite = fwrite(c2filename,sizeof(char),14,fp);
-    nwrite = fwrite(&trmin, sizeof(int), 1, fp);
-    nwrite = fwrite(&freq, sizeof(double), 1, fp);
+    char header_name[14]={0};
+    const char *base=c2filename;
+    for(const char *p=c2filename;*p;++p)if(*p=='/' || *p=='\\')base=p+1;
+    memcpy(header_name,base,strlen(base)<sizeof header_name?strlen(base):sizeof header_name);
+    if(fwrite(header_name,1,sizeof header_name,fp)!=sizeof header_name ||
+       fwrite(&trmin,sizeof trmin,1,fp)!=1 || fwrite(&freq,sizeof freq,1,fp)!=1) {
+        fclose(fp);return 0;
+    }
+    unsigned long nwrite;
     
     for(i=0; i<45000; i++) {
         buffer[2*i]=idat[i];
@@ -112,6 +126,7 @@ unsigned long writec2file(char *c2filename, int trmin, double freq
     }
     
     nwrite = fwrite(buffer, sizeof(float), 2*45000, fp);
+    if(fclose(fp)!=0)return 0;
     if( nwrite == 2*45000 ) {
         return nwrite;
     } else {
@@ -129,16 +144,16 @@ int main(int argc, char *argv[])
     float snr=50.0;
     float f0=0.0, t0=1.0;
     char *message, *c2filename, *hashtab, *loctab;
-    c2filename=malloc(sizeof(char)*15);
-    hashtab=malloc(sizeof(char)*32768*13);
-    loctab=malloc(sizeof(char)*32768*5);
+    c2filename="000000_0001.c2";
+    hashtab=fm_checked_malloc(sizeof(char)*32768*13);
+    loctab=fm_checked_malloc(sizeof(char)*32768*5);
     memset(hashtab,0,sizeof(char)*32768*13);
     memset(loctab,0,sizeof(char)*32768*5);
 
     // message length is 22 characters
-    message=malloc(sizeof(char)*23);
+    message=NULL;
     
-    strcpy(c2filename,"000000_0001.c2");
+
 
     srand(getpid());
 
@@ -165,14 +180,16 @@ int main(int argc, char *argv[])
     }
     
     if( optind+1 > argc ) {
-        usage();
+        usage();free(hashtab);free(loctab);
         return 0;
     } else {
         message=argv[optind];
     }
     
     unsigned char channel_symbols[162];
-    get_wspr_channel_symbols(message, hashtab, loctab, channel_symbols);
+    if(!get_wspr_channel_symbols(message,hashtab,loctab,channel_symbols)) {
+        fputs("Invalid WSPR message\n",stderr);free(hashtab);free(loctab);return 2;
+    }
     
     if( printchannel ) {
         printf("Channel symbols:\n");
@@ -206,7 +223,7 @@ int main(int argc, char *argv[])
         double carrierfreq=10.1387;
         int wsprtype=2;
         printf("Writing %s\n",c2filename);
-        writec2file(c2filename, wsprtype, carrierfreq, isig, qsig);
+        if(!writec2file(c2filename,wsprtype,carrierfreq,isig,qsig)) {free(hashtab);free(loctab);return 3;}
     }
-    return 1;
+    free(hashtab);free(loctab);return 0;
 }

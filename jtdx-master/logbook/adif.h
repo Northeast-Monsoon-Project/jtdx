@@ -16,6 +16,7 @@
 #include <QString>
 #include <QStringList>
 #include <QMultiHash>
+#include <QMap>
 #else
 #include <QtGui>
 #endif
@@ -43,7 +44,7 @@ class ADIF
 
         // open ADIF file and append the QSO details. Return true on success
         bool addQSOToFile(const QString hisCall, const QString hisGrid, const QString mode, const QString rptSent, const QString rptRcvd, QDateTime const& dateTimeOn, QDateTime const& dateTimeOff, const QString band,
-                                const QString comments, const QString name, const QString strDialFreq, const QString m_myCall, const QString m_myGrid, const QString m_txPower,const bool send_to_eqsl);
+                                const QString comments, const QString name, const QString strDialFreq, const QString m_myCall, const QString m_myGrid, const QString m_txPower,const bool send_to_eqsl, QMap<QString,QString> const& propagation = {});
 
         static QString bandFromFrequency(double dialFreq);
 

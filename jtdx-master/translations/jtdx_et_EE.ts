@@ -46,6 +46,43 @@
         <source>OK</source>
         <translation>OK</translation>
     </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>JTDX-F teave</translation>
+    </message>
+    <message>
+        <source>JTDX-F is developed by the Fluxmancer team.&lt;br&gt;Based on JTDX and WSJT-X; upstream credits and GPLv3 are preserved.&lt;br&gt;&lt;br&gt;</source>
+        <translation>JTDX-F-i arendab Fluxmanceri meeskond.&lt;br&gt;Aluseks on JTDX ja WSJT-X; autorite tunnustus ja GPLv3 litsents on säilitatud.&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>JTDX-F is licensed under GNU GPLv3, without warranty.</source>
+        <translation>JTDX-F on litsentsitud GNU GPLv3 alusel, ilma garantiita.</translation>
+    </message>
+    <message>
+        <source>FT2 / SuperFox: additional integrations; source revisions are documented with the source code.</source>
+        <translation>FT2 / SuperFox: lisaintegratsioonid; lähtekoodi revisjonid on dokumenteeritud koodi juures.</translation>
+    </message>
+    <message>
+        <source>FT8 / FT4: JTDX decoders, WSJT-X 3.0.2 protocol/waveforms, selected 3.3.0-beta5 performance/concurrency fixes, and Fluxmancer modern decoding.</source>
+        <translation>FT8 / FT4: JTDX-i dekoodrid, WSJT-X 3.0.2 protokoll ja lainekujud, valitud 3.3.0-beta5 jõudluse ja rööptöö parandused ning Fluxmanceri nüüdisaegne dekodeerimine.</translation>
+    </message>
+    <message>
+        <source>Hamlib (radio control): %1</source>
+        <translation>Hamlib (raadio juhtimine): %1</translation>
+    </message>
+    <message>
+        <source>JTDX-F preserves JTDX's heritage and incorporates selected WSJT-X updates. Components retain their respective authors and licenses.</source>
+        <translation>JTDX-F säilitab JTDX-i pärandi ja sisaldab valitud WSJT-X-i uuendusi. Komponentide autorid ja litsentsid säilivad.</translation>
+    </message>
+    <message>
+        <source>Q65 / MSK144 / Echo and astronomical calculations: WSJT-X 3.0.2.</source>
+        <translation>Q65 / MSK144 / Echo ja astronoomilised arvutused: WSJT-X 3.0.2.</translation>
+    </message>
+    <message>
+        <source>WSPR: WSJT-X 3.0.2 decoder with 3.3.0-beta5 message validation and JTDX-F safety fixes.</source>
+        <translation>WSPR: WSJT-X 3.0.2 dekooder koos 3.3.0-beta5 sõnumikontrolli ja JTDX-F-i turvaparandustega.</translation>
+    </message>
+    <message><source>JTTY: WSJT-X 3.3.0-beta5 decoder with Fluxmancer integration.</source><translation>JTTY: WSJT-X 3.3.0-beta5 dekooder, integreeritud Fluxmanceri poolt.</translation></message>
 </context>
 <context>
     <name>CallsignDialog</name>
@@ -57,6 +94,10 @@
 </context>
 <context>
     <name>Configuration::impl</name>
+    <message>
+        <source>Own transmitted message</source>
+        <translation>Enda saadetud sõnum</translation>
+    </message>
     <message>
         <location filename="../Configuration.cpp" line="1372"/>
         <source>&amp;OK</source>
@@ -326,6 +367,64 @@ Vorming:
         <location filename="../Configuration.cpp" line="6028"/>
         <source>Rig failure</source>
         <translation>Raadio viga</translation>
+    </message>
+    <message>
+        <source>Callsign management…</source>
+        <translation>Kutsungite haldus…</translation>
+    </message>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Sisesta kehtiv NTP serveri nimi või IP-aadress.</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Automaatrežiim</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization</source>
+        <translation>NTP ajasünkroonimine</translation>
+    </message>
+    <message>
+        <source>Current version: %1
+Previous version: %2</source>
+        <translation>Praegune versioon: %1
+Eelmine versioon: %2</translation>
+    </message>
+    <message>
+        <source>Halt Tx when SWR &gt; 2.5</source>
+        <translation>Peata TX, kui SWR &gt; 2,5</translation>
+    </message>
+    <message>
+        <source>Hamlib updates</source>
+        <translation>Hamlibi uuendused</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Välja lülitatud</translation>
+    </message>
+    <message>
+        <source>Restart application</source>
+        <translation>Taaskäivita rakendus</translation>
+    </message>
+    <message>
+        <source>Restore previous Hamlib</source>
+        <translation>Taasta eelmine Hamlib</translation>
+    </message>
+    <message>
+        <source>Stop transmission when a supported CAT radio reports SWR above 2.5. Unknown or unsupported readings are shown as unavailable. Protection also polls SWR when power display is off.</source>
+        <translation>Peata saade, kui toetatud CAT-raadio teatab SWR-ist üle 2,5. Tundmatud või toetamata näidud kuvatakse puuduvatena. Kaitse küsib SWR-i ka väljalülitatud võimsusnäiduga.</translation>
+    </message>
+    <message>
+        <source>Update Hamlib</source>
+        <translation>Uuenda Hamlibi</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready to restore. Restart the application to apply it.</source>
+        <translation>Versioon %1 on taastamiseks valmis. Rakendamiseks taaskäivita rakendus.</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready. Restart the application to apply it.</source>
+        <translation>Versioon %1 on valmis. Rakendamiseks taaskäivita rakendus.</translation>
     </message>
 </context>
 <context>
@@ -2502,6 +2601,18 @@ Viga: %2 - %3</translation>
         <source>Ham Radio Deluxe didn&apos;t respond to command &quot;%1&quot; as expected</source>
         <translation>Ham Radio Deluxe ei vastanud käsule &quot;%1&quot; ootuspäraselt</translation>
     </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid frequency list</source>
+        <translation>Ham Radio Deluxe saatis vigase sageduste loendi</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid or incomplete reply</source>
+        <translation>Ham Radio Deluxe saatis vigase või puuduliku vastuse</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid radio list</source>
+        <translation>Ham Radio Deluxe saatis vigase raadiote loendi</translation>
+    </message>
 </context>
 <context>
     <name>HamlibTransceiver</name>
@@ -2973,6 +3084,46 @@ Viga: %2 - %3</translation>
         <location filename="../logqso.cpp" line="222"/>
         <source>Cannot open &quot;%1&quot; for append: %2</source>
         <translation>Ei avane &quot;%1&quot; lisamiseks: %2</translation>
+    </message>
+    <message>
+        <source>Earth–Moon–Earth</source>
+        <translation>Maa–Kuu–Maa</translation>
+    </message>
+    <message>
+        <source>Meteor scatter</source>
+        <translation>Meteorhajumine</translation>
+    </message>
+    <message>
+        <source>Propagation</source>
+        <translation>Levimine</translation>
+    </message>
+    <message>
+        <source>Receive frequency</source>
+        <translation>Vastuvõtusagedus</translation>
+    </message>
+    <message>
+        <source>Remember propagation and satellite</source>
+        <translation>Jäta leviviis ja satelliit meelde</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satelliit</translation>
+    </message>
+    <message>
+        <source>Satellite mode</source>
+        <translation>Satelliidirežiim</translation>
+    </message>
+    <message>
+        <source>Satellite name</source>
+        <translation>Satelliidi nimi</translation>
+    </message>
+    <message>
+        <source>Tropospheric</source>
+        <translation>Troposfääriline</translation>
+    </message>
+    <message>
+        <source>Unspecified</source>
+        <translation>Määramata</translation>
     </message>
 </context>
 <context>
@@ -5345,6 +5496,310 @@ UDP server %2:%3</translation>
         <source>WD %1m</source>
         <translation></translation>
     </message>
+    <message>
+        <source>A log import is already running.</source>
+        <translation>Logi import juba käib.</translation>
+    </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>JTDX-F teave</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC-kütt</translation>
+    </message>
+    <message>
+        <source>Decoder error: %1. TX stopped; restarting decoder.</source>
+        <translation>Dekoodri viga: %1. Saade peatatud; dekooder taaskäivitatakse.</translation>
+    </message>
+    <message>
+        <source>Decoder exited (code %1, crash %2)</source>
+        <translation>Dekooder lõpetas töö (kood %1, krahh %2)</translation>
+    </message>
+    <message>
+        <source>Decoder restart failed repeatedly. Check decoder-errors.log and restart JTDX-F.</source>
+        <translation>Dekoodri taaskäivitamine ebaõnnestus korduvalt. Kontrolli decoder-errors.log faili ja taaskäivita JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Decoder restarted. Enable Monitor to resume reception; TX remains stopped.</source>
+        <translation>Dekooder taaskäivitati. Vastuvõtuks lülita sisse jälgimine; saade jääb peatatud.</translation>
+    </message>
+    <message>
+        <source>Enable TX manually, then Send each message (max. 80 characters).</source>
+        <translation>Luba saade käsitsi, seejärel saada iga sõnum eraldi (kuni 80 märki).</translation>
+    </message>
+    <message>
+        <source>FT2</source>
+        <translation>FT2</translation>
+    </message>
+    <message>
+        <source>JTTY</source>
+        <translation>JTTY</translation>
+    </message>
+    <message>
+        <source>JTTY requires a local audio input and output device.</source>
+        <translation>JTTY vajab kohalikke helisisendi ja -väljundi seadmeid.</translation>
+    </message>
+    <message>
+        <source>JTTY transmission timed out; TX stopped.</source>
+        <translation>JTTY saate ajalimiit ületati; saade peatatud.</translation>
+    </message>
+    <message>
+        <source>Listening…</source>
+        <translation>Kuulamine…</translation>
+    </message>
+    <message>
+        <source>Log import: %1 new, %2 duplicates, %3 originals archived, %4 records from other stations skipped.</source>
+        <translation>Logi import: %1 uut, %2 kordust, %3 algfaili arhiveeritud, %4 teiste jaamade kirjet vahele jäetud.</translation>
+    </message>
+    <message>
+        <source>Log loading failed: %1</source>
+        <translation>Logi laadimine ebaõnnestus: %1</translation>
+    </message>
+    <message>
+        <source>MCP %1</source>
+        <translation>MCP %1</translation>
+    </message>
+    <message>
+        <source>MCP error</source>
+        <translation>MCP viga</translation>
+    </message>
+    <message>
+        <source>MCP off</source>
+        <translation>MCP väljas</translation>
+    </message>
+    <message>
+        <source>MCP settings: File &gt; Settings &gt; MCP</source>
+        <translation>MCP sätted: Fail &gt; Sätted &gt; MCP</translation>
+    </message>
+    <message>
+        <source>MCP: %1</source>
+        <translation>MCP: %1</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Automaatrežiim</translation>
+    </message>
+    <message>
+        <source>Managed mode is listening. Enable TX manually to allow calls and scheduled CQ.</source>
+        <translation>Automaatrežiim kuulab. Kutsete ja ajastatud CQ lubamiseks lülita saade käsitsi sisse.</translation>
+    </message>
+    <message>
+        <source>Managed mode is off.</source>
+        <translation>Automaatrežiim on väljas.</translation>
+    </message>
+    <message>
+        <source>Modern algorithm decoding</source>
+        <translation>Kaasaegse algoritmiga dekodeerimine</translation>
+    </message>
+    <message>
+        <source>My callsign</source>
+        <translation>Minu kutsung</translation>
+    </message>
+    <message>
+        <source>No decoder completion within the timeout</source>
+        <translation>Dekooder ei lõpetanud töö ajalimiidi piires</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>Väljas</translation>
+    </message>
+    <message>
+        <source>Previous audio file is still being saved; this interval was skipped.</source>
+        <translation>Eelmist helifaili alles salvestatakse; see intervall jäeti vahele.</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast</source>
+        <translation>QSO-huviline</translation>
+    </message>
+    <message>
+        <source>Receiving</source>
+        <translation>Vastuvõtt</translation>
+    </message>
+    <message>
+        <source>Search around Rx frequency (Hz):</source>
+        <translation>Otsing vastuvõtusageduse ümber (Hz):</translation>
+    </message>
+    <message>
+        <source>Select a callsign before importing logs.</source>
+        <translation>Enne logide importimist vali kutsung.</translation>
+    </message>
+    <message>
+        <source>Select a valid callsign and grid in station settings before enabling TX.</source>
+        <translation>Enne saate lubamist vali jaama sätetes kehtiv kutsung ja lokaator.</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Saada</translation>
+    </message>
+    <message>
+        <source>SuperFox decoding (SuperHound)</source>
+        <translation>SuperFoxi dekodeerimine (SuperHound)</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance</source>
+        <translation>SuperFoxi sagedustolerants</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance...</source>
+        <translation>SuperFoxi sagedustolerants...</translation>
+    </message>
+    <message>
+        <source>SuperHound</source>
+        <translation>SuperHound</translation>
+    </message>
+    <message>
+        <source>TX watchdog expired. Finishing the current QSO before stopping.</source>
+        <translation>Saate valvetaimer aegus. Enne peatumist lõpetatakse käimasolev QSO.</translation>
+    </message>
+    <message>
+        <source>This mode requires local audio devices; TCI audio is unavailable.</source>
+        <translation>See režiim vajab kohalikke heliseadmeid; TCI heli ei ole saadaval.</translation>
+    </message>
+    <message>
+        <source>Transmitting</source>
+        <translation>Saade</translation>
+    </message>
+    <message>
+        <source>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</source>
+        <translation>Kasuta järeltõenäosustel põhinevat dekodeerimist ja kandidaatide lisakontrolli. Väljalülitatult kasutatakse tavapärast dekoodrit. Rakendub järgmisel dekodeerimisel.</translation>
+    </message>
+    <message>
+        <source>WD %1:%2</source>
+        <translation>WD %1:%2</translation>
+    </message>
+    <message>
+        <source>WD finishing QSO</source>
+        <translation>WD: QSO</translation>
+    </message>
+    <message>
+        <source>WD unlimited</source>
+        <translation>WD ∞</translation>
+    </message>
+    <message>
+        <source>The current operator's log is not ready. Check the log files and try again.</source>
+        <translation>Praeguse operaatori logi pole valmis. Kontrolli logifaile ja proovi uuesti.</translation>
+    </message>
+    <message>
+        <source>Blacklist management</source>
+        <translation>Musta nimekirja haldus</translation>
+    </message>
+    <message>
+        <source>CALL</source>
+        <translation>KUTSE</translation>
+    </message>
+    <message>
+        <source>REPORT</source>
+        <translation>RAPORT</translation>
+    </message>
+    <message>
+        <source>This station is blocked, or the permanent blacklist is unavailable.</source>
+        <translation>See jaam on blokeeritud või püsiv must nimekiri pole saadaval.</translation>
+    </message>
+    <message>
+        <source>Confirm switch</source>
+        <translation>Kinnita</translation>
+    </message>
+    <message>
+        <source>Average</source>
+        <translation>Keskmistamine</translation>
+    </message>
+    <message>
+        <source>Clear average</source>
+        <translation>Tühjenda keskmistamine</translation>
+    </message>
+    <message>
+        <source>Click to erase the right window; double-click to erase both.</source>
+        <translation>Klõps tühjendab parema akna; topeltklõps mõlemad.</translation>
+    </message>
+    <message>
+        <source>EME presets</source>
+        <translation>EME eelseaded</translation>
+    </message>
+    <message>
+        <source>Echo: %1 dB; Δf %2 Hz; quality %3; averages %4</source>
+        <translation>Kaja: %1 dB; Δf %2 Hz; kvaliteet %3; keskmistusi %4</translation>
+    </message>
+    <message>
+        <source>Enable TX manually to measure lunar echoes.</source>
+        <translation>Kuu kaja mõõtmiseks luba TX käsitsi.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX.</source>
+        <translation>Luba või peata TX.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX. Right-click for Wait &amp; Reply, Wait &amp; Call or Wait &amp; Pounce. Waiting requires a manually enabled TX session.</source>
+        <translation>Luba või peata TX. Paremklõps: oota ja vasta, kutsu või haara võimalusest. Ootamine nõuab käsitsi lubatud TX-seanssi.</translation>
+    </message>
+    <message>
+        <source>Full duplex</source>
+        <translation>Täisdupleks</translation>
+    </message>
+    <message>
+        <source>Left-click to erase the left window; right-click to erase the right window; double-click to erase both.</source>
+        <translation>Vasakklõps tühjendab vasaku akna, paremklõps parema ja topeltklõps mõlemad.</translation>
+    </message>
+    <message>
+        <source>Period</source>
+        <translation>Periood</translation>
+    </message>
+    <message>
+        <source>SWR %1 exceeds 2.5. TX stopped; enable TX manually after checking the antenna.</source>
+        <translation>SWR %1 ületab 2,5. TX peatati; pärast antenni kontrolli luba TX käsitsi.</translation>
+    </message>
+    <message>
+        <source>Set a valid station grid locator to calculate astronomical data.</source>
+        <translation>Astronoomilisteks arvutusteks määra kehtiv jaama lokaator.</translation>
+    </message>
+    <message>
+        <source>Stopped</source>
+        <translation>Lõpetatud</translation>
+    </message>
+    <message>
+        <source>The transmit slot was missed; enable TX again.</source>
+        <translation>Saateajakamber jäi vahele; luba TX uuesti.</translation>
+    </message>
+    <message>
+        <source>Transmission timed out; TX stopped.</source>
+        <translation>Saatmise aeg sai täis; TX peatati.</translation>
+    </message>
+    <message>
+        <source>VHF / EME</source>
+        <translation>VHF / EME</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Call</source>
+        <translation>Oota ja kutsu</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Pounce</source>
+        <translation>Oota ja haara võimalusest</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Reply</source>
+        <translation>Oota ja vasta</translation>
+    </message>
+    <message>
+        <source>Waiting is selected. Click Enable TX to authorize transmission; Stop cancels waiting.</source>
+        <translation>Ootamine on valitud. Saate lubamiseks klõpsa Luba TX; Peata tühistab ootamise.</translation>
+    </message>
+    <message>
+        <source>Waiting matched %1; continuing the manually enabled TX session.</source>
+        <translation>Ootetingimus täitus jaamaga %1; käsitsi lubatud TX-seanss jätkub.</translation>
+    </message>
+    <message>
+        <source>Waiting timed out; TX stopped.</source>
+        <translation>Ooteaeg sai täis; TX peatati.</translation>
+    </message>
+    <message>
+        <source>%1 is replying to another station; waiting for its CQ or final message.</source>
+        <translation>%1 vastab teisele jaamale; oodatakse tema CQ-d või lõppsõnumit.</translation>
+    </message>
+    <message>
+        <source>%1 is available; continuing the manually enabled TX session.</source>
+        <translation>%1 on vaba; käsitsi lubatud TX-seanss jätkub.</translation>
+    </message>
 </context>
 <context>
     <name>Modes</name>
@@ -5657,6 +6112,58 @@ Palun kontrolli kataloogi nime.</translation>
         <location filename="../WFPalette.cpp" line="258"/>
         <source>Error writing waterfall palette file &quot;%1&quot;: %2.</source>
         <translation>Viga jugapaleti faili kirjutamisel &quot;%1&quot;: %2.</translation>
+    </message>
+    <message>
+        <source>Cannot create log directory</source>
+        <translation>Logikataloogi ei saa luua</translation>
+    </message>
+    <message>
+        <source>Log files changed while loading. Please retry.</source>
+        <translation>Logifailid muutusid laadimise ajal. Proovi uuesti.</translation>
+    </message>
+    <message>
+        <source>Log is busy. Please retry.</source>
+        <translation>Logi on hõivatud. Proovi uuesti.</translation>
+    </message>
+    <message>
+        <source>Unable to import the log files.</source>
+        <translation>Logifaile ei saa importida.</translation>
+    </message>
+    <message>
+        <source>Unable to read the log files.</source>
+        <translation>Logifaile ei saa lugeda.</translation>
+    </message>
+    <message>
+        <source>Ambiguous QSO identity; log unchanged</source>
+        <translation>QSO identiteet ei ole ühene; logi ei muudetud</translation>
+    </message>
+    <message>
+        <source>Recorded QSO not found; log unchanged</source>
+        <translation>Salvestatud QSO-d ei leitud; logi ei muudetud</translation>
+    </message>
+    <message>
+        <source>Cannot read pending log update</source>
+        <translation>Ootel logiuuendust ei saa lugeda</translation>
+    </message>
+    <message>
+        <source>Invalid pending log update; originals retained</source>
+        <translation>Ootel logiuuendus on vigane; algfailid säilitati</translation>
+    </message>
+    <message>
+        <source>Cannot remove completed log update journal</source>
+        <translation>Lõpetatud logiuuenduse taastefaili ei saa kustutada</translation>
+    </message>
+    <message>
+        <source>QSO identity changed or timestamps are invalid; log unchanged</source>
+        <translation>QSO identiteet on muutunud või ajatemplid on vigased; logi ei muudetud</translation>
+    </message>
+    <message>
+        <source>Cannot revise a symbolic log link</source>
+        <translation>Sümboolse lingi kaudu avatud logi ei saa uuendada</translation>
+    </message>
+    <message>
+        <source>QSO update exceeds the journal size limit</source>
+        <translation>QSO uuendus ületab taastefaili suurusepiirangu</translation>
     </message>
 </context>
 <context>
@@ -6127,6 +6634,14 @@ Error(%2): %3</source>
         <location filename="../TCITransceiver.cpp" line="1740"/>
         <source>TCI modulator not Idle</source>
         <translation>TCI modulaator pole valmis</translation>
+    </message>
+    <message>
+        <source>Invalid TCI audio packet</source>
+        <translation>Vigane TCI helipakett</translation>
+    </message>
+    <message>
+        <source>TCI PCM playback requires an active, explicitly started transmission.</source>
+        <translation>TCI PCM-i esitus nõuab aktiivset, selgesõnaliselt käivitatud saadet.</translation>
     </message>
 </context>
 <context>
@@ -7225,13 +7740,13 @@ both here.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2233"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option is being used for non-overlapping spectra scenario. Tx will be halted if spectra have common frequencies with no respect to this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Seda suvandit kasutatakse kattuva spektri stsenaariumi korral. Tx peatub, kui spektritel on ühised sagedused, ilma et seda seadet arvestataks.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>With AutoSeq enabled, checking this option pauses calls to the selected station while it replies to someone else, keeping Enable TX on. Resume on its CQ, 73, RR73, RRR or a reply to you. When unchecked, do not pause for this reason. Call limits, the TX watchdog and Stop still apply.</source>
+        <translation>Kui AutoSeq on lubatud, peatab see valik valitud jaama kutsumise ajaks, mil ta vastab teisele jaamale; TX jääb lubatuks. Kutsumine jätkub tema CQ, 73, RR73, RRR või teile saadetud vastuse järel. Märkimata valiku korral sel põhjusel ei peatuta. Kutsete arvu piirangud, TX valveajasti ja Stopp kehtivad endiselt.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2236"/>
-        <source>Halt TX if operator I called answered to other operator</source>
-        <translation>Peata TX, kui operaator, keda ma kutsusin, vastas teisele operaatorile</translation>
+        <source>Wait if the called station replies to someone else</source>
+        <translation>Oota, kui kutsutud jaam vastab teisele jaamale</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2243"/>
@@ -8044,8 +8559,8 @@ Right click for insert and delete options.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3846"/>
-        <source>Transmitted message</source>
-        <translation>Saate sõnum</translation>
+        <source>Own transmitted message</source>
+        <translation>Enda saadetud sõnum</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3862"/>
@@ -8904,6 +9419,294 @@ resetting the radio interface and applying any
 soundcard changes</source>
         <translation>Konfiguratsiooni muudatustest loobu või rakenda neid, sealhulgas modemi lähtestamisel ja helikaardi muudatuste rakendamisel</translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutid saate lubamisest, üle kõigi QSO-de; 0 = piiramatu, kuni 999. Tegevus ei lähtesta taimerit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Access token</source>
+        <translation>Pääsutõend</translation>
+    </message>
+    <message>
+        <source>Allow control (mode, frequency, QSO and options)</source>
+        <translation>Luba juhtimine (režiim, sagedus, QSO ja valikud)</translation>
+    </message>
+    <message>
+        <source>Allow starting TX and Tune (also requires control)</source>
+        <translation>Luba saate ja häälestuse käivitamine (vajab ka juhtimise luba)</translation>
+    </message>
+    <message>
+        <source>Connect an AI client to JTDX-F using MCP. Changes take effect after OK. Only this computer (127.0.0.1) can connect.</source>
+        <translation>Ühenda tehisintellekti klient JTDX-F-iga MCP kaudu. Muudatused jõustuvad pärast OK vajutamist. Ühenduda saab ainult sellest arvutist (127.0.0.1).</translation>
+    </message>
+    <message>
+        <source>Copy token</source>
+        <translation>Kopeeri tõend</translation>
+    </message>
+    <message>
+        <source>Enable MCP server</source>
+        <translation>Luba MCP server</translation>
+    </message>
+    <message>
+        <source>Endpoint</source>
+        <translation>Ühendusaadress</translation>
+    </message>
+    <message>
+        <source>Generate new token</source>
+        <translation>Loo uus tõend</translation>
+    </message>
+    <message>
+        <source>MCP</source>
+        <translation>MCP</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>Port</translation>
+    </message>
+    <message>
+        <source>Use Streamable HTTP with Authorization: Bearer TOKEN, or the bundled jtdx_mcp_bridge.py for stdio clients. Status, decodes and log are readable with a token. Stop TX is always available. See docs/MCP_zh.md.</source>
+        <translation>Kasuta Streamable HTTP-d päisega Authorization: Bearer TOKEN või kaasasolevat jtdx_mcp_bridge.py silda stdio klientidele. Tõendiga saab lugeda olekut, dekodeeritud sõnumeid ja logi. Saate peatamine on alati saadaval. Vt docs/MCP_zh.md.</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Align the text for DXCC, distance and azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Joonda DXCC, kauguse ja asimuudi tekst.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allow kHz frequency offset entry without 'k' suffix.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Luba kHz sagedusnihke sisestamine ilma k-lõputa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have decodes for a new period start at the top of the Band Activity window and not scroll off the top when the window is full.&lt;/p&gt;&lt;p&gt;This is to aid selecting decodes to double-click while decoding is still in progress. Use the Band Activity vertical scroll bar to reveal decodes past the bottom of the window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Alusta uue perioodi dekodeeringuid sagedusala aktiivsuse akna ülaosast. Täis aknas ei kerita ülemisi ridu automaatselt ära.&lt;/p&gt;&lt;p&gt;Nii on dekodeerimise ajal lihtsam jaama topeltklõpsuga valida. Allpool olevate teadete nägemiseks kasuta vertikaalset kerimisriba.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase Band Activity and Rx frequency windows after band change.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tühjenda sagedusala aktiivsuse ja vastuvõtusageduse aknad pärast sagedusala vahetust.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends a valid Maidenhead locator, calculate and show the great-circle azimuth in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kehtiva Maidenheadi lokaatori vastuvõtul arvuta suurringi asimuut ja kuva see sagedusala aktiivsuse aknas.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends locator, calculate and show the distance in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Lokaatori vastuvõtul arvuta kaugus ja kuva see sagedusala aktiivsuse aknas.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between DXCC and distance/azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suurenda või vähenda DXCC ning kauguse/asimuudi vahet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between message text and DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suurenda või vähenda teate teksti ja DXCC vahet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open the Astronomical Data window automatically when switching to Q65 or JT65 mode and Decode after EME delay is enabled, and close it when no longer needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ava astronoomiliste andmete aken automaatselt Q65 või JT65 režiimile lülitumisel, kui EME-viivitusega dekodeerimine on lubatud. Sulge aken, kui seda enam ei vajata.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Turn the progress bar red while transmitting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muuda edenemisriba saatmise ajal punaseks.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tx until 73 is received when in MSK144 or Q65 mode. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;MSK144 või Q65 režiimis saada kuni 73 vastuvõtuni.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>A deliberate double-click may enable TX only after the transmission safety checks pass. Startup, background messages and remote selection cannot grant transmission permission.</source>
+        <translation>Tahtlik topeltklõps võib TX-i lubada alles pärast ohutuskontrolle. Käivitamine, taustateated ja kaugvalik ei anna saatmisluba.</translation>
+    </message>
+    <message>
+        <source>Additional features</source>
+        <translation>Lisafunktsioonid</translation>
+    </message>
+    <message>
+        <source>After a completed QSO, move the receive audio frequency to the transmit audio frequency. This does not enable the Tx=Rx lock.</source>
+        <translation>Pärast lõpetatud QSO-d sea vastuvõtu helisagedus võrdseks saatmise helisagedusega. Tx=Rx lukku ei lülitata sisse.</translation>
+    </message>
+    <message>
+        <source>Align DXCC/distance/azimuth</source>
+        <translation>Joonda DXCC/kaugus/asimuut</translation>
+    </message>
+    <message>
+        <source>Allow Tx frequency changes while transmitting</source>
+        <translation>Luba TX-sageduse muutmine saatmise ajal</translation>
+    </message>
+    <message>
+        <source>Allow the additional Earth–Moon–Earth propagation delay when collecting and decoding signals. This does not alter the UTC clock.</source>
+        <translation>Arvesta signaalide kogumisel ja dekodeerimisel Maa–Kuu–Maa levi lisaviivitust. UTC-kella ei muudeta.</translation>
+    </message>
+    <message>
+        <source>Alternate Erase button behavior</source>
+        <translation>Tühjendusnupu teine toimimisviis</translation>
+    </message>
+    <message>
+        <source>Alternate F1-F6 bindings</source>
+        <translation>F1–F6 alternatiivsed klahviseosed</translation>
+    </message>
+    <message>
+        <source>Auto-open/close Astronomical data window</source>
+        <translation>Ava/sulge astronoomiaaken automaatselt</translation>
+    </message>
+    <message>
+        <source>Calling CQ forces Call 1st</source>
+        <translation>CQ saatmine sunnib vastama esimesele kutsujale</translation>
+    </message>
+    <message>
+        <source>Clear DX Call after QSO</source>
+        <translation>Tühjenda DX-kutsung pärast QSO-d</translation>
+    </message>
+    <message>
+        <source>Clear DX Grid after QSO</source>
+        <translation>Tühjenda DX-lokaator pärast QSO-d</translation>
+    </message>
+    <message>
+        <source>Decode after EME delay</source>
+        <translation>Dekodeeri pärast EME-viivitust</translation>
+    </message>
+    <message>
+        <source>Di&amp;sable Tx after sending 73</source>
+        <translation>Peata TX pärast 73 saatmist</translation>
+    </message>
+    <message>
+        <source>Doubl&amp;e-click on call sets Tx enable</source>
+        <translation>Kutsungi topeltklõps lubab TX-i</translation>
+    </message>
+    <message>
+        <source>Enable VHF and submode features</source>
+        <translation>Luba VHF-i ja alamrežiimide funktsioonid</translation>
+    </message>
+    <message>
+        <source>Enable Wait &amp; Call, Wait &amp; Reply and Wait &amp; Pounce controls. They require a manually authorized TX session and cannot restart transmission after Stop. Managed mode keeps its own selection rules.</source>
+        <translation>Luba ootamisega kutsumine, vastamine ja CQ-le vastamine. Vajalik on käsitsi lubatud TX-seanss; pärast Peata vajutamist saatmist ei taaskäivitata. Hallatud režiim säilitab oma valikureeglid.</translation>
+    </message>
+    <message>
+        <source>Enable Wait features</source>
+        <translation>Luba ootefunktsioonid</translation>
+    </message>
+    <message>
+        <source>Erase decodes after band change</source>
+        <translation>Tühjenda dekodeeringud sagedusala vahetusel</translation>
+    </message>
+    <message>
+        <source>Finish one QSO and stop. This is the same setting as Single QSO in the main window. Leave it unchecked for continuous QSOs within the TX watchdog session.</source>
+        <translation>Lõpeta üks QSO ja peatu. See on sama valik kui peaakna Üks QSO. Märkimata valik lubab jätkata QSO-sid TX-valvuri seansi jooksul.</translation>
+    </message>
+    <message>
+        <source>Font...</source>
+        <translation>Font…</translation>
+    </message>
+    <message>
+        <source>Highlight DX Call in message</source>
+        <translation>Tõsta teates DX-kutsung esile</translation>
+    </message>
+    <message>
+        <source>Highlight DX Grid in message</source>
+        <translation>Tõsta teates DX-lokaator esile</translation>
+    </message>
+    <message>
+        <source>Less button coloring (restart required)</source>
+        <translation>Vähem nupuvärve (vajab taaskäivitust)</translation>
+    </message>
+    <message>
+        <source>MSK144/Q65: Tx until 73 is received</source>
+        <translation>MSK144/Q65: saada kuni 73 vastuvõtuni</translation>
+    </message>
+    <message>
+        <source>Map Grid locator to U.S. State</source>
+        <translation>Seo lokaator USA osariigiga</translation>
+    </message>
+    <message>
+        <source>Monitor returns to last used frequency</source>
+        <translation>Monitor naaseb viimati kasutatud sagedusele</translation>
+    </message>
+    <message>
+        <source>Read and display PWR and SWR</source>
+        <translation>Loe ja kuva võimsus ning SWR</translation>
+    </message>
+    <message>
+        <source>Read and display transmit power and SWR through CAT. Unsupported readings are shown as unavailable.</source>
+        <translation>Loe ja kuva CAT-i kaudu saatele võimsus ning SWR. Toetamata näidud kuvatakse kättesaamatutena.</translation>
+    </message>
+    <message>
+        <source>Set Rx frequency to Tx frequency after QSO</source>
+        <translation>Sea RX-sagedus pärast QSO-d TX-sagedusele</translation>
+    </message>
+    <message>
+        <source>Show &amp;DXCC, grid, and worked-before status    </source>
+        <translation>Kuva DXCC, lokaator ja varasem side</translation>
+    </message>
+    <message>
+        <source>Show DXCC for all messages</source>
+        <translation>Kuva DXCC kõigis teadetes</translation>
+    </message>
+    <message>
+        <source>Show U.S. States in messages with grid</source>
+        <translation>Kuva lokaatoriga teadetes USA osariik</translation>
+    </message>
+    <message>
+        <source>Show azimuth in messages with grid</source>
+        <translation>Kuva lokaatoriga teadetes asimuut</translation>
+    </message>
+    <message>
+        <source>Show blank line with time stamp</source>
+        <translation>Kuva eraldusreal ajatempel</translation>
+    </message>
+    <message>
+        <source>Show distance in messages with grid</source>
+        <translation>Kuva lokaatoriga teadetes kaugus</translation>
+    </message>
+    <message>
+        <source>Show if decoded stations are new DXCC entities or worked before.</source>
+        <translation>Kuva, kas dekodeeritud jaamad on uued DXCC üksused või nendega on varem sidet peetud.</translation>
+    </message>
+    <message>
+        <source>Show principal prefix instead of country name        </source>
+        <translation>Kuva riigi nime asemel põhiprefiks</translation>
+    </message>
+    <message>
+        <source>Show the separator line between periods with time stamp of the decode period.</source>
+        <translation>Kuva perioodide eraldusreal dekodeerimisperioodi ajatempel.</translation>
+    </message>
+    <message>
+        <source>Single decode</source>
+        <translation>Üks dekodeering</translation>
+    </message>
+    <message>
+        <source>Start new period decodes at top</source>
+        <translation>Alusta uue perioodi dekodeeringuid ülalt</translation>
+    </message>
+    <message>
+        <source>Stop Tune after the selected number of seconds. A zero interval disables this timer.</source>
+        <translation>Peata häälestus valitud sekundite möödumisel. Null lülitab taimeri välja.</translation>
+    </message>
+    <message>
+        <source>Tune watchdog   </source>
+        <translation>Häälestuse valvur</translation>
+    </message>
+    <message>
+        <source>Turn progress bar red while transmitting</source>
+        <translation>Punane edenemisriba saatmise ajal</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. Transmission safety checks still apply.</source>
+        <translation>F1–F5 valivad CQ, raporti, R-raporti, kinnituse ja 73; F6 muudab vastamispoliitikat. Saatmise ohutuskontrollid kehtivad endiselt.</translation>
+    </message>
+    <message>
+        <source>kHz entry without k (restart required)</source>
+        <translation>Sisesta kHz ilma k-ta (vajab taaskäivitust)</translation>
+    </message>
+    <message>
+        <source>When checked, double-clicking a decoded callsign starts a TX session after the transmission safety checks pass. The session then follows the normal AutoSeq, Single QSO and watchdog settings. Off by default.</source>
+        <translation>Kui see on märgitud, käivitab topeltklõps dekodeeritud kutsungil TX-seansi pärast edastuse ohutuskontrollide läbimist. Seanss järgib seejärel tavalisi AutoSeq, ühe QSO ja edastuse valveajasti sätteid. Vaikimisi välja lülitatud.</translation>
+    </message>
+    <message>
+        <source>Double-click a callsign to enable TX</source>
+        <translation>Topeltklõps kutsungil lubab TX-i</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. These keys cannot start a TX session. Click Enable TX first.</source>
+        <translation>Klahvid F1–F5 valivad CQ, raporti, R-raporti, kinnituse ja 73; F6 muudab vastamispõhimõtet. Need klahvid ei saa saatmisseanssi alustada. Klõpsa esmalt Luba TX.</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -8954,6 +9757,870 @@ soundcard changes</source>
         <location filename="../wf_palette_design_dialog.ui" line="23"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Double click a color to edit it.&lt;/p&gt;&lt;p&gt;Right click to insert or delete colors.&lt;/p&gt;&lt;p&gt;Colors at the top represent weak signals&lt;/p&gt;&lt;p&gt;and colors at the bottom represent strong&lt;/p&gt;&lt;p&gt;signals. You can have up to 256 colors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Topeltklõps värvil tema muutmiseks.&lt;/p&gt;&lt;p&gt;Parem klõps värvide lisamiseks või muutmiseks.&lt;/p&gt;&lt;p&gt;Värvid ülevalpoole näitavad nõregemaid signaales&lt;/p&gt;&lt;p&gt;ja värvid allpool näitavad tugevaid&lt;/p&gt;&lt;p&gt;signaale. Valida on kuni 256 värvi vahel.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>JttyController</name>
+    <message>
+        <source>Cannot write to the JTTY decoder.</source>
+        <translation>JTTY dekoodrile ei saa andmeid saata.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY decoder response.</source>
+        <translation>JTTY dekoodri vigane vastus.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY transmit audio.</source>
+        <translation>Vigased JTTY saateheli andmed.</translation>
+    </message>
+    <message>
+        <source>JTTY audio backlog exceeded 10 seconds; reception restarted.</source>
+        <translation>JTTY helijärjekord ületas 10 sekundit; vastuvõtt taaskäivitati.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder stopped unexpectedly.</source>
+        <translation>JTTY dekooder peatus ootamatult.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder timed out. Select JTTY again to restart it.</source>
+        <translation>JTTY dekoodri ajalimiit ületati. Taaskäivitamiseks vali JTTY uuesti.</translation>
+    </message>
+    <message>
+        <source>Unexpected JTTY decoder response.</source>
+        <translation>JTTY dekoodri ootamatu vastus.</translation>
+    </message>
+</context>
+<context>
+    <name>LogForwarder</name>
+    <message>
+        <source>External logger did not acknowledge the QSO. Local logs are saved.</source>
+        <translation>Väline logiprogramm ei kinnitanud QSO-d. Kohalikud logid on salvestatud.</translation>
+    </message>
+    <message>
+        <source>External logger disconnected before acknowledgement. Local logs are saved.</source>
+        <translation>Väline logiprogramm katkestas ühenduse enne kinnitust. Kohalikud logid on salvestatud.</translation>
+    </message>
+    <message>
+        <source>External logger rejected the QSO. Local logs are saved.</source>
+        <translation>Väline logiprogramm lükkas QSO tagasi. Kohalikud logid on salvestatud.</translation>
+    </message>
+    <message>
+        <source>Invalid external logger response. Local logs are saved.</source>
+        <translation>Välise logiprogrammi vigane vastus. Kohalikud logid on salvestatud.</translation>
+    </message>
+    <message>
+        <source>Unexpected external logger response. Local logs are saved.</source>
+        <translation>Välise logiprogrammi ootamatu vastus. Kohalikud logid on salvestatud.</translation>
+    </message>
+</context>
+<context>
+    <name>ManagedSettingsWidget</name>
+    <message>
+        <source>0 — unlimited</source>
+        <translation>0 — piiramatu</translation>
+    </message>
+    <message>
+        <source>Answer previously worked callsigns</source>
+        <translation>Vasta varem töötatud kutsungitele</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC-kütt</translation>
+    </message>
+    <message>
+        <source>New CQ zone</source>
+        <translation>Uus CQ tsoon</translation>
+    </message>
+    <message>
+        <source>New DXCC</source>
+        <translation>Uus DXCC üksus</translation>
+    </message>
+    <message>
+        <source>New ITU zone</source>
+        <translation>Uus ITU tsoon</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode DXCC</source>
+        <translation>Uus DXCC sagedusalal &amp;&amp; tööliigil</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode callsign</source>
+        <translation>Uus kutsung sagedusalal &amp;&amp; tööliigil</translation>
+    </message>
+    <message>
+        <source>New callsign</source>
+        <translation>Uus kutsung</translation>
+    </message>
+    <message>
+        <source>New grid</source>
+        <translation>Uus lokaator</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast (also prioritizes new DXCC entities and zones)</source>
+        <translation>QSO-huviline (eelistab ka uusi DXCC üksusi ja tsoone)</translation>
+    </message>
+    <message>
+        <source>Send three CQ rounds every 15 minutes</source>
+        <translation>Saada iga 15 minuti järel kolm CQ vooru</translation>
+    </message>
+    <message>
+        <source>Unanswered call limit:</source>
+        <translation>Vastuseta kutsete piir:</translation>
+    </message>
+    <message>
+        <source>Allow TX slot changes</source>
+        <translation>Luba TX-ajapilu vahetamist</translation>
+    </message>
+    <message>
+        <source>Allow automatic TX slot changes between completed QSOs. After a slot change, wait 5 minutes before another automatic change. Manual changes are always allowed and restart this timer. Off: stay in the selected TX slot.</source>
+        <translation>Luba TX-ajapilu automaatselt vahetada lõpetatud QSO-de vahel. Pärast vahetust tuleb enne järgmist automaatset vahetust oodata 5 minutit. Käsitsi võib alati vahetada ja see käivitab taimeri uuesti. Väljas: säilita valitud TX-ajapilu.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpClient</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Sisesta kehtiv NTP serveri nimi või IP-aadress.</translation>
+    </message>
+    <message>
+        <source>Invalid NTP packet length.</source>
+        <translation>NTP paketi vigane pikkus.</translation>
+    </message>
+    <message>
+        <source>NTP request timed out.</source>
+        <translation>NTP päringu ajalimiit ületati.</translation>
+    </message>
+    <message>
+        <source>The NTP date is outside the supported range.</source>
+        <translation>NTP kuupäev jääb toetatud vahemikust välja.</translation>
+    </message>
+    <message>
+        <source>The NTP response does not match this request.</source>
+        <translation>NTP vastus ei vasta sellele päringule.</translation>
+    </message>
+    <message>
+        <source>The NTP response has excessive delay or uncertainty.</source>
+        <translation>NTP vastuse viivitus või määramatus on liiga suur.</translation>
+    </message>
+    <message>
+        <source>The NTP server is not synchronized or refused the request.</source>
+        <translation>NTP server pole sünkroonitud või keeldus päringust.</translation>
+    </message>
+    <message>
+        <source>The clock changed during the NTP request, or the response was too slow.</source>
+        <translation>Kell muutus NTP päringu ajal või vastus saabus liiga hilja.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpController</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Sisesta kehtiv NTP serveri nimi või IP-aadress.</translation>
+    </message>
+    <message>
+        <source>Install polkit/pkexec to authorize system time synchronization.</source>
+        <translation>Süsteemiaja sünkroonimise lubamiseks paigalda polkit/pkexec.</translation>
+    </message>
+    <message>
+        <source>Permission granted. Synchronization follows the selected interval.</source>
+        <translation>Õigus antud. Sünkroonimine toimub valitud intervalliga.</translation>
+    </message>
+    <message>
+        <source>Permission request timed out. System time is unchanged.</source>
+        <translation>Õiguse taotlemise ajalimiit ületati. Süsteemiaega ei muudetud.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted (Windows error %1). Using system time.</source>
+        <translation>Õigust ei antud (Windowsi viga %1). Kasutatakse süsteemiaega.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted. Using system time.</source>
+        <translation>Õigust ei antud. Kasutatakse süsteemiaega.</translation>
+    </message>
+    <message>
+        <source>Requesting permission to set the system time…</source>
+        <translation>Süsteemiaja muutmise õiguse taotlemine…</translation>
+    </message>
+    <message>
+        <source>Synchronization deferred while transmitting.</source>
+        <translation>Sünkroonimine on saate ajal edasi lükatud.</translation>
+    </message>
+    <message>
+        <source>Synchronization failed: %1. Retrying in 1 minute.</source>
+        <translation>Sünkroonimine ebaõnnestus: %1. Uus katse 1 minuti pärast.</translation>
+    </message>
+    <message>
+        <source>The time synchronization helper is missing.</source>
+        <translation>Ajasünkroonimise abiprogramm puudub.</translation>
+    </message>
+    <message>
+        <source>Time synchronization stopped. Using system time.</source>
+        <translation>Ajasünkroonimine peatatud. Kasutatakse süsteemiaega.</translation>
+    </message>
+    <message>
+        <source>Time synchronized; correction %1 ms. Next check in %2 minutes.</source>
+        <translation>Aeg sünkroonitud; parandus %1 ms. Järgmine kontroll %2 minuti pärast.</translation>
+    </message>
+    <message>
+        <source>Use system time. NTP synchronization is disabled.</source>
+        <translation>Kasutatakse süsteemiaega. NTP sünkroonimine on väljas.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpSettingsWidget</name>
+    <message>
+        <source>%1 hours</source>
+        <translation>%1 tundi</translation>
+    </message>
+    <message>
+        <source>%1 minutes</source>
+        <translation>%1 minutit</translation>
+    </message>
+    <message>
+        <source>Africa / Kenya / icolo</source>
+        <translation>Aafrika / Keenia / icolo</translation>
+    </message>
+    <message>
+        <source>Africa / Mauritius / Mauritius Telecom</source>
+        <translation>Aafrika / Mauritius / Mauritius Telecom</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / INX-ZA</source>
+        <translation>Aafrika / Lõuna-Aafrika / INX-ZA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / NMISA</source>
+        <translation>Aafrika / Lõuna-Aafrika / NMISA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / SANReN</source>
+        <translation>Aafrika / Lõuna-Aafrika / SANReN</translation>
+    </message>
+    <message>
+        <source>Asia / Apple</source>
+        <translation>Aasia / Apple</translation>
+    </message>
+    <message>
+        <source>Asia / China / Alibaba</source>
+        <translation>Aasia / Hiina / Alibaba</translation>
+    </message>
+    <message>
+        <source>Asia / China / Baidu</source>
+        <translation>Aasia / Hiina / Baidu</translation>
+    </message>
+    <message>
+        <source>Asia / China / CAS NTSC</source>
+        <translation>Aasia / Hiina / CAS NTSC</translation>
+    </message>
+    <message>
+        <source>Asia / China / NTP Pool</source>
+        <translation>Aasia / Hiina / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tencent</source>
+        <translation>Aasia / Hiina / Tencent</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tsinghua TUNA</source>
+        <translation>Aasia / Hiina / Tsinghua TUNA</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Internet Multifeed</source>
+        <translation>Aasia / Jaapan / Internet Multifeed</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / NICT</source>
+        <translation>Aasia / Jaapan / NICT</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Sakura Internet</source>
+        <translation>Aasia / Jaapan / Sakura Internet</translation>
+    </message>
+    <message>
+        <source>Asia / South Korea / KRISS</source>
+        <translation>Aasia / Lõuna-Korea / KRISS</translation>
+    </message>
+    <message>
+        <source>Europe / France / RDEM Systems</source>
+        <translation>Euroopa / Prantsusmaa / RDEM Systems</translation>
+    </message>
+    <message>
+        <source>Europe / Germany / PTB</source>
+        <translation>Euroopa / Saksamaa / PTB</translation>
+    </message>
+    <message>
+        <source>Europe / Poland / GUM</source>
+        <translation>Euroopa / Poola / GUM</translation>
+    </message>
+    <message>
+        <source>Europe / Sweden / Netnod</source>
+        <translation>Euroopa / Rootsi / Netnod</translation>
+    </message>
+    <message>
+        <source>Europe / UK / NPL</source>
+        <translation>Euroopa / Ühendkuningriik / NPL</translation>
+    </message>
+    <message>
+        <source>Global / Apple</source>
+        <translation>Üleilmne / Apple</translation>
+    </message>
+    <message>
+        <source>Global / Cloudflare</source>
+        <translation>Üleilmne / Cloudflare</translation>
+    </message>
+    <message>
+        <source>Global / Google</source>
+        <translation>Üleilmne / Google</translation>
+    </message>
+    <message>
+        <source>Global / Microsoft Windows</source>
+        <translation>Üleilmne / Microsoft Windows</translation>
+    </message>
+    <message>
+        <source>NTP hostname or IP address</source>
+        <translation>NTP serveri nimi või IP-aadress</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization (requests administrator privileges when enabled)</source>
+        <translation>NTP ajasünkroonimine (lubamisel küsitakse administraatori õigusi)</translation>
+    </message>
+    <message>
+        <source>North America / Canada / NRC</source>
+        <translation>Põhja-Ameerika / Kanada / NRC</translation>
+    </message>
+    <message>
+        <source>North America / USA / NIST</source>
+        <translation>Põhja-Ameerika / USA / NIST</translation>
+    </message>
+    <message>
+        <source>Oceania / Australia / NTP Pool</source>
+        <translation>Okeaania / Austraalia / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Oceania / New Zealand / MSL (NZ networks only)</source>
+        <translation>Okeaania / Uus-Meremaa / MSL (ainult Uus-Meremaa võrgud)</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Muu</translation>
+    </message>
+    <message>
+        <source>South America / Argentina / INTI</source>
+        <translation>Lõuna-Ameerika / Argentina / INTI</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / NIC.br</source>
+        <translation>Lõuna-Ameerika / Brasiilia / NIC.br</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / National Observatory</source>
+        <translation>Lõuna-Ameerika / Brasiilia / Riiklik observatoorium</translation>
+    </message>
+    <message>
+        <source>South America / Chile / SHOA</source>
+        <translation>Lõuna-Ameerika / Tšiili / SHOA</translation>
+    </message>
+    <message>
+        <source>South America / Colombia / INM</source>
+        <translation>Lõuna-Ameerika / Colombia / INM</translation>
+    </message>
+    <message>
+        <source>Synchronization interval:</source>
+        <translation>Sünkroonimisintervall:</translation>
+    </message>
+    <message>
+        <source>Uses system UTC time; the synchronization interval is configurable.</source>
+        <translation>Kasutatakse süsteemi UTC-aega; sünkroonimisintervalli saab muuta.</translation>
+    </message>
+</context>
+<context>
+    <name>ProcessingDialog</name>
+    <message>
+        <source>Processing</source>
+        <translation>Töötlemine</translation>
+    </message>
+    <message>
+        <source>Stop TX</source>
+        <translation>Peata saade</translation>
+    </message>
+    <message>
+        <source>System processing, please wait…</source>
+        <translation>Süsteem töötleb, palun oota…</translation>
+    </message>
+</context>
+<context>
+    <name>StationManager</name>
+    <message>
+        <source>Add</source>
+        <translation>Lisa</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Lisa kutsung</translation>
+    </message>
+    <message>
+        <source>All regions</source>
+        <translation>Kõik regioonid</translation>
+    </message>
+    <message>
+        <source>Callsign management</source>
+        <translation>Kutsungite haldus</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Loobu</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Muuda</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Muuda kutsungit</translation>
+    </message>
+    <message>
+        <source>Enter a valid 4, 6 or 8 character grid locator.</source>
+        <translation>Sisesta kehtiv 4-, 6- või 8-märgiline lokaator.</translation>
+    </message>
+    <message>
+        <source>Enter a valid callsign (3–12 letters/digits, optional /suffix).</source>
+        <translation>Sisesta kehtiv kutsung (3–12 tähte/numbrit, valikuline /järelliide).</translation>
+    </message>
+    <message>
+        <source>Full call in Tx1</source>
+        <translation>Täielik kutsung Tx1-s</translation>
+    </message>
+    <message>
+        <source>Full call in Tx3</source>
+        <translation>Täielik kutsung Tx3-s</translation>
+    </message>
+    <message>
+        <source>Full call in Tx5 only</source>
+        <translation>Täielik kutsung ainult Tx5-s</translation>
+    </message>
+    <message>
+        <source>IARU region:</source>
+        <translation>IARU regioon:</translation>
+    </message>
+    <message>
+        <source>Invalid profile</source>
+        <translation>Vigane profiil</translation>
+    </message>
+    <message>
+        <source>My callsign:</source>
+        <translation>Minu kutsung:</translation>
+    </message>
+    <message>
+        <source>My grid:</source>
+        <translation>Minu lokaator:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Region 1</source>
+        <translation>Regioon 1</translation>
+    </message>
+    <message>
+        <source>Region 2</source>
+        <translation>Regioon 2</translation>
+    </message>
+    <message>
+        <source>Region 3</source>
+        <translation>Regioon 3</translation>
+    </message>
+    <message>
+        <source>Remove profile</source>
+        <translation>Eemalda profiil</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Salvesta</translation>
+    </message>
+    <message>
+        <source>This callsign already exists. Different /suffixes are allowed.</source>
+        <translation>See kutsung on juba olemas. Erinevad /järelliited on lubatud.</translation>
+    </message>
+    <message>
+        <source>Type 2 callsign messages:</source>
+        <translation>2. tüüpi kutsungi sõnumid:</translation>
+    </message>
+</context>
+<context>
+    <name>Blacklist</name>
+    <message>
+        <source>A base callsign blocks its portable prefixes and suffixes (K1ABC also blocks EA8/K1ABC and K1ABC/P). A callsign containing / blocks only that exact callsign.</source>
+        <translation>Baaskutsung blokeerib ka välitöö prefiksite ja järelliidetega variandid (K1ABC blokeerib ka EA8/K1ABC ja K1ABC/P). Kaldkriipsuga / kutsung blokeerib ainult täpse vaste.</translation>
+    </message>
+    <message>
+        <source>Blacklist changed in another program. Reload it before saving.</source>
+        <translation>Must nimekiri muutus teises programmis. Enne salvestamist laadi see uuesti.</translation>
+    </message>
+    <message>
+        <source>Blacklist file is too large.</source>
+        <translation>Musta nimekirja fail on liiga suur.</translation>
+    </message>
+    <message>
+        <source>Blacklist has too many entries.</source>
+        <translation>Mustas nimekirjas on liiga palju kirjeid.</translation>
+    </message>
+    <message>
+        <source>Blacklist is busy. Please retry.</source>
+        <translation>Must nimekiri on hõivatud. Proovi uuesti.</translation>
+    </message>
+    <message>
+        <source>Blacklist is not ready. Repair the existing file before saving.</source>
+        <translation>Must nimekiri pole valmis. Enne salvestamist paranda olemasolev fail.</translation>
+    </message>
+    <message>
+        <source>Blacklist notes must not exceed 512 characters.</source>
+        <translation>Musta nimekirja märkused ei tohi ületada 512 märki.</translation>
+    </message>
+    <message>
+        <source>Cannot create blacklist directory.</source>
+        <translation>Musta nimekirja kataloogi ei saa luua.</translation>
+    </message>
+    <message>
+        <source>Cannot open blacklist: %1</source>
+        <translation>Musta nimekirja ei saa avada: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save blacklist: %1</source>
+        <translation>Musta nimekirja ei saa salvestada: %1</translation>
+    </message>
+    <message>
+        <source>Duplicate callsign: %1</source>
+        <translation>Korduv kutsung: %1</translation>
+    </message>
+    <message>
+        <source>Invalid blacklist file; the original has been preserved.</source>
+        <translation>Vigane musta nimekirja fail; algfail on säilitatud.</translation>
+    </message>
+    <message>
+        <source>Invalid callsign: %1</source>
+        <translation>Vigane kutsung: %1</translation>
+    </message>
+    <message>
+        <source>Select an operator before editing the blacklist.</source>
+        <translation>Enne musta nimekirja muutmist vali operaator.</translation>
+    </message>
+    <message>
+        <source>Unsupported blacklist file version.</source>
+        <translation>Musta nimekirja failiversioon pole toetatud.</translation>
+    </message>
+</context>
+<context>
+    <name>BlacklistDialog</name>
+    <message>
+        <source>Add</source>
+        <translation>Lisa</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Lisa kutsung</translation>
+    </message>
+    <message>
+        <source>Callsign:</source>
+        <translation>Kutsung:</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Loobu</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Muuda</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Muuda kutsungit</translation>
+    </message>
+    <message>
+        <source>Invalid entry</source>
+        <translation>Vigane kirje</translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation>Märkus:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Permanent blacklist</source>
+        <translation>Püsiv must nimekiri</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Eemalda</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Salvesta</translation>
+    </message>
+</context>
+<context>
+    <name>AstroDialog</name>
+    <message>
+        <source>Astronomical Data</source>
+        <translation>Astronoomilised andmed</translation>
+    </message>
+    <message>
+        <source>Call DX</source>
+        <translation>Kutsu DX-jaama</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Sulge</translation>
+    </message>
+    <message>
+        <source>Constant frequency on the Moon</source>
+        <translation>Püsiv sagedus Kuul</translation>
+    </message>
+    <message>
+        <source>DX Moon Az / El: %1° / %2°</source>
+        <translation>Kuu asimuut / kõrgus DX-jaamas: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>Doppler tracking</source>
+        <translation>Doppleri jälgimine</translation>
+    </message>
+    <message>
+        <source>Echo RIT</source>
+        <translation>Kaja RIT</translation>
+    </message>
+    <message>
+        <source>Echo delay: %1 s; spread: %2 / %3 Hz</source>
+        <translation>Kaja viivitus: %1 s; hajuvus: %2 / %3 Hz</translation>
+    </message>
+    <message>
+        <source>Echo frequency dither (±10 Hz)</source>
+        <translation>Kaja sageduse võngutamine (±10 Hz)</translation>
+    </message>
+    <message>
+        <source>Full Doppler to DX grid</source>
+        <translation>Täielik Doppleri parandus DX-lokaatorini</translation>
+    </message>
+    <message>
+        <source>Method</source>
+        <translation>Meetod</translation>
+    </message>
+    <message>
+        <source>Moon Az / El: %1° / %2°</source>
+        <translation>Kuu asimuut / kõrgus: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>No Doppler correction</source>
+        <translation>Doppleri paranduseta</translation>
+    </message>
+    <message>
+        <source>On DX echo</source>
+        <translation>DX-jaama kajal</translation>
+    </message>
+    <message>
+        <source>Own / DX Doppler: %1 / %2 Hz</source>
+        <translation>Oma / DX Doppler: %1 / %2 Hz</translation>
+    </message>
+    <message>
+        <source>Own echo</source>
+        <translation>Oma kaja</translation>
+    </message>
+    <message>
+        <source>Set frequency</source>
+        <translation>Määra sagedus</translation>
+    </message>
+    <message>
+        <source>Sky: %1 K; degradation: %2 dB; polarization: %3°</source>
+        <translation>Taevas: %1 K; halvenemine: %2 dB; polarisatsioon: %3°</translation>
+    </message>
+    <message>
+        <source>Sun Az / El: %1° / %2°</source>
+        <translation>Päikese asimuut / kõrgus: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>TX frequency offset (MHz)</source>
+        <translation>TX-sageduse nihe (MHz)</translation>
+    </message>
+    <message>
+        <source>Waiting for astronomical data…</source>
+        <translation>Astronoomiliste andmete ootel…</translation>
+    </message>
+</context>
+<context>
+    <name>HamlibUpdater</name>
+    <message>
+        <source>Another Hamlib update is in progress.</source>
+        <translation>Teine Hamlibi uuendus on pooleli.</translation>
+    </message>
+    <message>
+        <source>Cannot read the Hamlib files.</source>
+        <translation>Hamlibi faile ei saa lugeda.</translation>
+    </message>
+    <message>
+        <source>Cannot save the Hamlib restart request: %1</source>
+        <translation>Hamlibi taaskäivitustaotlust ei saa salvestada: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save the downloaded Hamlib file.</source>
+        <translation>Allalaaditud Hamlibi faili ei saa salvestada.</translation>
+    </message>
+    <message>
+        <source>Cannot stage Hamlib: %1</source>
+        <translation>Hamlibi ei saa ette valmistada: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib compatibility checker: %1</source>
+        <translation>Hamlibi ühilduvuskontrolli ei saa käivitada: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib update helper.</source>
+        <translation>Hamlibi uuendusabilist ei saa käivitada.</translation>
+    </message>
+    <message>
+        <source>Checking Hamlib compatibility without connecting to a radio…</source>
+        <translation>Hamlibi ühilduvuse kontroll ilma raadioga ühendamata…</translation>
+    </message>
+    <message>
+        <source>Compatibility check passed. Restart JTDX-F to apply %1.</source>
+        <translation>Ühilduvuskontroll läbitud. Versiooni %1 rakendamiseks taaskäivita JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Downloading the official Hamlib 4.7 branch update…</source>
+        <translation>Ametliku Hamlib 4.7 haru uuenduse allalaadimine…</translation>
+    </message>
+    <message>
+        <source>Hamlib compatibility check failed: %1</source>
+        <translation>Hamlibi ühilduvuskontroll ebaõnnestus: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib download failed: %1</source>
+        <translation>Hamlibi allalaadimine ebaõnnestus: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib files changed after validation. Check the update again.</source>
+        <translation>Hamlibi failid on pärast kontrolli muutunud. Kontrolli uuendust uuesti.</translation>
+    </message>
+    <message>
+        <source>Hamlib update completed successfully.</source>
+        <translation>Hamlibi uuendus õnnestus.</translation>
+    </message>
+    <message>
+        <source>Hamlib update timed out. The current version is unchanged.</source>
+        <translation>Hamlibi uuendus aegus. Praegune versioon jäi muutmata.</translation>
+    </message>
+    <message>
+        <source>Hamlib update was not applied: %1</source>
+        <translation>Hamlibi uuendust ei rakendatud: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib updates require a 64-bit Windows installation.</source>
+        <translation>Hamlibi uuendused nõuavad 64-bitist Windowsi.</translation>
+    </message>
+    <message>
+        <source>Invalid Hamlib update: %1</source>
+        <translation>Vigane Hamlibi uuendus: %1</translation>
+    </message>
+    <message>
+        <source>No previous Hamlib version is available.</source>
+        <translation>Eelmist Hamlibi versiooni pole saadaval.</translation>
+    </message>
+    <message>
+        <source>On this platform, Hamlib is updated with JTDX-F.</source>
+        <translation>Sellel platvormil uuendatakse Hamlibi koos JTDX-F-iga.</translation>
+    </message>
+    <message>
+        <source>Restarting JTDX-F to apply the Hamlib update…</source>
+        <translation>JTDX-F-i taaskäivitamine Hamlibi uuenduse rakendamiseks…</translation>
+    </message>
+    <message>
+        <source>The Hamlib download is too large or could not be saved.</source>
+        <translation>Hamlibi allalaaditav fail on liiga suur või seda ei saa salvestada.</translation>
+    </message>
+    <message>
+        <source>The Hamlib update helper is missing. Reinstall JTDX-F.</source>
+        <translation>Hamlibi uuendusabiline puudub. Paigalda JTDX-F uuesti.</translation>
+    </message>
+    <message>
+        <source>The installation folder is not writable. Run JTDX-F with permission to update this folder.</source>
+        <translation>Paigalduskausta ei saa kirjutada. Käivita JTDX-F selle kausta uuendamise õigusega.</translation>
+    </message>
+</context>
+<context>
+    <name>OmniRigTransceiver</name>
+    <message>
+        <source>OmniRig: cannot initialize COM</source>
+        <translation>OmniRig: COM-i ei saa lähtestada</translation>
+    </message>
+    <message>
+        <source>OmniRig: no valid receive frequency was reported</source>
+        <translation>OmniRig: kehtivat vastuvõtusagedust ei teatatud</translation>
+    </message>
+</context>
+<context>
+    <name>Transceiver</name>
+    <message>
+        <source>This transceiver does not support PCM audio.</source>
+        <translation>See transiiver ei toeta PCM-heli.</translation>
+    </message>
+</context>
+<context>
+    <name>UpstreamController</name>
+    <message>
+        <source>Cannot communicate with the WSJT-X backend.</source>
+        <translation>WSJT-X-i taustamooduliga ei saa suhelda.</translation>
+    </message>
+    <message>
+        <source>Cannot prepare audio for the WSJT-X backend.</source>
+        <translation>WSJT-X-i taustamoodulile ei saa heli ette valmistada.</translation>
+    </message>
+    <message>
+        <source>Cannot read the prepared transmit audio.</source>
+        <translation>Ettevalmistatud saateheli ei saa lugeda.</translation>
+    </message>
+    <message>
+        <source>Invalid response from the WSJT-X backend.</source>
+        <translation>Vigane vastus WSJT-X-i taustamoodulilt.</translation>
+    </message>
+    <message>
+        <source>Invalid transmit audio from the WSJT-X backend.</source>
+        <translation>Vigane saateheli WSJT-X-i taustamoodulilt.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend rejected the request.</source>
+        <translation>WSJT-X-i taustamoodul lükkas taotluse tagasi.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend stopped unexpectedly.</source>
+        <translation>WSJT-X-i taustamoodul peatus ootamatult.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend timed out. Reception can be restarted by selecting the mode again.</source>
+        <translation>WSJT-X-i taustamoodul aegus. Vastuvõtu taaskäivitamiseks vali režiim uuesti.</translation>
+    </message>
+    <message>
+        <source>Unexpected response from the WSJT-X backend.</source>
+        <translation>Ootamatu vastus WSJT-X-i taustamoodulilt.</translation>
+    </message>
+</context>
+<context>
+    <name>OperatorLog</name>
+    <message>
+        <source>Log files changed during processing; originals retained. Please retry.</source>
+        <translation>Logifailid muutusid töötlemise ajal; originaalid on säilitatud. Palun proovige uuesti.</translation>
+    </message>
+    <message>
+        <source>Cannot create the old backup directory; originals retained.</source>
+        <translation>Varukoopiate kausta old ei saa luua; originaalid on säilitatud.</translation>
+    </message>
+    <message>
+        <source>Backup contents differ; originals retained.</source>
+        <translation>Varukoopia sisu erineb; originaalid on säilitatud.</translation>
+    </message>
+    <message>
+        <source>Invalid QSO for the current station; originals retained.</source>
+        <translation>Praeguse jaama QSO on vigane; originaalid on säilitatud.</translation>
     </message>
 </context>
 </TS>

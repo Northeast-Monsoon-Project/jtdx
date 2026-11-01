@@ -75,7 +75,7 @@ Invoke-RestMethod -Uri 'http://127.0.0.1:22380/mcp' -Method Post -Headers $heade
 | `get_log` | `max_bytes` 1～262144，默认 65536 | 读取 ADIF 日志尾部；截断时首条记录可能不完整 |
 | `set_monitor` | `enabled` 布尔 | 开关接收，需要控制权限 |
 | `set_frequency` | `hz` 100000～2147483647 的整数 | 设置工作频率，需要落在程序定义的业余波段内 |
-| `set_mode` | `mode`: FT8 / FT4 / JT65 / JT9 / T10 / WSPR-2 | 切换模式 |
+| `set_mode` | `mode`: FT8 / FT4 / FT2 / JTTY / Q65 / MSK144 / Echo / JT65 / JT9 / T10 / WSPR-2 | 切换模式 |
 | `set_audio_frequency` | 至少一个 `rx_hz`、`tx_hz`，200～4000 | 设置音频频率，受当前模式界面范围限制 |
 | `set_tx_period` | `first` 布尔 | true 为偶数/第一时隙，false 为奇数/第二时隙 |
 | `set_target` | `callsign`；可选 `grid`、`report`（−50～49，默认 −10） | 准备目标及标准消息，不开启发射 |
@@ -110,7 +110,7 @@ Invoke-RestMethod -Uri 'http://127.0.0.1:22380/mcp' -Method Post -Headers $heade
 2. 在停止发射时设置 `auto_sequence: true`、`single_qso: false`、合适的 `selection` 和 `watchdog_minutes`。
 3. 希望无人呼叫时主动应答别人的 CQ，可启用 `call_worked` 或 `search_cq`；其他新电台/区域筛选仍遵循设置。
 4. 选择实时解码或准备目标；希望先 CQ 时清空目标并 `select_message` 6。
-5. 操作者在程序界面人工点击“启用发射”。`start_tx` 不能替代这一步。自动程序会优先处理符合条件的呼叫，再搜索允许的 CQ；没有候选时 CQ，不插入强制 CQ 轮次。
+5. 操作者在程序界面人工点击“启用发射”，或在开启“双击呼号启用发射”后亲自双击解码目标。`start_tx` 和远程选择目标不能替代这个人工动作。自动程序会优先处理符合条件的呼叫，再搜索允许的 CQ/73/RR73/RRR；没有候选时 CQ，不插入强制 CQ 轮次。
 6. 轮询状态和解码；让 AutoSeq 完成交换。客户端不需要每个周期重新调用 `start_tx`，重复调用也不会重置监管计时。
 7. 调用 `stop_tx` 结束，或等待监管时间到期。到期后不会被操作、解码或 QSO 自动重新开启；手动开启发射会建立新会话。
 
@@ -120,7 +120,7 @@ Invoke-RestMethod -Uri 'http://127.0.0.1:22380/mcp' -Method Post -Headers $heade
 
 工具成功结果包含 `content` 文本及同内容的 `structuredContent`；执行失败返回 `isError: true`。调用方必须检查，HTTP 200 本身不表示操作成功。协议错误返回 JSON-RPC `error`：未知方法 −32601，参数错误 −32602，解析错误 −32700。
 
-状态增加 `manual_tx_authorized`（当前人工授权）及 `superfox`（接收模式）。`get_config` 的 `log_directory` 与 `log_files` 对应当前呼号全部日志。`get_log` 可以传入 `file` 文件名（不含目录）读取任一当前呼号日志，省略时读取排序后的最近文件；仍受 `max_bytes` 限制。
+状态增加 `manual_tx_authorized`（当前人工授权）及 `superfox`（接收模式）。`get_config` 的 `log_directory` 与 `log_files` 对应当前呼号全部季度日志。`get_log` 可以传入 `file` 文件名（不含目录）读取任一当前呼号日志，省略时读取排序后的最近文件；仍受 `max_bytes` 限制。
 
 状态中的 `managed_mode` 表示当前托管模式，`managed_tx_ready` 表示本次是否已选定托管发射内容（仍需人工发射许可）；MCP 初始化版本号跟随当前程序版本。
 
@@ -141,3 +141,26 @@ Invoke-RestMethod -Uri 'http://127.0.0.1:22380/mcp' -Method Post -Headers $heade
 | 解码器错误 | 先停止发射；程序尝试重启，随后点击“监听”；最多自动尝试 3 次，错误保存在数据目录 `decoder-errors.log` |
 
 协议参考：[MCP Streamable HTTP 规范](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports)。
+
+
+## V3.4.0：双份日志、FT2 与 JTTY
+
+本版提供 22 个工具。`set_mode` 新增 `FT2` 与 `JTTY`。`get_config.compatibility_log` 指向当前呼号目录的完整 `wsjtx_log.adi`，`log_files` 只列季度主日志。
+
+`set_jtty_text {"text":"CQ N0CALL"}` 准备 JTTY 文本（1～80 字符），不会发射。操作员先在程序内手动开启发射并授予 MCP 发射权限后，`start_tx` 才会发送一条消息。每条消息需要单独发送；`stop_tx` 立即取消待编码、待 PTT 和当前发射。`get_messages` 返回 JTTY 文本及编码状态，`get_events` 的 `jtty_receive` 提供逐步拼接的接收内容，`get_decodes` 收录完整接收消息。JTTY 不支持 AutoSeq、托管、标准六消息选择、时隙设置或调谐。
+
+`get_status.watchdog_finishing_qso` 为 true 表示监管已到期、正在完成当前 QSO；这时不能开始新 QSO。JTTY 则发完当前消息后停止。人工停止和故障停止始终立即执行。
+
+
+## V3.5.0：永久黑名单
+
+MCP 解码列表和事件缓存遵守当前操作员的永久黑名单，已屏蔽的完整呼号不会通过历史解码列表绕过界面过滤。`set_target` 与基于解码 ID 的回复同样拒绝屏蔽对象。黑名单损坏时保留原文件并阻止自动选择/发射，用户需修复文件；没有配置操作员时仍可纯监听。黑名单管理入口在主界面第三标签页，文件位于当前呼号日志目录 `blacklist.json`。
+
+第三标签页的呼号选择需点击“确认切换”才生效，暂存选择不改变 MCP 报告的当前操作员。切换后发射授权清零，仍须人工在界面启用。现代 FT8/FT4 解码开关是独立的本地解码设置，不改变现有 MCP 消息格式或远程发射权限。
+
+
+## V3.6.0 模式兼容
+
+`set_mode` 新增 `Q65`、`MSK144` 和 `Echo`，工具总数仍为 22。新模式使用主界面相同的人工发射授权、监管和黑名单门禁；远程选择模式不会开启发射。Q65 周期/子模式、全双工和天文跟踪在本地界面配置。Echo 是测量模式，不接受普通通联文本、托管或调谐命令；错误会通过既有 `isError` 返回。
+
+Q65/MSK144 的完整消息通过既有解码事件输出，Echo 测量通过 `echo` 事件提供信噪比、频移、质量和积分次数。JTDX-F 原有 FT8/FT4 解码事件字段保持兼容。

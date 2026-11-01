@@ -294,385 +294,500 @@
        </item>
        <item>
         <widget class="QGroupBox" name="display_group_box">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="title">
-          <string>Display</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_4">
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>3</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>1</number>
-          </property>
-          <property name="verticalSpacing">
-           <number>6</number>
-          </property>
-          <item row="0" column="1">
-           <layout class="QGridLayout" name="gridLayout_21">
-            <property name="topMargin">
-             <number>2</number>
-            </property>
-            <property name="verticalSpacing">
-             <number>3</number>
-            </property>
-            <item row="0" column="2">
-             <widget class="QPushButton" name="font_push_button">
-              <property name="toolTip">
-               <string>Set the font characteristics for the application.</string>
-              </property>
-              <property name="text">
-               <string>Application Font...</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QPushButton" name="decoded_text_font_push_button">
-              <property name="toolTip">
-               <string>Set the font characteristics for the Band Activity and Rx Frequency areas.</string>
-              </property>
-              <property name="text">
-               <string>Decoded Text Font...</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QCheckBox" name="scroll_check_box">
-              <property name="toolTip">
-               <string>Scroll message windows down not up.</string>
-              </property>
-              <property name="text">
-               <string>&amp;Scroll message windows down</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QCheckBox" name="miles_check_box">
-              <property name="toolTip">
-               <string>Show distance to DX station in miles rather than kilometers.</string>
-              </property>
-              <property name="text">
-               <string>Display dista&amp;nce in miles</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="hide_TX_messages_check_box">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When TX message is changed previous message will not be shown if it was transmitted for less than 2 seconds.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>&amp;Hide partially transmitted messages</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QCheckBox" name="countryPrefix_check_box">
-              <property name="toolTip">
-               <string>Append prefix instead of name.</string>
-              </property>
-              <property name="text">
-               <string>Show &amp;prefix not name</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QCheckBox" name="TX_messages_check_box">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="toolTip">
-               <string>Show outgoing transmitted messages in the Rx frequency window.</string>
-              </property>
-              <property name="text">
-               <string>&amp;Tx messages to Rx frequency window</string>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="countryName_check_box">
-              <property name="toolTip">
-               <string>Append DXCC names to decoded messages.</string>
-              </property>
-              <property name="text">
-               <string>Show &amp;DXCC names</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="insert_blank_check_box">
-              <property name="toolTip">
-               <string>Include a separator line between periods in the band activity window.</string>
-              </property>
-              <property name="text">
-               <string>&amp;Blank line between decoding periods</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <layout class="QHBoxLayout" name="horizontalLayout_40">
-              <item>
-               <widget class="QCheckBox" name="useDarkStyle_check_box">
-                <property name="text">
-                 <string>Use dar&amp;k style</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_2">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>0</width>
-                  <height>0</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
+ <property name="title">
+  <string>Display</string>
+ </property>
+ <layout class="QGridLayout" name="fm_display_group_box_layout">
+  <item row="0" column="0">
+   <widget class="QCheckBox" name="DXCC_check_box">
+    <property name="toolTip">
+     <string>Show if decoded stations are new DXCC entities or worked before.</string>
+    </property>
+    <property name="text">
+     <string>Show &amp;DXCC, grid, and worked-before status    </string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+  </item>
+  <item row="0" column="1">
+   <widget class="QPushButton" name="font_push_button">
+    <property name="toolTip">
+     <string>Set the font characteristics for the application.</string>
+    </property>
+    <property name="text">
+     <string>Font...</string>
+    </property>
+   </widget>
+  </item>
+  <item row="1" column="0">
+   <widget class="QCheckBox" name="insert_blank_check_box">
+    <property name="toolTip">
+     <string>Include a separator line between periods in the band activity window.</string>
+    </property>
+    <property name="text">
+     <string>&amp;Blank line between decoding periods</string>
+    </property>
+   </widget>
+  </item>
+  <item row="1" column="1">
+   <widget class="QPushButton" name="decoded_text_font_push_button">
+    <property name="toolTip">
+     <string>Set the font characteristics for the Band Activity and Rx Frequency areas.</string>
+    </property>
+    <property name="text">
+     <string>Decoded Text Font...</string>
+    </property>
+   </widget>
+  </item>
+  <item row="2" column="0">
+   <widget class="QCheckBox" name="cb_detailed_blank_line">
+    <property name="toolTip">
+     <string>Show the separator line between periods with time stamp of the decode period.</string>
+    </property>
+    <property name="text">
+     <string>Show blank line with time stamp</string>
+    </property>
+   </widget>
+  </item>
+  <item row="2" column="1">
+   <widget class="QCheckBox" name="decodes_from_top_check_box">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have decodes for a new period start at the top of the Band Activity window and not scroll off the top when the window is full.&lt;/p&gt;&lt;p&gt;This is to aid selecting decodes to double-click while decoding is still in progress. Use the Band Activity vertical scroll bar to reveal decodes past the bottom of the window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Start new period decodes at top</string>
+    </property>
+   </widget>
+  </item>
+  <item row="3" column="0">
+   <widget class="QCheckBox" name="cbHighlightDXcall">
+    <property name="text">
+     <string>Highlight DX Call in message</string>
+    </property>
+   </widget>
+  </item>
+  <item row="3" column="1">
+   <widget class="QCheckBox" name="cbHighlightDXgrid">
+    <property name="text">
+     <string>Highlight DX Grid in message</string>
+    </property>
+   </widget>
+  </item>
+  <item row="4" column="0">
+   <widget class="QCheckBox" name="countryName_check_box">
+    <property name="text">
+     <string>Show DXCC for all messages</string>
+    </property>
+   </widget>
+  </item>
+  <item row="4" column="1">
+   <widget class="QCheckBox" name="countryPrefix_check_box">
+    <property name="text">
+     <string>Show principal prefix instead of country name        </string>
+    </property>
+   </widget>
+  </item>
+  <item row="5" column="0">
+   <widget class="QCheckBox" name="miles_check_box">
+    <property name="toolTip">
+     <string>Show distance to DX station in miles rather than kilometers.</string>
+    </property>
+    <property name="text">
+     <string>Display dista&amp;nce in miles</string>
+    </property>
+   </widget>
+  </item>
+  <item row="5" column="1">
+   <widget class="QCheckBox" name="TX_messages_check_box">
+    <property name="toolTip">
+     <string>Show outgoing transmitted messages in the Rx frequency window.</string>
+    </property>
+    <property name="text">
+     <string>&amp;Tx messages to Rx frequency window</string>
+    </property>
+   </widget>
+  </item>
+  <item row="6" column="0">
+   <widget class="QCheckBox" name="scroll_check_box">
+    <property name="toolTip">
+     <string>Scroll message windows down not up.</string>
+    </property>
+    <property name="text">
+     <string>&amp;Scroll message windows down</string>
+    </property>
+   </widget>
+  </item>
+  <item row="6" column="1">
+   <widget class="QCheckBox" name="hide_TX_messages_check_box">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When TX message is changed previous message will not be shown if it was transmitted for less than 2 seconds.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>&amp;Hide partially transmitted messages</string>
+    </property>
+   </widget>
+  </item>
+  <item row="7" column="0">
+   <widget class="QCheckBox" name="useDarkStyle_check_box">
+    <property name="text">
+     <string>Use dar&amp;k style</string>
+    </property>
+   </widget>
+  </item>
+ </layout>
+</widget>
        </item>
        <item>
         <widget class="QGroupBox" name="behaviour_group_box">
-         <property name="title">
-          <string>Behavior</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_8">
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>3</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>1</number>
-          </property>
-          <property name="horizontalSpacing">
-           <number>6</number>
-          </property>
-          <property name="verticalSpacing">
-           <number>3</number>
-          </property>
-          <item row="0" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_32">
-            <item>
-             <widget class="QCheckBox" name="monitor_off_check_box">
-              <property name="toolTip">
-               <string>Don't start decoding until the monitor button is clicked.</string>
-              </property>
-              <property name="text">
-               <string>Mon&amp;itor off at startup</string>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_18">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_30">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="text">
-               <string>Tx watchdog timer</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="tx_watchdog_spin_box">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="specialValueText">
-               <string>Disabled</string>
-              </property>
-              <property name="suffix">
-               <string> minutes</string>
-              </property>
-              <property name="maximum"><number>999</number></property>
-              <property name="value">
-               <number>6</number>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="1" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_33">
-            <item>
-             <widget class="QCheckBox" name="decode_at_52s_check_box">
-              <property name="text">
-               <string>Decode at t = 52 s</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_26">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_32">
-              <property name="text">
-               <string>Tune timer</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="tune_timer_spin_box">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Number of seconds before tune is aborted&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="specialValueText">
-               <string>Disabled</string>
-              </property>
-              <property name="suffix">
-               <string> seconds</string>
-              </property>
-              <property name="minimum">
-               <number>0</number>
-              </property>
-              <property name="maximum">
-               <number>300</number>
-              </property>
-              <property name="singleStep">
-               <number>5</number>
-              </property>
-              <property name="value">
-               <number>30</number>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="2" column="0">
-           <widget class="QCheckBox" name="tx_QSY_check_box">
-            <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Some rigs are not able to process CAT commands while transmitting. This means that if you are operating in split mode you may have to uncheck this option.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="text">
-             <string>Allo&amp;w Tx frequency changes while transmitting</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QCheckBox" name="monitor_last_used_check_box">
-            <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check this if you wish to automatically return to the last monitored frequency when monitor is enabled, leave it unchecked if you wish to have the current rig frequency maintained.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="text">
-             <string>Monitor returns to last used fre&amp;quency</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_9">
-            <item>
-             <widget class="QCheckBox" name="CW_id_after_73_check_box">
-              <property name="toolTip">
-               <string>Send a CW ID after every 73 or free text message.</string>
-              </property>
-              <property name="text">
-               <string>CW ID a&amp;fter 73</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLabel" name="label">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Periodic CW ID Inter&amp;val:</string>
-              </property>
-              <property name="buddy">
-               <cstring>CW_id_interval_spin_box</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="CW_id_interval_spin_box">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="toolTip">
-               <string>Send a CW ID periodically every few minutes.
-This might be required under your countries licence regulations.
-It will not interfere with other users as it is always sent in the
-quiet period when decoding is done.</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
+ <property name="title">
+  <string>Behavior</string>
+ </property>
+ <layout class="QGridLayout" name="fm_behaviour_group_box_layout">
+  <item row="0" column="0">
+   <widget class="QCheckBox" name="monitor_off_check_box">
+    <property name="toolTip">
+     <string>Don't start decoding until the monitor button is clicked.</string>
+    </property>
+    <property name="text">
+     <string>Mon&amp;itor off at startup</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+  </item>
+  <item row="0" column="1">
+   <widget class="QCheckBox" name="monitor_last_used_check_box">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check this if you wish to automatically return to the last monitored frequency when monitor is enabled, leave it unchecked if you wish to have the current rig frequency maintained.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Monitor returns to last used frequency</string>
+    </property>
+   </widget>
+  </item>
+  <item row="1" column="0">
+   <widget class="QCheckBox" name="enable_VHF_features_check_box">
+    <property name="text">
+     <string>Enable VHF and submode features</string>
+    </property>
+   </widget>
+  </item>
+  <item row="1" column="1">
+   <widget class="QCheckBox" name="auto_astro_check_box">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open the Astronomical Data window automatically when switching to Q65 or JT65 mode and Decode after EME delay is enabled, and close it when no longer needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Auto-open/close Astronomical data window</string>
+    </property>
+   </widget>
+  </item>
+  <item row="2" column="0">
+   <widget class="QCheckBox" name="alternate_bindings_check_box">
+    <property name="text">
+     <string>Alternate F1-F6 bindings</string>
+    </property>
+    <property name="toolTip">
+     <string>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. These keys cannot start a TX session. Click Enable TX first.</string>
+    </property>
+   </widget>
+  </item>
+  <item row="2" column="1">
+   <widget class="QCheckBox" name="quick_call_check_box">
+    <property name="text">
+     <string>Double-click a callsign to enable TX</string>
+    </property>
+    <property name="toolTip">
+     <string>When checked, double-clicking a decoded callsign starts a TX session after the transmission safety checks pass. The session then follows the normal AutoSeq, Single QSO and watchdog settings. Off by default.</string>
+    </property>
+   </widget>
+  </item>
+  <item row="3" column="0">
+   <widget class="QCheckBox" name="disable_TX_on_73_check_box">
+    <property name="text">
+     <string>Di&amp;sable Tx after sending 73</string>
+    </property>
+    <property name="toolTip">
+     <string>Finish one QSO and stop. This is the same setting as Single QSO in the main window. Leave it unchecked for continuous QSOs within the TX watchdog session.</string>
+    </property>
+   </widget>
+  </item>
+  <item row="3" column="1">
+   <widget class="QCheckBox" name="force_call_1st_check_box">
+    <property name="text">
+     <string>Calling CQ forces Call 1st</string>
+    </property>
+   </widget>
+  </item>
+  <item row="4" column="0">
+   <widget class="QCheckBox" name="repeat_Tx_check_box">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tx until 73 is received when in MSK144 or Q65 mode. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>MSK144/Q65: Tx until 73 is received</string>
+    </property>
+   </widget>
+  </item>
+  <item row="4" column="1">
+   <widget class="QCheckBox" name="kHz_without_k_check_box">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allow kHz frequency offset entry without 'k' suffix.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>kHz entry without k (restart required)</string>
+    </property>
+   </widget>
+  </item>
+  <item row="5" column="0">
+   <widget class="QCheckBox" name="tx_QSY_check_box">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Some rigs are not able to process CAT commands while transmitting. This means that if you are operating in split mode you may have to uncheck this option.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Allow Tx frequency changes while transmitting</string>
+    </property>
+   </widget>
+  </item>
+  <item row="5" column="1">
+   <widget class="QCheckBox" name="decode_at_52s_check_box">
+    <property name="text">
+     <string>Decode after EME delay</string>
+    </property>
+    <property name="toolTip">
+     <string>Allow the additional Earth–Moon–Earth propagation delay when collecting and decoding signals. This does not alter the UTC clock.</string>
+    </property>
+   </widget>
+  </item>
+  <item row="6" column="0">
+   <widget class="QCheckBox" name="single_decode_check_box">
+    <property name="text">
+     <string>Single decode</string>
+    </property>
+   </widget>
+  </item>
+  <item row="6" column="1">
+   <widget class="QCheckBox" name="progress_bar_check_box">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Turn the progress bar red while transmitting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Turn progress bar red while transmitting</string>
+    </property>
+   </widget>
+  </item>
+  <item row="7" column="0">
+   <widget class="QCheckBox" name="tune_watchdog_check_box">
+    <property name="text">
+     <string>Tune watchdog   </string>
+    </property>
+    <property name="toolTip">
+     <string>Stop Tune after the selected number of seconds. A zero interval disables this timer.</string>
+    </property>
+   </widget>
+  </item>
+  <item row="7" column="1">
+   <widget class="QSpinBox" name="tune_timer_spin_box">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Number of seconds before tune is aborted&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="specialValueText">
+     <string>Disabled</string>
+    </property>
+    <property name="suffix">
+     <string> seconds</string>
+    </property>
+    <property name="minimum">
+     <number>0</number>
+    </property>
+    <property name="maximum">
+     <number>300</number>
+    </property>
+    <property name="singleStep">
+     <number>5</number>
+    </property>
+    <property name="value">
+     <number>30</number>
+    </property>
+   </widget>
+  </item>
+  <item row="8" column="0">
+   <widget class="QLabel" name="label_30">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>Tx watchdog timer</string>
+    </property>
+   </widget>
+  </item>
+  <item row="8" column="1">
+   <widget class="QSpinBox" name="tx_watchdog_spin_box">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="specialValueText">
+     <string>Disabled</string>
+    </property>
+    <property name="suffix">
+     <string> minutes</string>
+    </property>
+    <property name="maximum">
+     <number>999</number>
+    </property>
+    <property name="value">
+     <number>6</number>
+    </property>
+   </widget>
+  </item>
+ </layout>
+</widget>
+       </item>
+       <item>
+<widget class="QGroupBox" name="additional_features_box">
+ <property name="title">
+  <string>Additional features</string>
+ </property>
+ <layout class="QGridLayout" name="fm_additional_features_box_layout">
+  <item row="0" column="0">
+   <widget class="QCheckBox" name="cbRxToTxAfterQSO">
+    <property name="text">
+     <string>Set Rx frequency to Tx frequency after QSO</string>
+    </property>
+    <property name="toolTip">
+     <string>After a completed QSO, move the receive audio frequency to the transmit audio frequency. This does not enable the Tx=Rx lock.</string>
+    </property>
+   </widget>
+  </item>
+  <item row="0" column="1">
+   <widget class="QCheckBox" name="cbEraseBandActivity">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase Band Activity and Rx frequency windows after band change.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Erase decodes after band change</string>
+    </property>
+   </widget>
+  </item>
+  <item row="1" column="0">
+   <widget class="QCheckBox" name="cbClearDXcall">
+    <property name="text">
+     <string>Clear DX Call after QSO</string>
+    </property>
+   </widget>
+  </item>
+  <item row="1" column="1">
+   <widget class="QCheckBox" name="cbClearDXgrid">
+    <property name="text">
+     <string>Clear DX Grid after QSO</string>
+    </property>
+   </widget>
+  </item>
+  <item row="2" column="0">
+   <widget class="QCheckBox" name="cb_showDistance">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends locator, calculate and show the distance in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Show distance in messages with grid</string>
+    </property>
+   </widget>
+  </item>
+  <item row="2" column="1">
+   <widget class="QCheckBox" name="cb_showAzimuth">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends a valid Maidenhead locator, calculate and show the great-circle azimuth in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Show azimuth in messages with grid</string>
+    </property>
+   </widget>
+  </item>
+  <item row="3" column="0">
+   <widget class="QCheckBox" name="Map_Grid_to_State">
+    <property name="text">
+     <string>Map Grid locator to U.S. State</string>
+    </property>
+   </widget>
+  </item>
+  <item row="3" column="1">
+   <widget class="QCheckBox" name="Map_All_Messages">
+    <property name="text">
+     <string>Show U.S. States in messages with grid</string>
+    </property>
+   </widget>
+  </item>
+  <item row="4" column="0">
+   <widget class="QCheckBox" name="cb_Align">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Align the text for DXCC, distance and azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Align DXCC/distance/azimuth</string>
+    </property>
+   </widget>
+  </item>
+  <item row="4" column="1">
+   <widget class="QCheckBox" name="alternate_erase_button_check_box">
+    <property name="text">
+     <string>Alternate Erase button behavior</string>
+    </property>
+   </widget>
+  </item>
+  <item row="5" column="0">
+   <widget class="QSpinBox" name="align_spin_box">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between message text and DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="minimum">
+     <number>-2</number>
+    </property>
+    <property name="maximum">
+     <number>10</number>
+    </property>
+    <property name="value">
+     <number>1</number>
+    </property>
+   </widget>
+  </item>
+  <item row="5" column="1">
+   <widget class="QSpinBox" name="align_spin_box2">
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between DXCC and distance/azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="minimum">
+     <number>-8</number>
+    </property>
+    <property name="maximum">
+     <number>5</number>
+    </property>
+   </widget>
+  </item>
+  <item row="6" column="0">
+   <widget class="QCheckBox" name="enable_Wait_features_check_box">
+    <property name="text">
+     <string>Enable Wait features</string>
+    </property>
+    <property name="toolTip">
+     <string>Enable Wait &amp; Call, Wait &amp; Reply and Wait &amp; Pounce controls. They require a manually authorized TX session and cannot restart transmission after Stop. Managed mode keeps its own selection rules.</string>
+    </property>
+   </widget>
+  </item>
+  <item row="6" column="1">
+   <widget class="QCheckBox" name="disable_button_coloring_check_box">
+    <property name="text">
+     <string>Less button coloring (restart required)</string>
+    </property>
+   </widget>
+  </item>
+ </layout>
+</widget>
        </item>
        <item>
         <spacer name="verticalSpacer">
@@ -838,10 +953,10 @@ quiet period when decoding is done.</string>
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Request output power data from transceiver: CAT shall be set up via Hamlib, Hamlib does support getting output power data for some transceivers.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>Read and display transmit power and SWR through CAT. Unsupported readings are shown as unavailable.</string>
            </property>
            <property name="text">
-            <string>Output power</string>
+            <string>Read and display PWR and SWR</string>
            </property>
           </widget>
          </item>
@@ -2231,10 +2346,10 @@ both here.</string>
                      <bool>true</bool>
                     </property>
                     <property name="toolTip">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option is being used for non-overlapping spectra scenario. Tx will be halted if spectra have common frequencies with no respect to this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     <string>With AutoSeq enabled, checking this option pauses calls to the selected station while it replies to someone else, keeping Enable TX on. Resume on its CQ, 73, RR73, RRR or a reply to you. When unchecked, do not pause for this reason. Call limits, the TX watchdog and Stop still apply.</string>
                     </property>
                     <property name="text">
-                     <string>Halt TX if operator I called answered to other operator</string>
+                     <string>Wait if the called station replies to someone else</string>
                     </property>
                    </widget>
                   </item>
@@ -3844,7 +3959,7 @@ Right click for insert and delete options.</string>
                 </size>
                </property>
                <property name="text">
-                <string>Transmitted message</string>
+                <string>Own transmitted message</string>
                </property>
               </widget>
              </item>
@@ -3857,7 +3972,7 @@ Right click for insert and delete options.</string>
                 </size>
                </property>
                <property name="styleSheet">
-                <string notr="true">QLabel{background-color: #ffff00}</string>
+                <string notr="true">QLabel{background-color: #7AD6CA; color: #000000}</string>
                </property>
                <property name="text">
                 <string>K1ABC</string>
@@ -7280,8 +7395,6 @@ soundcard changes</string>
   <tabstop>grid_line_edit</tabstop>
   <tabstop>type_2_msg_gen_combo_box</tabstop>
   <tabstop>monitor_off_check_box</tabstop>
-  <tabstop>CW_id_after_73_check_box</tabstop>
-  <tabstop>CW_id_interval_spin_box</tabstop>
   <tabstop>rig_combo_box</tabstop>
   <tabstop>CAT_poll_interval_spin_box</tabstop>
   <tabstop>CAT_port_combo_box</tabstop>

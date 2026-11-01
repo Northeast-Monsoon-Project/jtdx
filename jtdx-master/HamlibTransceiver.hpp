@@ -10,6 +10,7 @@
 
 #include "TransceiverFactory.hpp"
 #include "PollingTransceiver.hpp"
+#include "HamlibVfoRoleState.hpp"
 
 extern "C"
 {
@@ -50,6 +51,7 @@ class HamlibTransceiver final
   Transceiver::MODE map_mode (rmode_t) const;
   rmode_t map_mode (Transceiver::MODE mode) const;
   std::tuple<vfo_t, vfo_t> get_vfos (bool for_split) const;
+  std::tuple<vfo_t, vfo_t> resolve_vfos (bool for_split) const;
   unsigned model_;
   struct RIGDeleter {static void cleanup (RIG *);};
   QScopedPointer<RIG, RIGDeleter> rig_;
@@ -58,18 +60,20 @@ class HamlibTransceiver final
   bool back_ptt_port_;
   bool one_VFO_;
   bool is_dummy_;
+  bool ptt_only_;
   bool ptt_on_;
   // these are saved on destruction so we can start new instances
   // where the last one left off
   static freq_t dummy_frequency_;
   static rmode_t dummy_mode_;
-  bool mutable reversed_;
+  HamlibVfoRoleState mutable vfo_roles_;
 
   bool freq_query_works_;
   bool mode_query_works_;
   bool split_query_works_;
   bool do_snr_;
   bool do_pwr_;
+  bool do_pwr_meter_;
   bool do_pwr2_;
   bool do_swr_;
   bool tickle_hamlib_;          // Hamlib requires a

@@ -1,0 +1,26 @@
+JTDX-F FT2 implementation provenance (V3.4.0)
+
+Source: IU8LMC Decodium, https://github.com/iu8lmc/Decodium-3.0-Shannon
+Pinned commit: 55aee72f3b46d63a72c7f9b2167b342f878a7a2e
+Upstream directory: lib/ft2/
+License: GNU GPL v3 or later; see repository COPYING. Upstream WSJT-X/JTDX/
+Decodium author credits are retained. Fluxmancer integration changes, 2026.
+
+This is the contemporary Decodium 4-GFSK FT2 protocol: 3.75-second slots,
+288 samples/symbol at 12 kHz, 103 coded/sync symbols plus two ramp symbols,
+2.52-second waveform, LDPC (174,91), 77-bit messages. It is NOT the old
+experimental two-tone WSJT-X mode of the same name.
+
+Imported frontend: ft2_decode/params/baseline/downsample/channel_est,
+getcandidates2, get_ft2_bitmetrics, normalizebmet, sync2d, subtractft2,
+ft2_nuttal_window; encoder: genft2, gen_ft2wave.
+Local adaptation: JTDX pack/unpack77 and twkfreq1 ABI, hash tables, callback,
+bounded shared-audio snapshot, invalid/quiet/narrow spectrum guards,
+waveform cache tracks sample rate, no unit-14 debugging output.
+fm_ft2_ldpc is a local adapter using JTDX bpdecode174_91/osd4_174_91.
+Multi-period averaging is not enabled by the JTDX-F frontend.
+Working frequency presets come from upstream models/FrequencyList.cpp at
+this exact commit; operators can edit them in Settings/Frequencies.
+
+Reference: https://www.ft2.it/manual/decodium4_manual_en.html
+ADIF: MFSK / SUBMODE FT2, introduced by ADIF 3.1.7.

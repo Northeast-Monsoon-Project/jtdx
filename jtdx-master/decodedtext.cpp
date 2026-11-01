@@ -12,8 +12,9 @@ namespace
   QRegularExpression words_re {R"(^(?:(?<word1>(?:CQ|DE|QRZ)(?:\s?DX|\s(?:[A-Z]{1,2}|\d{3}))|...|[A-Z0-9/]+)\s)(?:(?<word2>[A-Z0-9/]+)(?:\s(?<word3>[-+A-Z0-9]+)(?:\s(?<word4>(?:OOO|(?!RR73)[A-R]{2}[0-9]{2})))?)?)?)"};
 }
 
-DecodedText::DecodedText (QString const& the_string, QObject *parent)
+DecodedText::DecodedText (QString const& the_string, QObject *parent, bool extended)
   : QObject {parent}
+  ,extended_ {extended}
   ,string_ {the_string.left (the_string.indexOf (QChar::Nbsp))} // discard appended info
 //  : string_ {"185415   4  0.2  950 ~  CQ 5B/SQ9UM"}
   , padding_ {string_.indexOf (" ") > 4 ? 2 : 0} // allow for
@@ -31,13 +32,13 @@ DecodedText::DecodedText (QString const& the_string, QObject *parent)
       debug_translation_.insert("audio gap detected",tr("audio gap detected"));
       debug_translation_.insert("nfqso is out of bandwidth",tr("nfqso is out of bandwidth"));
             
-      message_ = message_.left (24).remove (QRegularExpression {"[<>]"});
+      message_ = message_.left (extended_ ? 37 : 24).remove (QRegularExpression {"[<>]"});
       int i1 = message_.indexOf ('\r');
       if (i1 > 0)
         {
           message_ = message_.left (i1 - 1);
         }
-      if (message_.contains (QRegularExpression {"^(CQ|QRZ)\\s"}))
+      if (!extended_ && message_.contains (QRegularExpression {"^(CQ|QRZ)\\s"}))
         {
           // TODO this magic position 16 is guaranteed to be after the
           // last space in a decoded CQ or QRZ message but before any
@@ -84,31 +85,37 @@ QString DecodedText::CQersCall(QString& grid,QString& tyyp)
 
 bool DecodedText::isHint()
 {
+  if(extended_)return false;
   	return string_.mid(47 + padding_,1) == "*" || string_.mid(47 + padding_,1) == "°" || string_.mid(47 + padding_,1) == "^" ;
 }
 
 bool DecodedText::isWrong()
 {
+  if(extended_)return false;
 	return string_.mid(47 + padding_,1) == "?";
 }
 
 bool DecodedText::isNonStd1()
 {
+  if(extended_)return false;
 	return string_.mid(47 + padding_,1) == ",";
 }
 
 bool DecodedText::isNonStd2()
 {
+  if(extended_)return false;
 	return string_.mid(47 + padding_,1) == ".";
 }
 
 bool DecodedText::isDebug()
 {
+  if(extended_)return false;
 	return string_.mid(47 + padding_,1) == "d";
 }
 
 bool DecodedText::isDXped()
 {
+  if(extended_)return false;
 	return string_.mid(47 + padding_,1) == "1";
 }
 

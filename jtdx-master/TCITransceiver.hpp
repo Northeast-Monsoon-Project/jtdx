@@ -5,9 +5,11 @@
 
 #include "TransceiverFactory.hpp"
 #include "PollingTransceiver.hpp"
+#include "PcmTxQueue.hpp"
 
 #include <QtWebSockets/QWebSocket>
 #include <QTimer>
+#include <QElapsedTimer>
 #include <QEventLoop>
 #include <mutex>
 
@@ -21,7 +23,7 @@ class QString;
 // TCI Interface
 //
 
-typedef struct
+struct Data_Stream
 {
     quint32 receiver;       //!< номер программного приёмника
     quint32 sampleRate;     //!< частота дискретизации
@@ -32,7 +34,8 @@ typedef struct
     quint32 type;           //!< тип потока данных
     quint32 reserv[9];      //!< зарезервировано
     float   data[8192];     //!< поле данных
-}Data_Stream;
+};
+static_assert(offsetof(Data_Stream,data)==64,"TCI wire header must be 64 bytes");
 
 typedef enum
 {
@@ -118,6 +121,7 @@ Cmd_Lock
 Q_ENUM (Tci_Cmd);
 
 public slots:
+  void set_tx_pcm(QByteArray const& pcm,quint64 generation=0) noexcept override;
 //  void close();
   void sendTextMessage(const QString &message);
 //  void trxChanged(quint32 trx, bool state);
@@ -163,7 +167,7 @@ protected:
   void do_txvolume (qreal volume) override; 
 //bounch
   void do_modulator_start(unsigned symbolsLength, double framesPerSymbol, double frequency,
-                     double toneSpacing, bool synchronize = true, double dBSNR = 99., double TRperiod=60.0) override;
+                     double toneSpacing, bool synchronize = true, double dBSNR = 99., double TRperiod=60.0, quint64 generation=0) override;
   void do_modulator_stop(bool quick = false) override;
   
   void rx2_enable (bool on);
@@ -195,6 +199,8 @@ protected:
   enum ModulatorState {Synchronizing, Active, Idle};
 
 private:
+  friend class RegressionTest;
+  void audioSendFailed();
   MODE get_mode (bool requested = false);
   QString frequency_to_string (Frequency) const;
   Frequency string_to_frequency (QString) const;
@@ -205,15 +211,15 @@ private:
   std::unique_ptr<TransceiverBase> wrapped_; // may be null
   QString rx_;
   QString server_;
-  bool use_for_ptt_;
+  bool use_for_ptt_ = false;
   QStringList errortable;
   QString error_;
-  bool do_snr_;
-  bool do_pwr_;
-  bool rig_power_;
-  bool rig_power_off_;
-  bool tci_audio_;
-  bool _power_;
+  bool do_snr_ = false;
+  bool do_pwr_ = false;
+  bool rig_power_ = false;
+  bool rig_power_off_ = false;
+  bool tci_audio_ = false;
+  bool _power_ = false;
   QWebSocket * commander_;
   QLocale locale_;
   QTimer * tci_timer1_;
@@ -222,21 +228,21 @@ private:
   QEventLoop * tci_loop2_;
   QTimer * tci_timer3_;
   QEventLoop * tci_loop3_;
-  int nIqBytes;
-  bool inConnected;
-  bool tci_Ready;
-  bool ESDR3;
-  bool HPSDR;
-  bool tx_top_;
-  bool band_change;
+  int nIqBytes = 0;
+  bool inConnected = false;
+  bool tci_Ready = false;
+  bool ESDR3 = false;
+  bool HPSDR = false;
+  bool tx_top_ = false;
+  bool band_change = false;
   QUrl url_;
-  quint32 audioSampleRate;
+  quint32 audioSampleRate = 0;
   FILE * wavptr_;
   QByteArray t_iqData;
-  int trxA;
-  int trxB;
-  int cntIQ;
-  bool bIQ;
+  int trxA = 0;
+  int trxB = 0;
+  int cntIQ = 0;
+  bool bIQ = false;
 
 // CAT internal variables
   QString requested_mode_;
@@ -249,44 +255,47 @@ private:
   QString requested_drive_;
   QString drive_;
   
-  bool requested_stream_audio_;
-  bool stream_audio_;
-  bool audio_;
-  bool tx_audio_;
-  bool requested_PTT_;
-  bool PTT_;
-  bool requested_split_;
-  bool split_;
-  bool started_split_;
-  bool requested_rx2_;
-  bool rx2_;
-  bool started_rx2_;
-  unsigned int power_;
-  unsigned int swr_;
-  int level_;
-  bool busy_rx_frequency_;
-  bool busy_mode_;  
-  bool busy_other_frequency_;
-  bool busy_split_;
-  bool busy_drive_;
-  bool busy_PTT_; 
-  bool busy_rx2_;  
+  bool requested_stream_audio_ = false;
+  bool stream_audio_ = false;
+  bool audio_ = false;
+  bool tx_audio_ = false;
+  bool requested_PTT_ = false;
+  bool PTT_ = false;
+  bool requested_split_ = false;
+  bool split_ = false;
+  bool started_split_ = false;
+  bool requested_rx2_ = false;
+  bool rx2_ = false;
+  bool started_rx2_ = false;
+  PcmTxQueue pcm_tx_;
+  unsigned last_rx_period_ms_ = 999999;
+  unsigned int power_ = 0;
+  unsigned int swr_ = 0; // ratio x 100, matching TransceiverState
+  QElapsedTimer swr_age_, power_age_;
+  int level_ = 0;
+  bool busy_rx_frequency_ = false;
+  bool busy_mode_ = false;
+  bool busy_other_frequency_ = false;
+  bool busy_split_ = false;
+  bool busy_drive_ = false;
+  bool busy_PTT_ = false;
+  bool busy_rx2_ = false;
   QHash<QString,Tci_Cmd> mapCmd_;
   JTDXDateTime * m_jtdxtime;
   // from Detector
     void clear ();                // discard buffer contents
 
   double m_period = 15.0;
-  unsigned m_downSampleFactor;
-  qint32 m_samplesPerFFT;       // after any down sampling
-  qint32 m_ns;
+  unsigned m_downSampleFactor = 0;
+  qint32 m_samplesPerFFT = 0;       // after any down sampling
+  qint32 m_ns = 0;
   static size_t const max_buffer_size {7 * 512};
   QScopedArrayPointer<short> m_buffer; // de-interleaved sample buffer
   // big enough for all the
   // samples for one increment of
   // data (a signals worth) at
   // the input sample rate
-  unsigned m_bufferPos;
+  unsigned m_bufferPos = 0;
   quint32 writeAudioData (float * data, qint32 maxSize);
   static size_t const bytesPerFrame = 2;
   // from Modulator
@@ -294,40 +303,45 @@ private:
   qint16 postProcessSample (qint16 sample) const;
   bool m_quickClose = false;
 
-  unsigned m_symbolsLength;
+  unsigned m_symbolsLength = 0;
 
   static double constexpr m_twoPi = 2.0 * 3.141592653589793238462;
   unsigned m_nspd = 2048 + 512; // CW ID WPM factor = 22.5 WPM
 
-  double m_phi;
-  double m_dphi;
-  double m_amp;
-  double m_nsps;
-  double  m_trfrequency;
-  double m_frequency0;
-  double m_snr;
-  double m_fac;
-  double m_toneSpacing;
-  double m_fSpread;
-  double m_TRperiod;
+  double m_phi = 0;
+  double m_dphi = 0;
+  double m_amp = 0;
+  double m_nsps = 0;
+  double m_trfrequency = 0;
+  double m_frequency0 = 0;
+  double m_snr = 0;
+  double m_fac = 0;
+  double m_toneSpacing = 0;
+  double m_fSpread = 0;
+  double m_TRperiod = 0;
 
-  qint64 m_silentFrames;
-  qint16 m_ramp;
+  qint64 m_silentFrames = 0;
+  qint16 m_ramp = 0;
   ModulatorState m_state;
 
-  bool m_tuning;
-  bool m_addNoise;
-  bool m_bFastMode;
+  bool m_tuning = false;
+  bool m_addNoise = false;
+  bool m_bFastMode = false;
+  bool m_waveformConsumed = false;
+  bool m_waveformNotified = false;
+  bool m_waveformStarted = false;
+  bool m_waveformStartNotified = false;
+  quint64 m_waveformGeneration = 0;
 
-  bool m_cwLevel;
-  unsigned m_ic;
-  unsigned m_isym0;
-  int m_j0;
-  double m_toneFrequency0;
+  bool m_cwLevel = false;
+  unsigned m_ic = 0;
+  unsigned m_isym0 = 0;
+  int m_j0 = 0;
+  double m_toneFrequency0 = 0;
   
   QByteArray m_tx1[8];
-  int tx_fifo, tx_fifo2;
-  quint32 last_type;  
+  int tx_fifo=0,tx_fifo2=0;
+  quint32 last_type = 0xffffffffu;
   std::string debug_file_;
   std::string wav_file_;
   std::mutex mtx_;

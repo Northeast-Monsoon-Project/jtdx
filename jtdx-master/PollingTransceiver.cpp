@@ -81,8 +81,9 @@ void PollingTransceiver::stop_timer ()
 void PollingTransceiver::do_post_start (JTDXDateTime * jtdxtime)
 {
   m_jtdxtime = jtdxtime;
-  auto ms = m_jtdxtime->currentMSecsSinceEpoch2() % 1000;
-  int sec = m_jtdxtime->currentDateTimeUtc2().toString("ss").toInt() % 15;
+  auto now=m_jtdxtime?m_jtdxtime->currentDateTimeUtc2():QDateTime::currentDateTimeUtc();
+  auto ms=now.time().msec();
+  int sec=now.time().second()%15;
 #if JTDX_DEBUG_TO_FILE
   FILE * pFile = fopen (debug_file_.c_str(),"a");
   if (m_jtdxtime == nullptr)

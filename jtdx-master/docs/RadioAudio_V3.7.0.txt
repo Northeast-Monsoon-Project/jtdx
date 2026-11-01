@@ -1,0 +1,77 @@
+JTDX-F V3.7.0 — CAT/audio/UDP port notes
+
+Reference: WSJT-X v3.3.0-beta5
+Commit: d89fe30ca1dfd3c38def8f17228f09f042829f95
+License: upstream GPLv3+; see repository COPYING.
+
+Adapted upstream components:
+- Transceiver/HamlibVfoRoleState.hpp, Transceiver/HamlibMode.cpp:
+  retain established RX/TX VFO roles while split PTT is active; recognize
+  DATA1/2/3 as compatible digital sideband profiles; bypass and restore the
+  Hamlib mode cache after a frequency change that can recall a band memory.
+- Audio/RxAudioBufferPolicy.hpp: 48,000 capture frames in full duplex,
+  Qt default in half duplex; explicit JTDX_RX_AUDIO_BUFFER_FRAMES wins.
+  Upstream measured 30–60 ms capture loss around output stop on its QO-100
+  setup. That figure is upstream evidence, not a JTDX-F hardware result.
+- tests/unit/common/test_hamlib_transceiver.cpp: in-memory Dummy adapter
+  fixture for split addressing and observing mode at the PTT boundary.
+- Network/MessageClient.cpp: abort obsolete DNS lookups, reject stale lookup
+  results, process at most 64 UDP datagrams before yielding the event loop.
+
+JTDX-F integration and additional fixes:
+- Pure VFO and mode-policy helpers consolidate repeated CAT decisions.
+  MAIN/SUB roles are recognized as well as A/B. Unknown/CURR does not
+  silently reset a previously established RX role.
+- Split band changes correct the actual TX VFO's mode. Required mode
+  correction errors abort the state request before PTT. This is deliberately
+  stricter than upstream's best-effort TX-mode correction.
+- TransceiverBase applies both RX and TX changes from one request before
+  PTT; the previous else-if could leave TX on the previous band.
+- SoundOutput uses one invalidate/halt path for Stop, replacement and
+  errors. Invalid formats cannot leave the old output usable. Runtime
+  failure first resets the backend and closes its source, then emits the
+  failed waveform generation. Queued old callbacks cannot affect a newer
+  playback. PCM EOF is explicit, distinguishing successful drain from a
+  real underrun. GUI consumers must check playback notification generation.
+- DNS backlog is limited to 128 messages / 256 KiB and exists only during
+  an active lookup. Destination changes clear the old backlog and duplicate
+  suppression. Reply requires all six original fields; its two later tail
+  fields remain optional. Truncated commands are rejected. TriggerCQ now
+  reads both documented booleans in the correct order.
+- Companion UDP sockets bypass HTTP/system proxies explicitly. Otherwise
+  Qt can reject binding with "The proxy type is invalid for this operation"
+  and prevent all UDP traffic, including localhost JTAlert communication.
+
+Validation scope:
+- tests/RadioAudioTests.hpp: cache bypass/restore (including -1 cache
+  forever), full-duplex buffer policy, stale callback rejection, real
+  Modulator cancellation with unavailable output, Dummy A/B and MAIN/SUB
+  TX mode, simultaneous RX/TX band change, failed mode correction, DATA
+  profiles and passband preservation.
+- tests/UdpProtocolTests.cpp: real loopback wire protocol, legacy Reply,
+  truncated packets, DNS cancellation, bounded backlog, port changes and
+  direct transport while an application HTTP proxy is configured. All ten
+  Qt Test cases (including setup/cleanup) passed on the local Linux build.
+- No radio, RF, sound-device fault injection or satellite path was used.
+  Rig-specific behavior and backend/device failure handling still need
+  hardware testing; these tests do not claim RF timing or SWR validation.
+
+Preserved integration contracts:
+Manual TX permission, immediate Stop, FT-450 CAT PTT acknowledgment, SWR
+protection, permitted late-slot starts and existing modern decoders remain
+owned by their existing controllers. These changes do not automatically
+rearm transmission after an error. Hamlib remains the supported 4.7.2 ABI;
+this is not an untested Hamlib 5 runtime migration.
+
+77-bit compatibility follow-up (separate from the radio/audio port):
+- lib/ft8v2/packjt77.f90 and packjt77sd.f90 share small pure predicates
+  adapted from beta5's lib/77bit/packjt77_grammar.f90. A three-token non-CQ
+  RR73 exchange now emits the defined Type1/2 tail index 32403. CQ RR73 and
+  explicit R+locator remain the genuine grid index 32373; old packets using
+  32373 for signoff remain decodable. The hint encoder uses the same bits.
+- Unbracketed /R and /P calls cannot share Type1/2's single suffix kind.
+  They now take the existing free-text fallback instead of silently rewriting
+  /R to /P or reaching the old undefined Type4 non-hash fallback.
+- tests/Pack77TailCompatibility.f90 checks wire bits, round trips, legacy
+  reception and main/hint encoder equality. This is a targeted grammar fix,
+  not a claim that the entire beta5 77-bit codec/AP architecture was ported.

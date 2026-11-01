@@ -56,6 +56,7 @@ public:
   // Model API
   //
   QString find (Frequency) const; // find band Frequency is in
+  static QString findBand (Frequency); // shared by the UI and ADIF lookup
   int find (QString const&) const; // find row of band (-1 if not valid)
   static QString const& oob ();
 

@@ -126,7 +126,7 @@ protected:
   virtual void do_nsym(int) {}
   virtual void do_trfrequency(double) {}
   virtual void do_txvolume (qreal) {}
-  virtual void do_modulator_start(unsigned, double, double, double, bool, double, double) {}
+  virtual void do_modulator_start(unsigned, double, double, double, bool, double, double, quint64) {}
   virtual void do_modulator_stop(bool) {}
 
   virtual bool do_pre_update () {return true;}

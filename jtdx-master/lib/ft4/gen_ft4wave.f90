@@ -5,11 +5,17 @@ subroutine gen_ft4wave(itone,nsym,nsps,fsample,f0,cwave,wave,icmplx,nwave)
   real pulse(6912)              !576*4*3
   real dphi(0:250000-1)
   integer itone(nsym)
+  integer last_nsps
+  real last_fsample
+  data last_nsps/0/, last_fsample/0.0/
+  save last_nsps,last_fsample
   logical first
   data first/.true./
   save pulse,first,twopi,dt,hmod
 
-  if(first) then
+  if(first .or. nsps.ne.last_nsps .or. fsample.ne.last_fsample) then
+     last_nsps=nsps
+     last_fsample=fsample
      twopi=8.0*atan(1.0)
      dt=1.0/fsample
      hmod=1.0

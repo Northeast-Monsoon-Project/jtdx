@@ -37,8 +37,8 @@ interface
 end interface
 
 npre1=0; npre2=0; d1=0.
-if(first_osd) then ! fill the generator matrix
 !$omp critical(first_osd)
+if(first_osd) then ! fill the generator matrix once, including concurrent callers
   gen=0
   do i=1,M
     do j=1,23
@@ -55,8 +55,8 @@ if(first_osd) then ! fill the generator matrix
     gen(irow,irow)=1
   enddo
 first_osd=.false.
-!$omp end critical(first_osd)
 endif
+!$omp end critical(first_osd)
 
 rx=llr
 apmaskr=apmask
@@ -280,7 +280,8 @@ hdec(indices)=hdec
 decoded=cw(1:K) 
 call chkcrc14a(decoded,nbadcrc)
 message77=decoded(1:77)
-if(nbadcrc.eq.1) nhardmin=-nhardmin
+! Negating zero cannot signal failure for an LDPC word with a bad CRC.
+if(nbadcrc.ne.0) nhardmin=-max(1,abs(nhardmin))
 
 return
 end subroutine osd174_91

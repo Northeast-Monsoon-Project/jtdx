@@ -19,7 +19,7 @@ output=release/(label+'-Source.zip')
 with zipfile.ZipFile(output,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
     for f in files:
         if not f: continue
-        if Path(f).suffix.lower() in ('.adi','.adif','.log') or '.qa' in Path(f).parts: raise SystemExit('Private/log file cannot enter source package: '+f)
+        if Path(f).suffix.lower() in ('.adi','.adif','.log','.pyc','.o','.obj','.a','.exe','.dll','.pdb') or any(part in ('.qa','__pycache__') for part in Path(f).parts): raise SystemExit('Private/log/generated file cannot enter source package: '+f)
         z.write(source/f,label+'/jtdx-master/'+f)
     for name in helpers:z.write(root/'scripts'/name,label+'/scripts/'+name)
     for p in (root/'dependencies').glob('*'):

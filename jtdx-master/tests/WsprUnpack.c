@@ -1,0 +1,390 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * Imported from WSJT-X v3.3.0-beta5 test_wsprd_utils.c; upstream authors retain copyright.
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "lib/wsprd/nhash.h"
+#include "lib/wsprd/wsprd_utils.h"
+
+struct wspr_vector {
+    const char *name;
+    signed char data[11];
+    const char *message;
+    const char *callsign;
+};
+
+static int failures = 0;
+
+static void expect_string(const char *label, const char *actual,
+                          const char *expected)
+{
+    if( strcmp(actual, expected) != 0 ) {
+        fprintf(stderr, "%s: expected '%s', got '%s'\n",
+                label, expected, actual);
+        failures++;
+    }
+}
+
+static void expect_int(const char *label, int actual, int expected)
+{
+    if( actual != expected ) {
+        fprintf(stderr, "%s: expected %d, got %d\n",
+                label, expected, actual);
+        failures++;
+    }
+}
+
+static void decode_vector(const struct wspr_vector *vector,
+                          char *hashtab, char *loctab)
+{
+    char call_loc_pow[23] = {0};
+    char callsign[13] = {0};
+    int noprint = unpk_((signed char *)vector->data, hashtab, loctab,
+                        call_loc_pow, callsign);
+
+    expect_int(vector->name, noprint, 0);
+    expect_string(vector->name, call_loc_pow, vector->message);
+    expect_string(vector->name, callsign, vector->callsign);
+}
+
+static void expect_hash_entry(const char *callsign, const char *grid,
+                              char *hashtab, char *loctab)
+{
+    int ihash = nhash(callsign, strlen(callsign), (uint32_t)146);
+    expect_string(callsign, hashtab + ihash * WSPRD_CALLSIGN_SIZE, callsign);
+    if( grid != NULL ) {
+        expect_string(callsign, loctab + ihash * WSPRD_GRID4_SIZE, grid);
+    }
+}
+
+static void expect_hash_slot(int ihash, const char *callsign, const char *grid,
+                             char *hashtab, char *loctab)
+{
+    expect_string(callsign, hashtab + ihash * WSPRD_CALLSIGN_SIZE, callsign);
+    expect_string(callsign, loctab + ihash * WSPRD_GRID4_SIZE, grid);
+}
+
+static void run_with_fresh_tables(void (*test)(char *, char *))
+{
+    char *hashtab = calloc(WSPRD_HASH_COUNT * WSPRD_CALLSIGN_SIZE, 1);
+    char *loctab = calloc(WSPRD_HASH_COUNT * WSPRD_GRID4_SIZE, 1);
+    if( hashtab == NULL || loctab == NULL ) {
+        fprintf(stderr, "failed to allocate WSPR hash tables\n");
+        exit(2);
+    }
+
+    test(hashtab, loctab);
+
+    free(hashtab);
+    free(loctab);
+}
+
+static const struct wspr_vector k1abc = {
+    "K1ABC FN42 33",
+    {-9, 12, 35, -117, 13, 24, 64, 0, 0, 0, 0},
+    "K1ABC FN42 33",
+    "K1ABC"
+};
+
+static const struct wspr_vector n1d = {
+    "N1D FN42 33",
+    {-9, -99, 1, -117, 13, 24, 64, 0, 0, 0, 0},
+    "N1D FN42 33",
+    "N1D"
+};
+
+static const struct wspr_vector five_n = {
+    "5N/6O0O 37",
+    {45, 15, -83, 104, 42, -103, -64, 0, 0, 0, 0},
+    "5N/6O0O 37",
+    "5N/6O0O"
+};
+
+static const struct wspr_vector pj4 = {
+    "PJ4/K1ABC 37",
+    {-9, 12, 35, -127, 14, -103, -64, 0, 0, 0, 0},
+    "PJ4/K1ABC 37",
+    "PJ4/K1ABC"
+};
+
+static const struct wspr_vector rover = {
+    "K1ABC/R 37",
+    {-9, 12, 35, -115, 79, 121, -64, 0, 0, 0, 0},
+    "K1ABC/R 37",
+    "K1ABC/R"
+};
+
+static const struct wspr_vector k1abc_max_power = {
+    "K1ABC FN42 60",
+    {-9, 12, 35, -117, 13, 31, 0, 0, 0, 0, 0},
+    "K1ABC FN42 60",
+    "K1ABC"
+};
+
+static const struct wspr_vector rover_max_power = {
+    "K1ABC/R 60",
+    {-9, 12, 35, -115, 79, 127, -128, 0, 0, 0, 0},
+    "K1ABC/R 60",
+    "K1ABC/R"
+};
+
+static const struct wspr_vector k1abc_type3_unresolved = {
+    "<K1ABC> FN42AA 33",
+    {-100, 54, -76, -77, 47, 39, -128, 0, 0, 0, 0},
+    "<...> FN42AA 33",
+    "<...>"
+};
+
+static const struct wspr_vector k1abc_type3_resolved = {
+    "<K1ABC> FN42AA 33",
+    {-100, 54, -76, -77, 47, 39, -128, 0, 0, 0, 0},
+    "<K1ABC> FN42AA 33",
+    "<K1ABC>"
+};
+
+static const struct wspr_vector pj4_type3_unresolved = {
+    "<PJ4/K1ABC> FK52UD 37",
+    {-120, 36, 124, 105, -94, -26, -128, 0, 0, 0, 0},
+    "<...> FK52UD 37",
+    "<...>"
+};
+
+static const struct wspr_vector pj4_type3_resolved = {
+    "<PJ4/K1ABC> FK52UD 37",
+    {-120, 36, 124, 105, -94, -26, -128, 0, 0, 0, 0},
+    "<PJ4/K1ABC> FK52UD 37",
+    "<PJ4/K1ABC>"
+};
+
+static void test_standard_and_compound_messages(char *hashtab, char *loctab)
+{
+    decode_vector(&k1abc, hashtab, loctab);
+    expect_hash_entry("K1ABC", "FN42", hashtab, loctab);
+
+    decode_vector(&n1d, hashtab, loctab);
+    expect_hash_entry("N1D", "FN42", hashtab, loctab);
+
+    decode_vector(&five_n, hashtab, loctab);
+    expect_hash_entry("5N/6O0O", NULL, hashtab, loctab);
+
+    decode_vector(&pj4, hashtab, loctab);
+    expect_hash_entry("PJ4/K1ABC", NULL, hashtab, loctab);
+
+    decode_vector(&rover, hashtab, loctab);
+    expect_hash_entry("K1ABC/R", NULL, hashtab, loctab);
+
+    decode_vector(&k1abc_max_power, hashtab, loctab);
+    expect_hash_entry("K1ABC", "FN42", hashtab, loctab);
+
+    decode_vector(&rover_max_power, hashtab, loctab);
+    expect_hash_entry("K1ABC/R", NULL, hashtab, loctab);
+}
+
+static void test_suffix_codes(void)
+{
+    static const struct {
+        int code;
+        const char *callsign;
+    } cases[] = {
+        {60000, "K1ABC/0"},
+        {60009, "K1ABC/9"},
+        {60010, "K1ABC/A"},
+        {60035, "K1ABC/Z"},
+        {60036, "K1ABC/10"},
+        {60125, "K1ABC/99"},
+        {60126, NULL},
+        {60256, NULL},
+        {60283, NULL},
+        {60381, NULL}
+    };
+
+    for( size_t i = 0; i < sizeof cases / sizeof cases[0]; i++ ) {
+        char callsign[WSPRD_CALLSIGN_SIZE] = "K1ABC";
+        char label[64];
+        snprintf(label, sizeof label, "suffix code %d", cases[i].code);
+        expect_int(label, unpackpfx(cases[i].code, callsign),
+                   cases[i].callsign != NULL);
+        if( cases[i].callsign != NULL ) {
+            expect_string(label, callsign, cases[i].callsign);
+        }
+    }
+}
+
+static void test_rejected_messages_preserve_hash_tables(char *hashtab,
+                                                       char *loctab)
+{
+    static const struct {
+        const char *name;
+        signed char data[11];
+    } cases[] = {
+        {"suffix code 60126", {-9, 12, 35, -115, 91, -39, -64, 0, 0, 0, 0}},
+        {"suffix code 60256", {-9, 12, 35, -115, 108, 25, -64, 0, 0, 0, 0}},
+        {"suffix code 60283", {-9, 12, 35, -115, 111, 121, -64, 0, 0, 0, 0}},
+        {"reserved type 63", {-9, 12, 35, -117, 13, 31, -64, 0, 0, 0, 0}}
+    };
+    const size_t calls_size = WSPRD_HASH_COUNT * WSPRD_CALLSIGN_SIZE;
+    const size_t grids_size = WSPRD_HASH_COUNT * WSPRD_GRID4_SIZE;
+    char *saved_calls = malloc(calls_size);
+    char *saved_grids = malloc(grids_size);
+    if( saved_calls == NULL || saved_grids == NULL ) {
+        fprintf(stderr, "failed to allocate WSPR hash table snapshots\n");
+        exit(2);
+    }
+
+    decode_vector(&k1abc, hashtab, loctab);
+    decode_vector(&rover, hashtab, loctab);
+
+    char call_loc_pow[WSPRD_MESSAGE_SIZE];
+    char callsign[WSPRD_CALLSIGN_SIZE];
+    for( size_t i = 0; i < sizeof cases / sizeof cases[0]; i++ ) {
+        expect_int("prime reused message buffers",
+                   unpk_((signed char *)k1abc.data, hashtab, loctab,
+                         call_loc_pow, callsign), 0);
+        memcpy(saved_calls, hashtab, calls_size);
+        memcpy(saved_grids, loctab, grids_size);
+        expect_int(cases[i].name,
+                   unpk_((signed char *)cases[i].data, hashtab, loctab,
+                         call_loc_pow, callsign), 1);
+
+        char label[80];
+        snprintf(label, sizeof label, "%s preserves callsign cache", cases[i].name);
+        expect_int(label, memcmp(hashtab, saved_calls, calls_size), 0);
+        snprintf(label, sizeof label, "%s preserves locator cache", cases[i].name);
+        expect_int(label, memcmp(loctab, saved_grids, grids_size), 0);
+        decode_vector(&k1abc_type3_resolved, hashtab, loctab);
+    }
+
+    free(saved_calls);
+    free(saved_grids);
+}
+
+static void test_type3_unresolved(char *hashtab, char *loctab)
+{
+    decode_vector(&k1abc_type3_unresolved, hashtab, loctab);
+    decode_vector(&pj4_type3_unresolved, hashtab, loctab);
+}
+
+static void test_type3_resolved_k1abc(char *hashtab, char *loctab)
+{
+    decode_vector(&k1abc, hashtab, loctab);
+    decode_vector(&k1abc_type3_resolved, hashtab, loctab);
+}
+
+static void test_type3_resolved_pj4(char *hashtab, char *loctab)
+{
+    decode_vector(&pj4, hashtab, loctab);
+    decode_vector(&pj4_type3_resolved, hashtab, loctab);
+}
+
+static void test_hash_table_line_loading(char *hashtab, char *loctab)
+{
+    expect_int("load hash line with grid",
+               wsprd_load_hash_line("   42 K1ABC FN42\n", hashtab, loctab), 1);
+    expect_hash_slot(42, "K1ABC", "FN42", hashtab, loctab);
+
+    expect_int("load hash line without grid",
+               wsprd_load_hash_line("43 PJ4/K1ABC\n", hashtab, loctab), 1);
+    expect_hash_slot(43, "PJ4/K1ABC", "", hashtab, loctab);
+
+    expect_int("load hash line with suffix call",
+               wsprd_load_hash_line("46 K1ABC/R\n", hashtab, loctab), 1);
+    expect_hash_slot(46, "K1ABC/R", "", hashtab, loctab);
+
+    expect_int("load hash line with numeric suffix",
+               wsprd_load_hash_line("47 K1ABC/10\n", hashtab, loctab), 1);
+    expect_hash_slot(47, "K1ABC/10", "", hashtab, loctab);
+
+    expect_int("load hash line with short prefix",
+               wsprd_load_hash_line("48 5N/6O0O\n", hashtab, loctab), 1);
+    expect_hash_slot(48, "5N/6O0O", "", hashtab, loctab);
+
+    strcpy(loctab + 44 * WSPRD_GRID4_SIZE, "ABCD");
+    expect_int("load hash line preserves missing grid",
+               wsprd_load_hash_line("44 K1ABC\n", hashtab, loctab), 1);
+    expect_hash_slot(44, "K1ABC", "ABCD", hashtab, loctab);
+
+    strcpy(loctab + 49 * WSPRD_GRID4_SIZE, "ABCD");
+    expect_int("load hash line preserves writer whitespace",
+               wsprd_load_hash_line("   49\tPJ4/K1ABC  \r\n", hashtab, loctab), 1);
+    expect_hash_slot(49, "PJ4/K1ABC", "ABCD", hashtab, loctab);
+
+    expect_int("load hash line ignores trailing tokens",
+               wsprd_load_hash_line("45 K1ABC FN42 ignored\n", hashtab, loctab), 1);
+    expect_hash_slot(45, "K1ABC", "FN42", hashtab, loctab);
+
+    expect_int("load max-size hash line",
+               wsprd_load_hash_line("32767 123456789012 ABCD\n", hashtab, loctab), 1);
+    expect_hash_slot(32767, "123456789012", "ABCD", hashtab, loctab);
+}
+
+static void expect_rejected_hash_line(const char *line,
+                                      char *hashtab, char *loctab)
+{
+    const int slot = 7;
+    strcpy(hashtab + slot * WSPRD_CALLSIGN_SIZE, "KEEP");
+    strcpy(loctab + slot * WSPRD_GRID4_SIZE, "ABCD");
+
+    expect_int(line, wsprd_load_hash_line(line, hashtab, loctab), 0);
+    expect_hash_slot(slot, "KEEP", "ABCD", hashtab, loctab);
+}
+
+static void test_invalid_hash_table_lines(char *hashtab, char *loctab)
+{
+    expect_rejected_hash_line("", hashtab, loctab);
+    expect_rejected_hash_line("7\n", hashtab, loctab);
+    expect_rejected_hash_line("slot K1ABC FN42\n", hashtab, loctab);
+    expect_rejected_hash_line("-1 K1ABC FN42\n", hashtab, loctab);
+    expect_rejected_hash_line("32768 K1ABC FN42\n", hashtab, loctab);
+    expect_rejected_hash_line("7 1234567890123 FN42\n", hashtab, loctab);
+    expect_rejected_hash_line("7 K1ABC FN421\n", hashtab, loctab);
+    expect_rejected_hash_line("9999999999999999999999999 K1ABC FN42\n", hashtab, loctab);
+    expect_rejected_hash_line("7K1ABC FN42\n", hashtab, loctab);
+}
+
+/* Keep JTDX-F's existing invalid-input protections when importing upstream utilities. */
+static void test_invalid_primitive_inputs(void)
+{
+    char callsign[WSPRD_CALLSIGN_SIZE] = "K1ABC";
+    char grid[WSPRD_GRID4_SIZE] = {0};
+    expect_int("negative callsign code", unpackcall(-1, callsign), 0);
+    expect_int("reserved callsign code", unpackcall(262177560, callsign), 0);
+    expect_int("negative locator code", unpackgrid(-128, grid), 0);
+    expect_string("negative locator is invalid", grid, "XXXX");
+    expect_int("reserved locator code", unpackgrid(32400 << 7, grid), 0);
+    strcpy(callsign, "K1ABC");
+    expect_int("negative prefix code", unpackpfx(-1, callsign), 0);
+    expect_string("negative prefix preserves call", callsign, "K1ABC");
+    strcpy(callsign, "TOO-LONG");
+    expect_int("compound call with invalid base", unpackpfx(60000, callsign), 0);
+}
+
+static void test_corrupt_hash_slot(char *hashtab, char *loctab)
+{
+    const unsigned slot = nhash("K1ABC", 5, (uint32_t)146);
+    /* No NUL in the slot: never read across slots while expanding a type-3 call. */
+    memset(hashtab + slot * WSPRD_CALLSIGN_SIZE, 'X', WSPRD_CALLSIGN_SIZE);
+    decode_vector(&k1abc_type3_unresolved, hashtab, loctab);
+    /* Brackets must also fit when the stored string itself is terminated. */
+    hashtab[slot * WSPRD_CALLSIGN_SIZE + WSPRD_CALLSIGN_SIZE - 1] = '\0';
+    decode_vector(&k1abc_type3_unresolved, hashtab, loctab);
+    decode_vector(&k1abc, hashtab, loctab);
+    decode_vector(&k1abc_type3_resolved, hashtab, loctab);
+}
+
+int main(void)
+{
+    run_with_fresh_tables(test_standard_and_compound_messages);
+    test_suffix_codes();
+    run_with_fresh_tables(test_rejected_messages_preserve_hash_tables);
+    run_with_fresh_tables(test_type3_unresolved);
+    run_with_fresh_tables(test_type3_resolved_k1abc);
+    run_with_fresh_tables(test_type3_resolved_pj4);
+    run_with_fresh_tables(test_hash_table_line_loading);
+    run_with_fresh_tables(test_invalid_hash_table_lines);
+    test_invalid_primitive_inputs();
+    run_with_fresh_tables(test_corrupt_hash_slot);
+
+    return failures == 0 ? 0 : 1;
+}

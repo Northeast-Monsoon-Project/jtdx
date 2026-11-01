@@ -1,10 +1,10 @@
-!last time modified by Igor UA3DJY on 20191120
-
+! WSJT-X v3.0.2 ccdfaf3c1c109010d15399674ce278167cfde848
 subroutine osdwspr(ss,apmask,ndeep,cw,nhardmin,dmin)
-
+!
 use iso_c_binding
 parameter (N=162, K=50, L=32)
 
+!integer*1 p1(L),p2(L),p3(L),p4(L)
 integer*1 gg(64)
 
 real ss(N)
@@ -24,9 +24,7 @@ data gg/1,1,0,1,0,1,0,0,1,0,0,0,1,1,0,0,1,0,1,0,0,1,0,1,1,1,0,1,1,0,0,0, &
 
 save first,gen
 
-d1=0.
-
-if(first) then ! fill the generator matrix
+if( first ) then ! fill the generator matrix
   gen=0
   gen(1,1:2*L)=gg(1:2*L)
   do i=2,K
@@ -39,12 +37,12 @@ rx=ss/127.0
 apmaskr=apmask
 
 ! Hard decisions on the received word.
-hdec=0            
+hdec=0
 where(rx .ge. 0) hdec=1
 
 ! Use magnitude of received symbols as a measure of reliability.
-absrx=abs(rx) 
-call indexx(absrx,N,indx)  
+absrx=abs(rx)
+call indexx(absrx,N,indx)
 
 ! Re-order the columns of the generator matrix in order of decreasing reliability.
 do i=1,N
@@ -53,8 +51,8 @@ do i=1,N
 enddo
 
 ! Do gaussian elimination to create a generator matrix with the most reliable
-! received bits in positions 1:K in order of decreasing reliability (more or less). 
-do id=1,K ! diagonal element indices 
+! received bits in positions 1:K in order of decreasing reliability (more or less).
+do id=1,K ! diagonal element indices
   do icol=id,K+20  ! The 20 is ad hoc - beware
     iflag=0
     if( genmrb(id,icol) .eq. 1 ) then
@@ -62,7 +60,7 @@ do id=1,K ! diagonal element indices
       if( icol .ne. id ) then ! reorder column
         temp(1:K)=genmrb(1:K,id)
         genmrb(1:K,id)=genmrb(1:K,icol)
-        genmrb(1:K,icol)=temp(1:K) 
+        genmrb(1:K,icol)=temp(1:K)
         itmp=indices(id)
         indices(id)=indices(icol)
         indices(icol)=itmp
@@ -79,16 +77,16 @@ enddo
 
 g2=transpose(genmrb)
 
-! The hard decisions for the K MRB bits define the order 0 message, m0. 
-! Encode m0 using the modified generator matrix to find the "order 0" codeword. 
+! The hard decisions for the K MRB bits define the order 0 message, m0.
+! Encode m0 using the modified generator matrix to find the "order 0" codeword.
 ! Flip various combinations of bits in m0 and re-encode to generate a list of
 ! codewords. Return the member of the list that has the smallest Euclidean
-! distance to the received word. 
+! distance to the received word.
 
 hdec=hdec(indices)   ! hard decisions from received symbols
 m0=hdec(1:K)         ! zero'th order message
-absrx=absrx(indices) 
-rx=rx(indices)       
+absrx=absrx(indices)
+rx=rx(indices)
 apmaskr=apmaskr(indices)
 
 call mrbencode(m0,c0,g2,N,K)
@@ -102,7 +100,7 @@ nrejected=0
 
 if(ndeep.le.0) goto 998  ! norder=0
 if(ndeep.gt.5) ndeep=5
-if(ndeep.eq.1) then
+if( ndeep.eq. 1) then
    nord=1
    npre1=0
    npre2=0
@@ -113,11 +111,12 @@ elseif(ndeep.eq.2) then
    npre1=1
    npre2=0
    nt=66
-   ntheta=16
+   ntheta=22
+   ntau = 16
 elseif(ndeep.eq.3) then
-   nord=2
+   nord=1
    npre1=1
-   npre2=0
+   npre2=1
    nt=66
    ntheta=22
    ntau=16
@@ -131,10 +130,10 @@ elseif(ndeep.eq.4) then
 elseif(ndeep.eq.5) then
    nord=3
    npre1=1
-   npre2=0
+   npre2=1
    nt=66
    ntheta=22
-   ntau=20
+   ntau=16
 endif
 
 do iorder=1,nord
@@ -147,6 +146,7 @@ do iorder=1,nord
       else
          iend=1
       endif
+      d1=0.
       do n1=iflag,iend,-1
          mi=misub
          mi(n1)=1
@@ -177,7 +177,7 @@ do iorder=1,nord
                nhardmin=sum(nxor)
                nd1Kptbest=nd1Kpt
             endif
-         else 
+         else
             nrejected=nrejected+1
          endif
       enddo
@@ -211,14 +211,14 @@ if(npre2.eq.1) then
       e2sub=ieor(ce(K+1:N),hdec(K+1:N))
       do i2=0,ntau
          ntotal2=ntotal2+1
-         ui=0 
-         if(i2.gt.0) ui(i2)=1 
+         ui=0
+         if(i2.gt.0) ui(i2)=1
          r2pat=ieor(e2sub,ui)
-778      continue 
+778      continue
             call fetchit(reset,r2pat(1:ntau),ntau,in1,in2)
             if(in1.gt.0.and.in2.gt.0) then
                ncount2=ncount2+1
-               mi=misub               
+               mi=misub
                mi(in1)=1
                mi(in2)=1
                if(sum(mi).lt.nord+npre1+npre2.or.any(iand(apmaskr(1:K),mi).eq.1)) cycle
@@ -262,7 +262,7 @@ subroutine nextpat(mi,k,iorder,iflag)
 ! generate the next test error pattern
   ind=-1
   do i=1,k-1
-     if( mi(i).eq.0 .and. mi(i+1).eq.1) ind=i 
+     if( mi(i).eq.0 .and. mi(i+1).eq.1) ind=i
   enddo
   if( ind .lt. 0 ) then ! no more patterns of this order
     iflag=ind
@@ -279,7 +279,7 @@ subroutine nextpat(mi,k,iorder,iflag)
   mi=ms
   do i=1,k  ! iflag will point to the lowest-index 1 in mi
     if(mi(i).eq.1) then
-      iflag=i 
+      iflag=i
       exit
     endif
   enddo
@@ -300,7 +300,7 @@ subroutine boxit(reset,e2,ntau,npindex,i1,i2)
     indexes=-1
     reset=.false.
   endif
- 
+
   indexes(npindex,1)=i1
   indexes(npindex,2)=i2
   ipat=0
@@ -315,8 +315,8 @@ subroutine boxit(reset,e2,ntau,npindex,i1,i2)
     fp(ipat)=npindex
   else
      do while (np(ip).ne.-1)
-      ip=np(ip) 
-     enddo  
+      ip=np(ip)
+     enddo
      np(ip)=npindex
   endif
   return
@@ -359,4 +359,4 @@ subroutine fetchit(reset,e2,ntau,i1,i2)
   lastpat=ipat
   return
 end subroutine fetchit
- 
+

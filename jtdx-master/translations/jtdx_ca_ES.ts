@@ -49,6 +49,43 @@
         <source>OK</source>
         <translation>D&apos;acord</translation>
     </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>Quant al JTDX-F</translation>
+    </message>
+    <message>
+        <source>JTDX-F is developed by the Fluxmancer team.&lt;br&gt;Based on JTDX and WSJT-X; upstream credits and GPLv3 are preserved.&lt;br&gt;&lt;br&gt;</source>
+        <translation>JTDX-F és desenvolupat per l’equip Fluxmancer.&lt;br&gt;Basat en JTDX i WSJT-X; es conserven els crèdits originals i la GPLv3.&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>JTDX-F is licensed under GNU GPLv3, without warranty.</source>
+        <translation>JTDX-F es distribueix sota la GNU GPLv3, sense garantia.</translation>
+    </message>
+    <message>
+        <source>FT2 / SuperFox: additional integrations; source revisions are documented with the source code.</source>
+        <translation>FT2 / SuperFox: integracions addicionals; les revisions d'origen es documenten amb el codi font.</translation>
+    </message>
+    <message>
+        <source>FT8 / FT4: JTDX decoders, WSJT-X 3.0.2 protocol/waveforms, selected 3.3.0-beta5 performance/concurrency fixes, and Fluxmancer modern decoding.</source>
+        <translation>FT8 / FT4: descodificadors JTDX, protocol i formes d’ona de WSJT-X 3.0.2, correccions seleccionades de rendiment i concurrència de 3.3.0-beta5 i descodificació moderna de Fluxmancer.</translation>
+    </message>
+    <message>
+        <source>Hamlib (radio control): %1</source>
+        <translation>Hamlib (control de ràdio): %1</translation>
+    </message>
+    <message>
+        <source>JTDX-F preserves JTDX's heritage and incorporates selected WSJT-X updates. Components retain their respective authors and licenses.</source>
+        <translation>JTDX-F conserva el llegat de JTDX i incorpora actualitzacions seleccionades de WSJT-X. Cada component conserva els seus autors i llicències.</translation>
+    </message>
+    <message>
+        <source>Q65 / MSK144 / Echo and astronomical calculations: WSJT-X 3.0.2.</source>
+        <translation>Q65 / MSK144 / Echo i càlculs astronòmics: WSJT-X 3.0.2.</translation>
+    </message>
+    <message>
+        <source>WSPR: WSJT-X 3.0.2 decoder with 3.3.0-beta5 message validation and JTDX-F safety fixes.</source>
+        <translation>WSPR: descodificador WSJT-X 3.0.2 amb validació de missatges de 3.3.0-beta5 i correccions de seguretat de JTDX-F.</translation>
+    </message>
+    <message><source>JTTY: WSJT-X 3.3.0-beta5 decoder with Fluxmancer integration.</source><translation>JTTY: descodificador WSJT-X 3.3.0-beta5 integrat per Fluxmancer.</translation></message>
 </context>
 <context>
     <name>CallsignDialog</name>
@@ -60,6 +97,10 @@
 </context>
 <context>
     <name>Configuration::impl</name>
+    <message>
+        <source>Own transmitted message</source>
+        <translation>Missatge transmès propi</translation>
+    </message>
     <message>
         <location filename="../Configuration.cpp" line="1372"/>
         <source>&amp;OK</source>
@@ -330,6 +371,64 @@ Format:
         <location filename="../Configuration.cpp" line="6028"/>
         <source>Rig failure</source>
         <translation>Fallida del equip</translation>
+    </message>
+    <message>
+        <source>Callsign management…</source>
+        <translation>Gestió d’indicatius…</translation>
+    </message>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Introduïu un nom de servidor NTP o una adreça IP vàlids.</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Mode assistit</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization</source>
+        <translation>Sincronització horària NTP</translation>
+    </message>
+    <message>
+        <source>Current version: %1
+Previous version: %2</source>
+        <translation>Versió actual: %1
+Versió anterior: %2</translation>
+    </message>
+    <message>
+        <source>Halt Tx when SWR &gt; 2.5</source>
+        <translation>Atura TX quan la ROE &gt; 2,5</translation>
+    </message>
+    <message>
+        <source>Hamlib updates</source>
+        <translation>Actualitzacions de Hamlib</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Cap</translation>
+    </message>
+    <message>
+        <source>Restart application</source>
+        <translation>Reinicia l'aplicació</translation>
+    </message>
+    <message>
+        <source>Restore previous Hamlib</source>
+        <translation>Restaura el Hamlib anterior</translation>
+    </message>
+    <message>
+        <source>Stop transmission when a supported CAT radio reports SWR above 2.5. Unknown or unsupported readings are shown as unavailable. Protection also polls SWR when power display is off.</source>
+        <translation>Atura la transmissió si una ràdio CAT compatible informa d'una ROE superior a 2,5. Les lectures desconegudes o no compatibles es mostren com a no disponibles. La protecció també consulta la ROE quan la visualització de potència està desactivada.</translation>
+    </message>
+    <message>
+        <source>Update Hamlib</source>
+        <translation>Actualitza Hamlib</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready to restore. Restart the application to apply it.</source>
+        <translation>La versió %1 està preparada per restaurar-la. Reinicia l'aplicació per aplicar-la.</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready. Restart the application to apply it.</source>
+        <translation>La versió %1 està preparada. Reinicia l'aplicació per aplicar-la.</translation>
     </message>
 </context>
 <context>
@@ -2502,6 +2601,18 @@ Error: %2 - %3</translation>
         <source>Ham Radio Deluxe didn&apos;t respond to command &quot;%1&quot; as expected</source>
         <translation>La resposta del Ham Radio Deluxe a la instrucció &quot;%1&quot; no és l&apos;esperada</translation>
     </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid frequency list</source>
+        <translation>Ham Radio Deluxe ha enviat una llista de freqüències no vàlida</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid or incomplete reply</source>
+        <translation>Ham Radio Deluxe ha enviat una resposta no vàlida o incompleta</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid radio list</source>
+        <translation>Ham Radio Deluxe ha enviat una llista d’equips no vàlida</translation>
+    </message>
 </context>
 <context>
     <name>HamlibTransceiver</name>
@@ -2970,6 +3081,46 @@ Error: %2 - %3</translation>
         <location filename="../logqso.cpp" line="222"/>
         <source>Cannot open &quot;%1&quot; for append: %2</source>
         <translation>No es pot obrir &quot;%1&quot; per afegir: %2</translation>
+    </message>
+    <message>
+        <source>Earth–Moon–Earth</source>
+        <translation>Terra–Lluna–Terra</translation>
+    </message>
+    <message>
+        <source>Meteor scatter</source>
+        <translation>Meteor scatter</translation>
+    </message>
+    <message>
+        <source>Propagation</source>
+        <translation>Propagació</translation>
+    </message>
+    <message>
+        <source>Receive frequency</source>
+        <translation>Freqüència de recepció</translation>
+    </message>
+    <message>
+        <source>Remember propagation and satellite</source>
+        <translation>Recorda la propagació i el satèl·lit</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satèl·lit</translation>
+    </message>
+    <message>
+        <source>Satellite mode</source>
+        <translation>Mode de satèl·lit</translation>
+    </message>
+    <message>
+        <source>Satellite name</source>
+        <translation>Nom del satèl·lit</translation>
+    </message>
+    <message>
+        <source>Tropospheric</source>
+        <translation>Troposfèrica</translation>
+    </message>
+    <message>
+        <source>Unspecified</source>
+        <translation>Sense especificar</translation>
     </message>
 </context>
 <context>
@@ -5337,6 +5488,310 @@ Servidor UDP %2:%3</translation>
         <source>WD %1m</source>
         <translation>WD %1m</translation>
     </message>
+    <message>
+        <source>A log import is already running.</source>
+        <translation>Ja s’està important un registre.</translation>
+    </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>Quant al JTDX-F</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>Caçador de DXCC</translation>
+    </message>
+    <message>
+        <source>Decoder error: %1. TX stopped; restarting decoder.</source>
+        <translation>Error del descodificador: %1. TX aturat; reiniciant el descodificador.</translation>
+    </message>
+    <message>
+        <source>Decoder exited (code %1, crash %2)</source>
+        <translation>El descodificador ha finalitzat (codi %1, fallada %2)</translation>
+    </message>
+    <message>
+        <source>Decoder restart failed repeatedly. Check decoder-errors.log and restart JTDX-F.</source>
+        <translation>El reinici del descodificador ha fallat repetidament. Reviseu decoder-errors.log i reinicieu JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Decoder restarted. Enable Monitor to resume reception; TX remains stopped.</source>
+        <translation>Descodificador reiniciat. Activeu Monitor per reprendre la recepció; TX continua aturat.</translation>
+    </message>
+    <message>
+        <source>Enable TX manually, then Send each message (max. 80 characters).</source>
+        <translation>Activeu TX manualment i després envieu cada missatge (màx. 80 caràcters).</translation>
+    </message>
+    <message>
+        <source>FT2</source>
+        <translation>FT2</translation>
+    </message>
+    <message>
+        <source>JTTY</source>
+        <translation>JTTY</translation>
+    </message>
+    <message>
+        <source>JTTY requires a local audio input and output device.</source>
+        <translation>JTTY requereix dispositius locals d’entrada i sortida d’àudio.</translation>
+    </message>
+    <message>
+        <source>JTTY transmission timed out; TX stopped.</source>
+        <translation>La transmissió JTTY ha superat el temps límit; TX aturat.</translation>
+    </message>
+    <message>
+        <source>Listening…</source>
+        <translation>Escoltant…</translation>
+    </message>
+    <message>
+        <source>Log import: %1 new, %2 duplicates, %3 originals archived, %4 records from other stations skipped.</source>
+        <translation>Importació del registre: %1 nous, %2 duplicats, %3 originals arxivats, %4 registres d'altres estacions omesos.</translation>
+    </message>
+    <message>
+        <source>Log loading failed: %1</source>
+        <translation>No s’ha pogut carregar el registre: %1</translation>
+    </message>
+    <message>
+        <source>MCP %1</source>
+        <translation>MCP %1</translation>
+    </message>
+    <message>
+        <source>MCP error</source>
+        <translation>Error MCP</translation>
+    </message>
+    <message>
+        <source>MCP off</source>
+        <translation>MCP desactivat</translation>
+    </message>
+    <message>
+        <source>MCP settings: File &gt; Settings &gt; MCP</source>
+        <translation>Configuració MCP: Fitxer &gt; Configuració &gt; MCP</translation>
+    </message>
+    <message>
+        <source>MCP: %1</source>
+        <translation>MCP: %1</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>Mode assistit</translation>
+    </message>
+    <message>
+        <source>Managed mode is listening. Enable TX manually to allow calls and scheduled CQ.</source>
+        <translation>El mode assistit està escoltant. Activeu TX manualment per permetre les crides i els CQ programats.</translation>
+    </message>
+    <message>
+        <source>Managed mode is off.</source>
+        <translation>El mode assistit està desactivat.</translation>
+    </message>
+    <message>
+        <source>Modern algorithm decoding</source>
+        <translation>Descodificació moderna</translation>
+    </message>
+    <message>
+        <source>My callsign</source>
+        <translation>El meu indicatiu</translation>
+    </message>
+    <message>
+        <source>No decoder completion within the timeout</source>
+        <translation>El descodificador no ha acabat dins del temps límit</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>Desactivat</translation>
+    </message>
+    <message>
+        <source>Previous audio file is still being saved; this interval was skipped.</source>
+        <translation>Encara s’està desant l’àudio anterior; s’ha omès aquest interval.</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast</source>
+        <translation>Aficionat als QSO</translation>
+    </message>
+    <message>
+        <source>Receiving</source>
+        <translation>Rebent</translation>
+    </message>
+    <message>
+        <source>Search around Rx frequency (Hz):</source>
+        <translation>Cerca al voltant de la freqüència RX (Hz):</translation>
+    </message>
+    <message>
+        <source>Select a callsign before importing logs.</source>
+        <translation>Seleccioneu un indicatiu abans d’importar registres.</translation>
+    </message>
+    <message>
+        <source>Select a valid callsign and grid in station settings before enabling TX.</source>
+        <translation>Seleccioneu un indicatiu i un localitzador vàlids a la configuració de l’estació abans d’activar TX.</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Envia</translation>
+    </message>
+    <message>
+        <source>SuperFox decoding (SuperHound)</source>
+        <translation>Descodificació SuperFox (SuperHound)</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance</source>
+        <translation>Tolerància de freqüència SuperFox</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance...</source>
+        <translation>Tolerància de freqüència SuperFox...</translation>
+    </message>
+    <message>
+        <source>SuperHound</source>
+        <translation>SuperHound</translation>
+    </message>
+    <message>
+        <source>TX watchdog expired. Finishing the current QSO before stopping.</source>
+        <translation>S’ha esgotat el temps de supervisió TX. Acabant el QSO actual abans d’aturar-se.</translation>
+    </message>
+    <message>
+        <source>This mode requires local audio devices; TCI audio is unavailable.</source>
+        <translation>Aquest mode requereix dispositius d’àudio locals; l’àudio TCI no està disponible.</translation>
+    </message>
+    <message>
+        <source>Transmitting</source>
+        <translation>Transmetent</translation>
+    </message>
+    <message>
+        <source>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</source>
+        <translation>Utilitza descodificació assistida per probabilitats posteriors i validació addicional dels candidats. Desactivat: descodificador tradicional. S’aplica a la descodificació següent.</translation>
+    </message>
+    <message>
+        <source>WD %1:%2</source>
+        <translation>WD %1:%2</translation>
+    </message>
+    <message>
+        <source>WD finishing QSO</source>
+        <translation>WD: QSO</translation>
+    </message>
+    <message>
+        <source>WD unlimited</source>
+        <translation>WD ∞</translation>
+    </message>
+    <message>
+        <source>The current operator's log is not ready. Check the log files and try again.</source>
+        <translation>El registre de l’operador actual encara no està disponible. Comproveu els fitxers de registre i torneu-ho a provar.</translation>
+    </message>
+    <message>
+        <source>Blacklist management</source>
+        <translation>Gestió de la llista negra</translation>
+    </message>
+    <message>
+        <source>CALL</source>
+        <translation>CRIDA</translation>
+    </message>
+    <message>
+        <source>REPORT</source>
+        <translation>RST</translation>
+    </message>
+    <message>
+        <source>This station is blocked, or the permanent blacklist is unavailable.</source>
+        <translation>Aquesta estació està bloquejada o la llista negra permanent no està disponible.</translation>
+    </message>
+    <message>
+        <source>Confirm switch</source>
+        <translation>Confirma</translation>
+    </message>
+    <message>
+        <source>Average</source>
+        <translation>Mitjana</translation>
+    </message>
+    <message>
+        <source>Clear average</source>
+        <translation>Esborra la mitjana</translation>
+    </message>
+    <message>
+        <source>Click to erase the right window; double-click to erase both.</source>
+        <translation>Fes clic per esborrar la finestra dreta; doble clic per esborrar-les totes dues.</translation>
+    </message>
+    <message>
+        <source>EME presets</source>
+        <translation>Predefinicions EME</translation>
+    </message>
+    <message>
+        <source>Echo: %1 dB; Δf %2 Hz; quality %3; averages %4</source>
+        <translation>Eco: %1 dB; Δf %2 Hz; qualitat %3; mitjanes %4</translation>
+    </message>
+    <message>
+        <source>Enable TX manually to measure lunar echoes.</source>
+        <translation>Habilita TX manualment per mesurar ecos lunars.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX.</source>
+        <translation>Habilita o atura TX.</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX. Right-click for Wait &amp; Reply, Wait &amp; Call or Wait &amp; Pounce. Waiting requires a manually enabled TX session.</source>
+        <translation>Habilita o atura TX. Clic dret per Espera i respon, Espera i crida o Espera i captura. L'espera requereix una sessió TX habilitada manualment.</translation>
+    </message>
+    <message>
+        <source>Full duplex</source>
+        <translation>Dúplex complet</translation>
+    </message>
+    <message>
+        <source>Left-click to erase the left window; right-click to erase the right window; double-click to erase both.</source>
+        <translation>Clic esquerre per esborrar la finestra esquerra; clic dret per esborrar la dreta; doble clic per esborrar-les totes dues.</translation>
+    </message>
+    <message>
+        <source>Period</source>
+        <translation>Període</translation>
+    </message>
+    <message>
+        <source>SWR %1 exceeds 2.5. TX stopped; enable TX manually after checking the antenna.</source>
+        <translation>La ROE %1 supera 2,5. TX s'ha aturat; torna a habilitar TX manualment després de comprovar l'antena.</translation>
+    </message>
+    <message>
+        <source>Set a valid station grid locator to calculate astronomical data.</source>
+        <translation>Estableix un locator vàlid de l'estació per calcular les dades astronòmiques.</translation>
+    </message>
+    <message>
+        <source>Stopped</source>
+        <translation>Aturat</translation>
+    </message>
+    <message>
+        <source>The transmit slot was missed; enable TX again.</source>
+        <translation>S'ha perdut l'interval de transmissió; torna a habilitar TX.</translation>
+    </message>
+    <message>
+        <source>Transmission timed out; TX stopped.</source>
+        <translation>S'ha esgotat el temps de transmissió; TX s'ha aturat.</translation>
+    </message>
+    <message>
+        <source>VHF / EME</source>
+        <translation>VHF / EME</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Call</source>
+        <translation>Espera i crida</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Pounce</source>
+        <translation>Espera i captura</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Reply</source>
+        <translation>Espera i respon</translation>
+    </message>
+    <message>
+        <source>Waiting is selected. Click Enable TX to authorize transmission; Stop cancels waiting.</source>
+        <translation>S'ha seleccionat l'espera. Fes clic a Habilita TX per autoritzar la transmissió; Atura cancel·la l'espera.</translation>
+    </message>
+    <message>
+        <source>Waiting matched %1; continuing the manually enabled TX session.</source>
+        <translation>L'espera ha trobat %1; es continua la sessió TX habilitada manualment.</translation>
+    </message>
+    <message>
+        <source>Waiting timed out; TX stopped.</source>
+        <translation>S'ha esgotat el temps d'espera; TX s'ha aturat.</translation>
+    </message>
+    <message>
+        <source>%1 is replying to another station; waiting for its CQ or final message.</source>
+        <translation>%1 està responent a una altra estació; s’espera el seu CQ o missatge final.</translation>
+    </message>
+    <message>
+        <source>%1 is available; continuing the manually enabled TX session.</source>
+        <translation>%1 està disponible; es continua la sessió TX habilitada manualment.</translation>
+    </message>
 </context>
 <context>
     <name>Modes</name>
@@ -5650,6 +6105,58 @@ Verifica el nom del directori correcte.</translation>
         <location filename="../WFPalette.cpp" line="258"/>
         <source>Error writing waterfall palette file &quot;%1&quot;: %2.</source>
         <translation>Error d&apos;escriptura de l&apos;arxiu de paleta de la cascada &quot;%1&quot;: %2.</translation>
+    </message>
+    <message>
+        <source>Cannot create log directory</source>
+        <translation>No es pot crear el directori de registres</translation>
+    </message>
+    <message>
+        <source>Log files changed while loading. Please retry.</source>
+        <translation>Els fitxers de registre han canviat durant la càrrega. Torneu-ho a provar.</translation>
+    </message>
+    <message>
+        <source>Log is busy. Please retry.</source>
+        <translation>El registre està ocupat. Torneu-ho a provar.</translation>
+    </message>
+    <message>
+        <source>Unable to import the log files.</source>
+        <translation>No es poden importar els fitxers de registre.</translation>
+    </message>
+    <message>
+        <source>Unable to read the log files.</source>
+        <translation>No es poden llegir els fitxers de registre.</translation>
+    </message>
+    <message>
+        <source>Ambiguous QSO identity; log unchanged</source>
+        <translation>La identitat del QSO no és única; el registre no s’ha modificat</translation>
+    </message>
+    <message>
+        <source>Recorded QSO not found; log unchanged</source>
+        <translation>No s’ha trobat el QSO registrat; el registre no s’ha modificat</translation>
+    </message>
+    <message>
+        <source>Cannot read pending log update</source>
+        <translation>No es pot llegir l’actualització pendent del registre</translation>
+    </message>
+    <message>
+        <source>Invalid pending log update; originals retained</source>
+        <translation>L’actualització pendent del registre no és vàlida; s’han conservat els originals</translation>
+    </message>
+    <message>
+        <source>Cannot remove completed log update journal</source>
+        <translation>No es pot eliminar el fitxer de recuperació de l’actualització completada</translation>
+    </message>
+    <message>
+        <source>QSO identity changed or timestamps are invalid; log unchanged</source>
+        <translation>La identitat del QSO ha canviat o les marques de temps no són vàlides; el registre no s’ha modificat</translation>
+    </message>
+    <message>
+        <source>Cannot revise a symbolic log link</source>
+        <translation>No es pot actualitzar un registre mitjançant un enllaç simbòlic</translation>
+    </message>
+    <message>
+        <source>QSO update exceeds the journal size limit</source>
+        <translation>L’actualització del QSO supera el límit de mida del fitxer de recuperació</translation>
     </message>
 </context>
 <context>
@@ -6132,6 +6639,14 @@ Error (%2): %3</translation>
         <location filename="../TCITransceiver.cpp" line="1740"/>
         <source>TCI modulator not Idle</source>
         <translation>Modulador TCI no inactiu</translation>
+    </message>
+    <message>
+        <source>Invalid TCI audio packet</source>
+        <translation>Paquet d’àudio TCI no vàlid</translation>
+    </message>
+    <message>
+        <source>TCI PCM playback requires an active, explicitly started transmission.</source>
+        <translation>La reproducció PCM per TCI requereix una transmissió activa iniciada explícitament.</translation>
     </message>
 </context>
 <context>
@@ -7239,13 +7754,13 @@ tots dos aquí.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2233"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option is being used for non-overlapping spectra scenario. Tx will be halted if spectra have common frequencies with no respect to this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; Aquesta opció s&apos;està utilitzant per a un escenari d&apos;espectre no superposat. La transmissió s&apos;aturarà si els espectres tenen freqüències comuns sense respectar aquesta configuració. &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
+        <source>With AutoSeq enabled, checking this option pauses calls to the selected station while it replies to someone else, keeping Enable TX on. Resume on its CQ, 73, RR73, RRR or a reply to you. When unchecked, do not pause for this reason. Call limits, the TX watchdog and Stop still apply.</source>
+        <translation>Amb AutoSeq activat, aquesta opció posa en pausa les crides a l’estació seleccionada mentre respon a una altra, mantenint Habilita TX activat. Es reprenen quan envia CQ, 73, RR73 o RRR, o us respon directament. Si no està marcada, no es pausa per aquest motiu. Els límits de crides, el temporitzador de vigilància de TX i Atura continuen vigents.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2236"/>
-        <source>Halt TX if operator I called answered to other operator</source>
-        <translation>Aturar TX si l&apos;operador a qui estic cridat ha respost a un altre operador</translation>
+        <source>Wait if the called station replies to someone else</source>
+        <translation>Espera si l’estació cridada respon a una altra estació</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2243"/>
@@ -8069,8 +8584,8 @@ Fes clic dret per inserir i eliminar opcions.</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3846"/>
-        <source>Transmitted message</source>
-        <translation>Missatge transmès</translation>
+        <source>Own transmitted message</source>
+        <translation>Missatge transmès propi</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3862"/>
@@ -8934,6 +9449,294 @@ soundcard changes</source>
 restablir la interfície de ràdio i aplicar qualsevol
 canvi en la targeta de so</translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minuts des de l’activació de TX, acumulats entre QSO; 0 = sense límit, màxim 999. L’activitat no reinicia el temporitzador.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Access token</source>
+        <translation>Token d’accés</translation>
+    </message>
+    <message>
+        <source>Allow control (mode, frequency, QSO and options)</source>
+        <translation>Permet el control (mode, freqüència, QSO i opcions)</translation>
+    </message>
+    <message>
+        <source>Allow starting TX and Tune (also requires control)</source>
+        <translation>Permet iniciar TX i Tune (requereix també control)</translation>
+    </message>
+    <message>
+        <source>Connect an AI client to JTDX-F using MCP. Changes take effect after OK. Only this computer (127.0.0.1) can connect.</source>
+        <translation>Connecteu un client d’IA al JTDX-F mitjançant MCP. Els canvis s’apliquen en prémer D’acord. Només es pot connectar aquest ordinador (127.0.0.1).</translation>
+    </message>
+    <message>
+        <source>Copy token</source>
+        <translation>Copia el token</translation>
+    </message>
+    <message>
+        <source>Enable MCP server</source>
+        <translation>Activa el servidor MCP</translation>
+    </message>
+    <message>
+        <source>Endpoint</source>
+        <translation>Adreça del servei</translation>
+    </message>
+    <message>
+        <source>Generate new token</source>
+        <translation>Genera un token nou</translation>
+    </message>
+    <message>
+        <source>MCP</source>
+        <translation>MCP</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>Port</translation>
+    </message>
+    <message>
+        <source>Use Streamable HTTP with Authorization: Bearer TOKEN, or the bundled jtdx_mcp_bridge.py for stdio clients. Status, decodes and log are readable with a token. Stop TX is always available. See docs/MCP_zh.md.</source>
+        <translation>Utilitzeu Streamable HTTP amb Authorization: Bearer TOKEN, o jtdx_mcp_bridge.py inclòs per als clients stdio. Amb un token es poden llegir l’estat, les descodificacions i el registre. Aturar TX sempre està disponible. Vegeu docs/MCP_zh.md.</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Align the text for DXCC, distance and azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Alinea el text de DXCC, distància i azimut.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allow kHz frequency offset entry without 'k' suffix.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permet introduir desplaçaments de freqüència en kHz sense el sufix «k».&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have decodes for a new period start at the top of the Band Activity window and not scroll off the top when the window is full.&lt;/p&gt;&lt;p&gt;This is to aid selecting decodes to double-click while decoding is still in progress. Use the Band Activity vertical scroll bar to reveal decodes past the bottom of the window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Comprova que tinguis descodificacions per començar un nou període a la part superior de la finestra d'Activitat de banda i no moguis la part superior quan la finestra estigui plena.&lt;/p&gt;&lt;p&gt;Això serveix per ajudar a seleccionar descodificacions, pots fer doble clic mentre la descodificació encara està en curs. Utilitza la barra de desplaçament vertical d'Activitat de banda per veure descodificacions passades a la part inferior de la finestra.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase Band Activity and Rx frequency windows after band change.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Esborra les finestres Activitat de banda i Freqüència RX després de canviar de banda.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends a valid Maidenhead locator, calculate and show the great-circle azimuth in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si una estació envia un locator Maidenhead vàlid, calcula i mostra l'azimut de cercle màxim a Activitat de banda.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends locator, calculate and show the distance in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si una estació envia un locator, calcula i mostra la distància a Activitat de banda.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between DXCC and distance/azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Augmenta o redueix l'espai entre DXCC i distància/azimut.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between message text and DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Augmenta o redueix l'espai entre el text del missatge i DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open the Astronomical Data window automatically when switching to Q65 or JT65 mode and Decode after EME delay is enabled, and close it when no longer needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Obre automàticament la finestra Dades astronòmiques quan se selecciona Q65 o JT65 i està activada la descodificació amb retard EME; la tanca quan ja no cal.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Turn the progress bar red while transmitting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Posa la barra de progrés vermella durant la transmissió.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tx until 73 is received when in MSK144 or Q65 mode. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Transmet fins a rebre 73 en mode MSK144 o Q65.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>A deliberate double-click may enable TX only after the transmission safety checks pass. Startup, background messages and remote selection cannot grant transmission permission.</source>
+        <translation>Un doble clic deliberat només pot habilitar TX després de superar les comprovacions de seguretat. L'inici del programa, els missatges en segon pla i la selecció remota no poden autoritzar la transmissió.</translation>
+    </message>
+    <message>
+        <source>Additional features</source>
+        <translation>Funcions addicionals</translation>
+    </message>
+    <message>
+        <source>After a completed QSO, move the receive audio frequency to the transmit audio frequency. This does not enable the Tx=Rx lock.</source>
+        <translation>Després de completar un QSO, mou la freqüència d'àudio RX a la freqüència TX. Això no activa el bloqueig Tx=Rx.</translation>
+    </message>
+    <message>
+        <source>Align DXCC/distance/azimuth</source>
+        <translation>Alinea DXCC/distància/azimut</translation>
+    </message>
+    <message>
+        <source>Allow Tx frequency changes while transmitting</source>
+        <translation>Permet canviar la freqüència de TX durant la transmissió</translation>
+    </message>
+    <message>
+        <source>Allow the additional Earth–Moon–Earth propagation delay when collecting and decoding signals. This does not alter the UTC clock.</source>
+        <translation>Inclou el retard addicional de propagació Terra–Lluna–Terra en recollir i descodificar senyals. No modifica el rellotge UTC.</translation>
+    </message>
+    <message>
+        <source>Alternate Erase button behavior</source>
+        <translation>Comportament alternatiu del botó Esborra</translation>
+    </message>
+    <message>
+        <source>Alternate F1-F6 bindings</source>
+        <translation>Enllaços alternatius F1-F6</translation>
+    </message>
+    <message>
+        <source>Auto-open/close Astronomical data window</source>
+        <translation>Obre/tanca automàticament Dades astronòmiques</translation>
+    </message>
+    <message>
+        <source>Calling CQ forces Call 1st</source>
+        <translation>Trucar a CQ obliga a trucar primer</translation>
+    </message>
+    <message>
+        <source>Clear DX Call after QSO</source>
+        <translation>Esborra l'indicatiu DX després del QSO</translation>
+    </message>
+    <message>
+        <source>Clear DX Grid after QSO</source>
+        <translation>Esborra el locator DX després del QSO</translation>
+    </message>
+    <message>
+        <source>Decode after EME delay</source>
+        <translation>Descodificar després del retard d'EME</translation>
+    </message>
+    <message>
+        <source>Di&amp;sable Tx after sending 73</source>
+        <translation>Desa&amp;ctiva TX després d’enviar 73</translation>
+    </message>
+    <message>
+        <source>Doubl&amp;e-click on call sets Tx enable</source>
+        <translation>Fes dobl&amp;e clic sobre els conjunts d'indicatius de TX habilitat</translation>
+    </message>
+    <message>
+        <source>Enable VHF and submode features</source>
+        <translation>Activa les funcions de VHF i submode</translation>
+    </message>
+    <message>
+        <source>Enable Wait &amp; Call, Wait &amp; Reply and Wait &amp; Pounce controls. They require a manually authorized TX session and cannot restart transmission after Stop. Managed mode keeps its own selection rules.</source>
+        <translation>Activa Espera i crida, Espera i respon i Espera i captura. Requereixen una sessió TX autoritzada manualment i no poden reiniciar la transmissió després d'Atura. El mode gestionat conserva les seves regles de selecció.</translation>
+    </message>
+    <message>
+        <source>Enable Wait features</source>
+        <translation>Activa les funcions d'espera</translation>
+    </message>
+    <message>
+        <source>Erase decodes after band change</source>
+        <translation>Esborra els missatges en canviar de banda</translation>
+    </message>
+    <message>
+        <source>Finish one QSO and stop. This is the same setting as Single QSO in the main window. Leave it unchecked for continuous QSOs within the TX watchdog session.</source>
+        <translation>Completa un QSO i atura't. És la mateixa opció que QSO únic a la finestra principal. Deixa-la desmarcada per fer QSO continus dins del temps del supervisor TX.</translation>
+    </message>
+    <message>
+        <source>Font...</source>
+        <translation>Font...</translation>
+    </message>
+    <message>
+        <source>Highlight DX Call in message</source>
+        <translation>Ressalta l'indicatiu DX al missatge</translation>
+    </message>
+    <message>
+        <source>Highlight DX Grid in message</source>
+        <translation>Ressalta el locator DX al missatge</translation>
+    </message>
+    <message>
+        <source>Less button coloring (restart required)</source>
+        <translation>Menys colors als botons (cal reiniciar)</translation>
+    </message>
+    <message>
+        <source>MSK144/Q65: Tx until 73 is received</source>
+        <translation>MSK144/Q65: transmet fins a rebre 73</translation>
+    </message>
+    <message>
+        <source>Map Grid locator to U.S. State</source>
+        <translation>Associa el locator a un estat dels EUA</translation>
+    </message>
+    <message>
+        <source>Monitor returns to last used frequency</source>
+        <translation>El monitor torna a la darrera freqüència utilitzada</translation>
+    </message>
+    <message>
+        <source>Read and display PWR and SWR</source>
+        <translation>Llegeix i mostra PWR i ROE</translation>
+    </message>
+    <message>
+        <source>Read and display transmit power and SWR through CAT. Unsupported readings are shown as unavailable.</source>
+        <translation>Llegeix i mostra la potència d'emissió i la ROE per CAT. Les lectures no compatibles es mostren com a no disponibles.</translation>
+    </message>
+    <message>
+        <source>Set Rx frequency to Tx frequency after QSO</source>
+        <translation>Ajusta RX a la freqüència TX després del QSO</translation>
+    </message>
+    <message>
+        <source>Show &amp;DXCC, grid, and worked-before status    </source>
+        <translation>Mostra &amp;DXCC, locator i estat de contacte anterior    </translation>
+    </message>
+    <message>
+        <source>Show DXCC for all messages</source>
+        <translation>Mostra DXCC a tots els missatges</translation>
+    </message>
+    <message>
+        <source>Show U.S. States in messages with grid</source>
+        <translation>Mostra els estats dels EUA als missatges amb locator</translation>
+    </message>
+    <message>
+        <source>Show azimuth in messages with grid</source>
+        <translation>Mostra l'azimut als missatges amb locator</translation>
+    </message>
+    <message>
+        <source>Show blank line with time stamp</source>
+        <translation>Mostra una línia en blanc amb marca horària</translation>
+    </message>
+    <message>
+        <source>Show distance in messages with grid</source>
+        <translation>Mostra la distància als missatges amb locator</translation>
+    </message>
+    <message>
+        <source>Show if decoded stations are new DXCC entities or worked before.</source>
+        <translation>Mostra si les estacions descodificades són entitats DXCC noves o les has treballat abans.</translation>
+    </message>
+    <message>
+        <source>Show principal prefix instead of country name        </source>
+        <translation>Mostra el prefix principal en lloc del nom del país        </translation>
+    </message>
+    <message>
+        <source>Show the separator line between periods with time stamp of the decode period.</source>
+        <translation>Mostra la línia separadora entre períodes amb la marca horària del període de descodificació.</translation>
+    </message>
+    <message>
+        <source>Single decode</source>
+        <translation>Descodificació única</translation>
+    </message>
+    <message>
+        <source>Start new period decodes at top</source>
+        <translation>Inicia un nou període de descodificacions a la part superior</translation>
+    </message>
+    <message>
+        <source>Stop Tune after the selected number of seconds. A zero interval disables this timer.</source>
+        <translation>Atura la sintonia després dels segons seleccionats. Un interval zero desactiva aquest temporitzador.</translation>
+    </message>
+    <message>
+        <source>Tune watchdog   </source>
+        <translation>Temporitzador de sintonia   </translation>
+    </message>
+    <message>
+        <source>Turn progress bar red while transmitting</source>
+        <translation>Barra de progrés vermella durant la transmissió</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. Transmission safety checks still apply.</source>
+        <translation>Utilitza F1–F5 per seleccionar CQ, informe, R-informe, confirmació i 73; F6 canvia la política de resposta. Les comprovacions de seguretat de transmissió continuen aplicant-se.</translation>
+    </message>
+    <message>
+        <source>kHz entry without k (restart required)</source>
+        <translation>Introducció de kHz sense k (cal reiniciar)</translation>
+    </message>
+    <message>
+        <source>When checked, double-clicking a decoded callsign starts a TX session after the transmission safety checks pass. The session then follows the normal AutoSeq, Single QSO and watchdog settings. Off by default.</source>
+        <translation>Si està marcat, fer doble clic en un indicatiu descodificat inicia una sessió TX després de superar les comprovacions de seguretat de transmissió. La sessió segueix els ajustos normals d'AutoSeq, QSO únic i temporitzador de supervisió. Desactivat per defecte.</translation>
+    </message>
+    <message>
+        <source>Double-click a callsign to enable TX</source>
+        <translation>Doble clic en un indicatiu per activar TX</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. These keys cannot start a TX session. Click Enable TX first.</source>
+        <translation>Utilitzeu F1–F5 per seleccionar CQ, informe de senyal, informe R, confirmació i 73; F6 canvia la política de resposta. Aquestes tecles no poden iniciar una sessió de TX. Feu clic primer a Habilita TX.</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -8984,6 +9787,870 @@ canvi en la targeta de so</translation>
         <location filename="../wf_palette_design_dialog.ui" line="23"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Double click a color to edit it.&lt;/p&gt;&lt;p&gt;Right click to insert or delete colors.&lt;/p&gt;&lt;p&gt;Colors at the top represent weak signals&lt;/p&gt;&lt;p&gt;and colors at the bottom represent strong&lt;/p&gt;&lt;p&gt;signals. You can have up to 256 colors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt;Doble clic sobre un color per editar-lo: &lt;/p&gt; &lt;p&gt; Clic dret per inserir o esborrar colors. &lt;/p&gt; &lt;p&gt; Els colors a la part superior representen senyals febles, &lt;/p&gt; &lt;p&gt; i els colors a la part inferior representen senyals forts.&lt;/p&gt; &lt;p&gt;Es poden tenir fins a 256 colors. &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>JttyController</name>
+    <message>
+        <source>Cannot write to the JTTY decoder.</source>
+        <translation>No es pot escriure al descodificador JTTY.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY decoder response.</source>
+        <translation>Resposta no vàlida del descodificador JTTY.</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY transmit audio.</source>
+        <translation>Àudio de transmissió JTTY no vàlid.</translation>
+    </message>
+    <message>
+        <source>JTTY audio backlog exceeded 10 seconds; reception restarted.</source>
+        <translation>L’àudio JTTY pendent ha superat els 10 segons; s’ha reiniciat la recepció.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder stopped unexpectedly.</source>
+        <translation>El descodificador JTTY s’ha aturat inesperadament.</translation>
+    </message>
+    <message>
+        <source>JTTY decoder timed out. Select JTTY again to restart it.</source>
+        <translation>El descodificador JTTY no ha respost a temps. Torneu a seleccionar JTTY per reiniciar-lo.</translation>
+    </message>
+    <message>
+        <source>Unexpected JTTY decoder response.</source>
+        <translation>Resposta inesperada del descodificador JTTY.</translation>
+    </message>
+</context>
+<context>
+    <name>LogForwarder</name>
+    <message>
+        <source>External logger did not acknowledge the QSO. Local logs are saved.</source>
+        <translation>El programa de registre extern no ha confirmat el QSO. Els registres locals s’han desat.</translation>
+    </message>
+    <message>
+        <source>External logger disconnected before acknowledgement. Local logs are saved.</source>
+        <translation>El programa de registre extern s’ha desconnectat abans de confirmar. Els registres locals s’han desat.</translation>
+    </message>
+    <message>
+        <source>External logger rejected the QSO. Local logs are saved.</source>
+        <translation>El programa de registre extern ha rebutjat el QSO. Els registres locals s’han desat.</translation>
+    </message>
+    <message>
+        <source>Invalid external logger response. Local logs are saved.</source>
+        <translation>Resposta no vàlida del programa de registre extern. Els registres locals s’han desat.</translation>
+    </message>
+    <message>
+        <source>Unexpected external logger response. Local logs are saved.</source>
+        <translation>Resposta inesperada del programa de registre extern. Els registres locals s’han desat.</translation>
+    </message>
+</context>
+<context>
+    <name>ManagedSettingsWidget</name>
+    <message>
+        <source>0 — unlimited</source>
+        <translation>0 — sense límit</translation>
+    </message>
+    <message>
+        <source>Answer previously worked callsigns</source>
+        <translation>Respon als indicatius ja contactats</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>Caçador de DXCC</translation>
+    </message>
+    <message>
+        <source>New CQ zone</source>
+        <translation>Zona CQ nova</translation>
+    </message>
+    <message>
+        <source>New DXCC</source>
+        <translation>DXCC nou</translation>
+    </message>
+    <message>
+        <source>New ITU zone</source>
+        <translation>Zona ITU nova</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode DXCC</source>
+        <translation>DXCC nou per banda i mode</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode callsign</source>
+        <translation>Indicatiu nou per banda i mode</translation>
+    </message>
+    <message>
+        <source>New callsign</source>
+        <translation>Indicatiu nou</translation>
+    </message>
+    <message>
+        <source>New grid</source>
+        <translation>Localitzador nou</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast (also prioritizes new DXCC entities and zones)</source>
+        <translation>Aficionat als QSO (prioritza també DXCC i zones nous)</translation>
+    </message>
+    <message>
+        <source>Send three CQ rounds every 15 minutes</source>
+        <translation>Envia tres rondes de CQ cada 15 minuts</translation>
+    </message>
+    <message>
+        <source>Unanswered call limit:</source>
+        <translation>Límit de crides sense resposta:</translation>
+    </message>
+    <message>
+        <source>Allow TX slot changes</source>
+        <translation>Permet canviar el torn de TX</translation>
+    </message>
+    <message>
+        <source>Allow automatic TX slot changes between completed QSOs. After a slot change, wait 5 minutes before another automatic change. Manual changes are always allowed and restart this timer. Off: stay in the selected TX slot.</source>
+        <translation>Permet canvis automàtics del torn de TX entre QSO completats. Després d'un canvi de torn, cal esperar 5 minuts abans d'un altre canvi automàtic. Els canvis manuals sempre es permeten i reinicien aquest temporitzador. Desactivat: mantén el torn de TX seleccionat.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpClient</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Introduïu un nom de servidor NTP o una adreça IP vàlids.</translation>
+    </message>
+    <message>
+        <source>Invalid NTP packet length.</source>
+        <translation>Longitud del paquet NTP no vàlida.</translation>
+    </message>
+    <message>
+        <source>NTP request timed out.</source>
+        <translation>La petició NTP ha superat el temps límit.</translation>
+    </message>
+    <message>
+        <source>The NTP date is outside the supported range.</source>
+        <translation>La data NTP és fora de l’interval admès.</translation>
+    </message>
+    <message>
+        <source>The NTP response does not match this request.</source>
+        <translation>La resposta NTP no correspon a aquesta petició.</translation>
+    </message>
+    <message>
+        <source>The NTP response has excessive delay or uncertainty.</source>
+        <translation>La resposta NTP té un retard o una incertesa excessius.</translation>
+    </message>
+    <message>
+        <source>The NTP server is not synchronized or refused the request.</source>
+        <translation>El servidor NTP no està sincronitzat o ha rebutjat la petició.</translation>
+    </message>
+    <message>
+        <source>The clock changed during the NTP request, or the response was too slow.</source>
+        <translation>El rellotge ha canviat durant la petició NTP o la resposta ha estat massa lenta.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpController</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>Introduïu un nom de servidor NTP o una adreça IP vàlids.</translation>
+    </message>
+    <message>
+        <source>Install polkit/pkexec to authorize system time synchronization.</source>
+        <translation>Instal·leu polkit/pkexec per autoritzar la sincronització de l’hora del sistema.</translation>
+    </message>
+    <message>
+        <source>Permission granted. Synchronization follows the selected interval.</source>
+        <translation>Permís concedit. La sincronització segueix l’interval seleccionat.</translation>
+    </message>
+    <message>
+        <source>Permission request timed out. System time is unchanged.</source>
+        <translation>La petició de permís ha superat el temps límit. L’hora del sistema no ha canviat.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted (Windows error %1). Using system time.</source>
+        <translation>No s’ha concedit el permís (error de Windows %1). S’utilitza l’hora del sistema.</translation>
+    </message>
+    <message>
+        <source>Permission was not granted. Using system time.</source>
+        <translation>No s’ha concedit el permís. S’utilitza l’hora del sistema.</translation>
+    </message>
+    <message>
+        <source>Requesting permission to set the system time…</source>
+        <translation>Demanant permís per ajustar l’hora del sistema…</translation>
+    </message>
+    <message>
+        <source>Synchronization deferred while transmitting.</source>
+        <translation>Sincronització ajornada durant la transmissió.</translation>
+    </message>
+    <message>
+        <source>Synchronization failed: %1. Retrying in 1 minute.</source>
+        <translation>La sincronització ha fallat: %1. Es tornarà a provar en 1 minut.</translation>
+    </message>
+    <message>
+        <source>The time synchronization helper is missing.</source>
+        <translation>Falta l’auxiliar de sincronització horària.</translation>
+    </message>
+    <message>
+        <source>Time synchronization stopped. Using system time.</source>
+        <translation>Sincronització horària aturada. S’utilitza l’hora del sistema.</translation>
+    </message>
+    <message>
+        <source>Time synchronized; correction %1 ms. Next check in %2 minutes.</source>
+        <translation>Hora sincronitzada; correcció de %1 ms. Propera comprovació en %2 minuts.</translation>
+    </message>
+    <message>
+        <source>Use system time. NTP synchronization is disabled.</source>
+        <translation>S’utilitza l’hora del sistema. La sincronització NTP està desactivada.</translation>
+    </message>
+</context>
+<context>
+    <name>NtpSettingsWidget</name>
+    <message>
+        <source>%1 hours</source>
+        <translation>%1 hores</translation>
+    </message>
+    <message>
+        <source>%1 minutes</source>
+        <translation>%1 minuts</translation>
+    </message>
+    <message>
+        <source>Africa / Kenya / icolo</source>
+        <translation>Àfrica / Kenya / icolo</translation>
+    </message>
+    <message>
+        <source>Africa / Mauritius / Mauritius Telecom</source>
+        <translation>Àfrica / Maurici / Mauritius Telecom</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / INX-ZA</source>
+        <translation>Àfrica / Sud-àfrica / INX-ZA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / NMISA</source>
+        <translation>Àfrica / Sud-àfrica / NMISA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / SANReN</source>
+        <translation>Àfrica / Sud-àfrica / SANReN</translation>
+    </message>
+    <message>
+        <source>Asia / Apple</source>
+        <translation>Àsia / Apple</translation>
+    </message>
+    <message>
+        <source>Asia / China / Alibaba</source>
+        <translation>Àsia / Xina / Alibaba</translation>
+    </message>
+    <message>
+        <source>Asia / China / Baidu</source>
+        <translation>Àsia / Xina / Baidu</translation>
+    </message>
+    <message>
+        <source>Asia / China / CAS NTSC</source>
+        <translation>Àsia / Xina / CAS NTSC</translation>
+    </message>
+    <message>
+        <source>Asia / China / NTP Pool</source>
+        <translation>Àsia / Xina / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tencent</source>
+        <translation>Àsia / Xina / Tencent</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tsinghua TUNA</source>
+        <translation>Àsia / Xina / Tsinghua TUNA</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Internet Multifeed</source>
+        <translation>Àsia / Japó / Internet Multifeed</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / NICT</source>
+        <translation>Àsia / Japó / NICT</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Sakura Internet</source>
+        <translation>Àsia / Japó / Sakura Internet</translation>
+    </message>
+    <message>
+        <source>Asia / South Korea / KRISS</source>
+        <translation>Àsia / Corea del Sud / KRISS</translation>
+    </message>
+    <message>
+        <source>Europe / France / RDEM Systems</source>
+        <translation>Europa / França / RDEM Systems</translation>
+    </message>
+    <message>
+        <source>Europe / Germany / PTB</source>
+        <translation>Europa / Alemanya / PTB</translation>
+    </message>
+    <message>
+        <source>Europe / Poland / GUM</source>
+        <translation>Europa / Polònia / GUM</translation>
+    </message>
+    <message>
+        <source>Europe / Sweden / Netnod</source>
+        <translation>Europa / Suècia / Netnod</translation>
+    </message>
+    <message>
+        <source>Europe / UK / NPL</source>
+        <translation>Europa / Regne Unit / NPL</translation>
+    </message>
+    <message>
+        <source>Global / Apple</source>
+        <translation>Mundial / Apple</translation>
+    </message>
+    <message>
+        <source>Global / Cloudflare</source>
+        <translation>Mundial / Cloudflare</translation>
+    </message>
+    <message>
+        <source>Global / Google</source>
+        <translation>Mundial / Google</translation>
+    </message>
+    <message>
+        <source>Global / Microsoft Windows</source>
+        <translation>Mundial / Microsoft Windows</translation>
+    </message>
+    <message>
+        <source>NTP hostname or IP address</source>
+        <translation>Nom del servidor NTP o adreça IP</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization (requests administrator privileges when enabled)</source>
+        <translation>Sincronització NTP (demana permisos d’administrador)</translation>
+    </message>
+    <message>
+        <source>North America / Canada / NRC</source>
+        <translation>Amèrica del Nord / Canadà / NRC</translation>
+    </message>
+    <message>
+        <source>North America / USA / NIST</source>
+        <translation>Amèrica del Nord / EUA / NIST</translation>
+    </message>
+    <message>
+        <source>Oceania / Australia / NTP Pool</source>
+        <translation>Oceania / Austràlia / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Oceania / New Zealand / MSL (NZ networks only)</source>
+        <translation>Oceania / Nova Zelanda / MSL (només xarxes de NZ)</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Altre</translation>
+    </message>
+    <message>
+        <source>South America / Argentina / INTI</source>
+        <translation>Amèrica del Sud / Argentina / INTI</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / NIC.br</source>
+        <translation>Amèrica del Sud / Brasil / NIC.br</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / National Observatory</source>
+        <translation>Amèrica del Sud / Brasil / Observatori Nacional</translation>
+    </message>
+    <message>
+        <source>South America / Chile / SHOA</source>
+        <translation>Amèrica del Sud / Xile / SHOA</translation>
+    </message>
+    <message>
+        <source>South America / Colombia / INM</source>
+        <translation>Amèrica del Sud / Colòmbia / INM</translation>
+    </message>
+    <message>
+        <source>Synchronization interval:</source>
+        <translation>Interval de sincronització:</translation>
+    </message>
+    <message>
+        <source>Uses system UTC time; the synchronization interval is configurable.</source>
+        <translation>Utilitza l’hora UTC del sistema; l’interval de sincronització és configurable.</translation>
+    </message>
+</context>
+<context>
+    <name>ProcessingDialog</name>
+    <message>
+        <source>Processing</source>
+        <translation>Processant</translation>
+    </message>
+    <message>
+        <source>Stop TX</source>
+        <translation>Atura TX</translation>
+    </message>
+    <message>
+        <source>System processing, please wait…</source>
+        <translation>El sistema està processant; espereu, si us plau…</translation>
+    </message>
+</context>
+<context>
+    <name>StationManager</name>
+    <message>
+        <source>Add</source>
+        <translation>Afegeix</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Afegeix un indicatiu</translation>
+    </message>
+    <message>
+        <source>All regions</source>
+        <translation>Totes les regions</translation>
+    </message>
+    <message>
+        <source>Callsign management</source>
+        <translation>Gestió d’indicatius</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancel·la</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Edita</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Edita l’indicatiu</translation>
+    </message>
+    <message>
+        <source>Enter a valid 4, 6 or 8 character grid locator.</source>
+        <translation>Introduïu un localitzador vàlid de 4, 6 o 8 caràcters.</translation>
+    </message>
+    <message>
+        <source>Enter a valid callsign (3–12 letters/digits, optional /suffix).</source>
+        <translation>Introduïu un indicatiu vàlid (3–12 lletres o xifres, amb /sufix opcional).</translation>
+    </message>
+    <message>
+        <source>Full call in Tx1</source>
+        <translation>Indicatiu complet a Tx1</translation>
+    </message>
+    <message>
+        <source>Full call in Tx3</source>
+        <translation>Indicatiu complet a Tx3</translation>
+    </message>
+    <message>
+        <source>Full call in Tx5 only</source>
+        <translation>Indicatiu complet només a Tx5</translation>
+    </message>
+    <message>
+        <source>IARU region:</source>
+        <translation>Regió IARU:</translation>
+    </message>
+    <message>
+        <source>Invalid profile</source>
+        <translation>Perfil no vàlid</translation>
+    </message>
+    <message>
+        <source>My callsign:</source>
+        <translation>El meu indicatiu:</translation>
+    </message>
+    <message>
+        <source>My grid:</source>
+        <translation>El meu localitzador:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>D’acord</translation>
+    </message>
+    <message>
+        <source>Region 1</source>
+        <translation>Regió 1</translation>
+    </message>
+    <message>
+        <source>Region 2</source>
+        <translation>Regió 2</translation>
+    </message>
+    <message>
+        <source>Region 3</source>
+        <translation>Regió 3</translation>
+    </message>
+    <message>
+        <source>Remove profile</source>
+        <translation>Elimina el perfil</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Desa</translation>
+    </message>
+    <message>
+        <source>This callsign already exists. Different /suffixes are allowed.</source>
+        <translation>Aquest indicatiu ja existeix. Es permeten /sufixos diferents.</translation>
+    </message>
+    <message>
+        <source>Type 2 callsign messages:</source>
+        <translation>Missatges amb indicatiu de tipus 2:</translation>
+    </message>
+</context>
+<context>
+    <name>Blacklist</name>
+    <message>
+        <source>A base callsign blocks its portable prefixes and suffixes (K1ABC also blocks EA8/K1ABC and K1ABC/P). A callsign containing / blocks only that exact callsign.</source>
+        <translation>Un indicatiu base bloqueja també els seus prefixos i sufixos portàtils (K1ABC bloqueja EA8/K1ABC i K1ABC/P). Un indicatiu amb / només bloqueja aquest indicatiu exacte.</translation>
+    </message>
+    <message>
+        <source>Blacklist changed in another program. Reload it before saving.</source>
+        <translation>Un altre programa ha modificat la llista negra. Torneu-la a carregar abans de desar.</translation>
+    </message>
+    <message>
+        <source>Blacklist file is too large.</source>
+        <translation>El fitxer de la llista negra és massa gran.</translation>
+    </message>
+    <message>
+        <source>Blacklist has too many entries.</source>
+        <translation>La llista negra té massa entrades.</translation>
+    </message>
+    <message>
+        <source>Blacklist is busy. Please retry.</source>
+        <translation>La llista negra està ocupada. Torneu-ho a provar.</translation>
+    </message>
+    <message>
+        <source>Blacklist is not ready. Repair the existing file before saving.</source>
+        <translation>La llista negra no està disponible. Repareu el fitxer existent abans de desar.</translation>
+    </message>
+    <message>
+        <source>Blacklist notes must not exceed 512 characters.</source>
+        <translation>Les notes de la llista negra no poden superar els 512 caràcters.</translation>
+    </message>
+    <message>
+        <source>Cannot create blacklist directory.</source>
+        <translation>No es pot crear el directori de la llista negra.</translation>
+    </message>
+    <message>
+        <source>Cannot open blacklist: %1</source>
+        <translation>No es pot obrir la llista negra: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save blacklist: %1</source>
+        <translation>No es pot desar la llista negra: %1</translation>
+    </message>
+    <message>
+        <source>Duplicate callsign: %1</source>
+        <translation>Indicatiu duplicat: %1</translation>
+    </message>
+    <message>
+        <source>Invalid blacklist file; the original has been preserved.</source>
+        <translation>Fitxer de llista negra no vàlid; s’ha conservat l’original.</translation>
+    </message>
+    <message>
+        <source>Invalid callsign: %1</source>
+        <translation>Indicatiu no vàlid: %1</translation>
+    </message>
+    <message>
+        <source>Select an operator before editing the blacklist.</source>
+        <translation>Seleccioneu un operador abans d’editar la llista negra.</translation>
+    </message>
+    <message>
+        <source>Unsupported blacklist file version.</source>
+        <translation>Versió del fitxer de llista negra no admesa.</translation>
+    </message>
+</context>
+<context>
+    <name>BlacklistDialog</name>
+    <message>
+        <source>Add</source>
+        <translation>Afegeix</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>Afegeix un indicatiu</translation>
+    </message>
+    <message>
+        <source>Callsign:</source>
+        <translation>Indicatiu:</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancel·la</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Edita</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>Edita l’indicatiu</translation>
+    </message>
+    <message>
+        <source>Invalid entry</source>
+        <translation>Entrada no vàlida</translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation>Nota:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>D’acord</translation>
+    </message>
+    <message>
+        <source>Permanent blacklist</source>
+        <translation>Llista negra permanent</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Elimina</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Desa</translation>
+    </message>
+</context>
+<context>
+    <name>AstroDialog</name>
+    <message>
+        <source>Astronomical Data</source>
+        <translation>Dades astronòmiques</translation>
+    </message>
+    <message>
+        <source>Call DX</source>
+        <translation>Indicatiu de DX</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Tanca</translation>
+    </message>
+    <message>
+        <source>Constant frequency on the Moon</source>
+        <translation>Freqüència constant a la Lluna</translation>
+    </message>
+    <message>
+        <source>DX Moon Az / El: %1° / %2°</source>
+        <translation>Az / El lunar del DX: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>Doppler tracking</source>
+        <translation>Seguiment de Doppler</translation>
+    </message>
+    <message>
+        <source>Echo RIT</source>
+        <translation>RIT de l'eco</translation>
+    </message>
+    <message>
+        <source>Echo delay: %1 s; spread: %2 / %3 Hz</source>
+        <translation>Retard de l'eco: %1 s; dispersió: %2 / %3 Hz</translation>
+    </message>
+    <message>
+        <source>Echo frequency dither (±10 Hz)</source>
+        <translation>Variació de freqüència de l'eco (±10 Hz)</translation>
+    </message>
+    <message>
+        <source>Full Doppler to DX grid</source>
+        <translation>Doppler complet fins al locator DX</translation>
+    </message>
+    <message>
+        <source>Method</source>
+        <translation>Mètode</translation>
+    </message>
+    <message>
+        <source>Moon Az / El: %1° / %2°</source>
+        <translation>Az / El de la Lluna: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>No Doppler correction</source>
+        <translation>Sense correcció Doppler</translation>
+    </message>
+    <message>
+        <source>On DX echo</source>
+        <translation>Sobre l'eco del DX</translation>
+    </message>
+    <message>
+        <source>Own / DX Doppler: %1 / %2 Hz</source>
+        <translation>Doppler propi / DX: %1 / %2 Hz</translation>
+    </message>
+    <message>
+        <source>Own echo</source>
+        <translation>Eco propi</translation>
+    </message>
+    <message>
+        <source>Set frequency</source>
+        <translation>Estableix la freqüència</translation>
+    </message>
+    <message>
+        <source>Sky: %1 K; degradation: %2 dB; polarization: %3°</source>
+        <translation>Cel: %1 K; degradació: %2 dB; polarització: %3°</translation>
+    </message>
+    <message>
+        <source>Sun Az / El: %1° / %2°</source>
+        <translation>Az / El del Sol: %1° / %2°</translation>
+    </message>
+    <message>
+        <source>TX frequency offset (MHz)</source>
+        <translation>Desplaçament de freqüència TX (MHz)</translation>
+    </message>
+    <message>
+        <source>Waiting for astronomical data…</source>
+        <translation>Esperant dades astronòmiques…</translation>
+    </message>
+</context>
+<context>
+    <name>HamlibUpdater</name>
+    <message>
+        <source>Another Hamlib update is in progress.</source>
+        <translation>Ja hi ha una actualització de Hamlib en curs.</translation>
+    </message>
+    <message>
+        <source>Cannot read the Hamlib files.</source>
+        <translation>No es poden llegir els fitxers de Hamlib.</translation>
+    </message>
+    <message>
+        <source>Cannot save the Hamlib restart request: %1</source>
+        <translation>No es pot desar la sol·licitud de reinici de Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save the downloaded Hamlib file.</source>
+        <translation>No es pot desar el fitxer de Hamlib descarregat.</translation>
+    </message>
+    <message>
+        <source>Cannot stage Hamlib: %1</source>
+        <translation>No es pot preparar Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib compatibility checker: %1</source>
+        <translation>No es pot iniciar el verificador de compatibilitat de Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib update helper.</source>
+        <translation>No es pot iniciar l'auxiliar d'actualització de Hamlib.</translation>
+    </message>
+    <message>
+        <source>Checking Hamlib compatibility without connecting to a radio…</source>
+        <translation>Comprovant la compatibilitat de Hamlib sense connectar-se a cap ràdio…</translation>
+    </message>
+    <message>
+        <source>Compatibility check passed. Restart JTDX-F to apply %1.</source>
+        <translation>Comprovació de compatibilitat superada. Reinicia JTDX-F per aplicar %1.</translation>
+    </message>
+    <message>
+        <source>Downloading the official Hamlib 4.7 branch update…</source>
+        <translation>Descarregant l'actualització oficial de la branca Hamlib 4.7…</translation>
+    </message>
+    <message>
+        <source>Hamlib compatibility check failed: %1</source>
+        <translation>Ha fallat la comprovació de compatibilitat de Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib download failed: %1</source>
+        <translation>Ha fallat la descàrrega de Hamlib: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib files changed after validation. Check the update again.</source>
+        <translation>Els fitxers de Hamlib han canviat després de validar-los. Torna a comprovar l'actualització.</translation>
+    </message>
+    <message>
+        <source>Hamlib update completed successfully.</source>
+        <translation>L'actualització de Hamlib s'ha completat correctament.</translation>
+    </message>
+    <message>
+        <source>Hamlib update timed out. The current version is unchanged.</source>
+        <translation>S'ha esgotat el temps d'actualització de Hamlib. La versió actual no s'ha modificat.</translation>
+    </message>
+    <message>
+        <source>Hamlib update was not applied: %1</source>
+        <translation>L'actualització de Hamlib no s'ha aplicat: %1</translation>
+    </message>
+    <message>
+        <source>Hamlib updates require a 64-bit Windows installation.</source>
+        <translation>Les actualitzacions de Hamlib requereixen una instal·lació de Windows de 64 bits.</translation>
+    </message>
+    <message>
+        <source>Invalid Hamlib update: %1</source>
+        <translation>Actualització de Hamlib no vàlida: %1</translation>
+    </message>
+    <message>
+        <source>No previous Hamlib version is available.</source>
+        <translation>No hi ha cap versió anterior de Hamlib disponible.</translation>
+    </message>
+    <message>
+        <source>On this platform, Hamlib is updated with JTDX-F.</source>
+        <translation>En aquesta plataforma, Hamlib s'actualitza amb JTDX-F.</translation>
+    </message>
+    <message>
+        <source>Restarting JTDX-F to apply the Hamlib update…</source>
+        <translation>Reiniciant JTDX-F per aplicar l'actualització de Hamlib…</translation>
+    </message>
+    <message>
+        <source>The Hamlib download is too large or could not be saved.</source>
+        <translation>La descàrrega de Hamlib és massa gran o no s'ha pogut desar.</translation>
+    </message>
+    <message>
+        <source>The Hamlib update helper is missing. Reinstall JTDX-F.</source>
+        <translation>Falta l'auxiliar d'actualització de Hamlib. Torna a instal·lar JTDX-F.</translation>
+    </message>
+    <message>
+        <source>The installation folder is not writable. Run JTDX-F with permission to update this folder.</source>
+        <translation>No es pot escriure a la carpeta d'instal·lació. Executa JTDX-F amb permís per actualitzar aquesta carpeta.</translation>
+    </message>
+</context>
+<context>
+    <name>OmniRigTransceiver</name>
+    <message>
+        <source>OmniRig: cannot initialize COM</source>
+        <translation>OmniRig: no es pot inicialitzar COM</translation>
+    </message>
+    <message>
+        <source>OmniRig: no valid receive frequency was reported</source>
+        <translation>OmniRig: no s'ha comunicat cap freqüència de recepció vàlida</translation>
+    </message>
+</context>
+<context>
+    <name>Transceiver</name>
+    <message>
+        <source>This transceiver does not support PCM audio.</source>
+        <translation>Aquest transceptor no admet àudio PCM.</translation>
+    </message>
+</context>
+<context>
+    <name>UpstreamController</name>
+    <message>
+        <source>Cannot communicate with the WSJT-X backend.</source>
+        <translation>No es pot comunicar amb el motor WSJT-X.</translation>
+    </message>
+    <message>
+        <source>Cannot prepare audio for the WSJT-X backend.</source>
+        <translation>No es pot preparar l'àudio per al motor WSJT-X.</translation>
+    </message>
+    <message>
+        <source>Cannot read the prepared transmit audio.</source>
+        <translation>No es pot llegir l'àudio de transmissió preparat.</translation>
+    </message>
+    <message>
+        <source>Invalid response from the WSJT-X backend.</source>
+        <translation>Resposta no vàlida del motor WSJT-X.</translation>
+    </message>
+    <message>
+        <source>Invalid transmit audio from the WSJT-X backend.</source>
+        <translation>Àudio de transmissió no vàlid del motor WSJT-X.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend rejected the request.</source>
+        <translation>El motor WSJT-X ha rebutjat la sol·licitud.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend stopped unexpectedly.</source>
+        <translation>El motor WSJT-X s'ha aturat inesperadament.</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend timed out. Reception can be restarted by selecting the mode again.</source>
+        <translation>S'ha esgotat el temps del motor WSJT-X. Es pot reiniciar la recepció seleccionant de nou el mode.</translation>
+    </message>
+    <message>
+        <source>Unexpected response from the WSJT-X backend.</source>
+        <translation>Resposta inesperada del motor WSJT-X.</translation>
+    </message>
+</context>
+<context>
+    <name>OperatorLog</name>
+    <message>
+        <source>Log files changed during processing; originals retained. Please retry.</source>
+        <translation>Els fitxers de registre han canviat durant el processament; els originals s'han conservat. Torneu-ho a provar.</translation>
+    </message>
+    <message>
+        <source>Cannot create the old backup directory; originals retained.</source>
+        <translation>No es pot crear el directori de còpies de seguretat old; els originals s'han conservat.</translation>
+    </message>
+    <message>
+        <source>Backup contents differ; originals retained.</source>
+        <translation>El contingut de la còpia de seguretat és diferent; els originals s'han conservat.</translation>
+    </message>
+    <message>
+        <source>Invalid QSO for the current station; originals retained.</source>
+        <translation>QSO no vàlid per a l'estació actual; els originals s'han conservat.</translation>
     </message>
 </context>
 </TS>

@@ -1,0 +1,10 @@
+grid.dat originates from WSJT-X v3.0.2, official tag commit
+ccdfaf3c1c109010d15399674ce278167cfde848, distributed under GPL-3.0.
+
+JTDX-F modification: FN35's NY-VY entry is corrected to NY-VT.
+VY is not a US postal state abbreviation; the locator intersects New York
+and Vermont. Lists describe possible states for a grid square, not the
+precise location of an individual station.
+
+The loader validates headings, numeric indices and duplicate cells before
+publishing the map and never indexes an unchecked fixed-size array.

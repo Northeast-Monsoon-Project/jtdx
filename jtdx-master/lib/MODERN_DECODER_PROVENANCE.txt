@@ -1,0 +1,250 @@
+JTDX-F V3.5.0 optional modern FT8 / FT4 decoder
+================================================
+
+Purpose and compatibility
+-------------------------
+The original JTDX branch already implements belief propagation (BP), ordered
+statistics decoding (OSD), AP hints, multiple soft-bit metrics and cancellation.
+This feature does NOT invent LDPC or add OSD for the first time. It is an optional,
+bounded extension of that existing pipeline. Both switches default to OFF.
+
+With the switch off, ft8b / ft4_decode use the previous decision path. The shared
+FT8 OSD generator's one-time initialization check was moved inside its existing
+OpenMP critical region to fix a real initialization race; no code matrix or
+numerical decoding operation was changed by that fix.
+Both existing OSD entry points also now return a strictly negative failure value
+for any bad CRC, including zero hard errors (integer negative zero is zero).
+This shared bug fix preserves valid traditional words and applies with either
+switch setting. Final algorithm comparisons use this fixed common baseline.
+
+Implemented extension
+---------------------
+* On failed, non-AP candidates, accumulate the channel and the first 1, 2 and 3
+  BP posterior vectors. Their average supplies a different OSD reliability order.
+* Try ordinary BP check messages (beta=1.0), then weighted messages (beta=0.8).
+  Each member uses the project's existing OSD (depth 3 for FT8, depth 2 for
+  FT4). This is a deterministic
+  small ensemble; it does not guess random callsigns or weaken CRC bits.
+* At most 6 OSD calls per rescue and 3 rescues per ft8b call / FT4 candidate.
+  The third search covers the three-symbol metric that a two-search budget missed.
+  No additional AP-constrained search is performed. Existing AP decoding remains.
+* Every extra candidate must pass CRC14, full 174-bit re-encoding equality, and
+  the original-channel evidence test. The guiding metric must have hard
+  mismatches + weighted mismatch cost below the old FT8 limit of 60, and at
+  least one original unhinted symbol metric must be below 50. These metrics
+  are different coherent symbol aggregations of the SAME waveform, NOT
+  statistically independent votes. Missing, zero and non-finite evidence views
+  are ignored. Posterior-amplified scores NEVER count as channel evidence.
+* BOTH FT4 paths now require successful message unpacking. Cancellation and
+  insertion into the duplicate list occur only after all existing message and
+  false-decode filters pass. A rejected callsign skips its candidate instead of
+  returning from the whole decode. These are shared reliability bug fixes, not
+  benefits to attribute to the optional modern search.
+* A failed rescue preserves the original candidate and failure status, including
+  the original FT8 failure-side bookkeeping used by later search passes.
+* An unsatisfied check, an unsupported message or a failed evidence check is a
+  failed decode. No promise of zero false decodes is made; CRC14 is finite.
+
+Sources and license
+-------------------
+The implementation is part of this GPLv3 JTDX-F derivative and retains
+the existing JTDX / WSJT-X code, matrices and attribution.
+
+1. WSJT-X, WSJTX/wsjtx, lib/ft8/decode174_91.f90, fixed commit
+   0f7d5928449ec747c3d1f6da1306f8c94404c3a9 (2026-10-21).
+   https://github.com/WSJTX/wsjtx/blob/0f7d5928449ec747c3d1f6da1306f8c94404c3a9/lib/ft8/decode174_91.f90
+   Official hybrid BP/OSD stores early accumulated posteriors and evaluates the
+   resulting word using channel LLRs. Our code keeps the local thread-aware OSD,
+   adds bounded weighted diversity and stricter verification; it does not import
+   the upstream dynamic Keff behavior or drop any CRC detection bits.
+
+2. 'Efficient Near Maximum-Likelihood Reliability-Based Decoding for Short
+   LDPC Codes', Weiyang Zhang, Chentao Yue, Yonghui Li, Branka Vucetic,
+   arXiv:2306.00443 (2023).
+   https://arxiv.org/abs/2306.00443
+   https://arxiv.org/html/2306.00443v2
+   Motivation for short weighted BP preprocessing and an independent
+   original-LLR weighted-distance test. beta=0.8 and this project's threshold are
+   engineering choices tested here, NOT a reproduction of the paper's claimed
+   gain, and NOT a claim that the paper tested FT8/FT4.
+
+3. Layered / serial scheduling comparison:
+   https://arxiv.org/abs/cs/0702111
+   Independent layered sum-product and normalized min-sum evaluation code is in
+   tests/ModernDecoderCandidates.f90, not the shipped decoder path.
+
+4. Robust demapper direction (evaluated only as a lightweight clipping proxy):
+   https://pro.univ-lille.fr/fileadmin/user_upload/pages_pros/anne_savard/publi/wcnc_2019.pdf
+   Simple clipping is not the full paper's noise-model demapper. It failed to
+   improve this experiment, so no clipping is enabled in production.
+
+Alternative evaluation and reproducibility
+-----------------------------------------
+Development used seed 375429, including deliberately unconstrained 77-bit
+payloads. The initial loose distance-60 rescue produced 1 CRC-valid wrong
+codeword in 4000 draws. Agreement between correlated posterior searches did not
+remove it. The final additional-candidate distance budget was tightened to 50
+before held-out evaluation; this trade-off loses some marginal true candidates.
+Do not omit this failed experiment or describe the first design as error-free.
+
+Initial soft-bit candidate comparison (depth-2 screening): seed 421973, 1000 valid-message codewords per
+AWGN soft-bit sigma=.85/.95/1.05/1.15. This is a BPSK/LLR-interface experiment,
+NOT audio dB, NOT a sensitivity specification and NOT an on-air comparison.
+Each alternative is applied after the same original BP+depth-3 OSD fails.
+
+                               .85    .95   1.05  1.15   total
+  Original                      799    395    127    41    1362
+  + layered sum-product         800    396    127    41    1364
+  + layered normalized minsum   800    398    128    41    1367
+  + posterior, beta=1           824    447    165    54    1490
+  + weighted posterior, beta=.8 824    444    161    51    1480
+  + initial ensemble            824    449    166    55    1494
+  + median-based clipping       824    449    166    55    1494
+
+No wrong output was observed in these rows, in 1000 pure-noise inputs, or in
+1000 soft-bit impulse stress inputs. The impulse case recovered 29/1000 in ALL
+variants: no demonstrated anti-impulse gain. The initial weighted member adds
+only 4/4000 above ordinary posterior OSD in this corpus; report that honestly.
+The layered candidates and clipping proxy were not selected.
+
+On the test machine the sigma=.95 original 1000-candidate workload used about
+1.60 CPU seconds; ordinary posterior rescue added 1.06, the initial ensemble
+added 1.98. Across these cases the maximum measured extra call was 7.6 ms.
+These are one-machine soft-bit figures, not a guaranteed UI latency. Actual
+FT8/FT4 audio cycle CPU, wall time and memory are measured by the separate
+ModernWaveform harness and summarized in the release validation report.
+
+The new BP/evidence scratch is roughly tens of KiB per active worker. FT4
+rescue uses depth 2 with no large lookup allocation. FT8 rescue uses the same
+roughly 2 MiB per-call lookup buffers already used by legacy depth-3 OSD; the
+old and additional calls run sequentially, not nested. DSP, FFT and the number
+of active workers also contribute to process memory. Do not confuse temporary
+scratch estimates with total process RSS or with a guaranteed memory bound.
+
+Tests:
+  tests/ModernDecoder.f90               regression + explicit seed/trials bench
+  tests/ModernDecoderCandidates.f90     non-production layered prototypes
+  tests/ModernCandidateBench.f90        identical-sample family comparison
+  tests/ModernDecoderThreads.f90        concurrent first initialization/recovery
+  tests/ModernWaveform.f90              full production waveform decoder harness
+  tests/test_modern_waveform.py         deterministic audio corpus and scoring
+
+The waveform harness uses separate declared seeds. Truth is the generated
+message and tone, not the number of lines printed by a decoder. Real recordings
+without ground truth cannot establish a correct/false decoding rate. Finite
+noise tests with no false outputs do not prove a zero false-alarm probability.
+
+Larger independent validation of the initial soft-bit-only design
+----------------------------------------------------------------
+Seed 915724, 1500 inputs per case, both FT8 and FT4 (including FT4 scrambling):
+12,000 AWGN codewords plus 3,000 pure-noise and 3,000 impulse stress inputs.
+The modern path recovered 400 additional correct codewords in total. However,
+FT4 sigma=1.05 produced ONE additional CRC-valid, unpackable wrong codeword
+(legacy 0). No false result appeared in the pure-noise/impulse groups. This
+prevents any claim that the broader search proves a lower total false-decode
+rate. The default UI switch remains off, and on-air / waveform results must be
+reported separately. The new validation/filtering reduces specific invalid
+acceptance paths but cannot remove all CRC-valid wrong-message risk.
+
+Initial depth-2 regression: 2400 cases, +51 correct, no additional wrong outputs.
+The final regression executes the final mode-specific production entry point.
+Threaded bounds-check validation: 8 workers, 384 calls equal to serial outputs,
+including four forced concurrent OSD initializations.
+
+Waveform development and final parameter choice
+-----------------------------------------------
+Initial full PCM tests used only CQ messages. They produced no extra messages:
+FT8 312/540 and FT4 310/540 for both paths. Legacy CQ AP can already recover
+messages that a new unhinted search finds; soft-bit improvements alone did NOT
+justify a claim of improved audio sensitivity.
+
+A declared mixed-message DEVELOPMENT corpus (seed 20261030, 270 paired frames
+per mode, reports/R-reports/RR73/73/free text/CQ, AWGN/impulse/crowded cases)
+showed the initial limited search added 1 message in each mode. Inspection found
+the two-attempt cap skipped the three-symbol metric. A correct FT4 candidate
+found via the two-symbol metric had original cost 54.0846 (fails strict 50), but
+its three-symbol metric cost was 48.2797. Only increasing search depth/cap failed
+to recover this case; cross-checking original symbol evidence recovered it.
+
+Development results against the then-current pre-shared-fix baseline:
+  FT8: old 312 correct, 0 wrong; cross/depth2 313; cross/depth3 317, 0 wrong.
+  FT4: old 433 correct, 3 wrong; cross/depth2 450; cross/depth3 455, 0 wrong.
+  No previously correct messages were lost in these development comparisons.
+
+FT8 depth 3 used about 133 CPU seconds for 270 modern frames (legacy 57),
+maximum measured wall time 1.12 seconds. FT4 depth 3 used 346 CPU seconds
+(legacy 63), maximum 3.84 seconds; depth 2 used 108 CPU seconds and maximum
+1.15 seconds. Therefore the final choice is FT8 depth 3 and FT4 depth 2, with
+three bounded rescues and original-evidence cross-checks. The deeper FT4 search
+was not selected: its five additional messages cost over three times the
+modern depth-2 CPU and reduced the 7.5-second cycle margin. These development
+timings are indicative; the final isolated run supplies release resource data.
+
+The shared CRC, FT4 validation/state and initialization fixes were subsequently
+applied to BOTH paths. A final untouched seed (20261031) must compare the
+modern search against that corrected traditional baseline. In particular, the
+development 3-to-0 wrong-message change cannot be advertised as a search-only
+advantage. Final held-out PCM results are recorded separately in the release
+validation report, including any added or lost messages and false decodes.
+
+
+V3.7.0: beta5 kernels and concurrency (2026-10-31)
+------------------------------------------------
+Reference: WSJT-X v3.3.0-beta5, d89fe30ca1dfd3c38def8f17228f09f042829f95.
+Imported lib/ft8var/ft8_fft32.f90 and ft8_symbol_spectrum.f90 from that
+reference into lib/, unchanged except for source/license comments. The
+upstream performance work is commit 25a626af8bb350bc7bc8c86c87be9969b9d676c9:
+https://github.com/WSJTX/wsjtx/commit/25a626af8bb350bc7bc8c86c87be9969b9d676c9
+Its published performance numbers describe upstream's implementation and
+benchmark machine; they are NOT JTDX-F performance claims.
+
+The local JTDX worker dispatcher, cache ownership, coherent QSO history,
+bounded append and atomic decode publication fixes are Fluxmancer changes,
+not a wholesale replacement with the upstream decoder. ft8_shared_state
+centralizes this synchronization and complete-call token matching.
+
+modern174 now evaluates each posterior/OSD attempt when ready and skips
+unused later BP updates after success. The trajectory order, OSD depth and
+budget, CRC14/re-encoding check, and original-channel evidence criteria are
+unchanged. The extracted modern174_evidence routine is the single criterion
+used by both production rescue and research-only candidate screening.
+Paired old/new-library tests used the identical ModernRescueBench source:
+2,547 BP-failed/noise inputs per mode, all CASE lines exactly equal; FT8 254
+and FT4 232 recovered, zero wrong in this finite synthetic corpus. The mode
+selects OSD depth; this soft-bit test does not model a complete FT4 waveform.
+
+New research sources considered beyond WSJT-X:
+* Tasdighi and Yousefi, Adaptive Learned Belief Propagation for Decoding
+  Error-Correcting Codes (2025): https://arxiv.org/abs/2507.19941
+* Bezner, Krieg and ten Brink, Row-Boosted Ensemble Belief Propagation for
+  Short LDPC Codes (2026): https://arxiv.org/abs/2608.09560
+Neither paper establishes sensitivity gains for this FT8 (174,91) decoder.
+ModernRowBoostCandidates/Bench are research-only files, excluded from the
+application. Their reliable-row selection is a local hypothesis, not a
+claim to reproduce the paper's learned/offline row-selection procedure.
+
+See docs/FT8_V370_VALIDATION.md for implementation boundaries, actual tests,
+paired PCM/resource measurements and research adoption decisions.
+
+The targeted Type2 /P AP repair records the type bits from the actual packed
+standard QSO/CQ template and applies them at one entry before BP. Fixed RR73
+AP tails now use 32403. Full PCM testing showed that retaining only the
+legacy 32373 unpack interpretation was insufficient for weak known-QSO
+reception: 24/24 old-encoder frames fell to 12/24. The final receive-only
+variant selector restores 24/24 without increasing BP/OSD attempts: the
+existing RR73 hint slot uses original symbol energy to select the standard
+or legacy codeword, and known-pair AP6 uses that same choice. Standard
+transmission remains 32403; Type4/Fox and unknown-recipient AP36 do not gain
+additional legacy hypotheses. Both traditional and modern paths benefit. Invalid AP cache markers (99/0)
+are explicitly rejected and station/grid changes invalidate old templates.
+Nonstandard-hashed /P AP combinations remain outside this minimal repair.
+The /P, /R, plain-call templates are checked against actual pack77 output and
+BP recovery in Ft8ApTemplates; portable PCM exercises the complete frontend.
+Complete-token callsign matching is a Fluxmancer audit fix, not a claim that
+beta5's history implementation already provided token-boundary matching.
+
+Generic four2a FFT plans now explicitly use one FFTW thread while holding the
+planner lock. This prevents downsam9/downsam9s/downsam10 leaving a global
+planner setting that multiplies FT8 worker count after a mode switch. Dedicated
+large FFT plans keep their existing threading. Ft8Spectrum checks the actual
+planner thread setting at intercepted plan creation, not just FFT results.

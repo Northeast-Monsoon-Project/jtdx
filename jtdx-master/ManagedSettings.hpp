@@ -10,7 +10,7 @@ public:
   void setSettings(ManagedSettings const&);
   ManagedSettings settings() const;
 private:
-  struct Controls {QHash<unsigned,QCheckBox*> criteria;QCheckBox* answer;QSpinBox* limit;};
+  struct Controls {QHash<unsigned,QCheckBox*> criteria;QCheckBox* answer;QCheckBox* freeTxSlot;QSpinBox* limit;};
   Controls hunter_,enthusiast_;
 };
 #endif

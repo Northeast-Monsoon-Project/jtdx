@@ -1,0 +1,40 @@
+JTDX-F JTTY implementation provenance (V3.7.0)
+
+Source: WSJT-X, https://github.com/WSJTX/wsjtx
+Base version: v3.3.0-beta4
+Base pinned commit: 0f7d5928449ec747c3d1f6da1306f8c94404c3a9
+Decoder update: v3.3.0-beta5
+Update pinned commit: d89fe30ca1dfd3c38def8f17228f09f042829f95
+License: GNU GPL v3 or later; see repository COPYING.
+Upstream authors retain copyright; Fluxmancer integration changes, 2026.
+
+Imported from lib/jtty/: source codec, convolutional FEC/list decoder,
+frame generation, Gaussian waveform, continuous multi-signal decoder,
+receive contexts, timing and subtraction helpers. packjt77_grammar.f90
+is the upstream grammar module. pack28/unpack28 calls are adapted to
+JTDX's explicit hash/thread arguments; the wire codec is unchanged.
+JttyDecoder.hpp and JttyReceiveTiming.hpp are upstream C++ wrappers.
+Four original tests/test_jtty_*.f90 fixtures are upstream golden-wire/FEC/receive/
+continuous-decode tests, adapted only for this project's build targets.
+
+V3.7.0 imports jtty_mdecode.f90 and jtty_tbcc_list_decoder.f90 from the
+beta5 commit above: reject strong-signal symbol-offset alias decodes and
+reuse sequence-energy prefixes for SIMD-friendly list-decoder computation.
+The upstream test_jtty_alias_decode.f90 and test_jtty_tbcc_list_decoder.f90
+are imported from the same commit. The alias regression includes a local
+standalone scan adapter because JTDX-F builds the receive-context API.
+Local adaptation: jtty_receive_context.f90 exchanges/resets alias history
+with each live/review reception state; upstream module-global alias state
+must not leak between independent contexts. test_jtty_alias_context.f90
+checks real PCM decoding, interleaving, stop and restart isolation.
+No JTTY wire format, source alphabet, CRC or coding profile is changed.
+
+Local integration: JttyCodec.cpp (isolated bounded JSON-lines DSP
+helper), JttyController, mainwindow_jtty.cpp, continuous audio transport,
+per-message manual send, stop/PTT/error handling, MCP preparation tool.
+The protocol is asynchronous keyboard text, not FT8 AutoSeq. Maximum
+80 characters per message; uppercase protocol alphabet; 31.25 baud,
+59 symbols per frame (1.888 s), up to 16 frames, Gaussian 4-FSK.
+Working frequency presets are upstream models/FrequencyList.cpp at the
+pinned commit and can be edited by the operator.
+ADIF: MFSK / SUBMODE JTTY in ADIF 3.1.8.

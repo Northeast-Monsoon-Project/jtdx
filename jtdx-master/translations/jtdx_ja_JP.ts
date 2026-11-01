@@ -46,6 +46,43 @@
         <source>OK</source>
         <translation>OK</translation>
     </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>JTDX-F について</translation>
+    </message>
+    <message>
+        <source>JTDX-F is developed by the Fluxmancer team.&lt;br&gt;Based on JTDX and WSJT-X; upstream credits and GPLv3 are preserved.&lt;br&gt;&lt;br&gt;</source>
+        <translation>JTDX-F は Fluxmancer チームが開発しています。&lt;br&gt;JTDX と WSJT-X を基にしており、原作者のクレジットと GPLv3 を継承しています。&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>JTDX-F is licensed under GNU GPLv3, without warranty.</source>
+        <translation>JTDX-F は GNU GPLv3 に基づき、無保証で提供されます。</translation>
+    </message>
+    <message>
+        <source>FT2 / SuperFox: additional integrations; source revisions are documented with the source code.</source>
+        <translation>FT2 / SuperFox：追加統合。元のリビジョンはソースコードに記載しています。</translation>
+    </message>
+    <message>
+        <source>FT8 / FT4: JTDX decoders, WSJT-X 3.0.2 protocol/waveforms, selected 3.3.0-beta5 performance/concurrency fixes, and Fluxmancer modern decoding.</source>
+        <translation>FT8 / FT4：JTDX デコーダー、WSJT-X 3.0.2 のプロトコル・波形、3.3.0-beta5 から選択した性能・並行処理の修正、および Fluxmancer のモダンデコード。</translation>
+    </message>
+    <message>
+        <source>Hamlib (radio control): %1</source>
+        <translation>Hamlib（無線機制御）：%1</translation>
+    </message>
+    <message>
+        <source>JTDX-F preserves JTDX's heritage and incorporates selected WSJT-X updates. Components retain their respective authors and licenses.</source>
+        <translation>JTDX-FはJTDXを継承し、選択したWSJT-Xの更新を統合しています。各構成要素の著作者とライセンスは保持されています。</translation>
+    </message>
+    <message>
+        <source>Q65 / MSK144 / Echo and astronomical calculations: WSJT-X 3.0.2.</source>
+        <translation>Q65 / MSK144 / Echoおよび天文計算：WSJT-X 3.0.2。</translation>
+    </message>
+    <message>
+        <source>WSPR: WSJT-X 3.0.2 decoder with 3.3.0-beta5 message validation and JTDX-F safety fixes.</source>
+        <translation>WSPR：WSJT-X 3.0.2 デコーダーに、3.3.0-beta5 のメッセージ検証と JTDX-F の安全性修正を追加。</translation>
+    </message>
+    <message><source>JTTY: WSJT-X 3.3.0-beta5 decoder with Fluxmancer integration.</source><translation>JTTY：Fluxmancer が統合した WSJT-X 3.3.0-beta5 デコーダー。</translation></message>
 </context>
 <context>
     <name>CallsignDialog</name>
@@ -57,6 +94,10 @@
 </context>
 <context>
     <name>Configuration::impl</name>
+    <message>
+        <source>Own transmitted message</source>
+        <translation>自局の送信メッセージ</translation>
+    </message>
     <message>
         <location filename="../Configuration.cpp" line="1420"/>
         <location filename="../Configuration.cpp" line="1431"/>
@@ -326,6 +367,64 @@ Format:
         <location filename="../Configuration.cpp" line="6028"/>
         <source>Rig failure</source>
         <translation>リグに障害あり</translation>
+    </message>
+    <message>
+        <source>Callsign management…</source>
+        <translation>コールサインの管理…</translation>
+    </message>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>有効な NTP ホスト名または IP アドレスを入力してください。</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>自動運用モード</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization</source>
+        <translation>NTP 時刻同期</translation>
+    </message>
+    <message>
+        <source>Current version: %1
+Previous version: %2</source>
+        <translation>現在のバージョン：%1
+以前のバージョン：%2</translation>
+    </message>
+    <message>
+        <source>Halt Tx when SWR &gt; 2.5</source>
+        <translation>SWR &gt; 2.5で送信を停止</translation>
+    </message>
+    <message>
+        <source>Hamlib updates</source>
+        <translation>Hamlibの更新</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>なし</translation>
+    </message>
+    <message>
+        <source>Restart application</source>
+        <translation>アプリを再起動</translation>
+    </message>
+    <message>
+        <source>Restore previous Hamlib</source>
+        <translation>以前のHamlibに戻す</translation>
+    </message>
+    <message>
+        <source>Stop transmission when a supported CAT radio reports SWR above 2.5. Unknown or unsupported readings are shown as unavailable. Protection also polls SWR when power display is off.</source>
+        <translation>対応CAT無線機のSWRが2.5を超えると送信を停止します。不明・非対応の値は利用不可と表示します。電力表示がオフでも保護機能はSWRを取得します。</translation>
+    </message>
+    <message>
+        <source>Update Hamlib</source>
+        <translation>Hamlibを更新</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready to restore. Restart the application to apply it.</source>
+        <translation>バージョン%1に戻す準備ができました。再起動すると適用されます。</translation>
+    </message>
+    <message>
+        <source>Version %1 is ready. Restart the application to apply it.</source>
+        <translation>バージョン%1の準備ができました。再起動すると適用されます。</translation>
     </message>
 </context>
 <context>
@@ -2496,6 +2595,18 @@ Error: %2 - %3</source>
         <source>Ham Radio Deluxe didn&apos;t respond to command &quot;%1&quot; as expected</source>
         <translation>Ham Radio Deluxeは、コマンド「%1」に期待どおりに応答しませんでした</translation>
     </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid frequency list</source>
+        <translation>Ham Radio Deluxe から無効な周波数リストを受信しました</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid or incomplete reply</source>
+        <translation>Ham Radio Deluxe から無効または不完全な応答を受信しました</translation>
+    </message>
+    <message>
+        <source>Ham Radio Deluxe sent an invalid radio list</source>
+        <translation>Ham Radio Deluxe から無効な無線機リストを受信しました</translation>
+    </message>
 </context>
 <context>
     <name>HamlibTransceiver</name>
@@ -2964,6 +3075,46 @@ Error: %2 - %3</source>
         <location filename="../logqso.cpp" line="222"/>
         <source>Cannot open &quot;%1&quot; for append: %2</source>
         <translation>追加のために「%1」を開くことができません：%2</translation>
+    </message>
+    <message>
+        <source>Earth–Moon–Earth</source>
+        <translation>地球—月—地球</translation>
+    </message>
+    <message>
+        <source>Meteor scatter</source>
+        <translation>流星散乱</translation>
+    </message>
+    <message>
+        <source>Propagation</source>
+        <translation>伝搬</translation>
+    </message>
+    <message>
+        <source>Receive frequency</source>
+        <translation>受信周波数</translation>
+    </message>
+    <message>
+        <source>Remember propagation and satellite</source>
+        <translation>伝搬方式と衛星を記憶</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>衛星</translation>
+    </message>
+    <message>
+        <source>Satellite mode</source>
+        <translation>衛星モード</translation>
+    </message>
+    <message>
+        <source>Satellite name</source>
+        <translation>衛星名</translation>
+    </message>
+    <message>
+        <source>Tropospheric</source>
+        <translation>対流圏伝搬</translation>
+    </message>
+    <message>
+        <source>Unspecified</source>
+        <translation>未指定</translation>
     </message>
 </context>
 <context>
@@ -5307,6 +5458,310 @@ UDP server %2:%3</source>
         <source>WD %1m</source>
         <translation>WD %1m</translation>
     </message>
+    <message>
+        <source>A log import is already running.</source>
+        <translation>ログのインポートは既に実行中です。</translation>
+    </message>
+    <message>
+        <source>About JTDX-F</source>
+        <translation>JTDX-F について</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC ハンター</translation>
+    </message>
+    <message>
+        <source>Decoder error: %1. TX stopped; restarting decoder.</source>
+        <translation>デコーダーエラー: %1。送信を停止し、デコーダーを再起動します。</translation>
+    </message>
+    <message>
+        <source>Decoder exited (code %1, crash %2)</source>
+        <translation>デコーダーが終了しました（コード %1、クラッシュ %2）</translation>
+    </message>
+    <message>
+        <source>Decoder restart failed repeatedly. Check decoder-errors.log and restart JTDX-F.</source>
+        <translation>デコーダーの再起動に繰り返し失敗しました。decoder-errors.log を確認し、JTDX-F を再起動してください。</translation>
+    </message>
+    <message>
+        <source>Decoder restarted. Enable Monitor to resume reception; TX remains stopped.</source>
+        <translation>デコーダーを再起動しました。受信を再開するにはモニターを有効にしてください。送信は停止したままです。</translation>
+    </message>
+    <message>
+        <source>Enable TX manually, then Send each message (max. 80 characters).</source>
+        <translation>手動で送信を有効にしてから、各メッセージを送信してください（最大 80 文字）。</translation>
+    </message>
+    <message>
+        <source>FT2</source>
+        <translation>FT2</translation>
+    </message>
+    <message>
+        <source>JTTY</source>
+        <translation>JTTY</translation>
+    </message>
+    <message>
+        <source>JTTY requires a local audio input and output device.</source>
+        <translation>JTTY にはローカルの音声入力機器と出力機器が必要です。</translation>
+    </message>
+    <message>
+        <source>JTTY transmission timed out; TX stopped.</source>
+        <translation>JTTY の送信がタイムアウトしたため、送信を停止しました。</translation>
+    </message>
+    <message>
+        <source>Listening…</source>
+        <translation>待ち受け中…</translation>
+    </message>
+    <message>
+        <source>Log import: %1 new, %2 duplicates, %3 originals archived, %4 records from other stations skipped.</source>
+        <translation>ログのインポート: 新規 %1 件、重複 %2 件、原本 %3 件を保管、他局の記録 %4 件を除外しました。</translation>
+    </message>
+    <message>
+        <source>Log loading failed: %1</source>
+        <translation>ログの読み込みに失敗しました: %1</translation>
+    </message>
+    <message>
+        <source>MCP %1</source>
+        <translation>MCP %1</translation>
+    </message>
+    <message>
+        <source>MCP error</source>
+        <translation>MCP エラー</translation>
+    </message>
+    <message>
+        <source>MCP off</source>
+        <translation>MCP 無効</translation>
+    </message>
+    <message>
+        <source>MCP settings: File &gt; Settings &gt; MCP</source>
+        <translation>MCP 設定: ファイル &gt; 設定 &gt; MCP</translation>
+    </message>
+    <message>
+        <source>MCP: %1</source>
+        <translation>MCP: %1</translation>
+    </message>
+    <message>
+        <source>Managed mode</source>
+        <translation>自動運用モード</translation>
+    </message>
+    <message>
+        <source>Managed mode is listening. Enable TX manually to allow calls and scheduled CQ.</source>
+        <translation>自動運用モードで待ち受け中です。呼び出しと定期 CQ を許可するには、手動で送信を有効にしてください。</translation>
+    </message>
+    <message>
+        <source>Managed mode is off.</source>
+        <translation>自動運用モードは無効です。</translation>
+    </message>
+    <message>
+        <source>Modern algorithm decoding</source>
+        <translation>最新アルゴリズムによるデコード</translation>
+    </message>
+    <message>
+        <source>My callsign</source>
+        <translation>自局コールサイン</translation>
+    </message>
+    <message>
+        <source>No decoder completion within the timeout</source>
+        <translation>制限時間内にデコードが完了しませんでした</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>無効</translation>
+    </message>
+    <message>
+        <source>Previous audio file is still being saved; this interval was skipped.</source>
+        <translation>前の音声ファイルを保存中のため、今回の周期はスキップしました。</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast</source>
+        <translation>QSO 愛好家</translation>
+    </message>
+    <message>
+        <source>Receiving</source>
+        <translation>受信中</translation>
+    </message>
+    <message>
+        <source>Search around Rx frequency (Hz):</source>
+        <translation>受信周波数の周囲を探索（Hz）:</translation>
+    </message>
+    <message>
+        <source>Select a callsign before importing logs.</source>
+        <translation>ログをインポートする前にコールサインを選択してください。</translation>
+    </message>
+    <message>
+        <source>Select a valid callsign and grid in station settings before enabling TX.</source>
+        <translation>送信を有効にする前に、局情報の設定で有効なコールサインとグリッドを選択してください。</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>送信</translation>
+    </message>
+    <message>
+        <source>SuperFox decoding (SuperHound)</source>
+        <translation>SuperFox デコード（SuperHound）</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance</source>
+        <translation>SuperFox 周波数許容範囲</translation>
+    </message>
+    <message>
+        <source>SuperFox frequency tolerance...</source>
+        <translation>SuperFox 周波数許容範囲...</translation>
+    </message>
+    <message>
+        <source>SuperHound</source>
+        <translation>SuperHound</translation>
+    </message>
+    <message>
+        <source>TX watchdog expired. Finishing the current QSO before stopping.</source>
+        <translation>送信監視タイマーが満了しました。現在の QSO を完了してから停止します。</translation>
+    </message>
+    <message>
+        <source>This mode requires local audio devices; TCI audio is unavailable.</source>
+        <translation>このモードにはローカルの音声機器が必要です。TCI 音声は使用できません。</translation>
+    </message>
+    <message>
+        <source>Transmitting</source>
+        <translation>送信中</translation>
+    </message>
+    <message>
+        <source>Use posterior-assisted decoding and additional candidate validation. Off uses the traditional decoder. Applies to the next decode.</source>
+        <translation>事後確率を利用したデコードと追加の候補検証を行います。無効時は従来のデコーダーを使用します。次回のデコードから適用されます。</translation>
+    </message>
+    <message>
+        <source>WD %1:%2</source>
+        <translation>WD %1:%2</translation>
+    </message>
+    <message>
+        <source>WD finishing QSO</source>
+        <translation>WD: QSO</translation>
+    </message>
+    <message>
+        <source>WD unlimited</source>
+        <translation>WD ∞</translation>
+    </message>
+    <message>
+        <source>The current operator's log is not ready. Check the log files and try again.</source>
+        <translation>現在の運用者のログが準備できていません。ログファイルを確認し、再試行してください。</translation>
+    </message>
+    <message>
+        <source>Blacklist management</source>
+        <translation>ブラックリストの管理</translation>
+    </message>
+    <message>
+        <source>CALL</source>
+        <translation>コールサイン</translation>
+    </message>
+    <message>
+        <source>REPORT</source>
+        <translation>レポート</translation>
+    </message>
+    <message>
+        <source>This station is blocked, or the permanent blacklist is unavailable.</source>
+        <translation>この局はブロックされているか、永続ブラックリストを利用できません。</translation>
+    </message>
+    <message>
+        <source>Confirm switch</source>
+        <translation>切替確定</translation>
+    </message>
+    <message>
+        <source>Average</source>
+        <translation>平均</translation>
+    </message>
+    <message>
+        <source>Clear average</source>
+        <translation>平均をクリア</translation>
+    </message>
+    <message>
+        <source>Click to erase the right window; double-click to erase both.</source>
+        <translation>クリックで右側、ダブルクリックで両方のウィンドウを消去します。</translation>
+    </message>
+    <message>
+        <source>EME presets</source>
+        <translation>EMEプリセット</translation>
+    </message>
+    <message>
+        <source>Echo: %1 dB; Δf %2 Hz; quality %3; averages %4</source>
+        <translation>エコー：%1 dB、Δf %2 Hz、品質%3、平均回数%4</translation>
+    </message>
+    <message>
+        <source>Enable TX manually to measure lunar echoes.</source>
+        <translation>月面エコーを測定するには手動でTXを有効にしてください。</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX.</source>
+        <translation>送信を有効化または停止します。</translation>
+    </message>
+    <message>
+        <source>Enable or stop TX. Right-click for Wait &amp; Reply, Wait &amp; Call or Wait &amp; Pounce. Waiting requires a manually enabled TX session.</source>
+        <translation>送信を有効化または停止します。右クリックで待機・応答、待機・呼出、待機・CQ応答を選択できます。手動で有効化したTXセッションが必要です。</translation>
+    </message>
+    <message>
+        <source>Full duplex</source>
+        <translation>全二重</translation>
+    </message>
+    <message>
+        <source>Left-click to erase the left window; right-click to erase the right window; double-click to erase both.</source>
+        <translation>左クリックで左側、右クリックで右側、ダブルクリックで両方を消去します。</translation>
+    </message>
+    <message>
+        <source>Period</source>
+        <translation>周期</translation>
+    </message>
+    <message>
+        <source>SWR %1 exceeds 2.5. TX stopped; enable TX manually after checking the antenna.</source>
+        <translation>SWR %1が2.5を超えたため送信を停止しました。アンテナ確認後、手動でTXを有効にしてください。</translation>
+    </message>
+    <message>
+        <source>Set a valid station grid locator to calculate astronomical data.</source>
+        <translation>天文データの計算には有効な自局グリッドを設定してください。</translation>
+    </message>
+    <message>
+        <source>Stopped</source>
+        <translation>停止</translation>
+    </message>
+    <message>
+        <source>The transmit slot was missed; enable TX again.</source>
+        <translation>送信時間枠に間に合いませんでした。TXを再度有効にしてください。</translation>
+    </message>
+    <message>
+        <source>Transmission timed out; TX stopped.</source>
+        <translation>送信がタイムアウトしたため停止しました。</translation>
+    </message>
+    <message>
+        <source>VHF / EME</source>
+        <translation>VHF / EME</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Call</source>
+        <translation>待機して呼び出す</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Pounce</source>
+        <translation>待機してCQに応答</translation>
+    </message>
+    <message>
+        <source>Wait &amp; Reply</source>
+        <translation>待機して応答</translation>
+    </message>
+    <message>
+        <source>Waiting is selected. Click Enable TX to authorize transmission; Stop cancels waiting.</source>
+        <translation>待機を選択しました。「送信を有効」で送信を許可します。「停止」で待機を取り消します。</translation>
+    </message>
+    <message>
+        <source>Waiting matched %1; continuing the manually enabled TX session.</source>
+        <translation>%1が待機条件に一致しました。手動で有効化したTXセッションを続行します。</translation>
+    </message>
+    <message>
+        <source>Waiting timed out; TX stopped.</source>
+        <translation>待機がタイムアウトしたため送信を停止しました。</translation>
+    </message>
+    <message>
+        <source>%1 is replying to another station; waiting for its CQ or final message.</source>
+        <translation>%1 は他局に応答中です。その局の CQ または終了メッセージを待っています。</translation>
+    </message>
+    <message>
+        <source>%1 is available; continuing the manually enabled TX session.</source>
+        <translation>%1 が応答可能になりました。手動で有効にした送信セッションを継続します。</translation>
+    </message>
 </context>
 <context>
     <name>Modes</name>
@@ -5619,6 +6074,58 @@ Please verify the correct directory name was given.</source>
         <location filename="../WFPalette.cpp" line="258"/>
         <source>Error writing waterfall palette file &quot;%1&quot;: %2.</source>
         <translation>ウォーターフォールパレットファイル &quot;%1&quot;の書き込みエラー：%2。</translation>
+    </message>
+    <message>
+        <source>Cannot create log directory</source>
+        <translation>ログのディレクトリを作成できません</translation>
+    </message>
+    <message>
+        <source>Log files changed while loading. Please retry.</source>
+        <translation>読み込み中にログファイルが変更されました。再試行してください。</translation>
+    </message>
+    <message>
+        <source>Log is busy. Please retry.</source>
+        <translation>ログが使用中です。再試行してください。</translation>
+    </message>
+    <message>
+        <source>Unable to import the log files.</source>
+        <translation>ログファイルをインポートできません。</translation>
+    </message>
+    <message>
+        <source>Unable to read the log files.</source>
+        <translation>ログファイルを読み込めません。</translation>
+    </message>
+    <message>
+        <source>Ambiguous QSO identity; log unchanged</source>
+        <translation>QSO の識別情報が重複しています。ログは変更されていません</translation>
+    </message>
+    <message>
+        <source>Recorded QSO not found; log unchanged</source>
+        <translation>記録済みの QSO が見つかりません。ログは変更されていません</translation>
+    </message>
+    <message>
+        <source>Cannot read pending log update</source>
+        <translation>保留中のログ更新を読み込めません</translation>
+    </message>
+    <message>
+        <source>Invalid pending log update; originals retained</source>
+        <translation>保留中のログ更新が無効です。元のファイルは保持されています</translation>
+    </message>
+    <message>
+        <source>Cannot remove completed log update journal</source>
+        <translation>完了したログ更新の復旧用ファイルを削除できません</translation>
+    </message>
+    <message>
+        <source>QSO identity changed or timestamps are invalid; log unchanged</source>
+        <translation>QSO の識別情報が変更されたか、日時が無効です。ログは変更されていません</translation>
+    </message>
+    <message>
+        <source>Cannot revise a symbolic log link</source>
+        <translation>シンボリックリンク先のログは更新できません</translation>
+    </message>
+    <message>
+        <source>QSO update exceeds the journal size limit</source>
+        <translation>QSO の更新が復旧用ファイルのサイズ上限を超えています</translation>
     </message>
 </context>
 <context>
@@ -6089,6 +6596,14 @@ Error(%2): %3</source>
         <location filename="../TCITransceiver.cpp" line="1740"/>
         <source>TCI modulator not Idle</source>
         <translation>TCIモジュラーはアイドルではありません</translation>
+    </message>
+    <message>
+        <source>Invalid TCI audio packet</source>
+        <translation>TCI 音声パケットが無効です</translation>
+    </message>
+    <message>
+        <source>TCI PCM playback requires an active, explicitly started transmission.</source>
+        <translation>TCI PCMの再生には、明示的に開始した送信が有効である必要があります。</translation>
     </message>
 </context>
 <context>
@@ -7057,8 +7572,8 @@ Error(%2): %3</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2236"/>
-        <source>Halt TX if operator I called answered to other operator</source>
-        <translation>他局への応答があった局への呼び出しを停止</translation>
+        <source>Wait if the called station replies to someone else</source>
+        <translation>呼び出した局が他局に応答したら待機する</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2246"/>
@@ -7573,8 +8088,8 @@ Error(%2): %3</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3846"/>
-        <source>Transmitted message</source>
-        <translation>送られたメッセージ</translation>
+        <source>Own transmitted message</source>
+        <translation>自局の送信メッセージ</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="3862"/>
@@ -7911,8 +8426,8 @@ both here.</source>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2233"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option is being used for non-overlapping spectra scenario. Tx will be halted if spectra have common frequencies with no respect to this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt; &lt;head /&gt; &lt;body&gt; &lt;p&gt;このオプションは、重複しないスペクトルシナリオに使用されています。この設定に関係なくスペクトルに共通の周波数がある場合、送信は停止します。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>With AutoSeq enabled, checking this option pauses calls to the selected station while it replies to someone else, keeping Enable TX on. Resume on its CQ, 73, RR73, RRR or a reply to you. When unchecked, do not pause for this reason. Call limits, the TX watchdog and Stop still apply.</source>
+        <translation>AutoSeq が有効なとき、この項目をオンにすると、選択した局が他局に応答している間は呼び出しを一時停止し、送信有効は維持します。その局の CQ、73、RR73、RRR、または自局への応答で再開します。オフの場合、この理由では一時停止しません。呼び出し回数の上限、送信監視タイマー、停止操作は引き続き有効です。</translation>
     </message>
     <message>
         <location filename="../Configuration.ui" line="2243"/>
@@ -8845,6 +9360,294 @@ soundcard changes</source>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Defines number of T10 decoding attempts for RX frequency&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt; &lt;head /&gt; &lt;body&gt; &lt;p&gt; RX周波数のT10デコード試行回数を定義します&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minutes from enabling TX, across QSOs; 0 = unlimited, maximum 999. Activity does not reset the timer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;送信を有効にしてからの経過時間（分）。QSO をまたいで計測します。0 は制限なし、最大 999。操作してもタイマーはリセットされません。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Access token</source>
+        <translation>アクセストークン</translation>
+    </message>
+    <message>
+        <source>Allow control (mode, frequency, QSO and options)</source>
+        <translation>制御を許可（モード、周波数、QSO、オプション）</translation>
+    </message>
+    <message>
+        <source>Allow starting TX and Tune (also requires control)</source>
+        <translation>送信とチューニングの開始を許可（制御の許可も必要）</translation>
+    </message>
+    <message>
+        <source>Connect an AI client to JTDX-F using MCP. Changes take effect after OK. Only this computer (127.0.0.1) can connect.</source>
+        <translation>MCP を使用して AI クライアントを JTDX-F に接続します。変更は OK を押した後に反映されます。このコンピューター（127.0.0.1）からのみ接続できます。</translation>
+    </message>
+    <message>
+        <source>Copy token</source>
+        <translation>トークンをコピー</translation>
+    </message>
+    <message>
+        <source>Enable MCP server</source>
+        <translation>MCP サーバーを有効にする</translation>
+    </message>
+    <message>
+        <source>Endpoint</source>
+        <translation>エンドポイント</translation>
+    </message>
+    <message>
+        <source>Generate new token</source>
+        <translation>新しいトークンを生成</translation>
+    </message>
+    <message>
+        <source>MCP</source>
+        <translation>MCP</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>ポート</translation>
+    </message>
+    <message>
+        <source>Use Streamable HTTP with Authorization: Bearer TOKEN, or the bundled jtdx_mcp_bridge.py for stdio clients. Status, decodes and log are readable with a token. Stop TX is always available. See docs/MCP_zh.md.</source>
+        <translation>Authorization: Bearer TOKEN を指定した Streamable HTTP、または stdio クライアント用の付属 jtdx_mcp_bridge.py を使用してください。トークンがあれば状態、デコード結果、ログを読み取れます。送信停止は常に利用可能です。docs/MCP_zh.md を参照してください。</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Align the text for DXCC, distance and azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;DXCC、距離、方位角の文字位置を揃えます。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allow kHz frequency offset entry without 'k' suffix.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;kHz単位の周波数オフセットを接尾辞kなしで入力できます。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have decodes for a new period start at the top of the Band Activity window and not scroll off the top when the window is full.&lt;/p&gt;&lt;p&gt;This is to aid selecting decodes to double-click while decoding is still in progress. Use the Band Activity vertical scroll bar to reveal decodes past the bottom of the window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;新しい周期のデコードをバンドアクティビティ欄の上部から表示し、欄が埋まっても先頭を自動でスクロールしません。&lt;/p&gt;&lt;p&gt;デコード中にダブルクリックする局を選びやすくします。下側のメッセージは縦スクロールバーで表示できます。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Erase Band Activity and Rx frequency windows after band change.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;バンド変更後にバンドアクティビティと受信周波数のウィンドウを消去します。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends a valid Maidenhead locator, calculate and show the great-circle azimuth in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;有効なMaidenheadロケーターを受信すると、大円方位角を計算してバンドアクティビティ欄に表示します。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If a station sends locator, calculate and show the distance in Band Activity pane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ロケーターを受信すると距離を計算し、バンドアクティビティ欄に表示します。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between DXCC and distance/azimuth.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;DXCCと距離/方位角の間隔を調整します。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Increase or decrease the space between message text and DXCC.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;メッセージとDXCCの間隔を調整します。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open the Astronomical Data window automatically when switching to Q65 or JT65 mode and Decode after EME delay is enabled, and close it when no longer needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Q65またはJT65に切り替え、EME遅延後のデコードが有効な場合、天文データ画面を自動で開きます。不要になると閉じます。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Turn the progress bar red while transmitting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;送信中は進行バーを赤色にします。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tx until 73 is received when in MSK144 or Q65 mode. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;MSK144またはQ65では73を受信するまで送信を続けます。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>A deliberate double-click may enable TX only after the transmission safety checks pass. Startup, background messages and remote selection cannot grant transmission permission.</source>
+        <translation>意図したダブルクリックでも、安全確認に合格した場合のみTXを有効化します。起動時、バックグラウンドのメッセージ、遠隔選択では送信を許可しません。</translation>
+    </message>
+    <message>
+        <source>Additional features</source>
+        <translation>追加機能</translation>
+    </message>
+    <message>
+        <source>After a completed QSO, move the receive audio frequency to the transmit audio frequency. This does not enable the Tx=Rx lock.</source>
+        <translation>QSO完了後、受信音声周波数を送信音声周波数に合わせます。Tx=Rxロックは有効にしません。</translation>
+    </message>
+    <message>
+        <source>Align DXCC/distance/azimuth</source>
+        <translation>DXCC/距離/方位角を整列</translation>
+    </message>
+    <message>
+        <source>Allow Tx frequency changes while transmitting</source>
+        <translation>送信中の送信周波数変更を許可</translation>
+    </message>
+    <message>
+        <source>Allow the additional Earth–Moon–Earth propagation delay when collecting and decoding signals. This does not alter the UTC clock.</source>
+        <translation>信号の収集・デコードで地球—月—地球の追加伝搬遅延を考慮します。UTC時計は変更しません。</translation>
+    </message>
+    <message>
+        <source>Alternate Erase button behavior</source>
+        <translation>消去ボタンの操作を切り替える</translation>
+    </message>
+    <message>
+        <source>Alternate F1-F6 bindings</source>
+        <translation>F1–F6の代替キー割り当て</translation>
+    </message>
+    <message>
+        <source>Auto-open/close Astronomical data window</source>
+        <translation>天文データ画面を自動開閉</translation>
+    </message>
+    <message>
+        <source>Calling CQ forces Call 1st</source>
+        <translation>CQ時は最初の呼出局に応答</translation>
+    </message>
+    <message>
+        <source>Clear DX Call after QSO</source>
+        <translation>QSO後にDXコールサインを消去</translation>
+    </message>
+    <message>
+        <source>Clear DX Grid after QSO</source>
+        <translation>QSO後にDXグリッドを消去</translation>
+    </message>
+    <message>
+        <source>Decode after EME delay</source>
+        <translation>EME遅延後にデコード</translation>
+    </message>
+    <message>
+        <source>Di&amp;sable Tx after sending 73</source>
+        <translation>73送信後にTXを停止(&amp;S)</translation>
+    </message>
+    <message>
+        <source>Doubl&amp;e-click on call sets Tx enable</source>
+        <translation>コールサインのダブルクリックでTX有効(&amp;E)</translation>
+    </message>
+    <message>
+        <source>Enable VHF and submode features</source>
+        <translation>VHFとサブモード機能を有効化</translation>
+    </message>
+    <message>
+        <source>Enable Wait &amp; Call, Wait &amp; Reply and Wait &amp; Pounce controls. They require a manually authorized TX session and cannot restart transmission after Stop. Managed mode keeps its own selection rules.</source>
+        <translation>待機・呼出、待機・応答、待機・CQ応答を有効にします。手動で許可したTXセッションが必要で、停止後に送信を再開しません。管理モードは独自の選択規則を使います。</translation>
+    </message>
+    <message>
+        <source>Enable Wait features</source>
+        <translation>待機機能を有効化</translation>
+    </message>
+    <message>
+        <source>Erase decodes after band change</source>
+        <translation>バンド変更後にデコードを消去</translation>
+    </message>
+    <message>
+        <source>Finish one QSO and stop. This is the same setting as Single QSO in the main window. Leave it unchecked for continuous QSOs within the TX watchdog session.</source>
+        <translation>1回のQSOを完了して停止します。メイン画面の単一QSOと同じ設定です。オフならTX監視タイマーのセッション内でQSOを続行します。</translation>
+    </message>
+    <message>
+        <source>Font...</source>
+        <translation>フォント…</translation>
+    </message>
+    <message>
+        <source>Highlight DX Call in message</source>
+        <translation>メッセージ内のDXコールを強調</translation>
+    </message>
+    <message>
+        <source>Highlight DX Grid in message</source>
+        <translation>メッセージ内のDXグリッドを強調</translation>
+    </message>
+    <message>
+        <source>Less button coloring (restart required)</source>
+        <translation>ボタンの配色を減らす（要再起動）</translation>
+    </message>
+    <message>
+        <source>MSK144/Q65: Tx until 73 is received</source>
+        <translation>MSK144/Q65：73受信まで送信</translation>
+    </message>
+    <message>
+        <source>Map Grid locator to U.S. State</source>
+        <translation>グリッドから米国州を推定</translation>
+    </message>
+    <message>
+        <source>Monitor returns to last used frequency</source>
+        <translation>受信を前回の周波数に戻す</translation>
+    </message>
+    <message>
+        <source>Read and display PWR and SWR</source>
+        <translation>電力とSWRを取得・表示</translation>
+    </message>
+    <message>
+        <source>Read and display transmit power and SWR through CAT. Unsupported readings are shown as unavailable.</source>
+        <translation>CAT経由で送信電力とSWRを取得・表示します。非対応の値は利用不可と表示します。</translation>
+    </message>
+    <message>
+        <source>Set Rx frequency to Tx frequency after QSO</source>
+        <translation>QSO後にRX周波数をTX周波数に合わせる</translation>
+    </message>
+    <message>
+        <source>Show &amp;DXCC, grid, and worked-before status    </source>
+        <translation>DXCC、グリッド、交信済み状態を表示(&amp;D)</translation>
+    </message>
+    <message>
+        <source>Show DXCC for all messages</source>
+        <translation>すべてのメッセージにDXCCを表示</translation>
+    </message>
+    <message>
+        <source>Show U.S. States in messages with grid</source>
+        <translation>グリッド付きメッセージに米国州を表示</translation>
+    </message>
+    <message>
+        <source>Show azimuth in messages with grid</source>
+        <translation>グリッド付きメッセージに方位角を表示</translation>
+    </message>
+    <message>
+        <source>Show blank line with time stamp</source>
+        <translation>区切り行に時刻を表示</translation>
+    </message>
+    <message>
+        <source>Show distance in messages with grid</source>
+        <translation>グリッド付きメッセージに距離を表示</translation>
+    </message>
+    <message>
+        <source>Show if decoded stations are new DXCC entities or worked before.</source>
+        <translation>デコード局が新しいDXCCエンティティか交信済みかを表示します。</translation>
+    </message>
+    <message>
+        <source>Show principal prefix instead of country name        </source>
+        <translation>国名の代わりに主プリフィックスを表示</translation>
+    </message>
+    <message>
+        <source>Show the separator line between periods with time stamp of the decode period.</source>
+        <translation>周期間の区切り行に、そのデコード周期の時刻を表示します。</translation>
+    </message>
+    <message>
+        <source>Single decode</source>
+        <translation>単一デコード</translation>
+    </message>
+    <message>
+        <source>Start new period decodes at top</source>
+        <translation>新周期のデコードを上部から表示</translation>
+    </message>
+    <message>
+        <source>Stop Tune after the selected number of seconds. A zero interval disables this timer.</source>
+        <translation>指定秒数後にチューン送信を停止します。0でタイマーを無効にします。</translation>
+    </message>
+    <message>
+        <source>Tune watchdog   </source>
+        <translation>チューン監視タイマー</translation>
+    </message>
+    <message>
+        <source>Turn progress bar red while transmitting</source>
+        <translation>送信中の進行バーを赤色にする</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. Transmission safety checks still apply.</source>
+        <translation>F1–F5でCQ、レポート、Rレポート、確認、73を選択し、F6で応答方針を変更します。送信の安全確認は引き続き適用されます。</translation>
+    </message>
+    <message>
+        <source>kHz entry without k (restart required)</source>
+        <translation>kHz入力でkを省略（要再起動）</translation>
+    </message>
+    <message>
+        <source>When checked, double-clicking a decoded callsign starts a TX session after the transmission safety checks pass. The session then follows the normal AutoSeq, Single QSO and watchdog settings. Off by default.</source>
+        <translation>オンにすると、デコードされたコールサインをダブルクリックした際に、送信の安全チェックを通過した後で送信セッションを開始します。その後は通常の AutoSeq、単一 QSO、送信監視タイマーの設定に従います。既定ではオフです。</translation>
+    </message>
+    <message>
+        <source>Double-click a callsign to enable TX</source>
+        <translation>コールサインのダブルクリックで送信を有効化</translation>
+    </message>
+    <message>
+        <source>Use F1–F5 to select CQ, report, R-report, acknowledgment and 73; F6 changes the reply policy. These keys cannot start a TX session. Click Enable TX first.</source>
+        <translation>F1～F5 は CQ、レポート、R レポート、確認、73 を選択し、F6 は応答方針を変更します。これらのキーでは送信セッションを開始できません。先に「送信許可」をクリックしてください。</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -8895,6 +9698,870 @@ soundcard changes</source>
         <location filename="../wf_palette_design_dialog.ui" line="23"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Double click a color to edit it.&lt;/p&gt;&lt;p&gt;Right click to insert or delete colors.&lt;/p&gt;&lt;p&gt;Colors at the top represent weak signals&lt;/p&gt;&lt;p&gt;and colors at the bottom represent strong&lt;/p&gt;&lt;p&gt;signals. You can have up to 256 colors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt; &lt;head /&gt; &lt;body&gt; &lt;p&gt;色をダブルクリックして編集します。.&lt;/p&gt;&lt;p&gt;右クリックして色を挿入または削除します。.&lt;/p&gt;&lt;p&gt;上部の色は弱い信号を表します.&lt;/p&gt;&lt;p&gt;および下部の色は強い信号を表します.&lt;/p&gt;&lt;p&gt;最大256色まで使用できます。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>JttyController</name>
+    <message>
+        <source>Cannot write to the JTTY decoder.</source>
+        <translation>JTTY デコーダーに書き込めません。</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY decoder response.</source>
+        <translation>JTTY デコーダーの応答が無効です。</translation>
+    </message>
+    <message>
+        <source>Invalid JTTY transmit audio.</source>
+        <translation>JTTY の送信音声が無効です。</translation>
+    </message>
+    <message>
+        <source>JTTY audio backlog exceeded 10 seconds; reception restarted.</source>
+        <translation>JTTY の音声滞留が 10 秒を超えたため、受信を再開しました。</translation>
+    </message>
+    <message>
+        <source>JTTY decoder stopped unexpectedly.</source>
+        <translation>JTTY デコーダーが予期せず停止しました。</translation>
+    </message>
+    <message>
+        <source>JTTY decoder timed out. Select JTTY again to restart it.</source>
+        <translation>JTTY デコーダーがタイムアウトしました。再起動するには JTTY を選び直してください。</translation>
+    </message>
+    <message>
+        <source>Unexpected JTTY decoder response.</source>
+        <translation>JTTY デコーダーから予期しない応答を受信しました。</translation>
+    </message>
+</context>
+<context>
+    <name>LogForwarder</name>
+    <message>
+        <source>External logger did not acknowledge the QSO. Local logs are saved.</source>
+        <translation>外部ログソフトから QSO の受領確認がありません。ローカルのログは保存済みです。</translation>
+    </message>
+    <message>
+        <source>External logger disconnected before acknowledgement. Local logs are saved.</source>
+        <translation>受領確認の前に外部ログソフトとの接続が切れました。ローカルのログは保存済みです。</translation>
+    </message>
+    <message>
+        <source>External logger rejected the QSO. Local logs are saved.</source>
+        <translation>外部ログソフトが QSO を拒否しました。ローカルのログは保存済みです。</translation>
+    </message>
+    <message>
+        <source>Invalid external logger response. Local logs are saved.</source>
+        <translation>外部ログソフトの応答が無効です。ローカルのログは保存済みです。</translation>
+    </message>
+    <message>
+        <source>Unexpected external logger response. Local logs are saved.</source>
+        <translation>外部ログソフトから予期しない応答を受信しました。ローカルのログは保存済みです。</translation>
+    </message>
+</context>
+<context>
+    <name>ManagedSettingsWidget</name>
+    <message>
+        <source>0 — unlimited</source>
+        <translation>0 — 制限なし</translation>
+    </message>
+    <message>
+        <source>Answer previously worked callsigns</source>
+        <translation>交信済みのコールサインにも応答する</translation>
+    </message>
+    <message>
+        <source>DXCC hunter</source>
+        <translation>DXCC ハンター</translation>
+    </message>
+    <message>
+        <source>New CQ zone</source>
+        <translation>未交信の CQ ゾーン</translation>
+    </message>
+    <message>
+        <source>New DXCC</source>
+        <translation>未交信の DXCC</translation>
+    </message>
+    <message>
+        <source>New ITU zone</source>
+        <translation>未交信の ITU ゾーン</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode DXCC</source>
+        <translation>バンド &amp;&amp; モードで未交信の DXCC</translation>
+    </message>
+    <message>
+        <source>New band &amp;&amp; mode callsign</source>
+        <translation>バンド &amp;&amp; モードで未交信のコールサイン</translation>
+    </message>
+    <message>
+        <source>New callsign</source>
+        <translation>未交信のコールサイン</translation>
+    </message>
+    <message>
+        <source>New grid</source>
+        <translation>未交信のグリッド</translation>
+    </message>
+    <message>
+        <source>QSO enthusiast (also prioritizes new DXCC entities and zones)</source>
+        <translation>QSO 愛好家（新しい DXCC とゾーンも優先）</translation>
+    </message>
+    <message>
+        <source>Send three CQ rounds every 15 minutes</source>
+        <translation>15 分ごとに CQ を 3 回送信する</translation>
+    </message>
+    <message>
+        <source>Unanswered call limit:</source>
+        <translation>応答がない場合の呼び出し回数:</translation>
+    </message>
+    <message>
+        <source>Allow TX slot changes</source>
+        <translation>送信スロットの自動切り替えを許可</translation>
+    </message>
+    <message>
+        <source>Allow automatic TX slot changes between completed QSOs. After a slot change, wait 5 minutes before another automatic change. Manual changes are always allowed and restart this timer. Off: stay in the selected TX slot.</source>
+        <translation>QSO が完全に終了した後に送信スロットを自動で切り替えられます。切り替え後、次の自動切り替えまで 5 分間待機します。手動ではいつでも切り替えられ、このタイマーを再開始します。オフの場合は選択した送信スロットを維持します。</translation>
+    </message>
+</context>
+<context>
+    <name>NtpClient</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>有効な NTP ホスト名または IP アドレスを入力してください。</translation>
+    </message>
+    <message>
+        <source>Invalid NTP packet length.</source>
+        <translation>NTP パケットの長さが無効です。</translation>
+    </message>
+    <message>
+        <source>NTP request timed out.</source>
+        <translation>NTP 要求がタイムアウトしました。</translation>
+    </message>
+    <message>
+        <source>The NTP date is outside the supported range.</source>
+        <translation>NTP の日付が対応範囲外です。</translation>
+    </message>
+    <message>
+        <source>The NTP response does not match this request.</source>
+        <translation>NTP 応答が今回の要求と一致しません。</translation>
+    </message>
+    <message>
+        <source>The NTP response has excessive delay or uncertainty.</source>
+        <translation>NTP 応答の遅延または時刻の誤差が大きすぎます。</translation>
+    </message>
+    <message>
+        <source>The NTP server is not synchronized or refused the request.</source>
+        <translation>NTP サーバーが未同期か、要求を拒否しました。</translation>
+    </message>
+    <message>
+        <source>The clock changed during the NTP request, or the response was too slow.</source>
+        <translation>NTP 要求中に時計が変更されたか、応答が遅すぎました。</translation>
+    </message>
+</context>
+<context>
+    <name>NtpController</name>
+    <message>
+        <source>Enter a valid NTP hostname or IP address.</source>
+        <translation>有効な NTP ホスト名または IP アドレスを入力してください。</translation>
+    </message>
+    <message>
+        <source>Install polkit/pkexec to authorize system time synchronization.</source>
+        <translation>システム時刻の同期を許可するには、polkit/pkexec をインストールしてください。</translation>
+    </message>
+    <message>
+        <source>Permission granted. Synchronization follows the selected interval.</source>
+        <translation>権限が付与されました。選択した間隔で同期します。</translation>
+    </message>
+    <message>
+        <source>Permission request timed out. System time is unchanged.</source>
+        <translation>権限の要求がタイムアウトしました。システム時刻は変更されていません。</translation>
+    </message>
+    <message>
+        <source>Permission was not granted (Windows error %1). Using system time.</source>
+        <translation>権限が付与されませんでした（Windows エラー %1）。システム時刻を使用します。</translation>
+    </message>
+    <message>
+        <source>Permission was not granted. Using system time.</source>
+        <translation>権限が付与されませんでした。システム時刻を使用します。</translation>
+    </message>
+    <message>
+        <source>Requesting permission to set the system time…</source>
+        <translation>システム時刻を設定する権限を要求しています…</translation>
+    </message>
+    <message>
+        <source>Synchronization deferred while transmitting.</source>
+        <translation>送信中のため同期を延期しました。</translation>
+    </message>
+    <message>
+        <source>Synchronization failed: %1. Retrying in 1 minute.</source>
+        <translation>同期に失敗しました: %1。1 分後に再試行します。</translation>
+    </message>
+    <message>
+        <source>The time synchronization helper is missing.</source>
+        <translation>時刻同期用の補助プログラムが見つかりません。</translation>
+    </message>
+    <message>
+        <source>Time synchronization stopped. Using system time.</source>
+        <translation>時刻同期を停止しました。システム時刻を使用します。</translation>
+    </message>
+    <message>
+        <source>Time synchronized; correction %1 ms. Next check in %2 minutes.</source>
+        <translation>時刻を同期しました。補正量 %1 ms。次回の確認は %2 分後です。</translation>
+    </message>
+    <message>
+        <source>Use system time. NTP synchronization is disabled.</source>
+        <translation>システム時刻を使用します。NTP 同期は無効です。</translation>
+    </message>
+</context>
+<context>
+    <name>NtpSettingsWidget</name>
+    <message>
+        <source>%1 hours</source>
+        <translation>%1 時間</translation>
+    </message>
+    <message>
+        <source>%1 minutes</source>
+        <translation>%1 分</translation>
+    </message>
+    <message>
+        <source>Africa / Kenya / icolo</source>
+        <translation>アフリカ / ケニア / icolo</translation>
+    </message>
+    <message>
+        <source>Africa / Mauritius / Mauritius Telecom</source>
+        <translation>アフリカ / モーリシャス / Mauritius Telecom</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / INX-ZA</source>
+        <translation>アフリカ / 南アフリカ / INX-ZA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / NMISA</source>
+        <translation>アフリカ / 南アフリカ / NMISA</translation>
+    </message>
+    <message>
+        <source>Africa / South Africa / SANReN</source>
+        <translation>アフリカ / 南アフリカ / SANReN</translation>
+    </message>
+    <message>
+        <source>Asia / Apple</source>
+        <translation>アジア / Apple</translation>
+    </message>
+    <message>
+        <source>Asia / China / Alibaba</source>
+        <translation>アジア / 中国 / アリババ</translation>
+    </message>
+    <message>
+        <source>Asia / China / Baidu</source>
+        <translation>アジア / 中国 / バイドゥ</translation>
+    </message>
+    <message>
+        <source>Asia / China / CAS NTSC</source>
+        <translation>アジア / 中国 / 中国科学院国家授時中心</translation>
+    </message>
+    <message>
+        <source>Asia / China / NTP Pool</source>
+        <translation>アジア / 中国 / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tencent</source>
+        <translation>アジア / 中国 / テンセント</translation>
+    </message>
+    <message>
+        <source>Asia / China / Tsinghua TUNA</source>
+        <translation>アジア / 中国 / 清華大学 TUNA</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Internet Multifeed</source>
+        <translation>アジア / 日本 / インターネットマルチフィード</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / NICT</source>
+        <translation>アジア / 日本 / NICT</translation>
+    </message>
+    <message>
+        <source>Asia / Japan / Sakura Internet</source>
+        <translation>アジア / 日本 / さくらインターネット</translation>
+    </message>
+    <message>
+        <source>Asia / South Korea / KRISS</source>
+        <translation>アジア / 韓国 / KRISS</translation>
+    </message>
+    <message>
+        <source>Europe / France / RDEM Systems</source>
+        <translation>ヨーロッパ / フランス / RDEM Systems</translation>
+    </message>
+    <message>
+        <source>Europe / Germany / PTB</source>
+        <translation>ヨーロッパ / ドイツ / PTB</translation>
+    </message>
+    <message>
+        <source>Europe / Poland / GUM</source>
+        <translation>ヨーロッパ / ポーランド / GUM</translation>
+    </message>
+    <message>
+        <source>Europe / Sweden / Netnod</source>
+        <translation>ヨーロッパ / スウェーデン / Netnod</translation>
+    </message>
+    <message>
+        <source>Europe / UK / NPL</source>
+        <translation>ヨーロッパ / 英国 / NPL</translation>
+    </message>
+    <message>
+        <source>Global / Apple</source>
+        <translation>世界共通 / Apple</translation>
+    </message>
+    <message>
+        <source>Global / Cloudflare</source>
+        <translation>世界共通 / Cloudflare</translation>
+    </message>
+    <message>
+        <source>Global / Google</source>
+        <translation>世界共通 / Google</translation>
+    </message>
+    <message>
+        <source>Global / Microsoft Windows</source>
+        <translation>世界共通 / Microsoft Windows</translation>
+    </message>
+    <message>
+        <source>NTP hostname or IP address</source>
+        <translation>NTP ホスト名または IP アドレス</translation>
+    </message>
+    <message>
+        <source>NTP time synchronization (requests administrator privileges when enabled)</source>
+        <translation>NTP 時刻同期（有効にすると管理者権限を要求します）</translation>
+    </message>
+    <message>
+        <source>North America / Canada / NRC</source>
+        <translation>北米 / カナダ / NRC</translation>
+    </message>
+    <message>
+        <source>North America / USA / NIST</source>
+        <translation>北米 / 米国 / NIST</translation>
+    </message>
+    <message>
+        <source>Oceania / Australia / NTP Pool</source>
+        <translation>オセアニア / オーストラリア / NTP Pool</translation>
+    </message>
+    <message>
+        <source>Oceania / New Zealand / MSL (NZ networks only)</source>
+        <translation>オセアニア / ニュージーランド / MSL（ニュージーランドのネットワークのみ）</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>その他</translation>
+    </message>
+    <message>
+        <source>South America / Argentina / INTI</source>
+        <translation>南米 / アルゼンチン / INTI</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / NIC.br</source>
+        <translation>南米 / ブラジル / NIC.br</translation>
+    </message>
+    <message>
+        <source>South America / Brazil / National Observatory</source>
+        <translation>南米 / ブラジル / 国立天文台</translation>
+    </message>
+    <message>
+        <source>South America / Chile / SHOA</source>
+        <translation>南米 / チリ / SHOA</translation>
+    </message>
+    <message>
+        <source>South America / Colombia / INM</source>
+        <translation>南米 / コロンビア / INM</translation>
+    </message>
+    <message>
+        <source>Synchronization interval:</source>
+        <translation>同期間隔:</translation>
+    </message>
+    <message>
+        <source>Uses system UTC time; the synchronization interval is configurable.</source>
+        <translation>システムの UTC 時刻を使用します。同期間隔を設定できます。</translation>
+    </message>
+</context>
+<context>
+    <name>ProcessingDialog</name>
+    <message>
+        <source>Processing</source>
+        <translation>処理中</translation>
+    </message>
+    <message>
+        <source>Stop TX</source>
+        <translation>送信停止</translation>
+    </message>
+    <message>
+        <source>System processing, please wait…</source>
+        <translation>システムで処理中です。しばらくお待ちください…</translation>
+    </message>
+</context>
+<context>
+    <name>StationManager</name>
+    <message>
+        <source>Add</source>
+        <translation>追加</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>コールサインを追加</translation>
+    </message>
+    <message>
+        <source>All regions</source>
+        <translation>すべての地域</translation>
+    </message>
+    <message>
+        <source>Callsign management</source>
+        <translation>コールサインの管理</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>編集</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>コールサインを編集</translation>
+    </message>
+    <message>
+        <source>Enter a valid 4, 6 or 8 character grid locator.</source>
+        <translation>4、6、または 8 文字の有効なグリッドロケーターを入力してください。</translation>
+    </message>
+    <message>
+        <source>Enter a valid callsign (3–12 letters/digits, optional /suffix).</source>
+        <translation>有効なコールサインを入力してください（3～12 文字の英数字、任意で /サフィックス）。</translation>
+    </message>
+    <message>
+        <source>Full call in Tx1</source>
+        <translation>Tx1 で完全なコールサインを送信</translation>
+    </message>
+    <message>
+        <source>Full call in Tx3</source>
+        <translation>Tx3 で完全なコールサインを送信</translation>
+    </message>
+    <message>
+        <source>Full call in Tx5 only</source>
+        <translation>Tx5 のみで完全なコールサインを送信</translation>
+    </message>
+    <message>
+        <source>IARU region:</source>
+        <translation>IARU リージョン:</translation>
+    </message>
+    <message>
+        <source>Invalid profile</source>
+        <translation>プロファイルが無効です</translation>
+    </message>
+    <message>
+        <source>My callsign:</source>
+        <translation>自局コールサイン:</translation>
+    </message>
+    <message>
+        <source>My grid:</source>
+        <translation>自局グリッド:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Region 1</source>
+        <translation>第 1 地域</translation>
+    </message>
+    <message>
+        <source>Region 2</source>
+        <translation>第 2 地域</translation>
+    </message>
+    <message>
+        <source>Region 3</source>
+        <translation>第 3 地域</translation>
+    </message>
+    <message>
+        <source>Remove profile</source>
+        <translation>プロファイルを削除</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <source>This callsign already exists. Different /suffixes are allowed.</source>
+        <translation>このコールサインは既に存在します。異なる /サフィックスは使用できます。</translation>
+    </message>
+    <message>
+        <source>Type 2 callsign messages:</source>
+        <translation>タイプ 2 コールサインのメッセージ:</translation>
+    </message>
+</context>
+<context>
+    <name>Blacklist</name>
+    <message>
+        <source>A base callsign blocks its portable prefixes and suffixes (K1ABC also blocks EA8/K1ABC and K1ABC/P). A callsign containing / blocks only that exact callsign.</source>
+        <translation>基本コールサインを登録すると、移動運用の接頭辞・接尾辞付きも対象になります（K1ABC は EA8/K1ABC と K1ABC/P もブロック）。/ を含むコールサインは完全一致の場合のみブロックします。</translation>
+    </message>
+    <message>
+        <source>Blacklist changed in another program. Reload it before saving.</source>
+        <translation>ブラックリストが別のプログラムで変更されました。保存する前に再読み込みしてください。</translation>
+    </message>
+    <message>
+        <source>Blacklist file is too large.</source>
+        <translation>ブラックリストのファイルが大きすぎます。</translation>
+    </message>
+    <message>
+        <source>Blacklist has too many entries.</source>
+        <translation>ブラックリストの登録件数が多すぎます。</translation>
+    </message>
+    <message>
+        <source>Blacklist is busy. Please retry.</source>
+        <translation>ブラックリストが使用中です。再試行してください。</translation>
+    </message>
+    <message>
+        <source>Blacklist is not ready. Repair the existing file before saving.</source>
+        <translation>ブラックリストの準備ができていません。保存する前に既存のファイルを修復してください。</translation>
+    </message>
+    <message>
+        <source>Blacklist notes must not exceed 512 characters.</source>
+        <translation>ブラックリストのメモは 512 文字以内にしてください。</translation>
+    </message>
+    <message>
+        <source>Cannot create blacklist directory.</source>
+        <translation>ブラックリストのディレクトリを作成できません。</translation>
+    </message>
+    <message>
+        <source>Cannot open blacklist: %1</source>
+        <translation>ブラックリストを開けません: %1</translation>
+    </message>
+    <message>
+        <source>Cannot save blacklist: %1</source>
+        <translation>ブラックリストを保存できません: %1</translation>
+    </message>
+    <message>
+        <source>Duplicate callsign: %1</source>
+        <translation>コールサインが重複しています: %1</translation>
+    </message>
+    <message>
+        <source>Invalid blacklist file; the original has been preserved.</source>
+        <translation>ブラックリストのファイルが無効です。元のファイルは保持しています。</translation>
+    </message>
+    <message>
+        <source>Invalid callsign: %1</source>
+        <translation>コールサインが無効です: %1</translation>
+    </message>
+    <message>
+        <source>Select an operator before editing the blacklist.</source>
+        <translation>ブラックリストを編集する前に運用者を選択してください。</translation>
+    </message>
+    <message>
+        <source>Unsupported blacklist file version.</source>
+        <translation>ブラックリストのファイルバージョンに対応していません。</translation>
+    </message>
+</context>
+<context>
+    <name>BlacklistDialog</name>
+    <message>
+        <source>Add</source>
+        <translation>追加</translation>
+    </message>
+    <message>
+        <source>Add callsign</source>
+        <translation>コールサインを追加</translation>
+    </message>
+    <message>
+        <source>Callsign:</source>
+        <translation>コールサイン:</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>編集</translation>
+    </message>
+    <message>
+        <source>Edit callsign</source>
+        <translation>コールサインを編集</translation>
+    </message>
+    <message>
+        <source>Invalid entry</source>
+        <translation>登録内容が無効です</translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation>メモ:</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Permanent blacklist</source>
+        <translation>永続ブラックリスト</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>削除</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+</context>
+<context>
+    <name>AstroDialog</name>
+    <message>
+        <source>Astronomical Data</source>
+        <translation>天文データ</translation>
+    </message>
+    <message>
+        <source>Call DX</source>
+        <translation>DXを呼び出す</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>閉じる</translation>
+    </message>
+    <message>
+        <source>Constant frequency on the Moon</source>
+        <translation>月面での周波数を一定にする</translation>
+    </message>
+    <message>
+        <source>DX Moon Az / El: %1° / %2°</source>
+        <translation>DX局からの月の方位角/仰角：%1° / %2°</translation>
+    </message>
+    <message>
+        <source>Doppler tracking</source>
+        <translation>ドップラー追尾</translation>
+    </message>
+    <message>
+        <source>Echo RIT</source>
+        <translation>エコーRIT</translation>
+    </message>
+    <message>
+        <source>Echo delay: %1 s; spread: %2 / %3 Hz</source>
+        <translation>エコー遅延：%1秒、周波数の広がり：%2 / %3 Hz</translation>
+    </message>
+    <message>
+        <source>Echo frequency dither (±10 Hz)</source>
+        <translation>エコー周波数を微変動（±10 Hz）</translation>
+    </message>
+    <message>
+        <source>Full Doppler to DX grid</source>
+        <translation>DXグリッドに対する全ドップラー補正</translation>
+    </message>
+    <message>
+        <source>Method</source>
+        <translation>方式</translation>
+    </message>
+    <message>
+        <source>Moon Az / El: %1° / %2°</source>
+        <translation>月の方位角/仰角：%1° / %2°</translation>
+    </message>
+    <message>
+        <source>No Doppler correction</source>
+        <translation>ドップラー補正なし</translation>
+    </message>
+    <message>
+        <source>On DX echo</source>
+        <translation>DX局のエコーに合わせる</translation>
+    </message>
+    <message>
+        <source>Own / DX Doppler: %1 / %2 Hz</source>
+        <translation>自局/DX局のドップラー：%1 / %2 Hz</translation>
+    </message>
+    <message>
+        <source>Own echo</source>
+        <translation>自局エコー</translation>
+    </message>
+    <message>
+        <source>Set frequency</source>
+        <translation>周波数を設定</translation>
+    </message>
+    <message>
+        <source>Sky: %1 K; degradation: %2 dB; polarization: %3°</source>
+        <translation>空の雑音温度：%1 K、劣化：%2 dB、偏波：%3°</translation>
+    </message>
+    <message>
+        <source>Sun Az / El: %1° / %2°</source>
+        <translation>太陽の方位角/仰角：%1° / %2°</translation>
+    </message>
+    <message>
+        <source>TX frequency offset (MHz)</source>
+        <translation>送信周波数オフセット（MHz）</translation>
+    </message>
+    <message>
+        <source>Waiting for astronomical data…</source>
+        <translation>天文データを待っています…</translation>
+    </message>
+</context>
+<context>
+    <name>HamlibUpdater</name>
+    <message>
+        <source>Another Hamlib update is in progress.</source>
+        <translation>別のHamlib更新が進行中です。</translation>
+    </message>
+    <message>
+        <source>Cannot read the Hamlib files.</source>
+        <translation>Hamlibファイルを読み込めません。</translation>
+    </message>
+    <message>
+        <source>Cannot save the Hamlib restart request: %1</source>
+        <translation>Hamlibの再起動要求を保存できません：%1</translation>
+    </message>
+    <message>
+        <source>Cannot save the downloaded Hamlib file.</source>
+        <translation>ダウンロードしたHamlibファイルを保存できません。</translation>
+    </message>
+    <message>
+        <source>Cannot stage Hamlib: %1</source>
+        <translation>Hamlibを一時保存できません：%1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib compatibility checker: %1</source>
+        <translation>Hamlib互換性チェッカーを起動できません：%1</translation>
+    </message>
+    <message>
+        <source>Cannot start the Hamlib update helper.</source>
+        <translation>Hamlib更新補助プログラムを起動できません。</translation>
+    </message>
+    <message>
+        <source>Checking Hamlib compatibility without connecting to a radio…</source>
+        <translation>無線機に接続せずにHamlibの互換性を確認しています…</translation>
+    </message>
+    <message>
+        <source>Compatibility check passed. Restart JTDX-F to apply %1.</source>
+        <translation>互換性を確認しました。JTDX-Fを再起動して%1を適用してください。</translation>
+    </message>
+    <message>
+        <source>Downloading the official Hamlib 4.7 branch update…</source>
+        <translation>公式Hamlib 4.7ブランチの更新をダウンロードしています…</translation>
+    </message>
+    <message>
+        <source>Hamlib compatibility check failed: %1</source>
+        <translation>Hamlib互換性チェックに失敗しました：%1</translation>
+    </message>
+    <message>
+        <source>Hamlib download failed: %1</source>
+        <translation>Hamlibのダウンロードに失敗しました：%1</translation>
+    </message>
+    <message>
+        <source>Hamlib files changed after validation. Check the update again.</source>
+        <translation>検証後にHamlibファイルが変更されました。更新を再確認してください。</translation>
+    </message>
+    <message>
+        <source>Hamlib update completed successfully.</source>
+        <translation>Hamlibの更新が完了しました。</translation>
+    </message>
+    <message>
+        <source>Hamlib update timed out. The current version is unchanged.</source>
+        <translation>Hamlibの更新がタイムアウトしました。現在のバージョンは変更されていません。</translation>
+    </message>
+    <message>
+        <source>Hamlib update was not applied: %1</source>
+        <translation>Hamlib更新は適用されませんでした：%1</translation>
+    </message>
+    <message>
+        <source>Hamlib updates require a 64-bit Windows installation.</source>
+        <translation>Hamlibの更新には64ビットWindows版が必要です。</translation>
+    </message>
+    <message>
+        <source>Invalid Hamlib update: %1</source>
+        <translation>無効なHamlib更新：%1</translation>
+    </message>
+    <message>
+        <source>No previous Hamlib version is available.</source>
+        <translation>復元できる以前のHamlibはありません。</translation>
+    </message>
+    <message>
+        <source>On this platform, Hamlib is updated with JTDX-F.</source>
+        <translation>この環境ではHamlibはJTDX-Fと一緒に更新されます。</translation>
+    </message>
+    <message>
+        <source>Restarting JTDX-F to apply the Hamlib update…</source>
+        <translation>Hamlib更新を適用するためJTDX-Fを再起動しています…</translation>
+    </message>
+    <message>
+        <source>The Hamlib download is too large or could not be saved.</source>
+        <translation>Hamlibのダウンロードが大きすぎるか、保存できませんでした。</translation>
+    </message>
+    <message>
+        <source>The Hamlib update helper is missing. Reinstall JTDX-F.</source>
+        <translation>Hamlib更新補助プログラムがありません。JTDX-Fを再インストールしてください。</translation>
+    </message>
+    <message>
+        <source>The installation folder is not writable. Run JTDX-F with permission to update this folder.</source>
+        <translation>インストール先に書き込めません。このフォルダーを更新できる権限でJTDX-Fを実行してください。</translation>
+    </message>
+</context>
+<context>
+    <name>OmniRigTransceiver</name>
+    <message>
+        <source>OmniRig: cannot initialize COM</source>
+        <translation>OmniRig：COMを初期化できません</translation>
+    </message>
+    <message>
+        <source>OmniRig: no valid receive frequency was reported</source>
+        <translation>OmniRig：有効な受信周波数が報告されませんでした</translation>
+    </message>
+</context>
+<context>
+    <name>Transceiver</name>
+    <message>
+        <source>This transceiver does not support PCM audio.</source>
+        <translation>この無線機はPCM音声に対応していません。</translation>
+    </message>
+</context>
+<context>
+    <name>UpstreamController</name>
+    <message>
+        <source>Cannot communicate with the WSJT-X backend.</source>
+        <translation>WSJT-Xバックエンドと通信できません。</translation>
+    </message>
+    <message>
+        <source>Cannot prepare audio for the WSJT-X backend.</source>
+        <translation>WSJT-Xバックエンド用の音声を準備できません。</translation>
+    </message>
+    <message>
+        <source>Cannot read the prepared transmit audio.</source>
+        <translation>準備した送信音声を読み込めません。</translation>
+    </message>
+    <message>
+        <source>Invalid response from the WSJT-X backend.</source>
+        <translation>WSJT-Xバックエンドから無効な応答がありました。</translation>
+    </message>
+    <message>
+        <source>Invalid transmit audio from the WSJT-X backend.</source>
+        <translation>WSJT-Xバックエンドから無効な送信音声が返されました。</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend rejected the request.</source>
+        <translation>WSJT-Xバックエンドが要求を拒否しました。</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend stopped unexpectedly.</source>
+        <translation>WSJT-Xバックエンドが予期せず停止しました。</translation>
+    </message>
+    <message>
+        <source>The WSJT-X backend timed out. Reception can be restarted by selecting the mode again.</source>
+        <translation>WSJT-Xバックエンドがタイムアウトしました。モードを選択し直すと受信を再開できます。</translation>
+    </message>
+    <message>
+        <source>Unexpected response from the WSJT-X backend.</source>
+        <translation>WSJT-Xバックエンドから予期しない応答がありました。</translation>
+    </message>
+</context>
+<context>
+    <name>OperatorLog</name>
+    <message>
+        <source>Log files changed during processing; originals retained. Please retry.</source>
+        <translation>処理中にログファイルが変更されました。元ファイルは保持されています。再試行してください。</translation>
+    </message>
+    <message>
+        <source>Cannot create the old backup directory; originals retained.</source>
+        <translation>バックアップ用の old フォルダーを作成できません。元ファイルは保持されています。</translation>
+    </message>
+    <message>
+        <source>Backup contents differ; originals retained.</source>
+        <translation>バックアップの内容が一致しません。元ファイルは保持されています。</translation>
+    </message>
+    <message>
+        <source>Invalid QSO for the current station; originals retained.</source>
+        <translation>現在の局の QSO が無効です。元ファイルは保持されています。</translation>
     </message>
 </context>
 </TS>

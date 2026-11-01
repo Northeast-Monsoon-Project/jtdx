@@ -1,0 +1,55 @@
+JTDX-F V3.6.0：WSPR 升级及输入安全审计
+
+来源与范围
+正式 WSJT-X 3.0.2，commit ccdfaf3c1c109010d15399674ce278167cfde848：
+https://github.com/WSJTX/wsjtx/tree/ccdfaf3c1c109010d15399674ce278167cfde848/lib/wsprd
+迁移 wsprd.c 与 osdwspr.f90 的解码流程，保留原作者/GPL 许可及 JTDX-F 的内存、输入边界修复。保留原有安全版 fano、jelinek、wsprsim_utils 和 wsprd_utils；不是将整个目录无差别覆盖。
+新版包含最后一遍归一化非相干逐比特度量、候选压缩、多遍策略及更长相减滤波器（256→360）、OSD 预处理/模式及误差图样计算修正。默认新版3遍、此前JTDX分支4遍，某些命令选项会改变遍数。GUI接口和CLI调用保持兼容。
+
+真实 PCM 留出验证
+tests/test_wspr_waveform.py 使用生产编码器的162个信道符号生成连续相位4-FSK，120秒/12kHz/16位单声道WAV。含随机起始延迟、频偏/线性漂移；AWGN、4毫秒脉冲、6信号拥塞及窄带干扰。固定 PCG64 种子20261101，每个相同WAV分别运行冻结V3.5基线与升级解码器。短波SNR参考带宽2500Hz。输入来自合成公开示例呼号，不使用或打包用户日志。
+90对有信号帧 = AWGN/脉冲/拥塞 × -25/-28/-30dB × 10帧；拥塞每帧6个真值消息，总共240条真值。
+                     旧版正确   升级正确   旧/新错译
+AWGN -25/-28/-30       10/10/8     10/10/9      0/0
+脉冲 -25/-28/-30       10/10/9     10/10/7      0/0
+拥塞 -25/-28/-30       60/60/53    60/60/53     0/0
+总计                  230/240     229/240      0/0
+成对变化是增加1条、丢失2条。该结果不支持“所有环境更灵敏”的宣传；最弱AWGN略有增加，最弱脉冲样本有下降。没有根据这个留出集反复调参。此次采用官方升级是版本对齐，不是把负结果包装成增益。
+另外纯噪声20对、窄带干扰噪声20对，两版均0条错误消息。这只能说明本样本未观察到误报，不能证明实际射频不会误译。
+原始报告：logs/wspr-v3.6.0-correctness-20261101.json、logs/wspr-v3.6.0-noise-20261101.json（位于项目工作目录，构建/提交附件由根任务管理）。报告记录二进制SHA256、平台、每帧真值/输出/资源；正确性阶段同时有其他构建，不以该阶段墙钟作为性能结论。
+命令（工作目录为项目工作区，先 source scripts/env.sh）：
+python3 jtdx-master/tests/test_wspr_waveform.py --benchmark --decoder .qa/v360-wspr/new-build/wsprd_jtdx --baseline .qa/v360-wspr/wsprd_jtdx-v350 --sim .qa/v360-wspr/wsprsim-v350 --seed 20261101 --trials 10 --scenarios awgn impulse crowded --snrs -25 -28 -30 --output logs/wspr-v3.6.0-correctness-20261101.json
+python3 jtdx-master/tests/test_wspr_waveform.py --benchmark --decoder .qa/v360-wspr/new-build/wsprd_jtdx --baseline .qa/v360-wspr/wsprd_jtdx-v350 --sim .qa/v360-wspr/wsprsim-v350 --seed 20261101 --trials 20 --scenarios noise noise_tone --snrs 0 --output logs/wspr-v3.6.0-noise-20261101.json
+
+修复的安全问题
+1. WAV原来盲跳44字节：含BWF扩展的合法文件错读，截断/错误采样格式也进入FFT。现在按RIFF块长度、padding、PCM/扩展PCM标识、12kHz单声道16位、声明长度解析；未知块跳过，拒绝截断、奇数字节、空音频。
+2. C2文件头/样本短读与NaN/Inf未检查，错误文件名长度造成前向越界：现验证完整头、模式、有限数值及样本数，短文件名使用安全缺省时间。
+3. 输出目录拼接定长缓冲、结果表不同容量且缺上限、外部哈希索引/字符串无边界：现有有界路径、统一200条结果上限、有效索引和受限读取。
+4. FFT/malloc分配及FFT计划失败、零/非有限归一化、C2路径销毁未建立的FFT计划、部分内存未释放：增加检查和对应释放；大谱数组移堆避免Windows默认栈不足。
+5. fano分配失败返回0（成功），且nbits、delta、循环乘法缺校验：现失败返回-1，拒绝不支持的长度/非法参数/循环溢出；注入真正malloc失败回归。
+6. 哈希表12字符呼号加<>后写入13字节缓冲溢出：超过10字符或缺终止符的槽输出未知，不截断伪造呼号。
+7. 公用nhash的32位尾字读取越过输入对象，掩码无法消除越界。ASan在精确长度字符串上复现，已使用原作者逐字节尾字算法，保持哈希一致。测试1..64字节×4种对齐均通过；该函数也用于主解码库和上游helper。
+8. 参数范围、hash/timing/spot输出打开失败、C2写入失败、频率校正逐遍重复累加也得到处理。
+
+验证范围
+tests/WsprFileIO.c：RIFF/BWF、所有短头、截断、异常块长度、声道/采样率、扩展路径；ASan/UBSan通过。
+tests/WsprFano.c：无效参数和malloc失败注入、正常全零码字；ASan/UBSan通过。
+tests/WsprCodec.c：有效/非法消息、坏hash槽、精确长度hash、10,000固定种子有界fuzz；ASan/UBSan通过。
+tests/test_wspr_inputs.py：独立进程实际输入/输出失败路径验证通过。
+这次静态审查以生产路径、输入边界和新集成为重点，不能穷尽所有电台驱动、系统设备、真实射频和长期并发状态；未声称“项目已经不存在任何bug”。
+
+独立资源复测（正式build，构建任务停止后）
+测试机：Intel Xeon E3-1240 v6，4核/8线程，3.70GHz，Linux x86_64。OMP_NUM_THREADS=1、OPENBLAS_NUM_THREADS=1；此解码器没有新增工作线程。基线为冻结V3.5可执行文件，新版为正式build/wsprd_jtdx。两版交替顺序、每帧各自独立进程；CPU是wait4统计的用户+系统CPU秒，RSS是解码器独立进程峰值，不包含GUI/合成音频Python进程。测量脚本通过轻量子进程隔离，避免NumPy父进程的继承高水位污染RSS。
+抽取固定留出集合的前3帧：3场景×3SNR×3=27对；纯噪声/窄带干扰噪声各取前10帧=20对。这是资源复测子集，不是新增独立正确性样本。该子集两版均70/72正确，0错译，20对噪声也均0错；不能用这一子集覆盖前述完整留出集升级版净少1条的结果。
+场景（每版帧数）       CPU均值旧/新(s)  新/旧CPU   墙钟P95旧/新(s)  最大墙钟旧/新(s)  峰值RSS旧/新(MiB)
+全部有信号(27)        0.189/0.186       0.99       0.526/0.658        1.981/1.517       24.26/24.33
+AWGN(9)          0.078/0.081       1.04       0.344/0.375        0.344/0.375       24.25/24.31
+脉冲(9)            0.088/0.083       0.94       0.304/0.304        0.304/0.304       24.26/24.30
+6路拥塞(9)          0.400/0.394       0.98       1.981/1.517        1.981/1.517       24.26/24.33
+纯噪声(10)          0.029/0.027       0.94       0.041/0.041        0.041/0.041       24.25/24.29
+窄带噪声(10)         0.887/0.338       0.38       1.366/0.547        1.366/0.547       24.24/24.32
+有信号综合CPU开销接近；窄带干扰样本中新版搜索更快。低SNR拥塞仍比普通单信号耗时高。样本规模小、CPU频率和OS调度会影响结果，本机最长低于2秒不保证每台电脑或所有输入均如此；WSPR接收周期为120秒。
+正式版本SHA256：1d27583661adb5215350061fdc6ffb0d7fb0bed6dd02fe841e944534cf19d385
+基线SHA256：33bff55d65121e3ca408d2528cb9ddf83779066441bd609a0f26b77acb0fb6a8
+资源报告：logs/wspr-v3.6.0-performance-20261101.json、logs/wspr-v3.6.0-performance-noise-20261101.json；硬件信息logs/wspr-v3.6.0-machine.json。
+复现：使用前述正确性命令，将decoder改为build/wsprd_jtdx、trials改为3；噪声命令trials改为10，并为两条命令设置OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1。其它场景、SNR与种子完全相同。

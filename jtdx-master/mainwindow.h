@@ -5,14 +5,25 @@ class QDropEvent;
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "OperatorLog.hpp"
+#include "UdpDecodeHistory.hpp"
+#include "OperatorLogLoader.hpp"
+#include "Blacklist.hpp"
 #include "ManagedMode.hpp"
 #include "ProcessingDialog.hpp"
+#include "PeriodAudioBuffer.hpp"
+#include "UpstreamOperatingState.hpp"
+#include "GeneralOperatingState.hpp"
+#include "SignoffState.hpp"
+#include "AstroDialog.hpp"
+#include "UpstreamController.hpp"
 #ifdef QT5
 #include <QtWidgets>
 #else
 #include <QtGui>
 #endif
 #include <QThread>
+#include <QThreadPool>
+#include <atomic>
 #include <QTimer>
 #include <QList>
 #include <QStringList>
@@ -72,6 +83,7 @@ class Modulator;
 class SoundInput;
 class Detector;
 class SampleDownloader;
+class JttyController;
 class DecodedText;
 class MainWindow : public QMainWindow
 {
@@ -108,14 +120,160 @@ public slots:
   void setManagedMode(ManagedMode);
   void observeManagedDecode(DecodedText&);
   ManagedCandidate chooseManagedCandidate(bool incomingOnly=false);
+  void prepareManagedTransmission();
   void managedTransmissionFinished();
   bool managedTxAllowed() const;
+  bool watchdogTxAllowed() const;
+  void finishTxWatchdog();
 private:
+  QString generalContext() const;
+  void applyGeneralSettings();
+  void updateGeneralWindows();
+  bool continueGeneralTx();
+  bool handleGeneralKeyEvent(QKeyEvent*);
+  bool handleGeneralMouseEvent(QObject*,QEvent*);
+  void quickCallFromSelection(QString const&,bool,bool,bool remoteSelection=false);
+  bool managedSelectionBlocked() const;
+  bool ordinaryRetryDue();
+  bool ordinaryBusyContextValid() const;
+  bool ordinaryBusyWaiting() const;
+  bool beginOrdinaryBusy(DecodedText&);
+  void observeOrdinaryBusy(DecodedText&);
+  void resetOrdinaryBusy();
+  void refreshOrdinaryBusy();
+  void ordinaryBusyTick();
+  QString m_ordinaryBusyCall,m_ordinaryBusyContext,m_ordinaryBusyReadyRow;
+  quint64 m_ordinaryBusyRevision=0;
+  qint64 m_ordinaryBusyReadyAt=-1;
+  int m_ordinaryBusyUtc=-1;
+  bool m_ordinaryBusyActive=false,m_ordinaryBusyDirectReply=false,m_ordinaryBusyHadExchange=false;
+  void seedOrdinarySelection(DecodedText&,bool);
+  QString m_ordinarySelectionContext;
+  void processGeneralDecode(QString const&);
+  bool generalTxAllowed() const;
+  void resetGeneralWait();
+  void generalTick();
+  void applyGeneralPostQso(QString const&);
+  void eraseGeneralMessages(bool rightButton=false);
+  void updateGeneralButtonColors();
+  void updateTxButtonAppearance();
+  void setupSignoff();
+  void prepareSignoff(QString const&);
+  void observeSignoff(QString const&);
+  void signoffReceiveCycleFinished(qint64);
+  void signoffPttReleased();
+  void logSignoffRound(bool ending=false);
+  void queueSignoffLogUpdate(OperatorLog::Record const&);
+  void startSignoffLogUpdate();
+  void flushSignoffLogRefresh();
+  void drainSignoffLogUpdates();
+  struct SignoffLogUpdate {QString owner;OperatorLog::Record original,replacement;};
+  QList<SignoffLogUpdate> m_signoffLogUpdates;
+  QFutureWatcher<QString> m_signoffLogUpdateWatcher;
+  OperatorLog::Record m_signoffLogOriginal;
+  QString m_signoffLogOwner;
+  QDateTime m_signoffLogOn,m_signoffLogOff;
+  bool m_signoffRoundStarted=false,m_signoffRoundEndRecorded=false,m_signoffLogPromptRequested=false;
+  bool m_signoffLogRefreshDeferred=false;
+  bool m_signoffLogWriting=false;
+  bool finishSignoff();
+  SignoffState m_signoff;
+  SignoffAudioCoverage m_signoffAudio;
+  QSet<qint64> m_signoffDecodedCycles,m_signoffAudioCycles;
+  quint64 m_signoffSelectionRevision=0;
+  quint64 m_signoffGeneration=0;
+  qint64 m_signoffRxCycleEnd=0;
+  bool m_ordinaryAutoPending=false;
+  void queueOrdinaryAutoSelection();
+  bool m_finishingSignoff=false;
+  QString m_ordinaryAutoContext;
+  quint64 m_ordinaryAutoSelectionRevision=0;
+  bool m_loggingCompletedSignoff=false;
+  GeneralOperatingState m_generalState;
+  bool m_restoringSettings=false;
+  QElapsedTimer m_generalClock;
+  QString m_generalPostQsoCall,m_generalPostQsoContext;
+  QString m_generalLogContext;
+  quint64 m_generalSelectionRevision=0,m_generalLogSelectionRevision=0;
+  void setupUpstream();
+  bool upstreamMode() const;
+  void selectUpstreamMode(QString const& mode);
+  void configureUpstreamPeriod();
+  void resetUpstreamContext();
+  QJsonObject upstreamParameters() const;
+  void upstreamAudio(QByteArray const&,qint64 endUtcMs);
+  void upstreamGuiUpdate();
+  void startUpstreamAudio();
+  void finishUpstreamTransmit();
+  void receiveUpstream(QJsonObject const&,QJsonObject const&);
+  void processDecodedOutput(QByteArray);
+  void updateAstronomy();
+  void applyAstroCorrection(QJsonObject const&);
+  quint64 correctedFrequency(quint64 nominal,qint64 correction) const;
+  UpstreamController *m_upstream=nullptr,*m_astroBackend=nullptr;
+  AstroDialog *m_astro=nullptr;
+  QAction *m_fullDuplexAction=nullptr,*m_astroAction=nullptr;
+  QToolBar *m_emeTools=nullptr;
+  QComboBox *m_upstreamPeriod=nullptr,*m_upstreamSubmode=nullptr;
+  QSpinBox *m_upstreamTolerance=nullptr;
+  QCheckBox *m_upstreamAverage=nullptr;
+  QLineEdit *m_echoMessage=nullptr;
+  QLabel *m_upstreamStatus=nullptr;
+  QMap<QString,QAction*> m_upstreamActions;
+  PeriodAudioBuffer m_periodAudio;
+  UpstreamOperatingState m_upstreamState;
+  QByteArray m_upstreamPcm,m_mskAudio;
+  QString m_upstreamTxContext,m_upstreamRequestedMessage;
+  int m_echoDither=0;
+  qint64 m_upstreamTxSlot=-1,m_upstreamLastSlot=-1,m_upstreamStartDelay=0;
+  qint64 m_lastAstroRequest=0;
+  quint64 m_upstreamTxRevision=0;
+  bool m_upstreamPcmConsumed=false,m_upstreamClearAverage=true;
+  QTimer m_upstreamTxTimeout;
+  QJsonObject m_astronomicalData;
+  AstroDialog::Correction m_astroCorrection;
+  void setupJtty();
+  void requestJttyTransmit();
+  void startJttyAudio();
+  void finishJttyTransmit();
+  void updateJttyUi();
+  void receiveJtty(QJsonObject const&);
+  JttyController* m_jtty=nullptr;
+  QWidget* m_jttyPage=nullptr;
+  QLineEdit* m_jttyText=nullptr;
+  QPushButton* m_jttySend=nullptr;
+  QLabel* m_jttyLive=nullptr;
+  QByteArray m_jttyPcm;
+  QString m_jttyTxContext,m_jttyPendingText;
+  bool m_jttyPreparing=false,m_jttyPcmConsumed=false;
+  qint64 m_jttyRxAnchor=0;
+  QElapsedTimer m_jttyOnAir;
+  QTimer m_jttyPttTimeout;
+  Q_SIGNAL void sendJttyPcm(QByteArray,SoundOutput*,AudioDevice::Channel,quint64 generation=0);
+  Q_SIGNAL void continuousAudio(bool);
   ManagedSession m_managed;
+  ManagedSlotPolicy m_managedSlotPolicy;
+  bool m_manualTxSlotChange=false;
+  bool managedCandidateSlotAllowed(ManagedCandidate const&) const;
+  bool applyManagedCandidateSlot(ManagedCandidate const&);
+  bool handleTxSlotEvent(QObject*,QEvent*);
+  void assignTxSlot(bool first,bool manual=false);
   QElapsedTimer m_managedClock;
   QMenu *m_managedMenu=nullptr;
   QAction *m_managedOff=nullptr;
   bool m_managedTxReady=false,m_managedCqOnAir=false,m_managedCallOnAir=false;
+  QElapsedTimer m_txStartClock;
+  qint64 m_txPttAckMs=-1,m_txAudioRequestedMs=-1;
+  bool m_txStartReported=false;
+  quint64 m_txStartAudioGeneration=0;
+  quint64 m_audioPlaybackGeneration=0;
+  QThreadPool m_txTimingPool;
+  std::shared_ptr<std::atomic<int>> m_txTimingPending{std::make_shared<std::atomic<int>>(0)};
+  void writeTxTiming(QString const&);
+  bool m_managedTxStarted=false,m_managedTxConsumed=false,m_managedTxNatural=false,m_managedTxCounted=false;
+  quint64 m_managedTxGeneration=0;
+  qint64 m_managedTxSlot=-1,m_managedTxPeriod=0;
+  QString m_managedTxMessage,m_managedTxCall,m_managedTxContext;
   QString m_managedContext;
 public slots:
   void p1ReadFromStdout();
@@ -127,6 +285,7 @@ public slots:
   void escapeHalt();
 
 protected:
+  void changeEvent(QEvent *event) override;
   virtual void keyPressEvent( QKeyEvent *e );
   void  closeEvent(QCloseEvent*);
   void childEvent(QChildEvent *) override;
@@ -206,31 +365,6 @@ private slots:
   void on_actionAutoFilter_toggled(bool checked);
   void on_actionEnable_hound_mode_toggled(bool checked);
   void on_actionUse_TX_frequency_jumps_triggered(bool checked);
-  void on_actionMTAuto_triggered();
-  void on_actionMT1_triggered();
-  void on_actionMT2_triggered();
-  void on_actionMT3_triggered();
-  void on_actionMT4_triggered();
-  void on_actionMT5_triggered();
-  void on_actionMT6_triggered();
-  void on_actionMT7_triggered();
-  void on_actionMT8_triggered();
-  void on_actionMT9_triggered();
-  void on_actionMT10_triggered();
-  void on_actionMT11_triggered();
-  void on_actionMT12_triggered();
-  void on_actionMT13_triggered();
-  void on_actionMT14_triggered();
-  void on_actionMT15_triggered();
-  void on_actionMT16_triggered();
-  void on_actionMT17_triggered();
-  void on_actionMT18_triggered();
-  void on_actionMT19_triggered();
-  void on_actionMT20_triggered();
-  void on_actionMT21_triggered();
-  void on_actionMT22_triggered();
-  void on_actionMT23_triggered();
-  void on_actionMT24_triggered();
   void on_actionAcceptUDPCQ_triggered();
   void on_actionAcceptUDPCQ73_triggered();
   void on_actionAcceptUDPAny_triggered();
@@ -283,6 +417,8 @@ private slots:
   void on_actionJT9_triggered();
   void on_actionT10_triggered();
   void on_actionFT4_triggered();
+  void on_actionFT2_triggered();
+  void on_actionJTTY_triggered();
   void on_actionFT8_triggered();
   void on_actionJT65_triggered();
   void on_actionJT9_JT65_triggered();
@@ -386,6 +522,21 @@ private slots:
   void haltTxTuneTimer();
   void logChanged();
   QString operatorLogStamp() const;
+  void watchOperatorLogs();
+  void updateStationSelector();
+  void updateStationSelectorEnabled();
+  void switchStation(QString const& callsign);
+  void applyStationIdentity();
+  void updateOwnDxcc();
+  void setupBlacklist();
+  void loadBlacklist();
+  void showBlacklistManager();
+  void applyBlacklist();
+  bool permanentlyBlocked(QString const& call) const;
+  bool messageBlacklisted(QString const& text) const;
+  QString selectedTransmitText() const;
+  void stopBlacklistedTransmit();
+  int txTabIndex() const {return m_txMessageTab;}
   void refreshOperatorLogs(bool showProgress=false);
   void updateLogProcessingDialog();
   void importOperatorLogs(QStringList paths=QStringList());
@@ -396,14 +547,26 @@ private slots:
 private:
   bool m_superFoxMode=false;
   int m_superFoxTolerance=75;
-  struct LogSnapshot {LogBook book;QString call,grid,date,error;};
+  using LogSnapshot=OperatorLogLoader::Result;
+  OperatorLogLoader m_logLoader;
   QFutureWatcher<LogSnapshot> m_logLoadWatcher;
   bool m_logRefreshPending=false,m_logProgressRequested=false,m_logLoading=false,m_logImportActive=false;
-  ProcessingDialog *m_logProcessingDialog=nullptr;
+  QPointer<ProcessingDialog> m_logProcessingDialog;
   QFutureWatcher<OperatorLog::ImportResult> m_logImportWatcher;
   QTimer m_logRefreshTimer;
+  QTimer m_logProgressTimer;
   QSet<QString> m_importAttempts;
   QString m_logFilesStamp;
+  QString m_logLoadContext,m_logLoadStamp;
+  quint64 m_logInputRevision=0,m_logLoadRevision=0;
+  bool m_logReady=false;
+  QString m_logReadyContext;
+  int m_txMessageTab=0;
+  QComboBox *m_quickStationSelector=nullptr;
+  QPushButton *m_confirmStationSwitchButton=nullptr;
+  QLabel *m_quickStationGrid=nullptr;
+  QPushButton *m_blacklistButton=nullptr;
+  Blacklist *m_blacklist=nullptr;
   void configureMcp();
   QJsonObject mcpCall(QString const&, QJsonObject const&);
   QJsonObject mcpStatus() const;
@@ -424,6 +587,8 @@ private:
   Q_SIGNAL void resumeAudioInputStream () const;
   Q_SIGNAL void startDetector (AudioDevice::Channel) const;
   Q_SIGNAL void FFTSize (unsigned) const;
+  Q_SIGNAL void audioPeriod(double);
+  Q_SIGNAL void audioSpread(double);
   Q_SIGNAL void detectorClose () const;
   Q_SIGNAL void finished () const;
   Q_SIGNAL void transmitFrequency (double) const;
@@ -432,7 +597,7 @@ private:
   Q_SIGNAL void sendMessage (unsigned symbolsLength, double framesPerSymbol,
       double frequency, double toneSpacing,
       SoundOutput *, AudioDevice::Channel = AudioDevice::Mono,
-      bool synchronize = true, double dBSNR = 99., int TRperiod=60) const;
+      bool synchronize = true, double dBSNR = 99., int TRperiod=60, quint64 generation=0) const;
   Q_SIGNAL void outAttenuationChanged (qreal) const;
   Q_SIGNAL void toggleShorthand () const;
 
@@ -474,6 +639,10 @@ private:
   Modulator * m_modulator;
   SoundOutput * m_soundOutput;
   int m_rx_audio_buffer_frames;
+  int m_rx_audio_buffer_override=0;
+  void applyRxAudioBufferSize();
+  void startSoundcardInputStream();
+  quint64 beginAudioPlayback();
   int m_tx_audio_buffer_frames;
   int m_outAttenuation = 225;
   QThread m_audioThread;
@@ -524,7 +693,17 @@ private:
   qint32  m_idleMinutes;
   qint32  m_oldTx5Index;
   qint32  m_oldFreeMsgIndex;
-  qint32  m_ft8threads;
+  qint32 m_ft8threads=0;
+  UdpDecodeHistory m_udpDecodeHistory;
+  quint64 m_udpReplayGeneration=0;
+  void clearBandActivity();
+  void sendUdpDecode(bool isNew,UdpDecodeRecord const&);
+  void sendWsprDecode(bool isNew,UdpWsprRecord const&);
+  void replayDecodeBatch(std::shared_ptr<QList<UdpReplayRow>>,int offset,quint64 generation,QString const& context);
+  int m_ft8ThreadLimit=1;
+  void setupFt8Threads(int available);
+  void seedSelectedQsoHistory(DecodedText&,QString const&);
+  void setFt8Threads(int requested);
   qint32  m_acceptUDP;
   qint32  m_lastCallingFreq;
   qint32  m_saveWav;
@@ -692,6 +871,8 @@ private:
   QFuture<void> m_wav_future;
   QFutureWatcher<void> m_wav_future_watcher;
   QFutureWatcher<QString> m_saveWAVWatcher;
+  QStringList m_wsprDecodeArgs;
+  bool m_wavSaveBusy=false;
 
   QFileSystemWatcher *fsWatcher;
 
@@ -768,6 +949,8 @@ private:
   bool m_transmitting;
   bool m_tune;
   bool m_txwatchdog;
+  bool m_watchdogFinishing=false;
+  QString m_watchdogCall,m_watchdogContext;
   TxWatchdog m_txSession;
   bool m_block_pwr_tooltip;
   bool m_PwrBandSetOK;
@@ -830,7 +1013,7 @@ private:
   void pskSetLocal ();
   void displayDialFrequency ();
   void transmitDisplay (bool);
-  void processMessage(QString const& messages, qint32 position, bool alt, bool ctrl);
+  bool processMessage(QString const& messages, qint32 position, bool alt, bool ctrl);
   void replyToUDP (QTime, qint32 snr, float delta_time, quint32 delta_frequency, QString const& mode, QString const& message_text, bool low_confidence, quint8 modifiers);
   void replayDecodes ();
   void postDecode (bool is_new, QString const& message);
@@ -842,16 +1025,15 @@ private:
   void setRig ();
   void WSPR_history(Frequency dialFreq, int ndecodes);
   QString WSPR_hhmm(int n);
-  QString save_wave_file (QString const& name
-                          , short const * data
-                          , int seconds
+  static QString save_wave_file (QString const& name
+                          , QVector<short> const& data
                           , QString const& my_callsign
                           , QString const& my_grid
                           , QString const& mode
                           , Frequency frequency
                           , QString const& his_call
                           , QString const& his_grid
-                          , JTDXDateTime * jtdxtime) const;
+                          , QDateTime const& utc);
   void read_wav_file (QString const& fname);
   bool subProcessFailed (QProcess *, int exit_code, QProcess::ExitStatus);
   void subProcessError (QProcess *, QProcess::ProcessError);

@@ -1,3 +1,4 @@
+#include "AudioBuffer.hpp"
 #include "Detector.hpp"
 #include <QtAlgorithms>
 #include <QDebug>
@@ -42,6 +43,7 @@ bool Detector::reset ()
 
 void Detector::clear ()
 {
+  QMutexLocker lock(&captureBufferMutex());
   // set index to roughly where we are in time (1ms resolution)
   // qint64 now (QDateTime::currentMSecsSinceEpoch ());
   // unsigned msInPeriod ((now % 86400000LL) % (m_period * 1000));
@@ -55,13 +57,20 @@ void Detector::clear ()
 
 qint64 Detector::writeData (char const * data, qint64 maxSize)
 {
+  QMutexLocker lock(&captureBufferMutex());
   static unsigned mstr0=999999;
-  qint64 ms0 = m_jtdxtime -> currentMSecsSinceEpoch2() % 86400000;
+  qint64 captureTime = m_jtdxtime->currentMSecsSinceEpoch2();
+  qint64 ms0 = captureTime % 86400000;
   unsigned mstr = ms0 % int(1000.0*m_period); // ms into the nominal Tx start time
-  if(mstr < mstr0) {              //When mstr has wrapped around to 0, restart the buffer
+  if(!m_continuous && mstr < mstr0) {
     dec_data.params.kin = 0;
     m_bufferPos = 0;
 //    printf("%s(%0.1f) reset buffer mstr:%d mstr0:%d maxSize:%lld\n",m_jtdxtime->currentDateTimeUtc2().toString("hh:mm:ss.zzz").toStdString().c_str(),m_jtdxtime->GetOffset(),mstr,mstr0,maxSize);
+  }
+  else if(m_continuous && dec_data.params.kin>60*12000) {
+    // Roll the legacy display buffer without discarding partially collected
+    // input. Long Q65 periods and JTTY need every downsampled audio block.
+    dec_data.params.kin=0;
   }
   mstr0=mstr;
 
@@ -95,6 +104,11 @@ qint64 Detector::writeData (char const * data, qint64 maxSize)
              dec_data.params.kin < (NTMAX*12000 - framesAfterDownSample)) {
             fil4_(&m_buffer[0], &framesToProcess, &dec_data.d2[dec_data.params.kin],
                   &framesAfterDownSample, &dec_data.dd2[dec_data.params.kin]);
+            {
+              QByteArray pcm(reinterpret_cast<char const*>(&dec_data.d2[dec_data.params.kin]),framesAfterDownSample*2);
+              if(m_continuous)Q_EMIT pcmWritten(pcm);
+              Q_EMIT timedPcmWritten(pcm,captureTime-qint64(remaining-numFramesProcessed)*1000/(m_frameRate*m_downSampleFactor));
+            }
             dec_data.params.kin += framesAfterDownSample;
           } else {
             // qDebug() << "framesToProcess     = " << framesToProcess;
@@ -111,6 +125,11 @@ qint64 Detector::writeData (char const * data, qint64 maxSize)
       } else {
         store (&data[(framesAccepted - remaining) * bytesPerFrame ()],
                numFramesProcessed, &dec_data.d2[dec_data.params.kin]);
+        {
+          QByteArray pcm(reinterpret_cast<char const*>(&dec_data.d2[dec_data.params.kin]),numFramesProcessed*2);
+          if(m_continuous)Q_EMIT pcmWritten(pcm);
+          Q_EMIT timedPcmWritten(pcm,captureTime-qint64(remaining-numFramesProcessed)*1000/m_frameRate);
+        }
         m_bufferPos += numFramesProcessed;
         dec_data.params.kin += numFramesProcessed;
         if (m_bufferPos == static_cast<unsigned> (m_samplesPerFFT)) {

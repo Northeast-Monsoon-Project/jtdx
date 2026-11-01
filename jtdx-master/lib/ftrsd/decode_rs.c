@@ -26,24 +26,30 @@ int DECODE_RS(
               void *p,
 #endif
               DTYPE *data, int *eras_pos, int no_eras, int calc_syn){
-    
+
 #ifndef FIXED
     struct rs *rs = (struct rs *)p;
 #endif
+    #ifndef FIXED
+    if(!rs)return -1;
+    #endif
+    if(!data || NROOTS>51 || no_eras<0 || no_eras>(int)NROOTS || (no_eras && !eras_pos))return -1;
+    for(unsigned int n=0;n<NN;n++)if(data[n]<0 || data[n]>(int)NN)return -1;
+    for(int n=0;n<no_eras;n++)if(eras_pos[n]<0 || eras_pos[n]>=(int)NN)return -1;
     int deg_lambda, el, deg_omega;
     int i, j, r,k;
     DTYPE u,q,tmp,num1,num2,den,discr_r;
     DTYPE lambda[NROOTS+1];	// Err+Eras Locator poly
-    static DTYPE s[51];					 // and syndrome poly
+    static _Thread_local DTYPE s[51];					 // and syndrome poly
     DTYPE b[NROOTS+1], t[NROOTS+1], omega[NROOTS+1];
     DTYPE root[NROOTS], reg[NROOTS+1], loc[NROOTS];
     int syn_error, count;
-    
+
     if( calc_syn ) {
         /* form the syndromes; i.e., evaluate data(x) at roots of g(x) */
         for(i=0;i<NROOTS;i++)
             s[i] = data[0];
-        
+
         for(j=1;j<NN;j++){
             for(i=0;i<NROOTS;i++){
                 if(s[i] == 0){
@@ -53,15 +59,15 @@ int DECODE_RS(
                 }
             }
         }
-        
+
         /* Convert syndromes to index form, checking for nonzero condition */
         syn_error = 0;
         for(i=0;i<NROOTS;i++){
             syn_error |= s[i];
             s[i] = INDEX_OF[s[i]];
         }
-        
-        
+
+
         if (!syn_error) {
             /* if syndrome is zero, data[] is a codeword and there are no
              * errors to correct. So return data[] unmodified
@@ -69,12 +75,12 @@ int DECODE_RS(
             count = 0;
             goto finish;
         }
-        
+
     }
-    
+
     memset(&lambda[1],0,NROOTS*sizeof(lambda[0]));
     lambda[0] = 1;
-    
+
     if (no_eras > 0) {
         /* Init lambda to be the erasure locator polynomial */
         lambda[1] = ALPHA_TO[MODNN(PRIM*(NN-1-eras_pos[0]))];
@@ -86,15 +92,15 @@ int DECODE_RS(
                     lambda[j] ^= ALPHA_TO[MODNN(u + tmp)];
             }
         }
-        
+
 #if DEBUG >= 1
         /* Test code that verifies the erasure locator polynomial just constructed
          Needed only for decoder debugging. */
-        
+
         /* find roots of the erasure location polynomial */
         for(i=1;i<=no_eras;i++)
             reg[i] = INDEX_OF[lambda[i]];
-        
+
         count = 0;
         for (i = 1,k=IPRIM-1; i <= NN; i++,k = MODNN(k+IPRIM)) {
             q = 1;
@@ -125,7 +131,7 @@ int DECODE_RS(
     }
     for(i=0;i<NROOTS+1;i++)
         b[i] = INDEX_OF[lambda[i]];
-    
+
     /*
      * Begin Berlekamp-Massey algorithm to determine error+erasure
      * locator polynomial
@@ -170,7 +176,7 @@ int DECODE_RS(
             memcpy(lambda,t,(NROOTS+1)*sizeof(t[0]));
         }
     }
-    
+
     /* Convert lambda to index form and compute deg(lambda(x)) */
     deg_lambda = 0;
     for(i=0;i<NROOTS+1;i++){
@@ -228,7 +234,7 @@ int DECODE_RS(
         omega[i] = INDEX_OF[tmp];
     }
     omega[NROOTS] = A0;
-    
+
     /*
      * Compute error values in poly-form. num1 = omega(inv(X(l))), num2 =
      * inv(X(l))**(FCR-1) and den = lambda_pr(inv(X(l))) all in poly-form
@@ -241,7 +247,7 @@ int DECODE_RS(
         }
         num2 = ALPHA_TO[MODNN(root[j] * (FCR - 1) + NN)];
         den = 0;
-        
+
         /* lambda[i+1] for i even is the formal derivative lambda_pr of lambda[i] */
         for (i = min(deg_lambda,NROOTS-1) & ~1; i >= 0; i -=2) {
             if(lambda[i+1] != A0)

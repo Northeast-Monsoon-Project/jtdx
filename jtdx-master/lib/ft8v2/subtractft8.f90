@@ -18,6 +18,7 @@ subroutine subtractft8(itone,f0,dt,swl)
 
   nstart=dt*12000+1
   call gen_ft8wave(itone,79,1920,2.0,12000.0,f0,cref,xjunk,1,NFRAME)
+!$omp critical(ft8_residual)
   do i=1,nframe
     id=nstart-1+i 
     if(id.ge.1.and.id.le.NMAX) then
@@ -26,6 +27,7 @@ subroutine subtractft8(itone,f0,dt,swl)
       cfilt(i)=0.0
     endif
   enddo
+!$omp end critical(ft8_residual)
   cfilt(nframe+1:)=0.0
   call four2a(cfilt,nfft,1,-1,1)
   cfilt(1:nfft)=cfilt(1:nfft)*cw(1:nfft)
@@ -37,11 +39,12 @@ subroutine subtractft8(itone,f0,dt,swl)
     cfilt(1:NFILT2/2+1)=cfilt(1:NFILT2/2+1)*endcorrswl
     cfilt(nframe:nframe-NFILT2/2:-1)=cfilt(nframe:nframe-NFILT2/2:-1)*endcorrswl
   endif
+!$omp critical(ft8_residual)
   do i=1,nframe
      j=nstart+i-1
      if(j.ge.1 .and. j.le.NMAX) dd8(j)=dd8(j)-2*REAL(cfilt(i)*cref(i))
   enddo
-!!!$omp flush(dd8) ! makes no difference in number of decoded messages
+!$omp end critical(ft8_residual)
 
   return
 end subroutine subtractft8

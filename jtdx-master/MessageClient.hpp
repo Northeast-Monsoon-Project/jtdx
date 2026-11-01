@@ -30,9 +30,10 @@ public:
 
   // instantiate and initiate a host lookup on the server
   //
-  // messages will be silently dropped until a server host lookup is complete
+  // A bounded recent backlog is held while DNS lookup is active.
   MessageClient (QString const& id, QString const& version,
                  QString const& server, port_type server_port, QObject * parent = nullptr);
+  ~MessageClient () override;
 
   // query server details
   QHostAddress server_address () const;

@@ -73,7 +73,7 @@ int jelinek(
     /********************* Start the stack decoder *****************/
     for (i=1; i <= ncycles; i++) {
 #ifdef DEBUG
-        printf("***stackptr=%ld, depth=%d, gamma=%d, encstate=%lx, bucket %d, low_bucket %d, high_bucket %d\n",
+        printf("***stackptr=%u, depth=%u, gamma=%ld, encstate=%lx, bucket %u, low_bucket %u, high_bucket %u\n",
                stackptr, depth, gamma, encstate, bucket, low_bucket, high_bucket);
 #endif
         // no need to store more than 7 bytes (56 bits) for encoder state because

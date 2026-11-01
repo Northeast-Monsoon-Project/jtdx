@@ -44,6 +44,7 @@ QJsonObject MainWindow::mcpStatus() const
     {"managed_mode",QStringList{"off","dxcc_hunter","qso_enthusiast"}.at(int(m_managed.mode()))}, {"managed_tx_ready",m_managedTxReady},
     {"auto_sequence", m_autoseq}, {"single_qso", m_singleshot}, {"qso_state", static_cast<int>(m_status)},
     {"watchdog_minutes", m_config.watchdog()}, {"watchdog_expired", m_txwatchdog},
+    {"watchdog_finishing_qso",m_watchdogFinishing},
     {"watchdog_remaining_seconds", m_txwatchdog ? 0 : m_txSession.remainingSeconds(m_config.watchdog())},
     {"last_logged_call", m_lastloggedcall}, {"control_allowed", m_config.mcp_settings().allowControl},
     {"transmit_allowed", m_config.mcp_settings().allowControl && m_config.mcp_settings().allowTransmit}};
@@ -59,7 +60,7 @@ QJsonObject MainWindow::mcpCall(QString const& name, QJsonObject const& a)
     {"answer_worked", m_answerWorkedB4}, {"call_worked", m_callWorkedB4}, {"search_cq", m_callPrioCQ},
     {"selection", QStringList{"manual", "first", "middle", "end"}.value(m_callMode)},
     {"watchdog_minutes", m_config.watchdog()}, {"autolog", m_config.autolog()}, {"language", m_lang},
-    {"data_directory", m_dataDir.absolutePath()}, {"log_directory", m_config.log_directory().absolutePath()}, {"log_files", QJsonArray::fromStringList(OperatorLog::files(m_config.my_callsign()))}, {"mcp_port", m_config.mcp_settings().port}});
+    {"data_directory", m_dataDir.absolutePath()}, {"log_directory", m_config.log_directory().absolutePath()}, {"log_files", QJsonArray::fromStringList(OperatorLog::files(m_config.my_callsign()))}, {"compatibility_log",OperatorLog::compatibilityFile(m_config.my_callsign())}, {"mcp_port", m_config.mcp_settings().port}});
   if (name == "get_decodes" || name == "get_events") {
     QJsonArray out; auto const& items = name == "get_decodes" ? m_mcpDecodes : m_mcpEvents;
     int after = a.value("after_id").toInt(0), limit = a.value("limit").toInt(100);
@@ -73,6 +74,7 @@ QJsonObject MainWindow::mcpCall(QString const& name, QJsonObject const& a)
     for (auto const& item : *m_config.frequencies()) items.append(QJsonObject{{"hz", static_cast<double>(item.frequency_)}, {"band", m_config.bands()->find(item.frequency_)}, {"mode", Modes::name(item.mode_)}});
     return McpServer::success({{"items", items}});
   }
+  if (name == "get_messages" && m_mode=="JTTY")return McpServer::success({{"mode","JTTY"},{"text",m_jttyText->text()},{"encoding",m_jttyPreparing}});
   if (name == "get_messages") return McpServer::success({{"messages", QJsonArray{ui->tx1->text(), ui->tx2->text(), ui->tx3->text(), ui->tx4->text(), ui->tx5->currentText(), ui->tx6->text()}}, {"selected", m_ntx}, {"last_sent", m_lastMessageSent}});
   if (name == "get_log") {
     auto paths=OperatorLog::files(m_config.my_callsign());
@@ -99,19 +101,30 @@ QJsonObject MainWindow::mcpCall(QString const& name, QJsonObject const& a)
   }
   if (QApplication::activeModalWidget()) return fail("Close the active dialog before changing radio state");
   bool txActive = m_enableTx || m_transmitting || m_tune || g_iptt != 0;
-  if (name != "start_tx" && name != "set_monitor" && name != "log_qso" && txActive)
+  if (name != "start_tx" && name != "set_jtty_text" && name != "set_monitor" && name != "log_qso" && txActive)
     return fail("Stop TX before changing mode, frequency, target or options");
   if (name == "start_tx" || name == "tune") {
     if (!m_manualTxAuthorized) return fail("TX is locked. The operator must manually press Enable Tx in the application. Stop revokes this authorization.");
+    if(name=="tune" && (m_mode=="JTTY" || m_mode=="Echo"))return fail("Tune is unavailable in this mode");
     if (m_config.my_callsign().isEmpty() || m_config.my_grid().size() < 4) return fail("Set callsign and grid in Settings first");
     if (m_diskData) return fail("TX is unavailable during file decoding");
     if (name == "start_tx") {
       if (m_tune) return fail("Stop Tune first");
       if (!m_enableTx) enableTx_mode(true); // repeat calls cannot extend the session
+      if(m_mode=="JTTY") {
+        if(m_transmitting || g_iptt || m_jttyPreparing)return fail("JTTY transmission is already pending");
+        if(m_jttyText->text().trimmed().isEmpty())return fail("Prepare JTTY text first");
+        requestJttyTransmit();
+        if(!m_jttyPreparing)return fail("JTTY transmission was not accepted (check watchdog and audio devices)");
+      }
     } else {
       if (m_enableTx || m_transmitting) return fail("Stop TX before starting Tune");
       if (!m_tune) { ui->tuneButton->setChecked(true); on_tuneButton_clicked(true); }
     }
+  } else if(name=="set_jtty_text") {
+    if(m_mode!="JTTY")return fail("Select JTTY mode first");
+    if(m_transmitting || g_iptt || m_jttyPreparing)return fail("Wait for the current JTTY message to finish");
+    m_jttyText->setText(a.value("text").toString());
   } else if (name == "set_monitor") {
     if (txActive && !a.value("enabled").toBool()) return fail("Stop TX before disabling reception");
     ui->monitorButton->setChecked(a.value("enabled").toBool());
@@ -120,6 +133,9 @@ QJsonObject MainWindow::mcpCall(QString const& name, QJsonObject const& a)
     QString mode = a.value("mode").toString();
     if (mode == "FT8") on_actionFT8_triggered();
     else if (mode == "FT4") on_actionFT4_triggered();
+    else if (mode == "FT2") on_actionFT2_triggered();
+    else if (mode == "JTTY") on_actionJTTY_triggered();
+    else if (mode == "Q65" || mode == "Echo" || mode == "MSK144") selectUpstreamMode(mode);
     else if (mode == "JT65") on_actionJT65_triggered();
     else if (mode == "JT9") on_actionJT9_triggered();
     else if (mode == "T10") on_actionT10_triggered();
@@ -137,10 +153,12 @@ QJsonObject MainWindow::mcpCall(QString const& name, QJsonObject const& a)
     if (a.contains("rx_hz")) ui->RxFreqSpinBox->setValue(a.value("rx_hz").toInt());
     if (a.contains("tx_hz")) ui->TxFreqSpinBox->setValue(a.value("tx_hz").toInt());
   } else if (name == "set_tx_period") {
+    if(m_mode=="JTTY")return fail("JTTY transmissions are asynchronous");
     if (!ui->TxMinuteButton->isEnabled()) return fail("TX period is unavailable in this mode");
     if (m_txFirst != a.value("first").toBool()) ui->TxMinuteButton->click();
   } else if (name == "set_target") {
     QString call = a.value("callsign").toString().trimmed().toUpper(), grid = a.value("grid").toString().toUpper();
+    if(permanentlyBlocked(call))return fail("Station is blocked or the permanent blacklist is unavailable");
     if (!QRegularExpression("^(?=.{3,12}$)(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+(?:/[A-Z0-9]+)*$").match(call).hasMatch()) return fail("Invalid callsign");
     if (!grid.isEmpty() && !QRegularExpression("^[A-R]{2}[0-9]{2}([A-X]{2})?$").match(grid).hasMatch()) return fail("Invalid Maidenhead grid");
     clearDX(""); ui->dxCallEntry->setText(call); ui->dxGridEntry->setText(grid);
@@ -148,6 +166,7 @@ QJsonObject MainWindow::mcpCall(QString const& name, QJsonObject const& a)
     genStdMsgs(QString::number(ui->rptSpinBox->value()));
     m_dateTimeQSOOn = m_jtdxtime->currentDateTimeUtc2();
   } else if (name == "reply_to_decode") {
+    if(m_mode=="JTTY")return fail("Use set_target and set_jtty_text for JTTY");
     QJsonObject found;
     for (auto const& v : m_mcpDecodes) if (v.toObject().value("id") == a.value("id")) found = v.toObject();
     if (found.isEmpty()) return fail("Decode ID has expired");
@@ -159,7 +178,7 @@ QJsonObject MainWindow::mcpCall(QString const& name, QJsonObject const& a)
     processMessage(line, line.size(), false, false);
     m_autoTx = autoTx;
   } else if (name == "select_message") {
-    if (m_mode.startsWith("WSPR")) return fail("Standard QSO messages are unavailable in WSPR");
+    if (m_mode.startsWith("WSPR") || m_mode=="JTTY" || m_mode=="Echo") return fail("Standard QSO messages are unavailable in this mode");
     switch (a.value("index").toInt()) {
       case 1: on_txb1_clicked(); break; case 2: on_txb2_clicked(); break; case 3: on_txb3_clicked(); break;
       case 4: on_txb4_clicked(); break; case 5: on_txb5_clicked(); break; case 6: on_txb6_clicked(); break;
@@ -169,7 +188,7 @@ QJsonObject MainWindow::mcpCall(QString const& name, QJsonObject const& a)
     if (a.isEmpty()) return fail("Specify at least one option");
     if(a.contains("managed_mode")) {
       auto mode=a.value("managed_mode").toString();
-      if(mode!="off" && m_mode.startsWith("WSPR"))return fail("Managed mode is unavailable in WSPR");
+      if(mode!="off" && (m_mode.startsWith("WSPR") || m_mode=="JTTY" || m_mode=="Echo"))return fail("Managed mode is unavailable in this mode");
       setManagedMode(mode=="dxcc_hunter"?ManagedMode::DxccHunter:mode=="qso_enthusiast"?ManagedMode::QsoEnthusiast:ManagedMode::Off);
     }
     if (a.contains("selection")) {

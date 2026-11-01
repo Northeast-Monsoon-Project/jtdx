@@ -91,8 +91,8 @@ int main(int argc, char *argv[])
 {
 #if defined(Q_OS_WIN)
   if (AttachConsole(ATTACH_PARENT_PROCESS)) {
-    freopen("CONOUT$", "w", stdout);
-    freopen("CONOUT$", "w", stderr);
+    if(!freopen("CONOUT$", "w", stdout))clearerr(stdout);
+    if(!freopen("CONOUT$", "w", stderr))clearerr(stderr);
   }
 #endif
 
@@ -357,7 +357,7 @@ int main(int argc, char *argv[])
     {
       JTDXMessageBox::critical_message (nullptr, a.applicationName (), QObject::tr ("Unexpected error"));
       std::cerr << "Unexpected error\n";
-      throw;			// hoping the runtime might tell us more about the exception
+      // The failure has been reported; exit through the normal error return.
     }
   return -1;
 }

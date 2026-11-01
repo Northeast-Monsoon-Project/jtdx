@@ -30,7 +30,7 @@ async def main():
                 async with ClientSession(read,write) as session:
                     init=await session.initialize()
                     assert init.model_dump(by_alias=True)['serverInfo']['name']=='JTDX-F'
-                    assert len((await session.list_tools()).tools)==21
+                    assert len((await session.list_tools()).tools)==22
                     assert len((await session.list_resources()).resources)==5
                     assert not (await session.call_tool('get_status')).model_dump(by_alias=True)['isError']
                     assert (await session.call_tool('start_tx')).model_dump(by_alias=True)['isError']
@@ -41,7 +41,7 @@ async def main():
         async with stdio_client(StdioServerParameters(command=sys.executable,args=[str(bridge)],env=env)) as (read,write):
             async with ClientSession(read,write) as session:
                 await session.initialize()
-                assert len((await session.list_tools()).tools)==21
+                assert len((await session.list_tools()).tools)==22
                 assert not (await session.call_tool('get_status')).model_dump(by_alias=True)['isError']
         print('Official MCP SDK: HTTP and stdio passed')
     finally:

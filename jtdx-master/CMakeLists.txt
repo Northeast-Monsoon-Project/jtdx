@@ -210,6 +210,7 @@ set (wsjt_qt_CXXSRCS
   DXLabSuiteCommanderTransceiver.cpp
   NetworkMessage.cpp
   MessageClient.cpp
+  JtAlertCompatibility.cpp
   LettersSpinBox.cpp
   HelpTextWindow.cpp
   SampleDownloader.cpp
@@ -233,6 +234,16 @@ set (jt9_CXXSRCS
 set (wsjtx_CXXSRCS
   logbook/adif.cpp
   OperatorLog.cpp
+  OperatorLogLoader.cpp
+  Blacklist.cpp
+  WSJTXGeneralSettings.cpp
+  DecodedPresentation.cpp
+  HamlibUpdater.cpp
+  HamlibUpdateSupport.cpp
+  HRDMessage.cpp
+  UpstreamController.cpp
+  AstroDialog.cpp
+  mainwindow_blacklist.cpp
   ProcessingDialog.cpp
   StationProfiles.cpp
   logbook/countrydat.cpp
@@ -242,6 +253,7 @@ set (wsjtx_CXXSRCS
   Modulator.cpp
   Detector.cpp
   logqso.cpp
+  LogForwarder.cpp
   displaytext.cpp
   decodedtext.cpp
   getfile.cpp
@@ -255,6 +267,15 @@ set (wsjtx_CXXSRCS
   WsprTxScheduler.cpp
   mainwindow.cpp
   mainwindow_mcp.cpp
+  mainwindow_jtty.cpp
+  mainwindow_upstream.cpp
+  mainwindow_udp.cpp
+  mainwindow_general.cpp
+  mainwindow_slots.cpp
+  mainwindow_signoff.cpp
+  mainwindow_retry.cpp
+  mainwindow_busy.cpp
+  JttyController.cpp
   McpServer.cpp
   Configuration.cpp
   main.cpp
@@ -290,6 +311,9 @@ if (WIN32)
 endif (WIN32)
 
 set (wsjt_FSRCS
+  lib/ft8_fft32.f90
+  lib/ft8_symbol_spectrum.f90
+  lib/ft8_shared_state.f90
   lib/afc10.f90
   lib/afc65b.f90
   lib/afc9.f90
@@ -302,6 +326,7 @@ set (wsjt_FSRCS
   lib/bpdecode144.f90
   lib/bpdecode174.f90
   lib/ft8v2/bpdecode174_91.f90
+  lib/modern174.f90
   lib/ccf2.f90
   lib/ccf65.f90
   lib/chkcall.f90
@@ -1106,11 +1131,53 @@ list(APPEND wsjt_CSRCS
   lib/superfox/qpc/qpc_subs.c
 )
 
+
+# FT2 3.75 s front-end, adapted from Decodium 3 (GPLv3).
+list(APPEND wsjt_FSRCS
+  lib/ft2/fm_ft2_ldpc.f90
+  lib/ft2/ft2_baseline.f90
+  lib/ft2/ft2_channel_est.f90
+  lib/ft2/ft2_decode.f90
+  lib/ft2/ft2_downsample.f90
+  lib/ft2/ft2_nuttal_window.f90
+  lib/ft2/gen_ft2wave.f90
+  lib/ft2/genft2.f90
+  lib/ft2/get_ft2_bitmetrics.f90
+  lib/ft2/getcandidates2.f90
+  lib/ft2/normalizebmet.f90
+  lib/ft2/subtractft2.f90
+  lib/ft2/sync2d.f90
+)
+
+# JTTY protocol and streaming receiver from WSJT-X v3.3.0-beta5 (GPLv3).
+list(APPEND wsjt_FSRCS
+  lib/jtty/ana64a.f90
+  lib/jtty/gen_jttywave.f90
+  lib/jtty/gen_syncwave.f90
+  lib/jtty/genjtty.f90
+  lib/jtty/jtty_block_pow.f90
+  lib/jtty/jtty_fec_mod.f90
+  lib/jtty/jtty_mdecode.f90
+  lib/jtty/jtty_mod.f90
+  lib/jtty/jtty_payload_correlators.f90
+  lib/jtty/jtty_peakup.f90
+  lib/jtty/jtty_receive_context.f90
+  lib/jtty/jtty_source_codec.f90
+  lib/jtty/jtty_tbcc_code_profile.f90
+  lib/jtty/jtty_tbcc_decoder.f90
+  lib/jtty/jtty_tbcc_list_decoder.f90
+  lib/jtty/packjt77_grammar.f90
+  lib/jtty/subtract_jtty.f90
+  lib/jtty/tbcc.f90
+)
 # build a library of package functionality (without and optionally with OpenMP support)
 add_library (wsjt_cxx STATIC ${wsjt_CSRCS} ${wsjt_CXXSRCS})
 
 # build an OpenMP variant of the Fortran library routines
 add_library (wsjt_fort STATIC ${wsjt_FSRCS})
+set_target_properties(wsjt_fort PROPERTIES Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/fortran_modules_serial)
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/fortran_modules_serial)
+target_include_directories(wsjt_fort BEFORE PUBLIC ${CMAKE_BINARY_DIR}/fortran_modules_serial)
 target_link_libraries (wsjt_fort  ${FFTW3_LIBRARIES})
 if (${OPENMP_FOUND} OR APPLE)
   add_library (wsjt_fort_omp STATIC ${wsjt_FSRCS})
@@ -1126,6 +1193,8 @@ if (${OPENMP_FOUND} OR APPLE)
     Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/fortran_modules_omp
     )
   file (MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/fortran_modules_omp)
+  # Keep serial/OpenMP interfaces separate, including for dependent targets.
+  target_include_directories(wsjt_fort_omp BEFORE PUBLIC ${CMAKE_BINARY_DIR}/fortran_modules_omp)
   if (APPLE)
     # On  Mac  we don't  have  working  OpenMP  support in  the  C/C++
     # compilers so  we have to manually  set the correct flags  to get
@@ -1265,7 +1334,17 @@ add_executable (jtdx MACOSX_BUNDLE
   ${jtdx_VERSION_RESOURCES}
   )
 
-set_target_properties (jtdx PROPERTIES OUTPUT_NAME "jtdx-f")
+if(WIN32)
+  # JTAlert discovers JTDX-compatible programs by this executable basename.
+  # Application identity, settings, logs and installation remain JTDX-F.
+  set_target_properties(jtdx PROPERTIES OUTPUT_NAME "jtdx")
+  add_executable(jtdx_f_launcher WIN32 tools/JtdxCompatibilityLauncher.cpp ${jtdx_VERSION_RESOURCES})
+  set_target_properties(jtdx_f_launcher PROPERTIES OUTPUT_NAME "jtdx-f")
+  target_link_libraries(jtdx_f_launcher user32)
+  install(TARGETS jtdx_f_launcher RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT Runtime)
+else()
+  set_target_properties(jtdx PROPERTIES OUTPUT_NAME "jtdx-f")
+endif()
 
 if (WSJT_CREATE_WINMAIN)
   set_target_properties (jtdx PROPERTIES WIN32_EXECUTABLE ON)
@@ -1350,6 +1429,12 @@ endif (UNIX)
 # installation
 #
 add_executable(jtdx-f-clock NtpClockHelper.cpp NtpClient.cpp)
+include(${CMAKE_CURRENT_SOURCE_DIR}/helpers/upstream/Upstream.cmake)
+install(TARGETS jtdx-f-upstream RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT runtime)
+add_executable(jtdx-hamlib-update HamlibUpdateHelper.cpp HamlibUpdateSupport.cpp)
+target_include_directories(jtdx-hamlib-update PRIVATE ${Hamlib_INCLUDE_DIR})
+target_link_libraries(jtdx-hamlib-update Qt5::Core)
+install(TARGETS jtdx-hamlib-update RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT runtime)
 target_link_libraries(jtdx-f-clock Qt5::Core Qt5::Network)
 if(WIN32)
   target_link_libraries(jtdx-f-clock advapi32)
@@ -1405,7 +1490,8 @@ install (FILES
 install (FILES
   cty.dat
   cty.dat_copyright.txt
-  contrib/Ephemeris/JPLEPH
+  upstream/wsjtx-3.0.2/JPLEPH
+  grid.dat
   contrib/CallDB/ALLCALL7.TXT
   contrib/CallDB/CALL3.TXT
   DESTINATION ${CMAKE_INSTALL_DATADIR}/${CMAKE_PROJECT_NAME}
@@ -1509,7 +1595,11 @@ if (NOT is_debug_build)
       )
 
     # if a system Qt is used (e.g. installed in /usr/lib/), it will not be included in the installation
-    set (fixup_exe "\$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/jtdx-f${CMAKE_EXECUTABLE_SUFFIX}")
+    if(WIN32)
+      set (fixup_exe "\$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/jtdx${CMAKE_EXECUTABLE_SUFFIX}")
+    else()
+      set (fixup_exe "\$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/jtdx-f${CMAKE_EXECUTABLE_SUFFIX}")
+    endif()
 
     #get_filename_component (hamlib_lib_dir ${hamlib_LIBRARIES} PATH)
 
@@ -1689,22 +1779,87 @@ include (CPack)
 include(CTest)
 if(BUILD_TESTING)
   find_package(Qt5 COMPONENTS Test REQUIRED)
+  add_executable(fm_jtalert_compatibility_tests tests/JtAlertCompatibilityTests.cpp JtAlertCompatibility.cpp)
+  target_include_directories(fm_jtalert_compatibility_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(fm_jtalert_compatibility_tests Qt5::Test Qt5::Core)
+  add_test(NAME JtAlertCompatibility COMMAND fm_jtalert_compatibility_tests)
+  add_executable(fm_udp_protocol_tests tests/UdpProtocolTests.cpp MessageClient.cpp NetworkMessage.cpp JtAlertCompatibility.cpp)
+  target_include_directories(fm_udp_protocol_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(fm_udp_protocol_tests Qt5::Test Qt5::Core Qt5::Network)
+  add_test(NAME UdpProtocol COMMAND fm_udp_protocol_tests)
+  set_tests_properties(JtAlertCompatibility UdpProtocol PROPERTIES TIMEOUT 60)
+  include(helpers/upstream/ControllerTests.cmake)
+  include(helpers/upstream/DspCompatibility.cmake)
+  add_executable(fm_pack77_tail_compatibility tests/Pack77TailCompatibility.f90)
+  target_include_directories(fm_pack77_tail_compatibility BEFORE PRIVATE "$<TARGET_PROPERTY:wsjt_fort,Fortran_MODULE_DIRECTORY>")
+  target_compile_options(fm_pack77_tail_compatibility PRIVATE -ffree-line-length-none)
+  target_link_libraries(fm_pack77_tail_compatibility PRIVATE wsjt_fort)
+  add_test(NAME Pack77TailCompatibility COMMAND fm_pack77_tail_compatibility)
+  add_executable(fm_hamlib_update_tests tests/HamlibUpdateTests.cpp HamlibUpdateSupport.cpp HRDMessage.cpp)
+  target_include_directories(fm_hamlib_update_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(fm_hamlib_update_tests Qt5::Test Qt5::Core)
+  add_test(NAME HamlibUpdateSupport COMMAND fm_hamlib_update_tests)
+  add_executable(fm_rig_power_tests tests/RigPowerTests.cpp)
+  target_include_directories(fm_rig_power_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(fm_rig_power_tests Qt5::Test Qt5::Core Hamlib::Hamlib)
+  add_test(NAME RigPower COMMAND fm_rig_power_tests)
+  add_executable(fm_qso_history_cooldown_tests tests/QsoHistoryCooldownTests.cpp qsohistory.cpp Radio.cpp)
+  target_include_directories(fm_qso_history_cooldown_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(fm_qso_history_cooldown_tests Qt5::Test Qt5::Core)
+  add_test(NAME QsoHistoryCooldown COMMAND fm_qso_history_cooldown_tests)
+  add_executable(fm_emulate_split_signal_tests tests/EmulateSplitSignalTests.cpp EmulateSplitTransceiver.cpp Transceiver.cpp)
+  target_include_directories(fm_emulate_split_signal_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(fm_emulate_split_signal_tests Qt5::Test Qt5::Core Qt5::Network)
+  add_test(NAME EmulateSplitSignals COMMAND fm_emulate_split_signal_tests)
+  add_executable(fm_signoff_tests tests/SignoffTests.cpp)
+  target_include_directories(fm_signoff_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(fm_signoff_tests Qt5::Test Qt5::Core)
+  add_test(NAME SignoffState COMMAND fm_signoff_tests)
+  add_executable(fm_general_settings_tests tests/GeneralSettingsTests.cpp WSJTXGeneralSettings.cpp ${wsjtx_GENUISRCS})
+  target_include_directories(fm_general_settings_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+  target_link_libraries(fm_general_settings_tests Qt5::Test Qt5::Widgets)
+  add_test(NAME GeneralSettings COMMAND fm_general_settings_tests)
+  set_tests_properties(GeneralSettings PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+  add_executable(fm_general_operating_tests tests/GeneralOperatingStateTests.cpp)
+  target_include_directories(fm_general_operating_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(fm_general_operating_tests Qt5::Test Qt5::Core)
+  add_test(NAME GeneralOperating COMMAND fm_general_operating_tests)
+  add_executable(fm_decoded_presentation_tests tests/DecodedPresentationTests.cpp DecodedPresentation.cpp)
+  target_include_directories(fm_decoded_presentation_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(fm_decoded_presentation_tests Qt5::Test Qt5::Core)
+  add_test(NAME DecodedPresentation COMMAND fm_decoded_presentation_tests)
+  add_executable(fm_frequency_input_tests tests/LiveFrequencyValidatorTests.cpp LiveFrequencyValidator.cpp Bands.cpp Bands.hpp FrequencyList.cpp Modes.cpp IARURegions.cpp Radio.cpp)
+  target_include_directories(fm_frequency_input_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(fm_frequency_input_tests Qt5::Test Qt5::Widgets Qt5::Network)
+  add_test(NAME FrequencyInput COMMAND fm_frequency_input_tests)
+  set_tests_properties(FrequencyInput PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
   set(fm_test_sources ${wsjtx_CXXSRCS})
   list(REMOVE_ITEM fm_test_sources main.cpp)
   add_executable(fm_regression tests/Regression.cpp ${fm_test_sources} ${wsjtx_GENUISRCS} ${wsjtx_RESOURCES_RCC})
   target_compile_definitions(fm_regression PRIVATE JTDX_FM_TEST)
   target_include_directories(fm_regression PRIVATE ${FFTW3_INCLUDE_DIRS})
   target_link_libraries(fm_regression Qt5::Test Qt5::SerialPort wsjt_fort_omp wsjt_cxx wsjt_qt wsjt_qtmm ${FFTW3_LIBRARIES})
-  add_dependencies(fm_regression jtdxjt9)
+  add_dependencies(fm_regression jtdxjt9 jtdx-f-upstream jtdx-f-jtty)
   configure_file(tests/data/ft8_000001.wav test-ft8.wav COPYONLY)
   configure_file(tests/data/superfox_000000.wav test-superfox_000000.wav COPYONLY)
   configure_file(contrib/CallDB/ALLCALL7.TXT test-data/ALLCALL7.TXT COPYONLY)
   configure_file(contrib/CallDB/CALL3.TXT test-data/CALL3.TXT COPYONLY)
+  configure_file(upstream/wsjtx-3.0.2/JPLEPH test-data/JPLEPH COPYONLY)
+  configure_file(grid.dat test-data/grid.dat COPYONLY)
   add_test(NAME fm_regression COMMAND fm_regression)
-  set_tests_properties(fm_regression PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen" TIMEOUT 90)
+  set_tests_properties(fm_regression PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen" TIMEOUT 180)
 endif()
 
 if(BUILD_TESTING)
+  find_package(Threads REQUIRED)
+  add_executable(fm_reed_solomon_safety tests/ReedSolomonSafety.c lib/wrapkarn.c lib/ftrsd/ftrsd2.c lib/ftrsd/init_rs.c lib/ftrsd/encode_rs.c lib/ftrsd/decode_rs.c)
+  target_include_directories(fm_reed_solomon_safety PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_compile_definitions(fm_reed_solomon_safety PRIVATE BIGSYM=1)
+  target_link_libraries(fm_reed_solomon_safety Threads::Threads)
+  if(NOT WIN32)
+    target_link_libraries(fm_reed_solomon_safety m)
+  endif()
+  add_test(NAME ReedSolomonSafety COMMAND fm_reed_solomon_safety)
   add_executable(fm_mcp_fixture tests/McpFixture.cpp McpServer.cpp)
   target_link_libraries(fm_mcp_fixture Qt5::Core Qt5::Network)
   if(NOT CMAKE_CROSSCOMPILING)
@@ -1715,6 +1870,26 @@ if(BUILD_TESTING)
 endif()
 install(FILES tools/jtdx_mcp_bridge.py DESTINATION share/jtdx/tools)
 install(DIRECTORY docs/ DESTINATION share/jtdx/docs)
+install(FILES helpers/upstream/PROTOCOL.txt helpers/upstream/MIGRATION.txt DESTINATION share/jtdx/docs/upstream)
+install(FILES upstream/wsjtx-3.0.2/COPYING upstream/wsjtx-3.0.2/AUTHORS upstream/wsjtx-3.0.2/SOURCE.json DESTINATION licenses/wsjtx-3.0.2)
+
+add_executable(jtdx-f-jtty JttyCodec.cpp)
+set_target_properties(jtdx-f-jtty PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
+target_link_libraries(jtdx-f-jtty Qt5::Core wsjt_fort wsjt_cxx ${FFTW3_LIBRARIES})
+install(TARGETS jtdx-f-jtty RUNTIME DESTINATION bin)
+if(BUILD_TESTING)
+  foreach(test source_codec tbcc_code_profile receive_state continuous_decode alias_decode tbcc_list_decoder alias_context)
+    add_executable(fm_jtty_${test} tests/test_jtty_${test}.f90)
+    target_link_libraries(fm_jtty_${test} wsjt_fort wsjt_cxx Qt5::Core ${FFTW3_LIBRARIES})
+    add_test(NAME fm_jtty_${test} COMMAND fm_jtty_${test})
+    set_tests_properties(fm_jtty_${test} PROPERTIES TIMEOUT 120)
+  endforeach()
+  add_dependencies(fm_regression jtdx-f-jtty)
+  if(NOT CMAKE_CROSSCOMPILING)
+    add_test(NAME fm_jtty_helper COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_jtty_helper.py $<TARGET_FILE:jtdx-f-jtty>)
+    set_tests_properties(fm_jtty_helper PROPERTIES TIMEOUT 120)
+  endif()
+endif()
 
 if(BUILD_TESTING)
   add_executable(fm_random_seed tests/RandomSeed.c)
@@ -1723,6 +1898,21 @@ if(BUILD_TESTING)
   add_executable(fm_codec_memory tests/CodecMemory.c lib/wsprd/jelinek.c lib/wsprd/tab.c)
   target_include_directories(fm_codec_memory PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
   add_test(NAME fm_codec_memory COMMAND fm_codec_memory)
+  add_executable(fm_wspr_codec tests/WsprCodec.c lib/wsprd/wsprsim_utils.c lib/wsprd/wsprd_utils.c lib/wsprd/fano.c lib/wsprd/tab.c lib/wsprd/nhash.c)
+  target_include_directories(fm_wspr_codec PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  add_test(NAME fm_wspr_codec COMMAND fm_wspr_codec)
+  add_executable(fm_wspr_file_io tests/WsprFileIO.c)
+  target_include_directories(fm_wspr_file_io PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  add_test(NAME WsprFileIO COMMAND fm_wspr_file_io)
+  add_executable(fm_wspr_fano tests/WsprFano.c lib/wsprd/tab.c)
+  target_include_directories(fm_wspr_fano PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  add_test(NAME WsprFano COMMAND fm_wspr_fano)
+  if(NOT CMAKE_CROSSCOMPILING)
+    add_test(NAME WsprInvalidInputs COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_wspr_inputs.py $<TARGET_FILE:wsprd_jtdx>)
+    add_test(NAME WsprWaveform COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_wspr_waveform.py --decoder $<TARGET_FILE:wsprd_jtdx> --sim $<TARGET_FILE:wsprsim>)
+    add_test(NAME UpstreamWaveform COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/helpers/upstream/test_upstream.py $<TARGET_FILE:jtdx-f-upstream> ${CMAKE_CURRENT_SOURCE_DIR}/upstream/wsjtx-3.0.2/JPLEPH)
+    set_tests_properties(WsprInvalidInputs WsprWaveform UpstreamWaveform PROPERTIES TIMEOUT 120)
+  endif()
 endif()
 
 if(BUILD_TESTING)
@@ -1753,4 +1943,63 @@ if(BUILD_TESTING)
   add_dependencies(fm_ntp_tests fm_ntp_helper)
   add_test(NAME fm_ntp_tests COMMAND fm_ntp_tests)
   set_tests_properties(fm_ntp_tests PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen" TIMEOUT 45)
+endif()
+
+if(BUILD_TESTING)
+  add_executable(fm_blacklist_tests tests/BlacklistTests.cpp Blacklist.cpp StationProfiles.cpp Radio.cpp)
+  target_include_directories(fm_blacklist_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(fm_blacklist_tests Qt5::Test Qt5::Widgets)
+  add_test(NAME fm_blacklist_tests COMMAND fm_blacklist_tests)
+  set_tests_properties(fm_blacklist_tests PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen" TIMEOUT 60)
+  add_executable(fm_operator_log_cache tests/OperatorLogCache.cpp OperatorLogLoader.cpp OperatorLog.cpp StationProfiles.cpp logbook/adif.cpp logbook/countrydat.cpp logbook/logbook.cpp Radio.cpp Bands.cpp Bands.hpp)
+  target_include_directories(fm_operator_log_cache PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(fm_operator_log_cache Qt5::Test Qt5::Widgets)
+  add_test(NAME fm_operator_log_cache COMMAND fm_operator_log_cache)
+  set_tests_properties(fm_operator_log_cache PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen" TIMEOUT 60)
+endif()
+
+if(BUILD_TESTING)
+  add_executable(fm_modern_waveform tests/ModernWaveform.f90)
+  foreach(test WorkerState Spectrum ApTemplates)
+    string(TOLOWER "${test}" suffix)
+    add_executable(fm_ft8_${suffix} tests/Ft8${test}.f90)
+    target_include_directories(fm_ft8_${suffix} BEFORE PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib ${CMAKE_CURRENT_BINARY_DIR}/fortran_modules_omp)
+    target_compile_options(fm_ft8_${suffix} PRIVATE $<$<COMPILE_LANGUAGE:Fortran>:-fopenmp>)
+    target_link_libraries(fm_ft8_${suffix} wsjt_fort_omp wsjt_cxx ${FFTW3_LIBRARIES})
+    if(WIN32)
+      set_target_properties(fm_ft8_${suffix} PROPERTIES LINK_FLAGS "-Wl,--stack,16777216")
+    endif()
+    add_test(NAME fm_ft8_${suffix} COMMAND fm_ft8_${suffix})
+    set_tests_properties(fm_ft8_${suffix} PROPERTIES TIMEOUT 120)
+  endforeach()
+  add_executable(fm_wspr_unpack tests/WsprUnpack.c lib/wsprd/wsprd_utils.c lib/wsprd/nhash.c)
+  target_include_directories(fm_wspr_unpack PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  add_test(NAME WsprUnpack COMMAND fm_wspr_unpack)
+  target_include_directories(fm_modern_waveform BEFORE PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib ${CMAKE_CURRENT_BINARY_DIR}/fortran_modules_omp)
+  target_compile_options(fm_modern_waveform PRIVATE $<$<COMPILE_LANGUAGE:Fortran>:-fopenmp>)
+  target_link_libraries(fm_modern_waveform wsjt_fort_omp wsjt_cxx ${FFTW3_LIBRARIES})
+  if(WIN32)
+    # This fixture enters the complete decoder on its main thread. Match the
+    # production jtdxjt9 stack reserve instead of MinGW's 2 MiB default.
+    set_target_properties(fm_modern_waveform PROPERTIES LINK_FLAGS "-Wl,--stack,16777216")
+  endif()
+  if(NOT CMAKE_CROSSCOMPILING)
+    add_test(NAME fm_modern_waveform COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_modern_waveform.py $<TARGET_FILE:fm_modern_waveform> ${CMAKE_CURRENT_BINARY_DIR}/test-data)
+    set_tests_properties(fm_modern_waveform PROPERTIES TIMEOUT 180)
+    add_test(NAME fm_ft8_worker_limit COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_ft8_worker_limit.py $<TARGET_FILE:fm_modern_waveform> ${CMAKE_CURRENT_BINARY_DIR}/test-data)
+    set_tests_properties(fm_ft8_worker_limit PROPERTIES TIMEOUT 600)
+  endif()
+endif()
+
+if(BUILD_TESTING)
+  add_executable(fm_modern_decoder tests/ModernDecoder.f90)
+  target_link_libraries(fm_modern_decoder wsjt_fort wsjt_cxx Qt5::Core ${FFTW3_LIBRARIES})
+  add_test(NAME fm_modern_decoder COMMAND fm_modern_decoder)
+  set_tests_properties(fm_modern_decoder PROPERTIES TIMEOUT 120)
+  add_executable(fm_modern_decoder_threads tests/ModernDecoderThreads.f90)
+  target_include_directories(fm_modern_decoder_threads BEFORE PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/fortran_modules_omp)
+  target_compile_options(fm_modern_decoder_threads PRIVATE $<$<COMPILE_LANGUAGE:Fortran>:-fopenmp>)
+  target_link_libraries(fm_modern_decoder_threads wsjt_fort_omp wsjt_cxx Qt5::Core ${FFTW3_LIBRARIES})
+  add_test(NAME fm_modern_decoder_threads COMMAND fm_modern_decoder_threads)
+  set_tests_properties(fm_modern_decoder_threads PROPERTIES TIMEOUT 120)
 endif()

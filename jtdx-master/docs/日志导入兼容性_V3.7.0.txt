@@ -1,0 +1,35 @@
+JTDX-F V3.7.0：外部 ADIF 的 UTF-8 长度兼容
+
+发现的问题
+部分日志软件将 UTF-8 字节数写入 ADIF 字段长度。例如 NAME 为 José 时长度写 5，
+而原解析器按 QString 的 4 个字符读取。原逻辑会吞掉后面的 <EOR> 起始，可能
+导入失败，也可能把相邻两个 QSO 静默合并，覆盖前一条 CALL。
+WSJT-X v3.3.0-beta5 的 test_worked_before_adif.cpp 专门覆盖字节/字符计数混用。
+参考提交：d89fe30ca1dfd3c38def8f17228f09f042829f95。
+
+处理边界
+只在 importFiles 导入非工作日志时规范化字段长度。若字符端点落在合法 ADIF
+标签内部或超出文件，而相同长度按 UTF-8 完整字节解码可以到达有效端点，则
+改写为 JTDX-F 的字符长度，再交给原有严格解析器。按字符计数的字段维持原样。
+原始文件精确字节仍备份到对应呼号的 old/；外部拖入源不删除。
+
+不猜测损坏的 ASCII 长度、不丢弃未知字段或核心呼号/日期。字段内真实的
+<EOR>/<EOH> 文本仍按声明长度保留。无法可靠判断的格式继续报错并保留原件。
+季度文件、wsjtx_log.adi 工作副本、更新 journal 和 QSO 字节偏移定位均保持
+严格解析。导入成功后统一写回字符长度，避免影响最后一轮 QSO 的原位更新。
+
+验证入口
+cmake --build build --target fm_operator_log_cache
+ctest --test-dir build --output-on-failure -R '^fm_operator_log_cache$'
+
+新增数据回归
+José、李华及补充 Unicode 字符，分别按字节/字符填写长度；带 UTF-8 BOM；
+相邻两条 QSO；包含字面 EOR/EOH 的中文备注；原始备份逐字节一致；重复导入
+不重复记录；导入后 updateQso 同时更新完整/季度日志且不损坏相邻 Unicode。
+另验证 5、8、9999 三种错误 ASCII 长度仍拒绝，已有日志保持原状。
+
+实际结果（2026-10-31）
+独立构建的完整 OperatorLogCache 回归 66/66 通过。相同新增用例连接冻结的
+V3.6.6 OperatorLog.cpp 时，三个字节计数字符串均只导入 1/2 条 QSO；5、8
+两个错误 ASCII 长度也被静默接受。新实现全部正确处理；旧代码负对照共失败
+5 项，新实现零失败。测试、编译日志及复现脚本在 .qa/v370-jtty-wspr/。

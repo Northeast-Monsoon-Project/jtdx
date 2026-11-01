@@ -1,0 +1,168 @@
+V3.6.0 DSP migration record
+==========================
+
+Upstream baseline: official WSJT-X tag v3.0.2, commit
+ccdfaf3c1c109010d15399674ce278167cfde848. No v3.3.0-beta source was used.
+The unmodified vendor tree, upstream COPYING and SHA-256 manifest are under
+upstream/wsjtx-3.0.2. The process adapter is GPL-3.0-or-later.
+
+The JTDX receive buffer layout and threaded FT8/FT4 front ends are preserved.
+Their decoder ABI is not compatible with WSJT-X's larger dec_data layout.
+FT8/FT4 continue to share the same updated protocol/waveform components when
+the optional modern decoder is either on or off. The modern decoder search,
+CRC validation and its existing conservative acceptance rules are unchanged.
+
+Actual shared updates:
+  lib/ft8v2/packjt77.f90
+    Ported the official portable callsign hash calculation. The previous
+    signed 64-bit product overflowed; the new 16-bit limb multiplication
+    explicitly computes the low64 bits without signed overflow.
+    Ported current ARRL section86 entries and RTTY region171 entries into
+    both pack and unpack tables, including GH/NS/TER/NB and extended regions.
+    Preserved the JTDX nthr/ntxhash interfaces and independent TX/RX hash state.
+  lib/gen_ft8wave.f90
+    Ported waveform parameter cache invalidation. Cache keys compare nsps,
+    sample rate and exact BT separately; a sum of parameters can collide.
+    Made the saved waveform cache private to each OpenMP decoder thread.
+    A 12k→48k sequential generation failed against upstream before this fix
+    (maximum PCM amplitude error2.0), and now matches the original oracle.
+  soundin.cpp
+    Ported stop/start capture suspension behavior from3.0.2. The previous
+    condition tested the enum constant instead of the stream state, and
+    suspend/resume could leave capture stalled on some audio backends.
+
+Compared and deliberately retained:
+  The JTDX-compatible upstream ft8var encoder174_91, BP174_91, genft8,
+  downsampling and fine synchronization mathematics match the local versions.
+  They have no new numerical algorithm to transplant merely by changing dates.
+  Upstream ft8var OSD still negates a zero hard-error count on CRC failure.
+  The local explicit-negative CRC failure and synchronized initialization fixes
+  are retained. Upstream FT4 still has the older leading-blank manipulation
+  and one-time waveform cache; the local audited fixes are retained.
+  Upstream-only AP/contest/front-end restructuring is not labeled as installed
+  merely because equivalent source files are present in the vendor tree.
+  WSPR is maintained as its own executable and migration record/test results.
+
+New runnable isolated modes:
+  Q65: original3.0.2 channel code, decoder/AP, per-parity averaging and all
+       periods15/30/60/120/300; explicit single-decode input. Valid submodes
+       follow the official period limits:15A..C,30A..D,60A..E,120A..F,300A..E.
+       UI clamps a previously selected submode when changing periods; helper
+       validates the same limits for both receive and transmit requests.
+  MSK144: original128/90 coding, shorthand encoder and7168-sample real-time
+       decoder,3584-sample hop. A normal synthetic CQ waveform round-trips.
+  Echo: original fixed-tone echo spectrum/SNR averaging. EchoCall/EchoCW are
+       not exposed by this adapter. GUI keeps per-transmission onset/dither
+       metadata and receives the lunar-return window, rather than decoding
+       transmit audio or a truncated echo payload.
+  Astronomy: original astro0 and JPLEPH; UTC input and Hz units are explicit.
+       TX midpoint calculations are distinct from current azimuth/elevation.
+       This is lunar/Sun geometry, not a satellite TLE propagator.
+
+Protocol/radio boundary:
+  Helper cannot key hardware or open audio. GUI retains manual TX authority.
+  Controller pins API/version/commit, validates envelopes and output sizes,
+  clears process state on context change, suppresses canceled TX and rejects
+  malformed or stale replies. Complete-before-signal prevents callback reentry
+  from erasing a newly queued job. Per-process SAVE state cannot race with JTDX.
+  Windows installation testing exposed a real Unicode-path crash: passing a
+  Chinese JPLEPH path through toLocal8Bit turned characters into question
+  marks and Fortran OPEN terminated the process. The helper now uses Qt to
+  stage JPLEPH once in a private work directory and passes only an ASCII
+  relative name to Fortran. Qt also selects the Unicode working directory;
+  other Fortran data paths use ".". Normal exit closes JPL unit12, restores
+  cwd, then removes the standalone temporary directory. The GUI owns its
+  child's --work-dir, ensuring forced stops/context changes cannot leak a
+  copied3.7 MiB ephemeris outside the controller's temporary tree.
+  CAT correction accounting distinguishes requested RF from nominal dial
+  frequency so delayed command acknowledgements do not accumulate Doppler.
+  Q65/MSK144 optional repeated RR73 is bounded to10 completed transmissions;
+  sending73 ends it. Receiving the current partner's73 is handled by the GUI.
+
+Validation artifacts:
+  tests/DspProtocolCompatibility.f90: eight bit-exact77-bit official vectors,
+       including new protocol tables, and18 independently calculated hashes.
+  tests/DspWaveformCompatibility.f90: four sequential parameter sets against
+       a renamed otherwise unchanged upstream waveform oracle; old-code
+       negative control demonstrates the stale-cache failure.
+  helpers/upstream/test_upstream.py: actual PCM Q65/MSK144/Echo, Q65 average,
+       astronomy and malformed-file/context checks using synthetic data only.
+  tests/UpstreamControllerTests.cpp: bad version/commit/API/output, timeout,
+       cancellation/reentry/context races and period capture boundary checks.
+  tests/UpstreamOperatingTests.cpp: repeat limits, per-slot echo data, CAT
+       feedback, capture time steps and Doppler/midpoint calculations.
+       A backwards UTC correction invalidates Q65's completed-receive gate;
+       a late result from the former future slot cannot authorize new TX.
+
+Recorded offline validation:
+  FT8/FT4 old/new common-component comparison used seed20261102 declared
+  before execution, CQ and mixed messages, AWGN/impulse/crowded/noise,
+  modern on/off, FT8 one/four threads and FT4 one thread,10 trials per case.
+  Across480 paired frames (960 decoder processes), each build recovered508
+  correct messages, with0 wrong messages,0 added messages and0 lost messages.
+  logs/dsp-v360-compatibility-20261102.json records the exact PCM cases and
+  binary hashes. This demonstrates compatibility on that matrix, not a new
+  sensitivity gain. Concurrent build load prevents CPU comparison from it.
+  The isolated helper passed the same29 actual-PCM/protocol checks on native
+  Linux and the Windows PE executable under Wine, including eight invalid
+  Q65 period/submode encode/decode cases, first-call Unicode ephemeris and
+  actual Unicode temp paths, normal-exit cleanup, and a parent-owned Unicode
+  directory removable after forced termination. Final result logs are
+  logs/upstream-v360-unicode-native.log and
+  logs/upstream-v360-unicode-windows.log. The original packaged helper's
+  failing negative control is logs/upstream-v360-unicode-negative-control.log.
+  The equivalent GUI state
+  tests passed10 checks in logs/upstream-v360-period-limits-tests.log.
+  No radio, CAT/PTT endpoint, user ADIF log or real audio device was used.
+
+Resource comparison against the frozen V3.5 decoder:
+  A separate quiet CPU window used seed20261103, mixed messages, AWGN,
+  crowded and noise cases,4 trials each, both switches and both versions:
+  144 fresh processes. Host: Intel Xeon E3-1240v6 at3.70GHz, Linux x86-64.
+  Source fixture hashes and every observation are in
+  logs/dsp-v360-performance-20261103.json. Old/new results were identical
+  on every paired frame; neither version produced an incorrect message.
+
+  Mode / threads / switch       V3.5 CPU mean    V3.6 CPU mean    Change
+  FT8 /1 / traditional          0.18269 s        0.18402 s        +0.73%
+  FT8 /1 / modern               0.37108 s        0.37311 s        +0.55%
+  FT8 /4 / traditional          0.54811 s        0.55049 s        +0.43%
+  FT8 /4 / modern               0.77730 s        0.75688 s        -2.63%
+  FT4 /1 / traditional          0.28461 s        0.28221 s        -0.84%
+  FT4 /1 / modern               0.54894 s        0.54746 s        -0.27%
+
+  These small differences do not establish a speed improvement or regression.
+  CPU totals include all worker threads; wall times are elapsed decoder time.
+  V3.6 mean wall times were0.185/0.375 s for FT8 traditional/modern with
+  one thread,0.186/0.347 s with four threads, and0.283/0.550 s for FT4.
+  Maximum observed wall time was1.486 s; this limited matrix cannot guarantee
+  the same deadline on slower computers or all interference/candidate loads.
+  Peak process RSS was approximately40–43 MiB for serial fixtures and61–65 MiB
+  for four-thread FT8. Paired-version maximum RSS deltas ranged from-2.85 to
+  +3.97 MiB; fresh-process allocation and ASLR noise are included.
+  Modern versus traditional CPU cost within V3.6 was+103% (FT8/1),+37%
+  (FT8/4),+94% (FT4). These are the existing modern algorithm's costs on
+  this sample mix, not newly introduced V3.6 migration overhead. Timing
+  includes decoder initialization; RSS excludes the GUI and other helpers.
+
+Limitations to preserve in release reporting:
+  Hardware PTT/audio latency and driver behavior require real-radio acceptance
+  tests; offline PCM tests do not establish RF performance or zero false decodes.
+  Detector UTC timestamps describe callback arrival, not a hardware sample
+  clock. Period capture tolerates500ms scheduling jitter and resets on larger
+  steps. Sub-threshold dropped samples cannot be distinguished from jitter
+  without a hardware timestamp or a device sequence counter.
+  Q65-15 with2.5 s EME delay inherits the upstream15 s input window: the
+  12.75 s payload starts at3.0 s, so its last0.75 s lies outside that window.
+  A deterministic strong truncated waveform decodes correctly in the helper
+  test, but equal weak-signal sensitivity is not established. Longer Q65
+  periods provide enough guard time for the full delayed payload. No claim
+  of seamless full-payload Q65-15 half-duplex EME reception is made.
+  GUI WAV File/Open, Open Next and Decode Remaining are disabled in the new
+  Q65/MSK144/Echo modes. Their live audio paths and offline helper PCM tests
+  are implemented; the old GUI WAV workflow remains for existing modes.
+  The shared legacy WAV buffer is limited to120 s and is not a Q65-300 reader.
+  MSK144 file decoding would require serial overlapping-window submission;
+  Echo files would require the correct post-transmission return window.
+  Existing JT65/JT9/T10 and FT2/JTTY remain on their existing backends.
+  JT4/FST4/FST4W/QRA64 are not implemented by this helper's live API.

@@ -24,6 +24,11 @@ public:
     FT8,
     FT4,
     WSPR,
+    FT2,
+    JTTY,
+    Q65,
+    ECHO,
+    MSK144,
     MODES_END_SENTINAL_AND_COUNT
   };
 

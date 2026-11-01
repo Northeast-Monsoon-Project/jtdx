@@ -35,23 +35,23 @@ QByteArray NtpClient::timestamp(qint64 ms) {
 }
 bool NtpClient::decode(QByteArray const& p,QByteArray const& id,qint64 t1,qint64 t4,qint64 elapsed,NtpSample *out,QString *error) {
   auto reject=[&](char const *message){if(error)*error=tr(message);return false;};
-  if(p.size()<48 || p.size()>1024 || id.size()!=8) return reject("Invalid NTP packet length.");
+  if(p.size()<48 || p.size()>1024 || id.size()!=8) return reject(QT_TRANSLATE_NOOP("NtpClient","Invalid NTP packet length."));
   auto flags=quint8(p[0]);auto stratum=quint8(p[1]);
   if((flags&7)!=4 || ((flags>>3)&7)<3 || ((flags>>3)&7)>4 || (flags>>6)==3 || stratum<1 || stratum>15)
-    return reject("The NTP server is not synchronized or refused the request.");
+    return reject(QT_TRANSLATE_NOOP("NtpClient","The NTP server is not synchronized or refused the request."));
   if(p.mid(24,8)!=id || p.mid(32,8)==QByteArray(8,0) || p.mid(40,8)==QByteArray(8,0))
-    return reject("The NTP response does not match this request.");
+    return reject(QT_TRANSLATE_NOOP("NtpClient","The NTP response does not match this request."));
   if(elapsed<0 || elapsed>3000 || std::abs(double(t4-t1-elapsed))>100)
-    return reject("The clock changed during the NTP request, or the response was too slow.");
+    return reject(QT_TRANSLATE_NOOP("NtpClient","The clock changed during the NTP request, or the response was too slow."));
   double t2=readTimestamp(p,32,t4),t3=readTimestamp(p,40,t4);
   double delay=double(elapsed)-(t3-t2);
   auto dispersion=qFromBigEndian<quint32>(reinterpret_cast<uchar const*>(p.constData()+8))/65.536;
   if(t3<t2 || delay < -2 || delay>2000 || dispersion>5000)
-    return reject("The NTP response has excessive delay or uncertainty.");
+    return reject(QT_TRANSLATE_NOOP("NtpClient","The NTP response has excessive delay or uncertainty."));
   double offset=((t2-t1)+(t3-t4))/2;
   auto utc=qRound64(t4+offset);
   auto date=QDateTime::fromMSecsSinceEpoch(utc,Qt::UTC).date();
-  if(date.year()<2000 || date.year()>2100) return reject("The NTP date is outside the supported range.");
+  if(date.year()<2000 || date.year()>2100) return reject(QT_TRANSLATE_NOOP("NtpClient","The NTP date is outside the supported range."));
   if(out) *out={utc,offset,qMax(0.0,delay)};
   if(error) error->clear();
   return true;

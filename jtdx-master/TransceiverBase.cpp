@@ -230,7 +230,7 @@ void TransceiverBase::set (TransceiverState const& s,
             debugFileClose(pFile);
 #endif
             if (s.tx_audio()) {
-              do_modulator_start(s.symbolslength (), s.framespersymbol (), s.trfrequency (), s.tonespacing (), s.synchronize (),s.dbsnr (), s.trperiod ());
+              do_modulator_start(s.symbolslength (), s.framespersymbol (), s.trfrequency (), s.tonespacing (), s.synchronize (),s.dbsnr (), s.trperiod (),s.waveform_generation());
               requested_.symbolslength(s.symbolslength ());
               requested_.framespersymbol(s.framespersymbol ());
               requested_.trfrequency(s.trfrequency ());
@@ -238,6 +238,7 @@ void TransceiverBase::set (TransceiverState const& s,
               requested_.synchronize(s.synchronize ());
               requested_.dbsnr(s.dbsnr ());
               requested_.trperiod(s.trperiod ());
+              requested_.waveform_generation(s.waveform_generation());
             } else {
               do_modulator_stop(s.quick ());
               requested_.quick (s.quick ());
@@ -319,7 +320,10 @@ void TransceiverBase::set (TransceiverState const& s,
                 requested_.frequency (actual_.frequency ());
                 requested_.mode (actual_.mode ());
               }
-            else if (!s.tx_frequency ()
+            // A single state request can change both RX and TX frequencies
+            // (band change, satellite tracking, or split followed by PTT).
+            // Complete both before keying; an else-if silently kept old TX.
+            if (!s.tx_frequency ()
                 || (s.tx_frequency () > 10000 // ignore bogus startup values
                     && s.tx_frequency () < std::numeric_limits<Frequency>::max () - 10000))
               {

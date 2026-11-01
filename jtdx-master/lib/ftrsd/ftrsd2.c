@@ -22,9 +22,8 @@
 #include <unistd.h>
 //#include <time.h>
 #include <string.h>
-#include "rs2.h"
+#include "int.h"
 
-static void *rs;
 void getpp_(int workdat[], float *pp);
 
 void ftrsd2_(int mrsym[], int mrprob[], int mr2sym[], int mr2prob[], 
@@ -35,13 +34,20 @@ void ftrsd2_(int mrsym[], int mrprob[], int mr2sym[], int mr2prob[],
   int indexes[63];
   int era_pos[51];
   int i, j, numera, nerr, nn=63;
+  if(!correct || !param)return;
+  memset(correct,0,63*sizeof *correct);memset(param,0,6*sizeof *param);param[2]=-1;
+  if(!mrsym || !mrprob || !mr2sym || !mr2prob || !nvect || !ipass)return;
+  for(int n=0;n<63;n++) {
+    if(mrsym[n]<0 || mrsym[n]>63 || mr2sym[n]<0 || mr2sym[n]>63 ||
+       mrprob[n]<0 || mrprob[n]>255 || mr2prob[n]<0 || mr2prob[n]>mrprob[n])return;
+  }
   int ntrials0 = *nvect;
   int ipassc = *ipass;
   int nhard=0,nhard_min=32768,nsoft=0,nsoft_min=32768;
   int ntotal=0,ntotal_min=32768,ncandidates;
   int nera_best=0;
   float pp,pp1,pp2,param4;
-  static unsigned int nseed;
+  unsigned int nseed;
 
 // Power-percentage symbol metrics - composite gnnf/hf 
   int perr[8][8] = {
@@ -58,7 +64,8 @@ void ftrsd2_(int mrsym[], int mrprob[], int mr2sym[], int mr2prob[],
 // Initialize the KA9Q Reed-Solomon encoder/decoder
   unsigned int symsize=6, gfpoly=0x43, fcr=3, prim=1, nroots=51;
 // printf("correct %d param %d\n",sizeof(correct),sizeof(param));
-  rs=init_rs_int(symsize, gfpoly, fcr, prim, nroots, 0);
+  void *rs=init_rs_int(symsize, gfpoly, fcr, prim, nroots);
+  if(!rs)return;
 
 // Reverse the received symbol vectors for BM decoder
   for (i=0; i<63; i++) {
@@ -106,7 +113,7 @@ void ftrsd2_(int mrsym[], int mrprob[], int mr2sym[], int mr2prob[],
     param[3]=0;
     param[4]=0;
     param[5]=0;
-    return;
+    free_rs_int(rs);return;
   }
 
 /*
@@ -136,7 +143,7 @@ codeword is "best".
     jj = (62-i)/8;
     thresh0[i] = 1.3*perr[ii][jj];
   }
-  if(nsum<=0) return;
+  if(nsum<=0) {free_rs_int(rs);return;}
 
   pp1=0.0;
   pp2=0.0;
@@ -200,7 +207,7 @@ codeword is "best".
       if(nhard_min <= 41 && ntotal_min <= 71) break;
     }
   }
-  param4=1000.0*pp2/pp1;
+  param4=pp1>0.0f ? 1000.0f*pp2/pp1 : 0.0f;
   param[0]=ncandidates;
   param[1]=nhard_min;
   param[2]=nsoft_min;
@@ -209,5 +216,5 @@ codeword is "best".
   param[5]=ntotal_min;
   if(param[0]==0) param[2]=-1;
 
-  return;
+  free_rs_int(rs);return;
 }

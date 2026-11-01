@@ -1,0 +1,143 @@
+JTDX-F isolated WSJT-X 3.0.2 backend, API 1
+=========================================
+
+Source: https://github.com/WSJTX/wsjtx/tree/ccdfaf3c1c109010d15399674ce278167cfde848
+License: GPL-3.0-or-later. Exact source file hashes are recorded in
+../../upstream/wsjtx-3.0.2/SOURCE.json; the vendored files are unmodified.
+
+This executable is a serial, process-private backend. It does not open a
+sound device, radio, CAT/PTT connection or network socket. The GUI owns capture,
+manual transmission authorization, UTC slot scheduling and audio playback.
+Do not link this library into the traditional JTDX decoder: both projects
+define overlapping packer, FFT and decoder symbols with different interfaces.
+
+The GUI starts it with --work-dir <absolute private directory>. This directory
+is owned by the controller, which removes its contents after the child exits
+or is forcibly stopped. hello confirms managed_work_dir:true; the controller
+rejects helpers that do not acknowledge this lifecycle contract. Standalone
+invocation without arguments uses its own QTemporaryDir and reports false.
+Qt changes the helper's working directory using Unicode-safe APIs; Fortran
+receives only ASCII relative names. No helper files are written to the
+installation directory or operator log directory.
+
+Transport: UTF-8 newline-delimited JSON on stdin/stdout. Every request has
+{"api":1,"id":"unique string","context":"station/band/mode revision","op":"..."}.
+All responses repeat api/id/context. Diagnostic Fortran/C output goes to stderr.
+Requests are bounded to 65536 bytes. A process binds its context on its first
+non-hello request. A context mismatch returns error; kill/restart the process
+after callsign, band, mode, or receive context changes, clearing all SAVE state,
+callsign hashes and accumulated spectra. An optional reset returns done with
+restart_required:true and exits. No persistent user data is written.
+
+Responses:
+  hello -> one type:hello with version, exact commit, supported modes/periods.
+  encode -> one type:encoded, or type:error.
+  decode -> zero/more type:decode (or type:echo), then one type:done.
+  astro -> one type:astro, or type:error.
+  error -> code/message, terminal response for that request.
+There is no trailing done after hello, encoded or astro.
+
+PCM files are mono signed 16-bit LITTLE-ENDIAN, without a WAV header.
+Decode requires path and sample_count matching the exact file size.
+Encode writes atomically to the requested path. All paths are supplied by the
+GUI, normally beneath its private temporary directory. PCM is never sent in JSON.
+
+Q65 decode:
+  mode:"Q65", period:15|30|60|120|300, submode:zero-based A..F,
+  Valid combinations match3.0.2:15 s A..C,30 s A..D,60 s A..E,
+  120 s A..F,300 s A..E. Both encode and decode reject other combinations.
+  path, sample_count <= period*12000 (zero pads a short capture),
+  utc:HHMMSS integer, rx_hz:100..5000, tolerance:10..1000,
+  low_hz:100..4900, high_hz:200..5000, low_hz < high_hz,
+  depth:1..3 (Quick/Medium/Deep; original40/60/100 iteration budgets),
+  max_drift:0..100, progress:0..5,
+  my_call/his_call:ASCII <=12, his_grid:ASCII <=6,
+  average:boolean, clear_average:boolean, single_decode:boolean,
+  eme_delay:0..5.5 seconds.
+  decode result: message, snr (dB), dt (seconds), frequency (Hz),
+  method (upstream AP method), averaged (number of sequences used).
+  done result: average_even, average_odd (separate UTC parity banks).
+  Defaults: period60/A, rx1500, tolerance100, low200/high4000, depth2.
+
+Q65 encode:
+  mode:"Q65", period, submode, message:ASCII <=37, audio_hz:100..5000,
+  path:output. Highest tone must remain below 6000 Hz.
+  Uses original genq65 packing/channel coding; produces 85 continuous-phase
+  symbols with 20 ms edge ramps. Output sample_rate48000, sample_count,
+  canonical message, start_delay_ms500 (15/30 s) or1000 (60/120/300 s),
+  duration_ms. PCM contains the active waveform only. The GUI inserts the
+  leading slot delay and trims late starts; do not play it immediately on reply.
+
+MSK144 decode:
+  mode:"MSK144", path, sample_count:7168 exactly, utc:HHMMSS,
+  tsec:0..30 (window's position in the current period), rx_hz:500..2500,
+  tolerance:10..200, depth:1..3, my_call/his_call, short_messages:boolean.
+  Feed overlapping 7168-sample windows with a 3584-sample hop at 12000 Hz.
+  Upstream mskrtd suppresses repeat messages within its streaming state.
+  Training/equalization and SWL short-message inference are not enabled.
+MSK144 encode:
+  mode:"MSK144", period:5|10|15|30, message, path.
+  Original 128/90 coding, or 40-symbol shorthand when message syntax selects it.
+  Repeats at standard 1000/2000 Hz for period minus0.5 s, start_delay_ms0.
+  Audio center is fixed1500 Hz, as in the upstream MSK144 modulator.
+
+Echo encode:
+  mode:"Echo", audio_hz:100..5000 (default1500), path.
+  Fixed tone, 2.048 s at48000 Hz, start_delay_ms0. No EchoCall/EchoCW payload.
+Echo decode:
+  mode:"Echo", path, sample_count<=28672 at12000 Hz, doppler_hz:-3000..3000,
+  rit_hz:-1000..1000, auto_mode:boolean, averages:1..100,
+  clear_average:boolean, audio_hz:1000..2000, width_hz:0.04..700.
+  Supply the post-transmission echo capture according to UTC/EME delay.
+  echo result: level_db, snr_db, error_db, offset_hz, width_hz,
+  quality (upstream integer quality), integrations; then done.
+
+Astro:
+  utc_ms:UTC Unix milliseconds (not local wall time),
+  optional tx_utc_ms:UTC midpoint for fixed-during-TX correction,
+  frequency_hz, my_grid:4/6-character Maidenhead, optional his_grid,
+  ephemeris_path:installed absolute JPLEPH path.
+  Qt copies this file once per helper process to its private work directory
+  as JPLEPH. Fortran opens the relative ASCII name, supporting Chinese and
+  other Unicode installation and user temp paths. Changing ephemeris_path
+  within an initialized process requires restarting the helper. On normal
+  exit the Fortran file is closed before restoring cwd and deleting private
+  temp files; the controller owns cleanup after forced termination.
+  astro result: utc_ms, moon_az_deg, moon_el_deg, dx_moon_az_deg,
+  dx_moon_el_deg, sun_az_deg, sun_el_deg, self_doppler_hz, dx_doppler_hz,
+  echo_delay_seconds, width_self_hz, width_dx_hz, sky_temperature_k,
+  degradation_db, polarization_deg. Optional midpoint returns tx_utc_ms,
+  tx_self_doppler_hz, tx_dx_doppler_hz without replacing current azimuth/elevation.
+  This computes Sun/Moon geometry; it is not a TLE satellite orbit tracker.
+
+Build integration:
+  include(helpers/upstream/Upstream.cmake) after Qt5 Core, FFTW3_LIBRARIES and
+  Boost_INCLUDE_DIRS are configured. Build/install jtdx-f-upstream and JPLEPH.
+  Its private module directory prevents same-name Fortran module collisions.
+  Windows executable reserves16 MiB stack for upstream automatic arrays.
+  Independent developer build: cmake -S helpers/upstream -B <separate-build>.
+  Integration check: python3 helpers/upstream/test_upstream.py <helper> <JPLEPH>.
+
+Windows PE verification from the Linux workspace root (not the source root):
+  source scripts/env.sh
+  export WINEPREFIX="$PWD/.deps/wine"
+  export WINEPATH="Z:$PWD/install-windows/bin;Z:$PWD/.deps/msys2/ucrt64/bin"
+  export DISPLAY=:97 WAYLAND_DISPLAY= WINEDEBUG=-all
+  export WINEDLLOVERRIDES=mscoree,mshtml=
+  python3 jtdx-master/helpers/upstream/test_upstream.py --wine \
+    build-windows-ucrt/jtdx-f-upstream.exe build-windows-ucrt/test-data/JPLEPH
+The --wine harness executes the real Windows binary and maps only its PCM
+and ephemeris request paths to Wine's Z: drive. It uses the same29 checks,
+fixed synthetic waveforms, known messages and error assertions as native Linux.
+Unicode path checks use a fresh astronomy process, verify the actual Unicode
+temp directory contains the staged ephemeris, check normal-exit cleanup, and
+exercise an explicitly managed Unicode work directory followed by forced kill.
+Runtime dependencies must come from the just-built Windows installation;
+using a previous release's helper or DLL set is not a valid release check.
+Wine coverage is a Windows executable smoke test, not a physical Windows
+audio/CAT/hardware acceptance test. The helper opens no hardware devices.
+
+Scope: hello lists only modes with implemented, exercised adapter paths.
+Existing FT8/FT4 (including modern algorithm), FT2/JTTY, JT65/JT9/T10 and WSPR
+continue through their existing backends. This helper does not implement JT4,
+FST4/FST4W, QRA64, satellite orbit prediction or transmitter hardware control.

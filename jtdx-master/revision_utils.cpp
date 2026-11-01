@@ -1,4 +1,5 @@
 #include "revision_utils.hpp"
+#include "JtAlertCompatibility.hpp"
 
 #include <cstring>
 
@@ -83,6 +84,6 @@ QString version (bool include_patch)
 
 QString program_title (QString const& revision)
 {
-  QString id {QCoreApplication::applicationName () + "  by Fluxmancer  V" + QCoreApplication::applicationVersion ()};
-  return id + " " + revision + ", derivative work based on WSJT-X by K1JT";
+  return JtAlertCompatibility::windowTitle(QCoreApplication::applicationName(),
+                                           QCoreApplication::applicationVersion(),revision);
 }
